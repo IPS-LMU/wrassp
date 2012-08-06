@@ -1,10 +1,11 @@
-#include "rassp.h"
+#include "wrassp.h"
 #include <dataobj.h>
 #include <asspfio.h>
 #include <asspmess.h>
 
 
 SEXP getDObj(SEXP fname) {
+
      SEXP ans, dPtr, class, rate, tracks;
      DOBJ DATA, * data = &(DATA);
      DDESC * desc = NULL;
