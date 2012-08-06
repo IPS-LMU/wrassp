@@ -11,23 +11,13 @@ seglist has to contain valid paths to the signal files and the according
 SSFF files have to be in the same directory.}
 
 \usage{
-newEmu.track(seglist = NULL, trackname = NULL, ext = NULL)
+newEmu.track(seglist = NULL, trackname = NULL, fext = NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{seglist}
-  {
-    seglist obtained by emu.query (or from new package seglist)
-  }
-  \item{trackname}
-  {
-    name of track wanted in trackdata returned (for valid options see below)
-  }
-  \item{ext}
-  {
-    extension of file if NULL default values of tracknames are expected
-  }
-}
+  \item{seglist}{seglist obtained by emu.query (or from new package seglist)}
+  \item{trackname}{name of track wanted in trackdata returned (for valid options see below)}
+  \item{fext}{extension of file if NULL default values of tracknames are expected}
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
@@ -45,6 +35,7 @@ newEmu.track(seglist = NULL, trackname = NULL, ext = NULL)
 \author{R. Winkelmann <raphael@phoentik.uni-muenchen.de>
 }
 \note{
+%fugly dude!
 default extension list (if nr of cols=1
 then the according trackname is equal to the file
 extension ommiting the preceeding dot. if nr of cols>1
@@ -53,29 +44,29 @@ extension ommiting the preceeding dot + ':' + the required
 colum name e.g. "fms:bw" as trackname will return
 the bandwidths of formants):
 
- \item{acfana}{-> .acf (nr of cols=1)}
+ - acfana -> .acf (nr of cols=1)
 
- \item{affilter:}{}
+ - affilter:
      high-pass -> .hpf (NO SSFF! SOUND FILE!) ???
      low-pass -> .lpf (NO SSFF! SOUND FILE!) ???
      band-pass -> .bpf (NO SSFF! SOUND FILE!) ???
      band-stop -> .bsf (NO SSFF! SOUND FILE!) ???
 
- \item{mdiffsig}{ -> .dwav  ??? other audio formats? .daiff??? (NO SSFF! SOUND FILE!)}
+ - mdiffsig -> .dwav  ??? other audio formats? .daiff??? (NO SSFF! SOUND FILE!)
 
- \item{f0ana}{ -> .f0 (nr of cols=1)}
+ - f0ana -> .f0 (nr of cols=1)
 
- \item{forest}{ -> .fms (nr of cols=2 -> fm+bw)}
+ - forest -> .fms (nr of cols=2 -> fm+bw)
  
- \item{mhspitch}{ -> .pit (nr of cols=1)}
+ - mhspitch -> .pit (nr of cols=1)
 
- \item{rfcana:}{}
+ - rfcana:
      LP Type=ARF -> .arf (nr of cols=3 -> rms+gain+arf)
      LP Type=LAR -> .lar (nr of cols=3 -> rms+gain+lar)
      LP Type=LPC -> .lpc (nr of cols=3 -> rms+gain+lpc)
      LP Type=RFC -> .rfc (nr of cols=3 -> rms+gain+rfc)
 
- \item{rmsana}{ -> .rms (nr of cols=1)}
+ rmsana -> .rms (nr of cols=1)
 
  - spectrum:
      LP Type=DFT -> .dft (nr of cols=1)
@@ -83,14 +74,13 @@ the bandwidths of formants):
      LP Type=CSS -> .css (nr of cols=1)
      LP Type=CEP -> .cep (nr of cols=1)
 
- \item{zcrana}{ -> .zcr (nr of cols=1)}
+ zcrana -> .zcr (nr of cols=1)
 
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-\code{\link{make.seglist}}
 }
 \examples{
 ##---- Should be DIRECTLY executable !! ----
