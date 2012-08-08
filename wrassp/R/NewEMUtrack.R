@@ -25,6 +25,14 @@ newEmu.track <- function(seglist=NULL, trackname=NULL, fext=NULL){
     }else if (trackname=="f0"){
       print("f0")
       newFileEx <- ".f0"
+    }else if (trackname=="fms:rms"){
+      print("fms:rms")
+      newFileEx <- ".fms"
+      colName <- "rms"
+    }else if (trackname=="fms:gain"){
+      print("fms:gain")
+      newFileEx <- ".fms"
+      colName <- "gain"      
     }else if (trackname=="fms:fm"){
       print("fms:fm")
       newFileEx <- ".fms"
@@ -32,7 +40,7 @@ newEmu.track <- function(seglist=NULL, trackname=NULL, fext=NULL){
     }else if (trackname=="fms:bw"){
       print("fms:bw")
       newFileEx <- ".fms"
-      colName <- "bw"
+      colName <- "bw"    
     }else if (trackname=="pit"){
       print("pit")
       newFileEx <- ".pit"
@@ -115,55 +123,62 @@ newEmu.track <- function(seglist=NULL, trackname=NULL, fext=NULL){
   
   data <- matrix(ncol=4, nrow=0)
   
-  #####TEST WITH first element######
-  i = 1
-  #split at "." char (fixed=T to turn off regex matching)
-  dotSplitFilePath = unlist(strsplit(seglist$utts[i], ".",fixed=T ))  
-  dotSplitFilePath[length(dotSplitFilePath)] <- newFileEx
+  #####LOOP OVER UTTS######
+  curIndexStart = 1
+  for (i in 1:length(seglist$utts)){
+    #split at "." char (fixed=T to turn off regex matching)
+    dotSplitFilePath = unlist(strsplit(seglist$utts[i], ".",fixed=T ))  
+    dotSplitFilePath[length(dotSplitFilePath)] <- newFileEx
   
-  fname = paste(dotSplitFilePath, collapse="")
+    fname = paste(dotSplitFilePath, collapse="")
     
-  #get data object
-  curDObj <- getDObj(fname)
+    #get data object
+    curDObj <- getDObj(fname)
   
-  curStart <- seglist$start[i]
-  curEnd <- seglist$end[i]
+    curStart <- seglist$start[i]
+    curEnd <- seglist$end[i]
 
-  fSampleRateInMS <- (1/attr(curDObj, "samplerate"))*1000
-  fStartTime <- 0.00246875*1000 #SIC! get from object
+    fSampleRateInMS <- (1/attr(curDObj, "samplerate"))*1000
+    fStartTime <- 0.00246875*1000 #SIC! get from object
   
-  timeStampSeq = seq(fStartTime, curEnd, fSampleRateInMS)
+    timeStampSeq = seq(fStartTime, curEnd, fSampleRateInMS)
   
-  #search for first element larger than start time
-  breakVal = -1
-  for (j in 1:length(timeStampSeq)){
-    if (timeStampSeq[j] >= curStart){
-      breakVal = j
-      break
+    #search for first element larger than start time
+    breakVal = -1
+    for (j in 1:length(timeStampSeq)){
+      if (timeStampSeq[j] >= curStart){
+        breakVal = j
+        break
+      }
     }
-  }
-  print(breakVal)
-  curStartDataIdx = breakVal
-  curEndDataIdx = length(timeStampSeq)
+    print(breakVal)
+    curStartDataIdx = breakVal
+    curEndDataIdx = length(timeStampSeq)
   
-  #set index and ftime
-  index[i,] <- c(curStartDataIdx, curEndDataIdx)
-  ftime[i,] <- c(timeStampSeq[curStartDataIdx], timeStampSeq[curEndDataIdx])
+    #set index and ftime
+    curIndexEnd = curIndexStart+curEndDataIdx-curStartDataIdx
+    index[i,] <- c(curIndexStart, curIndexEnd)
+    ftime[i,] <- c(timeStampSeq[curStartDataIdx], timeStampSeq[curEndDataIdx])
   
-  #calculate size of and create new data matrix
-  rowSeq <- seq(timeStampSeq[curStartDataIdx],timeStampSeq[curEndDataIdx], fSampleRateInMS) 
-  curData <- matrix(ncol=4, nrow=length(rowSeq))
-  colnames(curData) <- c("T1","T2","T3","T4")
-  rownames(curData) <- rowSeq
-  curData[,] <- curDObj$fm[118:152,] 
+    #calculate size of and create new data matrix
+    rowSeq <- seq(timeStampSeq[curStartDataIdx],timeStampSeq[curEndDataIdx], fSampleRateInMS) 
+    curData <- matrix(ncol=4, nrow=length(rowSeq))
+    colnames(curData) <- paste("T", 1:ncol(curData), sep="")
+    rownames(curData) <- rowSeq
+    curData[,] <- curDObj$fm[curStartDataIdx:curEndDataIdx,] 
 
   
-  #Append to global data matrix app
-  nrow(data)
-  data <- rbind(data, curData)
+    #Append to global data matrix app
+    nrow(data)
+    data <- rbind(data, curData)
   
-  #after loop
-  myTrackData <- as.trackdata(data, index=index, ftime, "fms:fm")
+    curIndexStart = curIndexEnd+1
+    #to be safe
+    curDObj = NULL
+  }  
+  #convert data, index, ftime to trackdata
+  myTrackData <- as.trackdata(data, index=index, ftime, trackname)
+  
   
   return(myTrackData)
   
@@ -173,13 +188,13 @@ newEmu.track <- function(seglist=NULL, trackname=NULL, fext=NULL){
 #test func
 
 #make seglist from query
-seglist <- emu.query("stops", "*", "Phonetic=u:")
+#seglist <- emu.query("stops", "*", "Phonetic=u:")
 
 #convert to valid file path (in local dir)
-for (i in 1:length(seglist$utts)){
-  curFile <- paste(seglist$utts[i],".wav", sep="")
-  curFile <-unlist(strsplit(curFile, ":",fixed=T ))[2]
-  seglist$utts[i] <- curFile
-}
+#for (i in 1:length(seglist$utts)){
+#  curFile <- paste(seglist$utts[i],".wav", sep="")
+#  curFile <-unlist(strsplit(curFile, ":",fixed=T ))[2]
+#  seglist$utts[i] <- curFile
+#}
 
-res = newEmu.track(seglist,'fms:fm')
+#res = newEmu.track(seglist,'fms:fm')

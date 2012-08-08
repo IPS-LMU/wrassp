@@ -56,7 +56,7 @@ the bandwidths of formants):
 
  - f0ana -> .f0 (nr of cols=1)
 
- - forest -> .fms (nr of cols=2 -> fm+bw)
+ - forest -> .fms (nr of cols=4 -> rms+gain+fm+bw)
  
  - mhspitch -> .pit (nr of cols=1)
 
