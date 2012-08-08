@@ -139,7 +139,7 @@ newEmu.track <- function(seglist=NULL, trackname=NULL, fext=NULL){
     curEnd <- seglist$end[i]
 
     fSampleRateInMS <- (1/attr(curDObj, "samplerate"))*1000
-    fStartTime <- 0.00246875*1000 #SIC! get from object
+    fStartTime <- attr(curDObj,"start_time")*1000
   
     timeStampSeq = seq(fStartTime, curEnd, fSampleRateInMS)
   
