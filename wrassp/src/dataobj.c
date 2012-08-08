@@ -201,9 +201,9 @@ SEXP getDObjTrackData(DOBJ * data, DDESC * desc)
 	  break;
 	  case DF_REAL64:
 	  {
-	       i16Ptr = (double *) &bPtr[desc->offset];
+	       f64Ptr = (double *) &bPtr[desc->offset];
 	       for (n=0; n < desc->numFields; n++) {
-		    Rans[m + n * data->numRecords] = (int) i16Ptr[n];
+		    Rans[m + n * data->numRecords] = (double) f64Ptr[n];
 	       }
 	  }
 	  break;
