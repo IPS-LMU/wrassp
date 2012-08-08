@@ -5,19 +5,19 @@
 Extracts relavant data from a given database (Signalfiles+SSFF-Files)
 }
 \description{
-Reads time relavent data from a given seglist and extracts the specified
+Reads time relevent data from a given seglist and extracts the specified
 trackdata and places it into a trackdata object (same as in emu/R). The 
 seglist has to contain valid paths to the signal files and the according 
 SSFF files have to be in the same directory.}
 
 \usage{
-newEmu.track(seglist = NULL, trackname = NULL, fext = NULL)
+newEmu.track(seglist = NULL, trackname = NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{seglist}{seglist obtained by emu.query (or from new package seglist)}
   \item{trackname}{name of track wanted in trackdata returned (for valid options see below)}
-  \item{fext}{extension of file if NULL default values of tracknames are expected}
+  %\item{fext}{extension of file if NULL default values of tracknames are expected}
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
@@ -83,10 +83,9 @@ the bandwidths of formants):
 \seealso{
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-\dontrun{sl = read.TextGrid(nam="FileName.TextGrid",layername="MAU",database="ALC")}
+## get seglist from a database (see emu.query)
+
+\dontrun{newtrackdata = newEmu.track(seglist,'fms:fm')}
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

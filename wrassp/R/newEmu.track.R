@@ -1,5 +1,5 @@
 
-newEmu.track <- function(seglist=NULL, trackname=NULL, fext=NULL){
+newEmu.track <- function(seglist=NULL, trackname=NULL){
   
   if( is.null(seglist) || is.null(trackname)) {
     cat("newEmu.track: usage: newEmu.track(seglist=seglistFromQuery, trackname=trackNameToBeReturned, ext=extenstionOfFile\n")
@@ -9,170 +9,163 @@ newEmu.track <- function(seglist=NULL, trackname=NULL, fext=NULL){
   
   #generate new file extension
   if (trackname=="acf"){
-      print("acf")
       newFileEx <- ".acf"
+      colName <- "acf"
     }else if (trackname=="hpf"){
-      print("hpf")
-      newFileEx <- ".hpf"      
+      newFileEx <- ".hpf"
+      colName <- "hpf"
     }else if (trackname=="lpf"){
-      print("lpf")
       newFileEx <- ".lpf"
+      colName <- "hpf"
     }else if (trackname=="bpf"){
-      print("bpf")
       newFileEx <- ".bpf"
+      colName <- "bpf"
     }else if (trackname=="bsf"){
       newFileEx <- ".bsf"
+      colName <- "bsf"
     }else if (trackname=="f0"){
-      print("f0")
       newFileEx <- ".f0"
+      colName <- "f0"
     }else if (trackname=="fms:rms"){
-      print("fms:rms")
       newFileEx <- ".fms"
       colName <- "rms"
     }else if (trackname=="fms:gain"){
-      print("fms:gain")
       newFileEx <- ".fms"
       colName <- "gain"      
     }else if (trackname=="fms:fm"){
-      print("fms:fm")
       newFileEx <- ".fms"
       colName <- "fm"
     }else if (trackname=="fms:bw"){
-      print("fms:bw")
       newFileEx <- ".fms"
       colName <- "bw"    
     }else if (trackname=="pit"){
-      print("pit")
       newFileEx <- ".pit"
+      colName <- "pit"
     }else if (trackname=="arf:rms"){
-      print("arf:rms")
       newFileEx <- ".arf"
       colName <- "rms"
     }else if (trackname=="arf:gain"){
-      print("arf:gain")
       newFileEx <- ".arf"
       colName <- "gain"
     }else if (trackname=="arf:arf"){
-      print("arf:arf")
       newFileEx <- ".arf"
       colName <- "arf"
     }else if (trackname=="lar:rms"){
-      print("lar:rms")
       newFileEx <- ".lar"
       colName <- "rms"
     }else if (trackname=="lar:gain"){
-      print("lar:gain")
       newFileEx <- ".lar"
       colName <- "gain"
     }else if (trackname=="lar:lar"){
-      print("lar:lar")
       newFileEx <- ".lar"
       colName <- "lar"
     }else if (trackname=="lpc:rms"){
-      print("lpc:rms")
       newFileEx <- ".lpc"
       colName <- "rms"
     }else if (trackname=="lpc:gain"){
-      print("lpc:gain")
       newFileEx <- ".lpc"
       colName <- "gain"
     }else if (trackname=="lpc:lpc"){
-      print("lpc:arf")
       newFileEx <- ".lpc"
       colName <- "lpc"
     }else if (trackname=="rfc:rms"){
-      print("rfc:rms")
       newFileEx <- ".rfc"
       colName <- "rms"
     }else if (trackname=="rfc:gain"){
-      print("rfc:gain")
       newFileEx <- ".rfc"
       colName <- "gain"
     }else if (trackname=="rfc:rfc"){
-      print("rfc:rfc")
       newFileEx <- ".rfc"
       colName <- "rfc"
     }else if (trackname=="rms"){  
-      print("rms")
       newFileEx <- ".fms"
-    }else if (trackname=="dft"){  
-      print("dft")
+      colName <- "rms"
+    }else if (trackname=="dft"){
       newFileEx <- ".dft"
+      colName <- "dft"
     }else if (trackname=="lps"){  
-      print("lps")
       newFileEx <- ".lps"
+      colName <- "lps"
     }else if (trackname=="css"){  
-      print("css")
       newFileEx <- ".css"
+      colName <- "css"
     }else if (trackname=="cep"){  
-      print("cep")
-      newFileEx <- ".cep"      
+      newFileEx <- ".cep"
+      colName <- "cep"
     }else if (trackname=="zcr"){  
-      print("zcr")
       newFileEx <- ".zcr"
+      colName <- "zcr"
    }else{
      stop("unknown trackname...")
    }
   
-  #create empty index, ftime, data matrices
+  #create empty index, ftime matrices
   index <- matrix(ncol=2, nrow=length(seglist$utts))
   colnames(index) <- c("start","end")
   
   ftime <- matrix(ncol=2, nrow=length(seglist$utts))
   colnames(ftime) <- c("start","end")
   
-  data <- matrix(ncol=4, nrow=0)
+  data <- NULL
   
   #####LOOP OVER UTTS######
   curIndexStart = 1
   for (i in 1:length(seglist$utts)){
     #split at "." char (fixed=T to turn off regex matching)
-    dotSplitFilePath = unlist(strsplit(seglist$utts[i], ".",fixed=T ))  
+    dotSplitFilePath <- unlist(strsplit(seglist$utts[i], ".",fixed=T ))  
     dotSplitFilePath[length(dotSplitFilePath)] <- newFileEx
   
-    fname = paste(dotSplitFilePath, collapse="")
+    fname <- paste(dotSplitFilePath, collapse="")
+    cat("current file:\n")
+    cat("\t - ", fname, "\n")
     
     #get data object
     curDObj <- getDObj(fname)
-  
+    
+    if(is.null(data)){
+      tmpData <- eval(parse(text=paste("curDObj$",colName,sep="")))
+      data <- matrix(ncol=ncol(tmpData), nrow=0)
+      tmpData <- NULL
+    }
+         
     curStart <- seglist$start[i]
     curEnd <- seglist$end[i]
 
     fSampleRateInMS <- (1/attr(curDObj, "samplerate"))*1000
     fStartTime <- attr(curDObj,"start_time")*1000
   
-    timeStampSeq = seq(fStartTime, curEnd, fSampleRateInMS)
+    timeStampSeq <- seq(fStartTime, curEnd, fSampleRateInMS)
   
     #search for first element larger than start time
-    breakVal = -1
+    breakVal <- -1
     for (j in 1:length(timeStampSeq)){
       if (timeStampSeq[j] >= curStart){
-        breakVal = j
+        breakVal <- j
         break
       }
     }
-    print(breakVal)
-    curStartDataIdx = breakVal
-    curEndDataIdx = length(timeStampSeq)
+    curStartDataIdx <- breakVal
+    curEndDataIdx <- length(timeStampSeq)
   
     #set index and ftime
-    curIndexEnd = curIndexStart+curEndDataIdx-curStartDataIdx
+    curIndexEnd <- curIndexStart+curEndDataIdx-curStartDataIdx
     index[i,] <- c(curIndexStart, curIndexEnd)
     ftime[i,] <- c(timeStampSeq[curStartDataIdx], timeStampSeq[curEndDataIdx])
   
     #calculate size of and create new data matrix
+    tmpData <- eval(parse(text=paste("curDObj$",colName,sep="")))
+    
     rowSeq <- seq(timeStampSeq[curStartDataIdx],timeStampSeq[curEndDataIdx], fSampleRateInMS) 
-    curData <- matrix(ncol=4, nrow=length(rowSeq))
+    curData <- matrix(ncol=ncol(tmpData), nrow=length(rowSeq))
     colnames(curData) <- paste("T", 1:ncol(curData), sep="")
     rownames(curData) <- rowSeq
-    curData[,] <- curDObj$fm[curStartDataIdx:curEndDataIdx,] 
+    curData[,] <- tmpData[curStartDataIdx:curEndDataIdx,] 
 
   
     #Append to global data matrix app
-    nrow(data)
     data <- rbind(data, curData)
   
-    curIndexStart = curIndexEnd+1
+    curIndexStart <- curIndexEnd+1
     #to be safe
     curDObj = NULL
   }  
