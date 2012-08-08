@@ -6,8 +6,7 @@ newEmu.track <- function(seglist=NULL, trackname=NULL, fext=NULL){
     cat("               replacement of the old emu.track function using the wrassp package\n")
     stop("newEmu.track: Argument names=NamesOfTextGridFileToRead and trackname=trackNameToBeReturned are required.\n")
   }
-
-  #maybe put in textfile then parse...???
+  
   #generate new file extension
   if (trackname=="acf"){
       print("acf")
@@ -107,40 +106,74 @@ newEmu.track <- function(seglist=NULL, trackname=NULL, fext=NULL){
      stop("unknown trackname...")
    }
   
+  #create empty index, ftime matrices
+  index <- matrix(ncol=2, nrow=length(seglist$utts))
+  colnames(index) <- c("start","end")
+  
+  ftime <- matrix(ncol=2, nrow=length(seglist$utts))
+  colnames(ftime) <- c("start","end")
+  
   #####TEST WITH first element######
-  
+  i = 1
   #split at "." char (fixed=T to turn off regex matching)
-  dotSplitFilePath = unlist(strsplit(seglist$utts[1], ".",fixed=T ))  
-  dotSplitFilePath[length(dotSplitFilePath)] <- newFieEx
+  dotSplitFilePath = unlist(strsplit(seglist$utts[i], ".",fixed=T ))  
+  dotSplitFilePath[length(dotSplitFilePath)] <- newFileEx
   
-  fname = paste(dotSplitFilePath[1], dotSplitFilePath[2], sep="")
-  
-  fname <- path.expand(fname)
-  
-#  for (i in 1:length(seglist$utts)){
-
-    #split at "." char (fixed=T to turn off regex matching)
-#    dotSplitFilePath = unlist(strsplit(seglist$utts[i], ".",fixed=T ))
-
-#    print(dotSplitFilePath[length(dotSplitFilePath)]) = newFieEx
+  fname = paste(dotSplitFilePath, collapse="")
     
-#  }
+  #get data object
+  curDObj <- getDObj(fname)
   
+  curStart <- seglist$start[i]
+  curEnd <- seglist$end[i]
 
+  fSampleRateInMS <- (1/attr(curDObj, "samplerate"))*1000
+  fStartTime <- 0.00246875*1000 #SIC! get from object
+  
+  timeStampSeq = seq(fStartTime, curEnd, fSampleRateInMS)
+  
+  #search for first element larger than start time
+  breakVal = -1
+  for (j in 1:length(timeStampSeq)){
+    if (timeStampSeq[j] >= curStart){
+      breakVal = j
+      break
+    }
+  }
+  print(breakVal)
+  curStartDataIdx = breakVal
+  curEndDataIdx = length(timeStampSeq)
+  
+  #set index and ftime
+  index[i,] <- c(curStartDataIdx, curEndDataIdx)
+  ftime[i,] <- c(timeStampSeq[curStartDataIdx], timeStampSeq[curEndDataIdx])
+  
+  #calculate size of and create new data matrix
+  rowSeq <- seq(timeStampSeq[curStartDataIdx],timeStampSeq[curEndDataIdx], fSampleRateInMS) 
+  data <- matrix(ncol=4, nrow=length(rowSeq))
+  colnames(data) <- c("T1","T2","T3","T4")
+  rownames(data) <- rowSeq
+  
+  #Append to global data matrix app
+  
+  
+  #after loop
+  myTrackData = as.trackdata(data, index=index, ftime, "fms:fm")
+  
+  
 }#newEmu.track
 
 ####################################
 #test func
 
 #make seglist from query
-#segs <- emu.query("stops", "*", "Phonetic=g")
+#seglist <- emu.query("stops", "*", "Phonetic=u:")
 
 #convert to valid file path (in local dir)
-#for (i in 1:length(segs$utts)){
-#  segs$utts[i] <- paste(segs$utts[i],".wav", sep="")
+#for (i in 1:length(seglist$utts)){
+#  curFile <- paste(seglist$utts[i],".wav", sep="")
+#  curFile <-unlist(strsplit(curFile, ":",fixed=T ))[2]
+#  seglist$utts[i] <- curFile
 #}
 
-#newEmu.track(segs,'fm')
-
-
-
+#newEmu.track(seglist,'fms:fm')
