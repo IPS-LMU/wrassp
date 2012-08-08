@@ -106,12 +106,14 @@ newEmu.track <- function(seglist=NULL, trackname=NULL, fext=NULL){
      stop("unknown trackname...")
    }
   
-  #create empty index, ftime matrices
+  #create empty index, ftime, data matrices
   index <- matrix(ncol=2, nrow=length(seglist$utts))
   colnames(index) <- c("start","end")
   
   ftime <- matrix(ncol=2, nrow=length(seglist$utts))
   colnames(ftime) <- c("start","end")
+  
+  data <- matrix(ncol=4, nrow=0)
   
   #####TEST WITH first element######
   i = 1
@@ -150,16 +152,20 @@ newEmu.track <- function(seglist=NULL, trackname=NULL, fext=NULL){
   
   #calculate size of and create new data matrix
   rowSeq <- seq(timeStampSeq[curStartDataIdx],timeStampSeq[curEndDataIdx], fSampleRateInMS) 
-  data <- matrix(ncol=4, nrow=length(rowSeq))
-  colnames(data) <- c("T1","T2","T3","T4")
-  rownames(data) <- rowSeq
+  curData <- matrix(ncol=4, nrow=length(rowSeq))
+  colnames(curData) <- c("T1","T2","T3","T4")
+  rownames(curData) <- rowSeq
+  curData[,] <- curDObj$fm[118:152,] 
+
   
   #Append to global data matrix app
-  
+  nrow(data)
+  data <- rbind(data, curData)
   
   #after loop
-  myTrackData = as.trackdata(data, index=index, ftime, "fms:fm")
+  myTrackData <- as.trackdata(data, index=index, ftime, "fms:fm")
   
+  return(myTrackData)
   
 }#newEmu.track
 
@@ -167,13 +173,13 @@ newEmu.track <- function(seglist=NULL, trackname=NULL, fext=NULL){
 #test func
 
 #make seglist from query
-#seglist <- emu.query("stops", "*", "Phonetic=u:")
+seglist <- emu.query("stops", "*", "Phonetic=u:")
 
 #convert to valid file path (in local dir)
-#for (i in 1:length(seglist$utts)){
-#  curFile <- paste(seglist$utts[i],".wav", sep="")
-#  curFile <-unlist(strsplit(curFile, ":",fixed=T ))[2]
-#  seglist$utts[i] <- curFile
-#}
+for (i in 1:length(seglist$utts)){
+  curFile <- paste(seglist$utts[i],".wav", sep="")
+  curFile <-unlist(strsplit(curFile, ":",fixed=T ))[2]
+  seglist$utts[i] <- curFile
+}
 
-#newEmu.track(seglist,'fms:fm')
+res = newEmu.track(seglist,'fms:fm')
