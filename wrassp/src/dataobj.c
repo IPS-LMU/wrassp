@@ -22,10 +22,12 @@ SEXP getDObj(SEXP fname) {
 	  error(getAsspMsg(asspMsgNum));
      asspFClose(data, AFC_KEEP);
      // count tracks
-     for (desc = &(data->ddl); desc !=NULL; desc=desc->next)
+     for (n=0, desc = &(data->ddl); desc !=NULL; desc=desc->next)
      {
 	  n++;
+	  //Rprintf("Cur n=%d\n", n);
      }
+     
      // create result, a list with a matrix for each track
      PROTECT(ans = allocVector(VECSXP, n));
      // create list of tracks
