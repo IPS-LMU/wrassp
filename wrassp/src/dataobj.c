@@ -6,7 +6,7 @@
 
 SEXP getDObj(SEXP fname) {
 
-   SEXP ans, dPtr, class, rate, tracks, startTime;
+   SEXP ans, dPtr, class, rate, tracks, startTime, origRate;
      DOBJ DATA, * data = &(DATA);
      DDESC * desc = NULL;
      long numRecs;
@@ -46,6 +46,13 @@ SEXP getDObj(SEXP fname) {
      PROTECT(rate = allocVector(REALSXP,1));
      REAL(rate)[0] = data->dataRate;
      setAttrib(ans, install("samplerate"), rate);
+     PROTECT(origRate = allocVector(REALSXP,1));
+     if (data->fileFormat == FF_SSFF) {
+	REAL(origRate)[0] = data->sampFreq;
+     } else {
+	REAL(origRate)[0] = 0;
+     }
+     setAttrib(ans, install("origFreq"), origRate);
      PROTECT(startTime = allocVector(REALSXP, 1));
      REAL(startTime)[0] = data->Start_Time;
      setAttrib(ans, install("start_time"), startTime);
