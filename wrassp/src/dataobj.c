@@ -27,7 +27,7 @@ SEXP getDObj(SEXP fname) {
 	  n++;
 	  //Rprintf("Cur n=%d\n", n);
      }
-     
+
      // create result, a list with a matrix for each track
      PROTECT(ans = allocVector(VECSXP, n));
      // create list of tracks
@@ -61,7 +61,7 @@ SEXP getDObj(SEXP fname) {
      PROTECT(class = allocVector(STRSXP, 1));
      SET_STRING_ELT(class, 0, mkChar("dobj"));
      classgets(ans, class);
-     UNPROTECT(6);
+     UNPROTECT(7);
      return ans;
 }
 
