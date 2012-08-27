@@ -23,13 +23,13 @@
    \code{ftime} component contains the start and end times of the
    segment data.
 
-   Trackdata objects are returned by the \code{\link{emu.track}} function.
+%   Trackdata objects are returned by the \code{\link{emu.track}} function.
 }
 \value{
   The components are bound into a trackdata object.
 }
 
-\seealso{ \code{\link{emu.track}} \code{\link{dplot}} }
+%\seealso{ \code{\link{emu.track}} \code{\link{dplot}} }
 
 \examples{
 
