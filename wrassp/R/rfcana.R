@@ -12,6 +12,10 @@
 		stop("WindowFunction of type '", Window,"' is not supported!")
 	}
 	
+	if(!isAsspLpType(LpType)){
+		stop("LpType of type '", LpType,"' is not supported!")
+	}
+	
 	
 	.External("performAssp", listOfFiles, fname = "rfcana", BeginTime = BeginTime, CenterTime = CenterTime, EndTime = EndTime, WindowShift = WindowShift, WindowSize = WindowSize, EffectiveLength = EffectiveLength, Window = Window, Order = Order, Preemphasis = Preemphasis, LpType = LpType, ToFile = ToFile, ExplicitExt = ExplicitExt)
 	
