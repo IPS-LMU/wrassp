@@ -7,6 +7,11 @@
 		stop("listOfFiles is NULL! It has to be a string or vector of file paths (min length = 1) pointing to valid file(s) to perform the given analysis function.")
 	}
 	
+	if(!isAsspWindowType(Window)){
+		stop("WindowFunction of type '", Window,"' is not supported!")
+	}
+	
+	
 	
 	.External("performAssp", listOfFiles, fname = "forest", BeginTime =  BeginTime, EndTime = EndTime, WindowShift = WindowShift, WindowSize = WindowSize, EffectiveLength = EffectiveLength, NominalF1 = NominalF1, Gender = Gender, Estimate = Estimate, Order = Order, IncrOrder = IncrOrder, NumFormants = NumFormants, Window = Window, Preemphasis = Preemphasis, ToFile = ToFile, ExplicitExt = ExplicitExt)
 	

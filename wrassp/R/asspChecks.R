@@ -1,5 +1,7 @@
 ##############################################
-'checkAsspWindowType' <-function(windowName){
+'isAsspWindowType' <-function(windowName=NULL){
+	if(is.null(windowName)){stop("No windowName given!")}
+	
 	winTypes = .Call("AsspWindowTypes")
 
 	isValidWindow = FALSE
@@ -13,8 +15,21 @@
 	return(isValidWindow)
 }
 
-###################TODO#########################
-'checkAsspLPType' <-function(lpName){}
+############################################
+'isAsspLpType' <-function(lpName=NULL){
+	if(is.null(lpName)){stop("No lpName given!")}
+	
+	lpTypes = .Call("AsspWindowTypes")
+
+	isValidLp = FALSE
+	for (type in lpTypes) {
+		if (lpName == type) {
+			isValidLp = TRUE
+			break
+		}
+	}
+	return(isValidLp)
+}
 
 
 

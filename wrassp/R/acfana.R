@@ -1,6 +1,6 @@
 "acfana" <- function(listOfFiles = NULL, BeginTime = 0.0, CenterTime = FALSE, 
 	EndTime = 0.0, WindowShift = 5.0, WindowSize = 20.0, EffectiveLength = TRUE, 
-	WindowFunction = "BLACKMAN", AnalysisOrder = 0, EnergyNormalization = FALSE, LengthNormalization = FALSE, ToFile = TRUE, ExplicitExt = NULL) {
+	Window = "BLACKMAN", AnalysisOrder = 0, EnergyNormalization = FALSE, LengthNormalization = FALSE, ToFile = TRUE, ExplicitExt = NULL) {
 
 	###########################
 	# a few parameter checks
@@ -9,8 +9,10 @@
 		stop("listOfFiles is NULL! It has to be a string or vector of file paths (min length = 1) pointing to valid file(s) to perform the given analysis function.")
 	}
 
-	if(!checkAsspWindowType(WindowFunction)){
-		stop("WindowFunction of type '", WindowFunction,"' is not supported!")
+	#DON'T FORGET TO RENAME WindowFunction to window in performAssp.c!!!!
+
+	if(!isAsspWindowType(Window)){
+		stop("WindowFunction of type '", Window,"' is not supported!")
 	}
 	
 
