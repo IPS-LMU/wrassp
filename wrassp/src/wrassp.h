@@ -74,9 +74,9 @@ typedef enum wrassp_option_number
   WO_VOIPROB,
   WO_VOIRMS,
   WO_VOIZCR,
-  WO_HPCUWOFF,			/* filter parameters */
-  WO_LPCUWOFF,
-  WO_SWOPDB,
+  WO_HPCUTOFF,			/* filter parameters */
+  WO_LPCUTOFF,
+  WO_STOPDB,
   WO_TBWIDTH,
   WO_USEIIR,      /* use IIR filter instead of FIR */
   WO_NUMIIRSECS,  /* number of IIR sections, default 4 */
@@ -100,14 +100,14 @@ typedef enum wrassp_option_number
   /* general tclassp options */
   WO_OUTPUTDIR,
   WO_OUTPUTEXT,
-  WO_FILE
+  WO_TOFILE
 } ASSP_OPT_NUM;
 
 typedef struct wrassp_option
 {
   char * name; /* name of option as used in R */
   ASSP_OPT_NUM optNum;
-} WOPT;
+} W_OPT;
 
 typedef struct anaopt_function_list
 {
@@ -115,7 +115,7 @@ typedef struct anaopt_function_list
   setDefProc *setFunc;		/* name of the function to set default option values */
   computeProc *compProc;	/* name of the function to call for parameter
 				 *  computation*/
-  WOPT *options;                /* pointer to options table */
+  W_OPT *options;                /* pointer to options table */
   int major;			/*major version number */
   int minor;			/*minor version number */
   char defExt[16];		/*default extension */
@@ -137,4 +137,18 @@ typedef struct wrassp_gender
     char code;
 } W_GENDER;
 
+extern W_OPT acfanaOptions[];
+extern W_OPT afdiffOptions[];
+extern W_OPT affilterOptions[];
+extern W_OPT f0_ksvOptions[];
+extern W_OPT f0_mhsOptions[];
+extern W_OPT forestOptions[];
+extern W_OPT rmsanaOptions[];
+extern W_OPT rfcanaOptions[];
+extern W_OPT spectrumOptions[];
+extern W_OPT zcranaOptions[];
+
+
+DOBJ * computeFilter ( DOBJ * inpDOp, AOPTS * anaopts, DOBJ * outDOp);
+DOBJ * computeF0 (DOBJ * inpDOp, AOPTS * anaOpts, DOBJ * outDOp);
 #endif // _WRASSP

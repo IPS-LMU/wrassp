@@ -12,7 +12,7 @@ SEXP getDObj(SEXP fname) {
      long numRecs;
      int i, n;
      // read the data
-     data = asspFOpen(CHAR(STRING_ELT(fname, 0)), AFO_READ, (DOBJ*)NULL);
+     data = asspFOpen(strdup(CHAR(STRING_ELT(fname, 0))), AFO_READ, (DOBJ*)NULL);
      if (data == NULL)
 	  error(getAsspMsg(asspMsgNum));
 	  //error(CHAR(STRING_ELT(fname,0)));
