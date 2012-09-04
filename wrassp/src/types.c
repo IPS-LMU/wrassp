@@ -59,9 +59,9 @@ SEXP AsspSpectTypes ()
     }
     
     PROTECT(result = allocVector(STRSXP, n));
-    while (lPtr->ident != NULL) {
+    while (sPtr->ident != NULL) {
       SET_STRING_ELT(result, i, mkChar(sPtr->ident));
-      lPtr++; i++;
+      sPtr++; i++;
     }
     UNPROTECT(1);
     return(result);
