@@ -63,7 +63,7 @@ SEXP getDObj(SEXP fname) {
      classgets(ans, class);
      UNPROTECT(7);
      return ans;
-}
+ }
 
 
 static void DObjFinalizer(SEXP dPtr) {
