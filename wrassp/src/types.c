@@ -37,7 +37,8 @@ SEXP AsspLpTypes()
 	lPtr++;
 	n++;
     }
-    
+
+    lPtr=lpType;
     PROTECT(result = allocVector(STRSXP, n));
     while (lPtr->ident != NULL) {
       SET_STRING_ELT(result, i, mkChar(lPtr->ident));
@@ -57,7 +58,8 @@ SEXP AsspSpectTypes ()
 	sPtr++;
 	n++;
     }
-    
+
+    sPtr = spectType;
     PROTECT(result = allocVector(STRSXP, n));
     while (sPtr->ident != NULL) {
       SET_STRING_ELT(result, i, mkChar(sPtr->ident));
