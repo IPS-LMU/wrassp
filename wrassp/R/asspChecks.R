@@ -19,9 +19,10 @@
 'isAsspLpType' <-function(lpName=NULL){
 	if(is.null(lpName)){stop("No lpName given!")}
 	
-	lpTypes = .Call("AsspWindowTypes")
+	lpTypes = .Call("AsspLpTypes")
 
 	isValidLp = FALSE
+	
 	for (type in lpTypes) {
 		if (lpName == type) {
 			isValidLp = TRUE
