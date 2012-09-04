@@ -37,82 +37,104 @@ typedef enum AsspFuncs
 typedef int (setDefProc) (AOPTS * opt);
 typedef DOBJ *(computeProc) (DOBJ * smpDOp, AOPTS * aoPtr, DOBJ * lpDOp);
 
+
+
+typedef enum wrassp_option_number
+{
+  WO_NONE = -1,
+  WO_OPTIONS,			/* for bit flags (upper byte reserved) */
+  WO_BEGINTIME,
+  WO_ENDTIME,
+  WO_CENTRETIME,
+  WO_MSSIZE,
+  WO_MSSHIFT,
+  WO_MSSMOOTH,
+  WO_BANDWIDTH,
+  WO_RESOLUTION,
+  WO_GAIN,
+  WO_RANGE,
+  WO_PREEMPH,
+  WO_FFTLEN,
+  WO_CHANNEL,
+  WO_GENDER,
+  WO_ORDER,
+  WO_INCREMENT,
+  WO_NUMLEVELS,
+  WO_NUMFORMANTS,
+  WO_PRECISION,
+  WO_ACCURACY,
+  WO_ALPHA,
+  WO_THRESHOLD,
+  WO_MAXF,
+  WO_MINF,
+  WO_NOMF1,			/* e.g. for formant analysis */
+  WO_INS_EST,
+  WO_VOIAC1PP,			/* VOICING thresholds */
+  WO_VOIMAG,
+  WO_VOIPROB,
+  WO_VOIRMS,
+  WO_VOIZCR,
+  WO_HPCUWOFF,			/* filter parameters */
+  WO_LPCUWOFF,
+  WO_SWOPDB,
+  WO_TBWIDTH,
+  WO_USEIIR,      /* use IIR filter instead of FIR */
+  WO_NUMIIRSECS,  /* number of IIR sections, default 4 */
+  WO_TYPE,			/* hold-all */
+  WO_FORMAT,
+  WO_WINFUNC,
+  /* These are not in libassp, only in tclassp */
+  WO_MSEFFLEN,
+  /* plain power spectrum in mhs pitch */
+  WO_MHS_OPT_POWER,
+  /* normation for acfana */
+  WO_ENERGYNORM,
+  WO_LENGTHNORM,
+  /* options specific to afdiff */
+  WO_DIFF_OPT_BACKWARD,		/* backwards difference (as opposed to forward) */
+  WO_DIFF_OPT_CENTRAL,		/* compute central/interpolated/3-point difference */
+  /* options specific to rmsana*/
+  WO_RMS_OPT_LINEAR,     /* linear RMS amplitude  */
+  /* options specific to spectrum */
+  WO_LPS_OPT_DEEMPH, /* omit de-emphasis */
+  /* general tclassp options */
+  WO_OUTPUTDIR,
+  WO_OUTPUTEXT,
+  WO_FILE
+} ASSP_OPT_NUM;
+
+typedef struct wrassp_option
+{
+  char * name; /* name of option as used in R */
+  ASSP_OPT_NUM optNum;
+} WOPT;
+
 typedef struct anaopt_function_list
 {
   char *fName;			/* symbolic (known) name of the function */
   setDefProc *setFunc;		/* name of the function to set default option values */
   computeProc *compProc;	/* name of the function to call for parameter
 				 *  computation*/
+  WOPT *options;                /* pointer to options table */
   int major;			/*major version number */
   int minor;			/*minor version number */
   char defExt[16];		/*default extension */
   AsspFunc_e funcNum;	/*number of function */
 } A_F_LIST;
 
-typedef enum assp_option_number
+typedef enum wrassp_gender_type
 {
-  TO_NONE = -1,
-  TO_OPTIONS,			/* for bit flags (upper byte reserved) */
-  TO_BEGINTIME,
-  TO_ENDTIME,
-  TO_CENTRETIME,
-  TO_MSSIZE,
-  TO_MSSHIFT,
-  TO_MSSMOOTH,
-  TO_BANDWIDTH,
-  TO_RESOLUTION,
-  TO_GAIN,
-  TO_RANGE,
-  TO_PREEMPH,
-  TO_FFTLEN,
-  TO_CHANNEL,
-  TO_GENDER,
-  TO_ORDER,
-  TO_INCREMENT,
-  TO_NUMLEVELS,
-  TO_NUMFORMANTS,
-  TO_PRECISION,
-  TO_ACCURACY,
-  TO_ALPHA,
-  TO_THRESHOLD,
-  TO_MAXF,
-  TO_MINF,
-  TO_NOMF1,			/* e.g. for formant analysis */
-  TO_INS_EST,
-  TO_VOIAC1PP,			/* VOICING thresholds */
-  TO_VOIMAG,
-  TO_VOIPROB,
-  TO_VOIRMS,
-  TO_VOIZCR,
-  TO_HPCUTOFF,			/* filter parameters */
-  TO_LPCUTOFF,
-  TO_STOPDB,
-  TO_TBWIDTH,
-  TO_USEIIR,      /* use IIR filter instead of FIR */
-  TO_NUMIIRSECS,  /* number of IIR sections, default 4 */
-  TO_TYPE,			/* hold-all */
-  TO_FORMAT,
-  TO_WINFUNC,
-  /* These are not in libassp, only in tclassp */
-  TO_MSEFFLEN,
-  /* plain power spectrum in mhs pitch */
-  TO_MHS_OPT_POWER,
-  /* normation for acfana */
-  TO_ENERGYNORM,
-  TO_LENGTHNORM,
-  /* options specific to afdiff */
-  TO_DIFF_OPT_BACKWARD,		/* backwards difference (as opposed to forward) */
-  TO_DIFF_OPT_CENTRAL,		/* compute central/interpolated/3-point difference */
-  /* options specific to rmsana*/
-  TO_RMS_OPT_LINEAR,     /* linear RMS amplitude  */
-  /* options specific to spectrum */
-  TO_LPS_OPT_DEEMPH, /* omit de-emphasis */
-  /* general tclassp options */
-  TO_OUTPUTDIR,
-  TO_OUTPUTEXT,
-  TO_FILE
-} ASSP_OPT_NUM;
+    TG_NONE = -1,
+    TG_FEMALE,
+    TG_MALE,
+    TG_UNKNOWN,
+} W_GENDER_TYPE;
 
-
+typedef struct wrassp_gender
+{
+    char * ident;
+    W_GENDER_TYPE num;
+    char code;
+} W_GENDER;
 
 #endif // _WRASSP
