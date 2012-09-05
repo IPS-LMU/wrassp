@@ -7,6 +7,12 @@
 		stop("listOfFiles is NULL! It has to be a string or vector of file paths (min length = 1) pointing to valid file(s) to perform the given analysis function.")
 	}
 	
-		.External("performAssp", listOfFiles, fname = "affilter", HighPass = HighPass, LowPass = LowPass, StopBand = StopBand, Transition = Transition, UseIIR = UseIIR, NumIIRsections = as.integer(NumIIRsections), ToFile = ToFile, ExplicitExt = ExplicitExt)
+	pb <- txtProgressBar(...)
 	
+	for (i in 1:length(listOfFiles)){
+		cat(i, '\n')
+		setTxtProgressBar(pb, i)
+		.External("performAssp", listOfFiles[i], fname = "affilter", HighPass = HighPass, LowPass = LowPass, StopBand = StopBand, Transition = Transition, UseIIR = UseIIR, NumIIRsections = as.integer(NumIIRsections), ToFile = ToFile, ExplicitExt = ExplicitExt)
+	}
+	close(pb)
 }
