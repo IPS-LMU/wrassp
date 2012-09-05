@@ -68,7 +68,9 @@ W_OPT afdiffOptions[] = {
   ,
   {"ExplicitExt", WO_OUTPUTEXT}
   ,				//DON'T FORGET EXTENSION!!!
-  {"ToFile", WO_TOFILE},    {NULL, WO_NONE}
+  {"ToFile", WO_TOFILE}
+  ,    
+  {NULL, WO_NONE}
 };
 
 W_OPT affilterOptions[] = {
@@ -375,13 +377,13 @@ SEXP performAssp(SEXP args) {
   if ((anaFunc->setFunc) (opt) == -1) 
     error("%d\t$%s\n", asspMsgNum, getAsspMsg(asspMsgNum));
 
-  wrasspOptions = anaFunc->options;
   args= CDR(args);
   
 
 
   for (int i = 0; args != R_NilValue; i++, args = CDR(args)) {
     name = isNull(TAG(args)) ? "" : CHAR(PRINTNAME(TAG(args)));
+    wrasspOptions = anaFunc->options;
     while (wrasspOptions->name != NULL) {
       if (strcmp(wrasspOptions->name, name) == 0)
 	break;
@@ -479,6 +481,7 @@ SEXP performAssp(SEXP args) {
       break;
     case WO_CHANNEL:
       opt->channel = INTEGER(el)[0];
+      break;
     case WO_GENDER:
       /*
        * some things need to be set here:
@@ -846,13 +849,28 @@ SEXP performAssp(SEXP args) {
 
       outPtr->numRecords =outPtr->bufNumRecs;
       
-      if (!expExt | strcmp(ext, "")==0)
-	strcpy(ext,anaFunc->defExt);
-      
+      /* parse the input path to get directory (dPath),
+	 base file name (bPath) and original extension (oExt) */
       parsepath(strdup(name), &dPath, &bPath, &oExt);
+      /* outName is the same except for extension */
       strcpy(outName, "");
       strcat(outName, dPath);
       strcat(outName, bPath);
+      /* Extension can be many different things */
+      if (!expExt | strcmp(ext, "")==0) 
+	{
+	  switch (anaFunc->funcNum) 
+	    {
+	    case AF_AFDIFF:
+	      strcpy(ext, ".d");
+	      oExt++; /* skip period */
+	      strcat(ext, oExt);
+	      break;
+	    default:
+	      strcpy(ext,anaFunc->defExt);
+	      break;
+	    }
+	}
       strcat(outName, ext);
       outPtr = asspFOpen(outName, AFO_WRITE, outPtr);
       if (outPtr == NULL) {
@@ -915,3 +933,4 @@ DOBJ *computeF0(DOBJ * inpDOp, AOPTS * anaOpts, DOBJ * outDOp)
 {
   return computeKSV(inpDOp, anaOpts, outDOp, (DOBJ *) NULL);
 }
+
