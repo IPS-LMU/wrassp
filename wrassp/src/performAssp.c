@@ -46,7 +46,7 @@ W_OPT acfanaOptions[] = {
   ,
   {"ExplicitExt", WO_OUTPUTEXT}
   ,				//DON'T FORGET EXTENSION!!!
-  {"WindowFunction", WO_WINFUNC}
+  {"Window", WO_WINFUNC}
   ,
   {"AnalysisOrder", WO_ORDER}
   ,
