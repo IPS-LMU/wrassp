@@ -10,6 +10,5 @@
 
 ####### RAPHAEL #########
 
-- one file -> getDObj on resulting file -> return Obj
-- invis. on .External
 - improve rec search (seglist not wrassp)
+- overwrite check
