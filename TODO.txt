@@ -4,10 +4,11 @@
 
 ######## LASSE ##########
 
-- progressbar in affilter does not move!
+- (DONE) progressbar in affilter does not move!
 - f0ana dies a painfull death
 - dftSpectrum -> Out of memory
 - remove pointer from data objects
+- (DONE) fix ExplicitExtension
 
 ####### RAPHAEL #########
 

@@ -808,6 +808,7 @@ SEXP performAssp(SEXP args) {
       } else {
 	strncpy(ext, cPtr, strlen(cPtr));
       }
+      expExt=1;
       switch (anaFunc->funcNum) {
       case AF_RFCANA:
 	lPtr = lpType;
