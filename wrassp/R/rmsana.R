@@ -12,8 +12,17 @@
 		stop("WindowFunction of type '", Window,"' is not supported!")
 	}
 	
+	###########################
+	# perform analysis
+
+	if(length(listOfFiles)==1){
+		pb <- NULL
+	}else{
+		pb <- txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
+	}	
 	
+	invisible(.External("performAssp", listOfFiles, fname = "rmsana", BeginTime = BeginTime, CenterTime = CenterTime, EndTime = EndTime, WindowShift = WindowShift, WindowSize = WindowSize, EffectiveLength = EffectiveLength, Linear = Linear, Window = Window, ToFile = ToFile, ExplicitExt = ExplicitExt, ProgressBar = pb))
 	
-	.External("performAssp", listOfFiles, fname = "rmsana", BeginTime = BeginTime, CenterTime = CenterTime, EndTime = EndTime, WindowShift = WindowShift, WindowSize = WindowSize, EffectiveLength = EffectiveLength, Linear = Linear, Window = Window, ToFile = ToFile, ExplicitExt = ExplicitExt)
+	if(!(length(listOfFiles)==1)){ close(pb) }
 	
 }

@@ -11,8 +11,17 @@
 		stop("WindowFunction of type '", Window,"' is not supported!")
 	}
 	
+	###########################
+	#perform analysis
+	
+	if(length(listOfFiles)==1){
+		pb <- NULL
+	}else{
+		pb <- txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
+	}	
 	
 	
-	.External("performAssp", listOfFiles, fname = "forest", BeginTime =  BeginTime, EndTime = EndTime, WindowShift = WindowShift, WindowSize = WindowSize, EffectiveLength = EffectiveLength, NominalF1 = NominalF1, Gender = Gender, Estimate = Estimate, Order = as.integer(Order), IncrOrder = as.integer(IncrOrder), NumFormants = as.integer(NumFormants), Window = Window, Preemphasis = Preemphasis, ToFile = ToFile, ExplicitExt = ExplicitExt)
+	invisible(.External("performAssp", listOfFiles, fname = "forest", BeginTime =  BeginTime, EndTime = EndTime, WindowShift = WindowShift, WindowSize = WindowSize, EffectiveLength = EffectiveLength, NominalF1 = NominalF1, Gender = Gender, Estimate = Estimate, Order = as.integer(Order), IncrOrder = as.integer(IncrOrder), NumFormants = as.integer(NumFormants), Window = Window, Preemphasis = Preemphasis, ToFile = ToFile, ExplicitExt = ExplicitExt, ProgressBar = pb))
 	
+	if(!(length(listOfFiles)==1)){ close(pb) }
 }
