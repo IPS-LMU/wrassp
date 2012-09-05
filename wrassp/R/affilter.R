@@ -7,6 +7,9 @@
 	if (is.null(listOfFiles)) {
 		stop("listOfFiles is NULL! It has to be a string or vector of file paths (min length = 1) pointing to valid file(s) to perform the given analysis function.")
 	}
+
+	###########################
+	# perform analysis
 	
 	if(length(listOfFiles)==1){
 		pb <- NULL
@@ -17,10 +20,10 @@
 	for (i in 1:length(listOfFiles)) {
 
 		#setTxtProgressBar(pb, i,)
-		.External("performAssp", listOfFiles[i], fname = "affilter", HighPass = HighPass, 
+		invisible(.External("performAssp", listOfFiles[i], fname = "affilter", HighPass = HighPass, 
 			LowPass = LowPass, StopBand = StopBand, Transition = Transition, 
 			UseIIR = UseIIR, NumIIRsections = as.integer(NumIIRsections), ToFile = ToFile, 
-			ExplicitExt = ExplicitExt, ProgressBar=pb)
+			ExplicitExt = ExplicitExt, ProgressBar = pb))
 	}
 
 	if(!(length(listOfFiles)==1)){ close(pb) }

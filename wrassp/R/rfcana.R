@@ -16,7 +16,18 @@
 		stop("LpType of type '", LpType,"' is not supported!")
 	}
 	
+	###########################
+	# perform analysis
+
+	if(length(listOfFiles)==1){
+		pb <- NULL
+	}else{
+		pb <- txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
+	}	
 	
-	.External("performAssp", listOfFiles, fname = "rfcana", BeginTime = BeginTime, CenterTime = CenterTime, EndTime = EndTime, WindowShift = WindowShift, WindowSize = WindowSize, EffectiveLength = EffectiveLength, Window = Window, Order = as.integer(Order), Preemphasis = Preemphasis, LpType = LpType, ToFile = ToFile, ExplicitExt = ExplicitExt)
 	
+	invisible(.External("performAssp", listOfFiles, fname = "rfcana", BeginTime = BeginTime, CenterTime = CenterTime, EndTime = EndTime, WindowShift = WindowShift, WindowSize = WindowSize, EffectiveLength = EffectiveLength, Window = Window, Order = as.integer(Order), Preemphasis = Preemphasis, LpType = LpType, ToFile = ToFile, ExplicitExt = ExplicitExt, ProgressBar = pb))
+
+
+	if(!(length(listOfFiles)==1)){ close(pb) }	
 }
