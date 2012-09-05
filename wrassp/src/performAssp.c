@@ -72,6 +72,8 @@ W_OPT afdiffOptions[] = {
   ,				//DON'T FORGET EXTENSION!!!
   {"ToFile", WO_TOFILE}
   ,    
+  {"ProgressBar", WO_PBAR}
+  ,
   {NULL, WO_NONE}
 };
 
@@ -244,6 +246,8 @@ W_OPT rmsanaOptions[] = {
   {"ExplicitExt", WO_OUTPUTEXT}
   ,				//DON'T FORGET EXTENSION!!!
   {"Window", WO_WINFUNC}
+  ,
+  {"ProgressBar", WO_PBAR}
   ,
   {"ToFile", WO_TOFILE},    {NULL, WO_NONE}
 };
