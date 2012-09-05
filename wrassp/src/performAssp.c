@@ -886,7 +886,7 @@ SEXP performAssp(SEXP args) {
       strcat(outName, dPath);
       strcat(outName, bPath);
       /* Extension can be many different things */
-      if (!expExt | strcmp(ext, "")==0) 
+      if (!expExt || strcmp(ext, "")==0) 
 	{
 	  switch (anaFunc->funcNum) 
 	    {
