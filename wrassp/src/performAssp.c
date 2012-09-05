@@ -862,6 +862,8 @@ SEXP performAssp(SEXP args) {
     PROTECT(newVal = allocVector(INTSXP, 1));
     PROTECT(utilsPackage = eval(lang2(install("getNamespace"), ScalarString(mkChar("utils"))), 
 				R_GlobalEnv));
+    INTEGER(newVal)[0] = 0;
+    eval(lang4(install("setTxtProgressBar"), pBar, newVal, R_NilValue), utilsPackage);
   }
 
   for (i = 0; i < length(inputs); i++)
@@ -916,7 +918,7 @@ SEXP performAssp(SEXP args) {
 
       // if a progress bar was passed over, increment its value
       if (pBar != R_NilValue) {
-	INTEGER(newVal)[0] = i;
+	INTEGER(newVal)[0] = i+1;
 	eval(lang4(install("setTxtProgressBar"), pBar, newVal, R_NilValue), utilsPackage);
       }
     }
