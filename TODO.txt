@@ -12,3 +12,4 @@
 
 - improve rec search (seglist not wrassp)
 - overwrite check
+- getDObj when listOfFiles has length!
