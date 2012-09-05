@@ -1,8 +1,10 @@
 #include "wrassp.h"
+#include <math.h>  // ceil, floor
 #include <dataobj.h>
 #include <asspfio.h>
 #include <asspmess.h>
 
+#include <R_ext/PrtUtil.h>
 
 SEXP getDObj(SEXP fname) {
 
@@ -23,6 +25,122 @@ SEXP getDObj(SEXP fname) {
      asspFClose(data, AFC_KEEP);
      // count tracks
      for (n=0, desc = &(data->ddl); desc !=NULL; desc=desc->next)
+     {
+	  n++;
+	  //Rprintf("Cur n=%d\n", n);
+     }
+
+     // create result, a list with a matrix for each track
+     PROTECT(ans = allocVector(VECSXP, n));
+     // create list of tracks
+     PROTECT(tracks = allocVector(STRSXP, n));
+     for (i=0, desc = &(data->ddl); desc !=NULL; desc=desc->next, i++)
+     {
+     	  SET_STRING_ELT(tracks, i, mkChar(desc->ident));
+	  // fill tracks with data
+	  Rprintf("Loading track %s.\n", desc->ident);
+	  SET_VECTOR_ELT(ans, i, getDObjTrackData(data, desc));
+     }
+     // set the names
+     setAttrib(ans, R_NamesSymbol, tracks);
+     dPtr = R_MakeExternalPtr(data, install("DOBJ"), install("something"));
+     PROTECT(dPtr);
+     R_RegisterCFinalizerEx(dPtr, DObjFinalizer, TRUE);
+     setAttrib(ans, install("data pointer"), dPtr);
+     PROTECT(rate = allocVector(REALSXP,1));
+     REAL(rate)[0] = data->dataRate;
+     setAttrib(ans, install("samplerate"), rate);
+     PROTECT(origRate = allocVector(REALSXP,1));
+     if (data->fileFormat == FF_SSFF) {
+	REAL(origRate)[0] = data->sampFreq;
+     } else {
+	REAL(origRate)[0] = 0;
+     }
+     setAttrib(ans, install("origFreq"), origRate);
+     PROTECT(startTime = allocVector(REALSXP, 1));
+     REAL(startTime)[0] = data->Start_Time;
+     setAttrib(ans, install("start_time"), startTime);
+     PROTECT(class = allocVector(STRSXP, 1));
+     SET_STRING_ELT(class, 0, mkChar("dobj"));
+     classgets(ans, class);
+     UNPROTECT(7);
+     return ans;
+ }
+
+
+SEXP getDObj2(SEXP args) {
+
+  SEXP ans, dPtr, class, rate, tracks, startTime, origRate, el;
+  DOBJ DATA, * data = &(DATA);
+  DDESC * desc = NULL;
+  long numRecs;
+  int i, n;
+  char * fName = NULL, *name;
+  double begin = 0, end = 0;
+  int isSample = 0;
+  
+  // parse args
+  args = CDR(args); // skip name of function
+  el = CAR(args);
+  fName = strdup(CHAR(STRING_ELT(el, 0)));
+  
+  args = CDR(args);
+  for (i = 0; args != R_NilValue; i++, args=CDR(args))
+    {
+      name = isNull(TAG(args)) ? "" : CHAR(PRINTNAME(TAG(args)));
+      el = CAR(args);
+      if (strcmp(name, "begin") == 0) {
+	begin = REAL(el)[0];
+	if (begin < 0)
+	  begin = 0;
+      } else if (strcmp(name, "end") == 0) {
+	end = REAL(el)[0];
+	if (end < 0)
+	  end = 0;
+      } else if (strcmp(name, "samples") == 0) {
+	isSample = INTEGER(el)[0];
+      } else {
+	error("Bad option '%s'.", name);
+      }
+    }
+
+  if (end < begin && end > 0)
+    error("End before begin. That's not clever, dude!");
+
+  // open the file
+  data = asspFOpen(fName, AFO_READ, (DOBJ*)NULL);
+  if (data == NULL)
+    error(getAsspMsg(asspMsgNum));
+  // figure out timing
+  if (isSample) {
+    if (end == 0)
+      end = data->startRecord + data->numRecords -1;
+  } else {
+    begin = ceil(begin * data->dataRate) + data->startRecord;
+    if (end == 0)
+      end = data->startRecord + data->numRecords -1;
+    else 
+      end = floor(end * data->dataRate) + data->startRecord;
+  }
+  if (end > (data->startRecord + data->numRecords)) 
+    end = data->startRecord + data->numRecords - 1;
+  if (begin > (data->startRecord+data->numRecords))
+    {
+      asspFClose(data, AFC_FREE);
+      error("Begin after end of data. That's not clever, dude!");
+    }
+  
+  numRecs = (long)(end - begin);
+  // read the data
+  allocDataBuf(data, numRecs);
+  data->bufStartRec = (long)begin;
+  if ((numRecs = asspFFill(data)) < 0) {
+    asspFClose(data, AFC_FREE);
+    error(getAsspMsg(asspMsgNum));
+  }
+  asspFClose(data, AFC_KEEP);
+  // count tracks
+  for (n=0, desc = &(data->ddl); desc !=NULL; desc=desc->next)
      {
 	  n++;
 	  //Rprintf("Cur n=%d\n", n);
@@ -128,14 +246,14 @@ SEXP getDObjTrackData(DOBJ * data, DDESC * desc)
      case DF_UINT32:
      case DF_INT32:
      {
-     	  PROTECT(ans=allocMatrix(INTSXP, data->numRecords, desc->numFields));
+     	  PROTECT(ans=allocMatrix(INTSXP, data->bufNumRecs, desc->numFields));
      	  Ians = INTEGER(ans);
      }
      break;
      case DF_REAL32:
      case DF_REAL64:
      {
-	  PROTECT(ans=allocMatrix(REALSXP, data->numRecords, desc->numFields));
+	  PROTECT(ans=allocMatrix(REALSXP, data->bufNumRecs, desc->numFields));
 	  Rans = REAL(ans);
      }
      break;
@@ -147,7 +265,7 @@ SEXP getDObjTrackData(DOBJ * data, DDESC * desc)
      break;
      }
 
-     for (m = 0; m < data->numRecords; m++)
+     for (m = 0; m < data->bufNumRecs; m++)
      {
 	  bufPtr = data->dataBuffer + m * data->recordSize;
 	  memcpy(tempBuffer, bufPtr, (size_t) data->recordSize);
@@ -156,7 +274,7 @@ SEXP getDObjTrackData(DOBJ * data, DDESC * desc)
 	  {
 	       u8Ptr = &bPtr[desc->offset];
 	       for (n=0; n < desc->numFields; n++) {
-		    Ians[m + n * data->numRecords] = (unsigned int) u8Ptr[n];
+		    Ians[m + n * data->bufNumRecs] = (unsigned int) u8Ptr[n];
 	       }
 	  }
 	  break;
@@ -164,7 +282,7 @@ SEXP getDObjTrackData(DOBJ * data, DDESC * desc)
 	  {
 	       i8Ptr = (int8_t *) &bPtr[desc->offset];
 	       for (n=0; n < desc->numFields; n++) {
-		    Ians[m + n * data->numRecords] = (int) u8Ptr[n];
+		    Ians[m + n * data->bufNumRecs] = (int) u8Ptr[n];
 	       }
 	  }
 	  break;
@@ -172,7 +290,7 @@ SEXP getDObjTrackData(DOBJ * data, DDESC * desc)
 	  {
 	       u16Ptr = (uint16_t *) &bPtr[desc->offset];
 	       for (n=0; n < desc->numFields; n++) {
-		    Ians[m + n * data->numRecords] = (unsigned int) u16Ptr[n];
+		    Ians[m + n * data->bufNumRecs] = (unsigned int) u16Ptr[n];
 	       }
 	  }
 	  break;
@@ -180,7 +298,7 @@ SEXP getDObjTrackData(DOBJ * data, DDESC * desc)
 	  {
 	       i16Ptr = (int16_t *) &bPtr[desc->offset];
 	       for (n=0; n < desc->numFields; n++) {
-		    Ians[m + n * data->numRecords] = (int) i16Ptr[n];
+		    Ians[m + n * data->bufNumRecs] = (int) i16Ptr[n];
 	       }
 	  }
 	  break;
@@ -188,7 +306,7 @@ SEXP getDObjTrackData(DOBJ * data, DDESC * desc)
 	  {
 	       u32Ptr = (uint32_t *) &bPtr[desc->offset];
 	       for (n=0; n < desc->numFields; n++) {
-		    Ians[m + n * data->numRecords] = (unsigned long) u32Ptr[n];
+		    Ians[m + n * data->bufNumRecs] = (unsigned long) u32Ptr[n];
 	       }
 	  }
 	  break;
@@ -196,7 +314,7 @@ SEXP getDObjTrackData(DOBJ * data, DDESC * desc)
 	  {
 	       i32Ptr = (int32_t *) &bPtr[desc->offset];
 	       for (n=0; n < desc->numFields; n++) {
-		    Ians[m + n * data->numRecords] = (long) i32Ptr[n];
+		    Ians[m + n * data->bufNumRecs] = (long) i32Ptr[n];
 	       }
 	  }
 	  break;
@@ -204,7 +322,7 @@ SEXP getDObjTrackData(DOBJ * data, DDESC * desc)
 	  {
 	       f32Ptr = (float *) &bPtr[desc->offset];
 	       for (n=0; n < desc->numFields; n++) {
-		    Rans[m + n * data->numRecords] = (double) f32Ptr[n];
+		    Rans[m + n * data->bufNumRecs] = (double) f32Ptr[n];
 	       }
 	  }
 	  break;
@@ -212,7 +330,7 @@ SEXP getDObjTrackData(DOBJ * data, DDESC * desc)
 	  {
 	       f64Ptr = (double *) &bPtr[desc->offset];
 	       for (n=0; n < desc->numFields; n++) {
-		    Rans[m + n * data->numRecords] = (double) f64Ptr[n];
+		    Rans[m + n * data->bufNumRecs] = (double) f64Ptr[n];
 	       }
 	  }
 	  break;
