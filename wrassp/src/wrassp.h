@@ -100,7 +100,8 @@ typedef enum wrassp_option_number
   /* general tclassp options */
   WO_OUTPUTDIR,
   WO_OUTPUTEXT,
-  WO_TOFILE
+  WO_TOFILE,
+  WO_PBAR        /*R Textual Progress Bar*/
 } ASSP_OPT_NUM;
 
 typedef struct wrassp_option
