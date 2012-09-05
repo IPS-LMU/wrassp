@@ -56,6 +56,8 @@ W_OPT acfanaOptions[] = {
   ,
   {"ToFile", WO_TOFILE}
   ,
+  {"ProgressBar", WO_PBAR}
+  ,
   {NULL, WO_NONE}
 };
 
@@ -88,6 +90,8 @@ W_OPT affilterOptions[] = {
   ,
   {"ExplicitExt", WO_OUTPUTEXT}
   ,				//DON'T FORGET EXTENSION!!!
+  {"ProgressBar", WO_PBAR}
+  ,
   {"ToFile", WO_TOFILE}
   ,    
   /* {"-channel"}, */
@@ -112,6 +116,8 @@ W_OPT f0_ksvOptions[] = {
   {"MinAmp", WO_VOIMAG}
   ,
   {"MaxZCR", WO_VOIZCR}
+  ,
+  {"ProgressBar", WO_PBAR}
   ,
   {"ExplicitExt", WO_OUTPUTEXT}
   ,				//DON'T FORGET EXTENSION!!!
@@ -142,6 +148,8 @@ W_OPT f0_mhsOptions[] = {
   {"MaxZCR", WO_VOIZCR}
   ,
   {"MinProb", WO_VOIPROB}
+  ,
+  {"ProgressBar", WO_PBAR}
   ,
   {"PlainSpectrum", WO_MHS_OPT_POWER}
   ,
@@ -184,6 +192,8 @@ W_OPT forestOptions[] = {
   ,
   {"ExplicitExt", WO_OUTPUTEXT}
   ,				//DON'T FORGET EXTENSION!!!
+  {"ProgressBar", WO_PBAR}
+  ,
   {"ToFile", WO_TOFILE},    {NULL, WO_NONE}
 };
 
@@ -210,6 +220,8 @@ W_OPT rfcanaOptions[] = {
   {"Preemphasis", WO_PREEMPH}
   ,
   {"LpType", WO_TYPE}
+  ,
+  {"ProgressBar", WO_PBAR}
   ,
   {"ToFile", WO_TOFILE},    {NULL, WO_NONE}
 };
@@ -273,6 +285,8 @@ W_OPT spectrumOptions[] = {
   /* general stuff */
   {"ExplicitExt", WO_OUTPUTEXT}
   ,				//DON'T FORGET EXTENSION!!!
+  {"ProgressBar", WO_PBAR}
+  ,
   {"ToFile", WO_TOFILE},    {NULL, WO_NONE}
 };
 
@@ -291,6 +305,8 @@ W_OPT zcranaOptions[] = {
   ,				//DON'T FORGET EXTENSION!!!
   /* {"Window", WO_WINFUNC} */
   /* , */
+  {"ProgressBar", WO_PBAR}
+  ,
   {"ToFile", WO_TOFILE}
   ,
   {NULL, WO_NONE}
@@ -340,7 +356,7 @@ A_F_LIST funclist[] = {
 };
 
 SEXP performAssp(SEXP args) {
-  SEXP el, inputs, res;
+  SEXP el, inputs, res, pBar = R_NilValue, utilsPackage, newVal;
   const char * name;
   AOPTS OPTS;
   AOPTS * opt = &OPTS;
@@ -826,13 +842,22 @@ SEXP performAssp(SEXP args) {
 	break;
       }
       break;
-    WO_TOFILE:
+    case WO_TOFILE:
       toFile = INTEGER(el)[0] != 0;
+      break;
+    case WO_PBAR:
+      pBar = el;
       break;
     }
   }
   
   // do analysis
+  
+  if (pBar != R_NilValue) {
+    PROTECT(newVal = allocVector(INTSXP, 1));
+    PROTECT(utilsPackage = eval(lang2(install("getNamespace"), ScalarString(mkChar("utils"))), 
+				R_GlobalEnv));
+  }
 
   for (i = 0; i < length(inputs); i++)
     {
@@ -847,7 +872,7 @@ SEXP performAssp(SEXP args) {
 	error("%s", getAsspMsg(asspMsgNum));
       }
 
-      outPtr->numRecords =outPtr->bufNumRecs;
+      //outPtr->numRecords =outPtr->bufNumRecs;
       
       /* parse the input path to get directory (dPath),
 	 base file name (bPath) and original extension (oExt) */
@@ -883,10 +908,20 @@ SEXP performAssp(SEXP args) {
       }
       asspFClose(inPtr, AFC_FREE);
       asspFClose(outPtr, AFC_FREE);
+
+      // if a progress bar was passed over, increment its value
+      if (pBar != R_NilValue) {
+	INTEGER(newVal)[0] = i;
+	eval(lang4(install("setTxtProgressBar"), pBar, newVal, R_NilValue), utilsPackage);
+      }
     }
   PROTECT(res = allocVector(INTSXP, 1));
   INTEGER(res)[0] = i;
-  UNPROTECT(1);
+
+  if (pBar == R_NilValue)
+    UNPROTECT(1);
+  else
+    UNPROTECT(3);
   return res;
 }
 
