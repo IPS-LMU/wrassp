@@ -38,7 +38,7 @@
 
 
 ###########################################
-"checkForExistingFiles" <- function(listOfFilePaths, newExt) {
+"hasDuplicateFiles" <- function(listOfFilePaths, newExt) {
 
 	problemFiles <- NULL
 
@@ -57,9 +57,9 @@
 			cat("######################\n")
 			print(problemFiles)
 			cat("\n", "Following files exist with the extension '", newExt, 
-				"'! Do you wish to overwrite them? (enter 'y' for yes or 'n' for no )", 
+				"'! Do you wish to overwrite them?", 
 				"\n")
-			userInput <- readline("enter a positive integer: ")
+			userInput <- readline("type 'y' for yes or 'n' for no: ")
 			if (nchar(userInput) == 0) {
 				userInput = "xxx"
 			}
@@ -76,5 +76,5 @@
 
 }
 
-checkForExistingFiles(dir("~/tmp/kielread/signals/wav", ".wav$", full.name = T), 
-	".fms")
+#checkForExistingFiles(dir("~/tmp/kielread/signals/wav", ".wav$", full.name = T), 
+#	".fms")

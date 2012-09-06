@@ -1,6 +1,6 @@
 "acfana" <- function(listOfFiles = NULL, BeginTime = 0.0, CenterTime = FALSE, 
 	EndTime = 0.0, WindowShift = 5.0, WindowSize = 20.0, EffectiveLength = TRUE, 
-	Window = "BLACKMAN", AnalysisOrder = 0, EnergyNormalization = FALSE, LengthNormalization = FALSE, ToFile = TRUE, ExplicitExt = NULL) {
+	Window = "BLACKMAN", AnalysisOrder = 0, EnergyNormalization = FALSE, LengthNormalization = FALSE, ToFile = TRUE, ExplicitExt = NULL, fileCheck = TRUE) {
 
 	###########################
 	# a few parameter checks
@@ -14,8 +14,19 @@
 	}
 
 	###########################
-	# perform analysis
+	# file check
+	
+	if(fileCheck){
+		if(is.null(ExplicitExt)){
+			#stop('asfdsfasdfasdf')
+			hasDuplicateFiles(listOfFiles,'.acf')
+		}
+		print("DOING FILE CHECK!")
+	}
 
+	###########################
+	# perform analysis
+	
 	if(length(listOfFiles)==1){
 		pb <- NULL
 	}else{
