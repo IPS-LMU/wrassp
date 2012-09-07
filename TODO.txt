@@ -10,6 +10,16 @@ make it awesome!!!! :-)
 - remove pointer from data objects
 - (DONE) fix ExplicitExtension
 
+- multiple calls of f0ana cause:
+  *** caught segfault ***
+  address 0x4a44fc8, cause 'memory not mapped'
+
+  Traceback:
+	1: .External("performAssp", listOfFiles, fname = "f0ana", BeginTime = BeginTime,     EndTime = EndTime, WindowShift = WindowShift, Gender = Gender,     MaxF = MaxF, MinF = MinF, MinAmp = MinAmp, MaxZCR = MaxZCR,     ExplicitExt = ExplicitExt, ToFile = ToFile, ProgressBar = pb)
+ 	2: f0ana(res$signals, ExplicitExt = ".f0")
+...
+
+
 ####### RAPHAEL #########
 
 - improve rec search (seglist not wrassp)
