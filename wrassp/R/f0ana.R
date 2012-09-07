@@ -1,3 +1,20 @@
+##' .. content for \description{} (no empty lines) ..
+##'
+##' .. content for \details{} ..
+##' @title 
+##' @param listOfFiles 
+##' @param BeginTime 
+##' @param EndTime 
+##' @param WindowShift 
+##' @param Gender 
+##' @param MaxF 
+##' @param MinF 
+##' @param MinAmp 
+##' @param MaxZCR 
+##' @param ToFile 
+##' @param ExplicitExt 
+##' @return 
+##' @author Raphael Winkelmann
 "f0ana" <- function(listOfFiles = NULL, BeginTime = 0.0, EndTime = 0.0, WindowShift = 5.0, Gender = 'u', MaxF = 600, MinF = 50, MinAmp = 50, MaxZCR = 3000.0, ToFile = TRUE, ExplicitExt = NULL){
 	
 	###########################

@@ -1,4 +1,10 @@
-##############################################
+##' .. content for \description{} (no empty lines) ..
+##'
+##' .. content for \details{} ..
+##' @title 
+##' @param windowName 
+##' @return 
+##' @author Raphael Winkelmann
 "isAsspWindowType" <- function(windowName = NULL) {
 	if (is.null(windowName)) {
 		stop("No windowName given!")
@@ -17,7 +23,13 @@
 	return(isValidWindow)
 }
 
-############################################
+##' .. content for \description{} (no empty lines) ..
+##'
+##' .. content for \details{} ..
+##' @title 
+##' @param lpName 
+##' @return 
+##' @author Raphael Winkelmann
 "isAsspLpType" <- function(lpName = NULL) {
 	if (is.null(lpName)) {
 		stop("No lpName given!")
@@ -37,7 +49,14 @@
 }
 
 
-###########################################
+##' .. content for \description{} (no empty lines) ..
+##'
+##' .. content for \details{} ..
+##' @title 
+##' @param listOfFilePaths 
+##' @param newExt 
+##' @return 
+##' @author Raphael Winkelmann
 "hasDuplicateFiles" <- function(listOfFilePaths, newExt) {
 
 	problemFiles <- NULL
@@ -75,6 +94,3 @@
 	}
 
 }
-
-#checkForExistingFiles(dir("~/tmp/kielread/signals/wav", ".wav$", full.name = T), 
-#	".fms")

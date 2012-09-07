@@ -1,4 +1,23 @@
-"rfcana" <- function(listOfFiles = NULL, BeginTime = 0.0, CenterTime = FALSE, EndTime = 0.0, WindowShift = 5.0, WindowSize = 20.0, EffectiveLength = TRUE, Window = 'BLACKMAN', Order = 0, Preemphasis = -0.95, LpType = 'RFC', ToFile = TRUE, ExplicitExt = NULL) {
+##' .. content for \description{} (no empty lines) ..
+##'
+##' .. content for \details{} ..
+##' @title 
+##' @param listOfFiles 
+##' @param BeginTime 
+##' @param CenterTime 
+##' @param EndTime 
+##' @param WindowShift 
+##' @param WindowSize 
+##' @param EffectiveLength 
+##' @param Window 
+##' @param Order 
+##' @param Preemphasis 
+##' @param LpType 
+##' @param ToFile 
+##' @param ExplicitExt 
+##' @return 
+##' @author Raphael Winkelmann
+'rfcana' <- function(listOfFiles = NULL, BeginTime = 0.0, CenterTime = FALSE, EndTime = 0.0, WindowShift = 5.0, WindowSize = 20.0, EffectiveLength = TRUE, Window = 'BLACKMAN', Order = 0, Preemphasis = -0.95, LpType = 'RFC', ToFile = TRUE, ExplicitExt = NULL) {
 	
 	
 	###########################

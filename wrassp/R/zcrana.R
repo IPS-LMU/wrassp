@@ -1,4 +1,18 @@
-"zcrana" <- function(listOfFiles = NULL, BeginTime = 0.0, CenterTime = FALSE, EndTime = 0.0, WindowShift = 5.0, WindowSize = 25.0, ToFile = TRUE, ExplicitExt = NULL) {
+##' .. content for \description{} (no empty lines) ..
+##'
+##' .. content for \details{} ..
+##' @title 
+##' @param listOfFiles 
+##' @param BeginTime 
+##' @param CenterTime 
+##' @param EndTime 
+##' @param WindowShift 
+##' @param WindowSize 
+##' @param ToFile 
+##' @param ExplicitExt 
+##' @return 
+##' @author Raphael Winkelmann
+'zcrana' <- function(listOfFiles = NULL, BeginTime = 0.0, CenterTime = FALSE, EndTime = 0.0, WindowShift = 5.0, WindowSize = 25.0, ToFile = TRUE, ExplicitExt = NULL) {
 
 	###########################
 	# a few parameter checks

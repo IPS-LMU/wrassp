@@ -1,3 +1,25 @@
+##' .. content for \description{} (no empty lines) ..
+##'
+##' .. content for \details{} ..
+##' @title 
+##' @param listOfFiles 
+##' @param BeginTime 
+##' @param EndTime 
+##' @param WindowShift 
+##' @param WindowSize 
+##' @param EffectiveLength 
+##' @param NominalF1 
+##' @param Gender 
+##' @param Estimate 
+##' @param Order 
+##' @param IncrOrder 
+##' @param NumFormants 
+##' @param Window 
+##' @param Preemphasis 
+##' @param ToFile 
+##' @param ExplicitExt 
+##' @return 
+##' @author Raphael Winkelmann
 "forest" <- function(listOfFiles = NULL, BeginTime = 0.0, EndTime = 0.0, WindowShift = 5.0, WindowSize = 20.0, EffectiveLength = TRUE, NominalF1 = 500, Gender = 'm', Estimate = FALSE, Order = 0, IncrOrder = 0, NumFormants = 4, Window = 'BLACKMAN', Preemphasis = -0.8, ToFile = TRUE, ExplicitExt = NULL) {
 	
 	###########################

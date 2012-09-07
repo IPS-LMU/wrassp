@@ -1,3 +1,18 @@
+##' affilter function adapted from assp
+##'
+##' still have to write propper man pages
+##' @title affilter
+##' @param listOfFiles bla
+##' @param HighPass bli
+##' @param LowPass blup
+##' @param StopBand bla
+##' @param Transition bli
+##' @param UseIIR blup
+##' @param NumIIRsections bla
+##' @param ToFile bla
+##' @param ExplicitExt bli
+##' @return number of files processed
+##' @author Raphael Winkelmann
 "affilter" <- function(listOfFiles = NULL, HighPass = 4000, LowPass = 0, StopBand = 96, 
                        Transition = 250, UseIIR = FALSE, NumIIRsections = 4, ToFile = TRUE,
                        ExplicitExt = NULL) {

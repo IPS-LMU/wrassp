@@ -1,3 +1,15 @@
+##' afdiff adapted from assp
+##'
+##' still have to write propper manual entry
+##' @title afdiff
+##' @param listOfFiles 
+##' @param ComputeBackwardDifference 
+##' @param ComputeCentralDifference 
+##' @param Channel 
+##' @param ToFile 
+##' @param ExplicitExt 
+##' @return nr of files processed
+##' @author Raphael Winkelmann
 "afdiff" <- function(listOfFiles = NULL, ComputeBackwardDifference = FALSE, ComputeCentralDifference = FALSE, Channel = 1, ToFile = TRUE, ExplicitExt=NULL) {
 
 	###########################

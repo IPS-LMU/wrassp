@@ -1,3 +1,25 @@
+##' .. content for \description{} (no empty lines) ..
+##'
+##' .. content for \details{} ..
+##' @title 
+##' @param listOfFiles 
+##' @param BeginTime 
+##' @param CenterTime 
+##' @param EndTime 
+##' @param WindowShift 
+##' @param Gender 
+##' @param MaxF 
+##' @param MinF 
+##' @param MinAmp 
+##' @param MinAC1 
+##' @param MinRMS 
+##' @param MaxZCR 
+##' @param MinProb 
+##' @param PlainSpectrum 
+##' @param ToFile 
+##' @param ExplicitExt 
+##' @return 
+##' @author Raphael Winkelmann
 'mhspitch' <-function(listOfFiles = NULL, BeginTime = 0.0, CenterTime = FALSE, EndTime = 0.0, WindowShift = 5.0, Gender = 'u', MaxF = 600.0, MinF = 50.0, MinAmp = 50.0, MinAC1 = 0.25, MinRMS = 18.0, MaxZCR = 3000.0, MinProb = 0.52, PlainSpectrum = FALSE, ToFile = TRUE, ExplicitExt = NULL) {
 	
 	###########################

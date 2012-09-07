@@ -1,4 +1,26 @@
-##########################################################
+##' .. content for \description{} (no empty lines) ..
+##'
+##' .. content for \details{} ..
+##' @title 
+##' @param listOfFiles 
+##' @param BeginTime 
+##' @param CenterTime 
+##' @param EndTime 
+##' @param Resolution 
+##' @param FftLength 
+##' @param WindowSize 
+##' @param WindowShift 
+##' @param Window 
+##' @param Bandwidth 
+##' @param EffectiveLength 
+##' @param Order 
+##' @param Preemphasis 
+##' @param Deemphasize 
+##' @param NumCeps 
+##' @param ToFile 
+##' @param ExplicitExt 
+##' @return 
+##' @author Raphael Winkelmann
 'dftSpectrum' <- function(listOfFiles = NULL, BeginTime = 0.0, CenterTime = FALSE, EndTime = 0.0, Resolution = 40.0, FftLength = 0, WindowSize = 0.0, WindowShift = 5.0, Window = 'BLACKMAN', Bandwidth = 0.0, EffectiveLength = FALSE, Order = 0, Preemphasis = 0.0, Deemphasize = FALSE, NumCeps = 0, ToFile = TRUE, ExplicitExt = NULL) {
 	
 	SpectrumType = 'DFT'
@@ -29,8 +51,30 @@
 		
 }
 
-###########################################################
 
+##' .. content for \description{} (no empty lines) ..
+##'
+##' .. content for \details{} ..
+##' @title 
+##' @param listOfFiles 
+##' @param BeginTime 
+##' @param CenterTime 
+##' @param EndTime 
+##' @param Resolution 
+##' @param FftLength 
+##' @param WindowSize 
+##' @param WindowShift 
+##' @param Window 
+##' @param Bandwidth 
+##' @param EffectiveLength 
+##' @param Order 
+##' @param Preemphasis 
+##' @param Deemphasize 
+##' @param NumCeps 
+##' @param ToFile 
+##' @param ExplicitExt 
+##' @return 
+##' @author Raphael Winkelmann
 'lpsSpectrum' <- function(listOfFiles = NULL, BeginTime = 0.0, CenterTime = FALSE, EndTime = 0.0, Resolution = 40.0, FftLength = 0, WindowSize = 20.0, WindowShift = 5.0, Window = 'BLACKMAN', Bandwidth = 0.0, EffectiveLength = FALSE, Order = 0, Preemphasis = -0.95, Deemphasize = FALSE, NumCeps = 0, ToFile = TRUE, ExplicitExt = NULL) {
 	
 	stop("DEFAULT VALUES WRONG! NOT IMPLEMENTED YET!")
@@ -63,8 +107,30 @@
 		
 }
 
-###########################################################
 
+##' .. content for \description{} (no empty lines) ..
+##'
+##' .. content for \details{} ..
+##' @title 
+##' @param listOfFiles 
+##' @param BeginTime 
+##' @param CenterTime 
+##' @param EndTime 
+##' @param Resolution 
+##' @param FftLength 
+##' @param WindowSize 
+##' @param WindowShift 
+##' @param Window 
+##' @param Bandwidth 
+##' @param EffectiveLength 
+##' @param Order 
+##' @param Preemphasis 
+##' @param Deemphasize 
+##' @param NumCeps 
+##' @param ToFile 
+##' @param ExplicitExt 
+##' @return 
+##' @author Raphael Winkelmann
 'cssSpectrum' <- function(listOfFiles = NULL, BeginTime = 0.0, CenterTime = FALSE, EndTime = 0.0, Resolution = 40.0, FftLength = 0, WindowSize = 0.0, WindowShift = 5.0, Window = 'BLACKMAN', Bandwidth = 0.0, EffectiveLength = FALSE, Order = 0, Preemphasis = 0.0, Deemphasize = FALSE, NumCeps = 0, ToFile = TRUE, ExplicitExt = NULL) {
 	
 	stop("DEFAULT VALUES WRONG! NOT IMPLEMENTED YET!")
@@ -98,8 +164,29 @@
 		
 }
 
-###########################################################
-
+##' .. content for \description{} (no empty lines) ..
+##'
+##' .. content for \details{} ..
+##' @title 
+##' @param listOfFiles 
+##' @param BeginTime 
+##' @param CenterTime 
+##' @param EndTime 
+##' @param Resolution 
+##' @param FftLength 
+##' @param WindowSize 
+##' @param WindowShift 
+##' @param Window 
+##' @param Bandwidth 
+##' @param EffectiveLength 
+##' @param Order 
+##' @param Preemphasis 
+##' @param Deemphasize 
+##' @param NumCeps 
+##' @param ToFile 
+##' @param ExplicitExt 
+##' @return 
+##' @author Raphael Winkelmann
 'cepSpectrum' <- function(listOfFiles = NULL, BeginTime = 0.0, CenterTime = FALSE, EndTime = 0.0, Resolution = 40.0, FftLength = 0, WindowSize = 0.0, WindowShift = 5.0, Window = 'BLACKMAN', Bandwidth = 0.0, EffectiveLength = FALSE, Order = 0, Preemphasis = 0.0, Deemphasize = FALSE, NumCeps = 0, ToFile = TRUE, ExplicitExt = NULL) {
 	
 	stop("DEFAULT VALUES WRONG! NOT IMPLEMENTED YET!")

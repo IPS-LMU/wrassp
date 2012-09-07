@@ -1,3 +1,23 @@
+##' acfana function adapted from assp library
+##'
+##' still have to write propper documentation
+##' @title acfana
+##' @param listOfFiles vector of files to be processed by function
+##' @param BeginTime start time (in ms) in file to perform function on 
+##' @param CenterTime ?????
+##' @param EndTime end time (in ms) in file to perform function on
+##' @param WindowShift window shift of function (in ms) 
+##' @param WindowSize window size of function (in ms)
+##' @param EffectiveLength ?????
+##' @param Window type of window see isAsspWindowType function  
+##' @param AnalysisOrder ????
+##' @param EnergyNormalization ????
+##' @param LengthNormalization ????
+##' @param ToFile write results to file (default extension is .acf)
+##' @param ExplicitExt set if you wish to overwride the default extension
+##' @param fileCheck precheck if files already exist
+##' @return nrOfProcessedFiles
+##' @author Raphael Winkelmann
 "acfana" <- function(listOfFiles = NULL, BeginTime = 0.0, CenterTime = FALSE, 
 	EndTime = 0.0, WindowShift = 5.0, WindowSize = 20.0, EffectiveLength = TRUE, 
 	Window = "BLACKMAN", AnalysisOrder = 0, EnergyNormalization = FALSE, LengthNormalization = FALSE, ToFile = TRUE, ExplicitExt = NULL, fileCheck = TRUE) {
