@@ -11,18 +11,22 @@
   \item{listOfFiles}{vector of file paths to be processed
   by function}
 
-  \item{ComputeBackwardDifference}{}
+  \item{ComputeBackwardDifference}{???}
 
-  \item{ComputeCentralDifference}{}
+  \item{ComputeCentralDifference}{???}
 
-  \item{Channel}{}
+  \item{Channel}{channel of audio file to compute diff
+  (default = 1)}
 
-  \item{ToFile}{}
+  \item{ToFile}{write results to file (default extension is
+  .d+(extensionsOfAudioFile))}
 
-  \item{ExplicitExt}{}
+  \item{ExplicitExt}{set if you wish to overwride the
+  default extension}
 }
 \value{
-  nr of files processed
+  nrOfProcessedFiles or if only one file to process return
+  dataObj of that file
 }
 \description{
   afdiff adapted from assp

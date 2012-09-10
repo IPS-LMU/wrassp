@@ -1,8 +1,8 @@
-##' .. content for \description{} (no empty lines) ..
+##' this is the description
 ##'
-##' .. content for \details{} ..
+##' and these are the details
 ##' @title isAsspWindowType
-##' @param windowName 
+##' @param windowName name of window
 ##' @return (BOOL) true if windowName is valid 
 ##' @author Raphael Winkelmann
 "isAsspWindowType" <- function(windowName = NULL) {
@@ -10,7 +10,7 @@
 		stop("No windowName given!")
 	}
 
-	winTypes = .Call("AsspWindowTypes")
+	winTypes = AsspWindowTypes()
 
 	isValidWindow = FALSE
 
@@ -23,11 +23,11 @@
 	return(isValidWindow)
 }
 
-##' .. content for \description{} (no empty lines) ..
+##' this is the description
 ##'
-##' .. content for \details{} ..
+##' and these are the details
 ##' @title isAsspLpType
-##' @param lpName 
+##' @param lpName name of lp type
 ##' @return (BOOL) true if lpName is valid
 ##' @author Raphael Winkelmann
 "isAsspLpType" <- function(lpName = NULL) {
@@ -35,7 +35,7 @@
 		stop("No lpName given!")
 	}
 
-	lpTypes = .Call("AsspLpTypes")
+	lpTypes = AsspLpTypes()
 
 	isValidLp = FALSE
 
@@ -49,48 +49,48 @@
 }
 
 
-##' .. content for \description{} (no empty lines) ..
+##' this is the description
 ##'
-##' .. content for \details{} ..
+##' and these are the details
 ##' @title hasDupicateFiles
 ##' @param listOfFilePaths 
 ##' @param newExt 
 ##' @return (BOOL)
 ##' @author Raphael Winkelmann
-"hasDuplicateFiles" <- function(listOfFilePaths, newExt) {
+#"hasDuplicateFiles" <- function(listOfFilePaths, newExt) {
 
-	problemFiles <- NULL
+#	problemFiles <- NULL
 
-	for (file in listOfFilePaths) {
-		basePath = unlist(strsplit(file, ".", fixed = T))[1]
-		newPath = paste(basePath, newExt, sep = "")
-		if (!file.exists(newPath)) {
-			print(newPath)
-			problemFiles <- c(problemFiles, newPath)
-		}
-	}
-
-	userInput = "xxx"
-	if (!is.null(problemFiles)) {
-		while (!((userInput == "y") | (userInput == "n"))) {
-			cat("######################\n")
-			print(problemFiles)
-			cat("\n", "Following files exist with the extension '", newExt, 
-				"'! Do you wish to overwrite them?", 
-				"\n")
-			userInput <- readline("type 'y' for yes or 'n' for no: ")
-			if (nchar(userInput) == 0) {
-				userInput = "xxx"
-			}
-		}
-	} else {
-		userInput = "y"
-	}
-
-	if (userInput == "y") {
-		return(TRUE)
-	} else {
-		return(FALSE)
-	}
-
-}
+#	for (file in listOfFilePaths) {
+#		basePath = unlist(strsplit(file, ".", fixed = T))[1]
+#		newPath = paste(basePath, newExt, sep = "")
+#		if (!file.exists(newPath)) {
+#			print(newPath)
+#			problemFiles <- c(problemFiles, newPath)
+#		}
+#	}
+#
+#	userInput = "xxx"
+#	if (!is.null(problemFiles)) {
+#		while (!((userInput == "y") | (userInput == "n"))) {
+#			cat("######################\n")
+#			print(problemFiles)
+##			cat("\n", "Following files exist with the extension '", newExt, 
+#				"'! Do you wish to overwrite them?", 
+#				"\n")
+#			userInput <- readline("type 'y' for yes or 'n' for no: ")
+#			if (nchar(userInput) == 0) {
+#				userInput = "xxx"
+#			}
+#		}
+#	} else {
+#		userInput = "y"
+#	}
+#
+#	if (userInput == "y") {
+#		return(TRUE)
+#	} else {
+#		return(FALSE)
+#	}
+#
+#}

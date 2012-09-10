@@ -1,11 +1,11 @@
 \name{getDObj}
 \alias{getDObj}
-\title{getDObj}
+\title{Get a dobj data object from a signal/parameter File}
 \usage{
   getDObj(fname, begin = 0, end = 0, samples = FALSE)
 }
 \arguments{
-  \item{fname}{file name to retrieve}
+  \item{fname}{filename of the signal or parameter file}
 
   \item{begin}{begin time (default is in ms) of segment to
   retrieve}
@@ -20,12 +20,14 @@
   list object containing file data
 }
 \description{
-  .. content for \description{} (no empty lines) ..
+  getDObj creates an object of class dobj from a signal or
+  parameter file readable by the ASSP Library (WAVE, SSFF,
+  AUP, ...)
 }
 \details{
-  .. content for \details{} ..
+  and these are the details
 }
 \author{
-  Raphael Winkelmann
+  Lasse Bombien
 }
 

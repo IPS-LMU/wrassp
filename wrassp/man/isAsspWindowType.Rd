@@ -5,16 +5,16 @@
   isAsspWindowType(windowName = NULL)
 }
 \arguments{
-  \item{windowName}{}
+  \item{windowName}{name of window}
 }
 \value{
   (BOOL) true if windowName is valid
 }
 \description{
-  .. content for \description{} (no empty lines) ..
+  this is the description
 }
 \details{
-  .. content for \details{} ..
+  and these are the details
 }
 \author{
   Raphael Winkelmann

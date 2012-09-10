@@ -53,10 +53,10 @@
   dataObj of that file
 }
 \description{
-  .. content for \description{} (no empty lines) ..
+  descritopns
 }
 \details{
-  .. content for \details{} ..
+  details
 }
 \author{
   Raphael Winkelmann

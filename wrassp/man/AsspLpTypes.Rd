@@ -8,10 +8,10 @@
   vector containing lp types
 }
 \description{
-  .. content for \description{} (no empty lines) ..
+  this is the description
 }
 \details{
-  .. content for \details{} ..
+  an these are the details
 }
 \author{
   Raphael Winkelmann

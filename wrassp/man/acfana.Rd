@@ -17,7 +17,7 @@
   \item{BeginTime}{start time (in ms) in file to perform
   function on}
 
-  \item{CenterTime}{?????}
+  \item{CenterTime}{???}
 
   \item{EndTime}{end time (in ms) in file to perform
   function on}
@@ -26,16 +26,16 @@
 
   \item{WindowSize}{window size of function (in ms)}
 
-  \item{EffectiveLength}{?????}
+  \item{EffectiveLength}{???}
 
   \item{Window}{type of window see isAsspWindowType
   function}
 
-  \item{AnalysisOrder}{????}
+  \item{AnalysisOrder}{???}
 
-  \item{EnergyNormalization}{????}
+  \item{EnergyNormalization}{???}
 
-  \item{LengthNormalization}{????}
+  \item{LengthNormalization}{???}
 
   \item{ToFile}{write results to file (default extension is
   .acf)}

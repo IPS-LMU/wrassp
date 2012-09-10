@@ -5,16 +5,16 @@
   isAsspLpType(lpName = NULL)
 }
 \arguments{
-  \item{lpName}{}
+  \item{lpName}{name of lp type}
 }
 \value{
   (BOOL) true if lpName is valid
 }
 \description{
-  .. content for \description{} (no empty lines) ..
+  this is the description
 }
 \details{
-  .. content for \details{} ..
+  and these are the details
 }
 \author{
   Raphael Winkelmann

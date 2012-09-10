@@ -8,10 +8,10 @@
   vector containing window types
 }
 \description{
-  .. content for \description{} (no empty lines) ..
+  this is the description
 }
 \details{
-  .. content for \details{} ..
+  and these are the details
 }
 \author{
   Raphael Winkelmann
