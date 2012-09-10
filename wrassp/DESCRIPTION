@@ -3,18 +3,32 @@ Version: 0.2
 Date: 2012-07-04
 Title: R interface to ASSP Library
 Authors@R: c(person("Lasse", "Bombien", role = c("aut", "cre"), email =
-        "lasse@phonetik.uni-muenchen.de"), person("Raphael",
-        "Winkelmann", role = c("aut","cre"), email =
-        "raphael@phonetik.uni-muenchen.de"), person("Michel",
-        "Scheffers", role = "ctb"))
-Description: rassp is a wrapper to Michel Scheffers' libassp (Advances 
-	     Speech Signal Processor) library for handling and processing 
-	     speech data. X formats are supproted and a absolutely awesome 
-	     number of analysis procedures are available. 
+    "lasse@phonetik.uni-muenchen.de"), person("Raphael",
+    "Winkelmann", role = c("aut","cre"), email =
+    "raphael@phonetik.uni-muenchen.de"), person("Michel",
+    "Scheffers", role = "ctb"))
+Description: rassp is a wrapper to Michel Scheffers' libassp (Advances
+    Speech Signal Processor) library for handling and processing
+    speech data. X formats are supproted and a absolutely awesome
+    number of analysis procedures are available.
 License: GPL (>= 2)
 Packaged: 2012-07-04 20:04:08 UTC; lasse
 Author: Lasse Bombien [aut, cre],
-  Raphael Winkelmann [aut, cre],
-  Michel Scheffers [ctb]
+    Raphael Winkelmann [aut, cre],
+    Michel Scheffers [ctb]
 Maintainer: Lasse Bombien <lasse@phonetik.uni-muenchen.de>, Raphael
-        Winkelmann <raphael@phonetik.uni-muenchen.de>
+    Winkelmann <raphael@phonetik.uni-muenchen.de>
+Collate:
+    'acfana.R'
+    'afdiff.R'
+    'affilter.R'
+    'asspChecks.R'
+    'AsspTypes.R'
+    'f0ana.R'
+    'forest.R'
+    'getDObj.R'
+    'mhspitch.R'
+    'rfcana.R'
+    'rmsana.R'
+    'spectrum.R'
+    'zcrana.R'

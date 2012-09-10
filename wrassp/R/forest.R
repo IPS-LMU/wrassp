@@ -1,24 +1,24 @@
 ##' .. content for \description{} (no empty lines) ..
 ##'
 ##' .. content for \details{} ..
-##' @title 
+##' @title forest
 ##' @param listOfFiles vector of file paths to be processed by function
-##' @param BeginTime 
-##' @param EndTime 
-##' @param WindowShift 
-##' @param WindowSize 
-##' @param EffectiveLength 
-##' @param NominalF1 
-##' @param Gender 
-##' @param Estimate 
-##' @param Order 
-##' @param IncrOrder 
-##' @param NumFormants 
-##' @param Window 
-##' @param Preemphasis 
-##' @param ToFile 
-##' @param ExplicitExt 
-##' @return 
+##' @param BeginTime bla 
+##' @param EndTime bli
+##' @param WindowShift blup 
+##' @param WindowSize bla
+##' @param EffectiveLength bli 
+##' @param NominalF1 blup
+##' @param Gender bla
+##' @param Estimate bli
+##' @param Order blup
+##' @param IncrOrder bla
+##' @param NumFormants bli
+##' @param Window blup
+##' @param Preemphasis bla 
+##' @param ToFile  write results to file (default extension is .fms)
+##' @param ExplicitExt set if you wish to overwride the default extension
+##' @return nrOfProcessedFiles or if only one file to process return dataObj of that file
 ##' @author Raphael Winkelmann
 'forest' <- function(listOfFiles = NULL, BeginTime = 0.0, EndTime = 0.0, WindowShift = 5.0, WindowSize = 20.0, EffectiveLength = TRUE, NominalF1 = 500, Gender = 'm', Estimate = FALSE, Order = 0, IncrOrder = 0, NumFormants = 4, Window = 'BLACKMAN', Preemphasis = -0.8, ToFile = TRUE, ExplicitExt = NULL) {
 	

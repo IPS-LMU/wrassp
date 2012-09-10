@@ -1,3 +1,0 @@
-# Export all names
-exportPattern(".")
-useDynLib("wrassp")

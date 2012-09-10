@@ -1,9 +1,9 @@
 ##' .. content for \description{} (no empty lines) ..
 ##'
 ##' .. content for \details{} ..
-##' @title 
+##' @title isAsspWindowType
 ##' @param windowName 
-##' @return 
+##' @return (BOOL) true if windowName is valid 
 ##' @author Raphael Winkelmann
 "isAsspWindowType" <- function(windowName = NULL) {
 	if (is.null(windowName)) {
@@ -26,9 +26,9 @@
 ##' .. content for \description{} (no empty lines) ..
 ##'
 ##' .. content for \details{} ..
-##' @title 
+##' @title isAsspLpType
 ##' @param lpName 
-##' @return 
+##' @return (BOOL) true if lpName is valid
 ##' @author Raphael Winkelmann
 "isAsspLpType" <- function(lpName = NULL) {
 	if (is.null(lpName)) {
@@ -52,10 +52,10 @@
 ##' .. content for \description{} (no empty lines) ..
 ##'
 ##' .. content for \details{} ..
-##' @title 
+##' @title hasDupicateFiles
 ##' @param listOfFilePaths 
 ##' @param newExt 
-##' @return 
+##' @return (BOOL)
 ##' @author Raphael Winkelmann
 "hasDuplicateFiles" <- function(listOfFilePaths, newExt) {
 

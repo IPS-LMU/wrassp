@@ -1,8 +1,8 @@
 ##' .. content for \description{} (no empty lines) ..
 ##'
 ##' .. content for \details{} ..
-##' @title 
-##' @return 
+##' @title AsspWindowTypes
+##' @return vector containing window types
 ##' @author Raphael Winkelmann
 'AsspWindowTypes' <-function(){
 	
@@ -12,8 +12,8 @@
 ##' .. content for \description{} (no empty lines) ..
 ##'
 ##' .. content for \details{} ..
-##' @title 
-##' @return 
+##' @title AsspLpTypes
+##' @return vector containing lp types
 ##' @author Raphael Winkelmann
 'AsspLpTypes' <-function(){
 	
@@ -23,8 +23,8 @@
 ##' .. content for \description{} (no empty lines) ..
 ##'
 ##' .. content for \details{} ..
-##' @title 
-##' @return 
+##' @title AsspSpectTypes
+##' @return vector containing spectrogram types
 ##' @author Raphael Winkelmann
 'AsspSpectTypes' <-function(){
 	
