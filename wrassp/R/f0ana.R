@@ -2,7 +2,7 @@
 ##'
 ##' .. content for \details{} ..
 ##' @title 
-##' @param listOfFiles 
+##' @param listOfFiles vector of file paths to be processed by function 
 ##' @param BeginTime 
 ##' @param EndTime 
 ##' @param WindowShift 
@@ -15,7 +15,7 @@
 ##' @param ExplicitExt 
 ##' @return 
 ##' @author Raphael Winkelmann
-"f0ana" <- function(listOfFiles = NULL, BeginTime = 0.0, EndTime = 0.0, WindowShift = 5.0, Gender = 'u', MaxF = 600, MinF = 50, MinAmp = 50, MaxZCR = 3000.0, ToFile = TRUE, ExplicitExt = NULL){
+'f0ana' <- function(listOfFiles = NULL, BeginTime = 0.0, EndTime = 0.0, WindowShift = 5.0, Gender = 'u', MaxF = 600, MinF = 50, MinAmp = 50, MaxZCR = 3000.0, ToFile = TRUE, ExplicitExt = NULL){
 	
 	###########################
 	# a few parameter checks
@@ -34,7 +34,16 @@
 	}	
 	
 	invisible(.External("performAssp", listOfFiles, fname = "f0ana", BeginTime = BeginTime, EndTime = EndTime, WindowShift = WindowShift, Gender = Gender, MaxF = MaxF, MinF = MinF, MinAmp = MinAmp, MaxZCR = MaxZCR, ExplicitExt = ExplicitExt, ToFile = ToFile, ProgressBar = pb))
-	
-	if(!(length(listOfFiles)==1)){ close(pb) }
+
+        #############################
+        # return dataObj if length only one file
+        
+	if(!(length(listOfFiles)==1)){
+          close(pb)
+        }else{
+          resDataObj = getDObj(listOfFiles[1])
+          return(resDataObj)
+        }
+
 	
 }

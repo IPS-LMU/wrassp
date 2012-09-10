@@ -1,25 +1,25 @@
 ##' .. content for \description{} (no empty lines) ..
 ##'
 ##' .. content for \details{} ..
-##' @title 
-##' @param listOfFiles 
-##' @param BeginTime 
-##' @param CenterTime 
-##' @param EndTime 
-##' @param Resolution 
-##' @param FftLength 
-##' @param WindowSize 
-##' @param WindowShift 
-##' @param Window 
-##' @param Bandwidth 
-##' @param EffectiveLength 
-##' @param Order 
-##' @param Preemphasis 
-##' @param Deemphasize 
-##' @param NumCeps 
-##' @param ToFile 
-##' @param ExplicitExt 
-##' @return 
+##' @title dftspectrum
+##' @param listOfFiles vector of file paths to be processed by function 
+##' @param BeginTime bla
+##' @param CenterTime bli
+##' @param EndTime blup
+##' @param Resolution bla
+##' @param FftLength bli
+##' @param WindowSize blup
+##' @param WindowShift bla
+##' @param Window bli
+##' @param Bandwidth blup
+##' @param EffectiveLength bla
+##' @param Order bli
+##' @param Preemphasis blup
+##' @param Deemphasize bla
+##' @param NumCeps bli
+##' @param ToFile write results to file (default extension is .acf)
+##' @param ExplicitExt set if you wish to overwride the default extension
+##' @return nrOfProcessedFiles or if only one file to process return dataObj of that file
 ##' @author Raphael Winkelmann
 'dftSpectrum' <- function(listOfFiles = NULL, BeginTime = 0.0, CenterTime = FALSE, EndTime = 0.0, Resolution = 40.0, FftLength = 0, WindowSize = 0.0, WindowShift = 5.0, Window = 'BLACKMAN', Bandwidth = 0.0, EffectiveLength = FALSE, Order = 0, Preemphasis = 0.0, Deemphasize = FALSE, NumCeps = 0, ToFile = TRUE, ExplicitExt = NULL) {
 	
@@ -47,7 +47,15 @@
 	
 	invisible(.External("performAssp", listOfFiles, fname = "spectrum", BeginTime = BeginTime, CenterTime = CenterTime, EndTime = EndTime, SpectrumType = SpectrumType, Resolution = Resolution, FftLength = as.integer(FftLength), WindowSize = WindowSize, WindowShift = WindowShift,  Window = Window, Bandwidth = Bandwidth, EffectiveLength = EffectiveLength, Order = as.integer(Order), Preemphasis = Preemphasis, Deemphasize = Deemphasize, NumCeps = as.integer(NumCeps), ToFile = ToFile, ExplicitExt = ExplicitExt, ProgressBar = pb))
 	
-	if(!(length(listOfFiles)==1)){ close(pb) }
+        #############################
+        # return dataObj if length only one file
+
+        if(!(length(listOfFiles)==1)){
+          close(pb)
+        }else{
+          resDataObj = getDObj(listOfFiles[1])
+          return(resDataObj)
+        }
 		
 }
 
@@ -55,25 +63,25 @@
 ##' .. content for \description{} (no empty lines) ..
 ##'
 ##' .. content for \details{} ..
-##' @title 
-##' @param listOfFiles 
-##' @param BeginTime 
-##' @param CenterTime 
-##' @param EndTime 
-##' @param Resolution 
-##' @param FftLength 
-##' @param WindowSize 
-##' @param WindowShift 
-##' @param Window 
-##' @param Bandwidth 
-##' @param EffectiveLength 
-##' @param Order 
-##' @param Preemphasis 
-##' @param Deemphasize 
-##' @param NumCeps 
-##' @param ToFile 
-##' @param ExplicitExt 
-##' @return 
+##' @title lpsSpectrum
+##' @param listOfFiles vector of file paths to be processed by function
+##' @param BeginTime bli
+##' @param CenterTime blup
+##' @param EndTime bla
+##' @param Resolution bli
+##' @param FftLength blup
+##' @param WindowSize bla
+##' @param WindowShift bli
+##' @param Window blup
+##' @param Bandwidth bla
+##' @param EffectiveLength bli
+##' @param Order blup
+##' @param Preemphasis bla 
+##' @param Deemphasize bli
+##' @param NumCeps blup
+##' @param ToFile write results to file (default extension is .lps)
+##' @param ExplicitExt set if you wish to overwride the default extension
+##' @return nrOfProcessedFiles or if only one file to process return dataObj of that file
 ##' @author Raphael Winkelmann
 'lpsSpectrum' <- function(listOfFiles = NULL, BeginTime = 0.0, CenterTime = FALSE, EndTime = 0.0, Resolution = 40.0, FftLength = 0, WindowSize = 20.0, WindowShift = 5.0, Window = 'BLACKMAN', Bandwidth = 0.0, EffectiveLength = FALSE, Order = 0, Preemphasis = -0.95, Deemphasize = FALSE, NumCeps = 0, ToFile = TRUE, ExplicitExt = NULL) {
 	
@@ -102,8 +110,17 @@
 	}
 	
 	invisible(.External("performAssp", listOfFiles, fname = "spectrum", BeginTime = BeginTime, CenterTime = CenterTime, EndTime = EndTime, SpectrumType = SpectrumType, Resolution = Resolution, FftLength = as.integer(FftLength), WindowSize = WindowSize, WindowShift = WindowShift,  Window = Window, Bandwidth = Bandwidth, EffectiveLength = EffectiveLength, Order = as.integer(Order), Preemphasis = Preemphasis, Deemphasize = Deemphasize, NumCeps = as.integer(NumCeps), ToFile = ToFile, ExplicitExt = ExplicitExt, ProgressBar = pb))
-	
-	if(!(length(listOfFiles)==1)){ close(pb) }
+
+
+        #############################
+        # return dataObj if length only one file
+                
+	if(!(length(listOfFiles)==1)){
+          close(pb)
+        }else{
+          resDataObj = getDObj(listOfFiles[1])
+          return(resDataObj)
+        }
 		
 }
 
@@ -111,25 +128,25 @@
 ##' .. content for \description{} (no empty lines) ..
 ##'
 ##' .. content for \details{} ..
-##' @title 
-##' @param listOfFiles 
-##' @param BeginTime 
-##' @param CenterTime 
-##' @param EndTime 
-##' @param Resolution 
-##' @param FftLength 
-##' @param WindowSize 
-##' @param WindowShift 
-##' @param Window 
-##' @param Bandwidth 
-##' @param EffectiveLength 
-##' @param Order 
-##' @param Preemphasis 
-##' @param Deemphasize 
-##' @param NumCeps 
-##' @param ToFile 
-##' @param ExplicitExt 
-##' @return 
+##' @title cssSpectrum 
+##' @param listOfFiles vector of file paths to be processed by function 
+##' @param BeginTime bla
+##' @param CenterTime bli
+##' @param EndTime blup
+##' @param Resolution bla
+##' @param FftLength bli
+##' @param WindowSize blup
+##' @param WindowShift bla
+##' @param Window bli
+##' @param Bandwidth blup
+##' @param EffectiveLength bla
+##' @param Order bli
+##' @param Preemphasis blup
+##' @param Deemphasize bla
+##' @param NumCeps bli
+##' @param ToFile write results to file (default extension is .css)
+##' @param ExplicitExt set if you wish to overwride the default extension
+##' @return nrOfProcessedFiles or if only one file to process return dataObj of that file
 ##' @author Raphael Winkelmann
 'cssSpectrum' <- function(listOfFiles = NULL, BeginTime = 0.0, CenterTime = FALSE, EndTime = 0.0, Resolution = 40.0, FftLength = 0, WindowSize = 0.0, WindowShift = 5.0, Window = 'BLACKMAN', Bandwidth = 0.0, EffectiveLength = FALSE, Order = 0, Preemphasis = 0.0, Deemphasize = FALSE, NumCeps = 0, ToFile = TRUE, ExplicitExt = NULL) {
 	
@@ -159,33 +176,41 @@
 	
 	
 	invisible(.External("performAssp", listOfFiles, fname = "spectrum", BeginTime = BeginTime, CenterTime = CenterTime, EndTime = EndTime, SpectrumType = SpectrumType, Resolution = Resolution, FftLength = as.integer(FftLength), WindowSize = WindowSize, WindowShift = WindowShift,  Window = Window, Bandwidth = Bandwidth, EffectiveLength = EffectiveLength, Order = as.integer(Order), Preemphasis = Preemphasis, Deemphasize = Deemphasize, NumCeps = as.integer(NumCeps), ToFile = ToFile, ExplicitExt = ExplicitExt, ProgressBar = pb))
-	
-	if(!(length(listOfFiles)==1)){ close(pb) }
+
+        #############################
+        # return dataObj if length only one file
+              
+	if(!(length(listOfFiles)==1)){
+          close(pb)
+        }else{
+          resDataObj = getDObj(listOfFiles[1])
+          return(resDataObj)
+        }
 		
 }
 
 ##' .. content for \description{} (no empty lines) ..
 ##'
 ##' .. content for \details{} ..
-##' @title 
-##' @param listOfFiles 
-##' @param BeginTime 
-##' @param CenterTime 
-##' @param EndTime 
-##' @param Resolution 
-##' @param FftLength 
-##' @param WindowSize 
-##' @param WindowShift 
-##' @param Window 
-##' @param Bandwidth 
-##' @param EffectiveLength 
-##' @param Order 
-##' @param Preemphasis 
-##' @param Deemphasize 
-##' @param NumCeps 
-##' @param ToFile 
-##' @param ExplicitExt 
-##' @return 
+##' @title cep 
+##' @param listOfFiles vector of file paths to be processed by function 
+##' @param BeginTime bli
+##' @param CenterTime blup
+##' @param EndTime bla
+##' @param Resolution bla
+##' @param FftLength bli
+##' @param WindowSize blup
+##' @param WindowShift bla
+##' @param Window bli
+##' @param Bandwidth blup
+##' @param EffectiveLength bla 
+##' @param Order bli
+##' @param Preemphasis blup 
+##' @param Deemphasize bla 
+##' @param NumCeps bli
+##' @param ToFile write results to file (default extension is .cep)
+##' @param ExplicitExt set if you wish to overwride the default extension
+##' @return nrOfProcessedFiles or if only one file to process return dataObj of that file
 ##' @author Raphael Winkelmann
 'cepSpectrum' <- function(listOfFiles = NULL, BeginTime = 0.0, CenterTime = FALSE, EndTime = 0.0, Resolution = 40.0, FftLength = 0, WindowSize = 0.0, WindowShift = 5.0, Window = 'BLACKMAN', Bandwidth = 0.0, EffectiveLength = FALSE, Order = 0, Preemphasis = 0.0, Deemphasize = FALSE, NumCeps = 0, ToFile = TRUE, ExplicitExt = NULL) {
 	
@@ -216,6 +241,14 @@
 	
 	
 	invisible(.External("performAssp", listOfFiles, fname = "spectrum", BeginTime = BeginTime, CenterTime = CenterTime, EndTime = EndTime, SpectrumType = SpectrumType, Resolution = Resolution, FftLength = FftLength, WindowSize = WindowSize, WindowShift = WindowShift,  Window = Window, Bandwidth = Bandwidth, EffectiveLength = EffectiveLength, Order = Order, Preemphasis = Preemphasis, Deemphasize = Deemphasize, NumCeps = NumCeps, ToFile = ToFile, ExplicitExt = ExplicitExt, ProgressBar = pb))
-		
-	if(!(length(listOfFiles)==1)){ close(pb) }
+
+        #############################
+        # return dataObj if length only one file
+                
+	if(!(length(listOfFiles)==1)){
+          close(pb)
+        }else{
+          resDataObj = getDObj(listOfFiles[1])
+          return(resDataObj)
+        }
 }

@@ -2,7 +2,7 @@
 ##'
 ##' still have to write propper man pages
 ##' @title affilter
-##' @param listOfFiles bla
+##' @param listOfFiles vector of file paths to be processed by function
 ##' @param HighPass bli
 ##' @param LowPass blup
 ##' @param StopBand bla
@@ -13,7 +13,7 @@
 ##' @param ExplicitExt bli
 ##' @return number of files processed
 ##' @author Raphael Winkelmann
-"affilter" <- function(listOfFiles = NULL, HighPass = 4000, LowPass = 0, StopBand = 96, 
+'affilter' <- function(listOfFiles = NULL, HighPass = 4000, LowPass = 0, StopBand = 96, 
                        Transition = 250, UseIIR = FALSE, NumIIRsections = 4, ToFile = TRUE,
                        ExplicitExt = NULL) {
 
@@ -40,9 +40,16 @@
 			UseIIR = UseIIR, NumIIRsections = as.integer(NumIIRsections),
                         ToFile = ToFile, 
 			ExplicitExt = ExplicitExt, ProgressBar = pb))
-    
 
-    if(!(length(listOfFiles)==1)){ close(pb) }
+    #############################
+    # return dataObj if length only one file
+
+    if(!(length(listOfFiles)==1)){
+      close(pb)
+    }else{
+      resDataObj = getDObj(listOfFiles[1])
+      return(resDataObj)
+    }
 
 
 

@@ -1,16 +1,16 @@
 ##' .. content for \description{} (no empty lines) ..
 ##'
 ##' .. content for \details{} ..
-##' @title 
-##' @param listOfFiles 
-##' @param BeginTime 
-##' @param CenterTime 
-##' @param EndTime 
-##' @param WindowShift 
-##' @param WindowSize 
-##' @param ToFile 
-##' @param ExplicitExt 
-##' @return 
+##' @title zcrana
+##' @param listOfFiles vector of file paths to be processed by function 
+##' @param BeginTime bla
+##' @param CenterTime bli
+##' @param EndTime blup
+##' @param WindowShift bla
+##' @param WindowSize bli
+##' @param ToFile write results to file (default extension is .zcr)
+##' @param ExplicitExt set if you wish to overwride the default extension
+##' @return nrOfProcessedFiles or if only one file to process return dataObj of that file
 ##' @author Raphael Winkelmann
 'zcrana' <- function(listOfFiles = NULL, BeginTime = 0.0, CenterTime = FALSE, EndTime = 0.0, WindowShift = 5.0, WindowSize = 25.0, ToFile = TRUE, ExplicitExt = NULL) {
 
@@ -31,8 +31,17 @@
 	}	
 
 	invisible(.External("performAssp", listOfFiles, fname = "zcrana", BeginTime = BeginTime, CenterTime = CenterTime, EndTime = EndTime, WindowShift = WindowShift, WindowSize = WindowSize, ToFile = ToFile, ExplicitExt = ExplicitExt, ProgressBar = pb))
+
+        
+        #############################
+        # return dataObj if length only one file
 	
-	
-	if(!(length(listOfFiles)==1)){ close(pb) }
+	if(!(length(listOfFiles)==1)){
+          close(pb)
+        }else{
+          resDataObj = getDObj(listOfFiles[1])
+          return(resDataObj)
+        }
+
 
 }

@@ -2,7 +2,7 @@
 ##'
 ##' still have to write propper documentation
 ##' @title acfana
-##' @param listOfFiles vector of files to be processed by function
+##' @param listOfFiles vector of file paths to be processed by function
 ##' @param BeginTime start time (in ms) in file to perform function on 
 ##' @param CenterTime ?????
 ##' @param EndTime end time (in ms) in file to perform function on
@@ -15,12 +15,11 @@
 ##' @param LengthNormalization ????
 ##' @param ToFile write results to file (default extension is .acf)
 ##' @param ExplicitExt set if you wish to overwride the default extension
-##' @param fileCheck precheck if files already exist
-##' @return nrOfProcessedFiles
+##' @return nrOfProcessedFiles or if only one file to process return dataObj of that file
 ##' @author Raphael Winkelmann
-"acfana" <- function(listOfFiles = NULL, BeginTime = 0.0, CenterTime = FALSE, 
+'acfana' <- function(listOfFiles = NULL, BeginTime = 0.0, CenterTime = FALSE, 
 	EndTime = 0.0, WindowShift = 5.0, WindowSize = 20.0, EffectiveLength = TRUE, 
-	Window = "BLACKMAN", AnalysisOrder = 0, EnergyNormalization = FALSE, LengthNormalization = FALSE, ToFile = TRUE, ExplicitExt = NULL, fileCheck = TRUE) {
+	Window = "BLACKMAN", AnalysisOrder = 0, EnergyNormalization = FALSE, LengthNormalization = FALSE, ToFile = TRUE, ExplicitExt = NULL) {
 
 	###########################
 	# a few parameter checks
@@ -31,17 +30,6 @@
 
 	if(!isAsspWindowType(Window)){
 		stop("WindowFunction of type '", Window,"' is not supported!")
-	}
-
-	###########################
-	# file check
-	
-	if(fileCheck){
-		if(is.null(ExplicitExt)){
-			#stop('asfdsfasdfasdf')
-			hasDuplicateFiles(listOfFiles,'.acf')
-		}
-		print("DOING FILE CHECK!")
 	}
 
 	###########################
@@ -56,6 +44,14 @@
 	invisible(.External("performAssp", listOfFiles, fname = "acfana", BeginTime = BeginTime, 
 		CenterTime = CenterTime, EndTime = EndTime, WindowShift = WindowShift, WindowSize = WindowSize, EffectiveLength = EffectiveLength, Window = Window, AnalysisOrder = as.integer(AnalysisOrder), EnergyNormalization = EnergyNormalization, LengthNormalization = LengthNormalization, ToFile = ToFile, ExplicitExt = ExplicitExt, ProgressBar = pb))
 
-	if(!(length(listOfFiles)==1)){ close(pb) }
+        #############################
+        # return dataObj if length only one file
+        
+	if(!(length(listOfFiles)==1)){
+          close(pb)
+        }else{
+          resDataObj = getDObj(listOfFiles[1])
+          return(resDataObj)
+        }
 
 }

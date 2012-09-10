@@ -2,7 +2,7 @@
 ##'
 ##' still have to write propper manual entry
 ##' @title afdiff
-##' @param listOfFiles 
+##' @param listOfFiles vector of file paths to be processed by function
 ##' @param ComputeBackwardDifference 
 ##' @param ComputeCentralDifference 
 ##' @param Channel 
@@ -10,7 +10,7 @@
 ##' @param ExplicitExt 
 ##' @return nr of files processed
 ##' @author Raphael Winkelmann
-"afdiff" <- function(listOfFiles = NULL, ComputeBackwardDifference = FALSE, ComputeCentralDifference = FALSE, Channel = 1, ToFile = TRUE, ExplicitExt=NULL) {
+'afdiff' <- function(listOfFiles = NULL, ComputeBackwardDifference = FALSE, ComputeCentralDifference = FALSE, Channel = 1, ToFile = TRUE, ExplicitExt=NULL) {
 
 	###########################
 	# a few parameter checks
@@ -31,5 +31,13 @@
 	invisible(.External("performAssp", listOfFiles, fname = "afdiff",ComputeBackwardDifference  = ComputeBackwardDifference, Channel = as.integer(Channel), ToFile = ToFile, ExplicitExt = ExplicitExt, ProgressBar=pb))
 
 
-	if(!(length(listOfFiles)==1)){ close(pb) }
+        #############################
+        # return dataObj if length only one file
+        
+	if(!(length(listOfFiles)==1)){
+          close(pb)
+        }else{
+          resDataObj = getDObj(listOfFiles[1])
+          return(resDataObj)
+        }
 }
