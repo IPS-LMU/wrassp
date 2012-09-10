@@ -2,15 +2,17 @@
 \alias{rmsana}
 \title{rmsana}
 \usage{
-  rmsana(listOfFiles = NULL, BeginTime = 0,
-    CenterTime = FALSE, EndTime = 0, WindowShift = 5,
-    WindowSize = 20, EffectiveLength = TRUE,
-    Linear = FALSE, Window = "HAMMING", ToFile = TRUE,
-    ExplicitExt = NULL)
+  rmsana(listOfFiles = NULL, optLogFilePath = NULL,
+    BeginTime = 0, CenterTime = FALSE, EndTime = 0,
+    WindowShift = 5, WindowSize = 20,
+    EffectiveLength = TRUE, Linear = FALSE,
+    Window = "HAMMING", ToFile = TRUE, ExplicitExt = NULL)
 }
 \arguments{
   \item{listOfFiles}{nrOfProcessedFiles or if only one file
   to process return dataObj of that file}
+
+  \item{optLogFilePath}{path to option log file}
 
   \item{BeginTime}{start time (in ms) in file to perform
   function on}

@@ -2,10 +2,10 @@
 \alias{cepSpectrum}
 \title{cep}
 \usage{
-  cepSpectrum(listOfFiles = NULL, BeginTime = 0,
-    CenterTime = FALSE, EndTime = 0, Resolution = 40,
-    FftLength = 0, WindowSize = 0, WindowShift = 5,
-    Window = "BLACKMAN", Bandwidth = 0,
+  cepSpectrum(listOfFiles = NULL, optLogFilePath = NULL,
+    BeginTime = 0, CenterTime = FALSE, EndTime = 0,
+    Resolution = 40, FftLength = 0, WindowSize = 0,
+    WindowShift = 5, Window = "BLACKMAN", Bandwidth = 0,
     EffectiveLength = FALSE, Order = 0, Preemphasis = 0,
     Deemphasize = FALSE, NumCeps = 0, ToFile = TRUE,
     ExplicitExt = NULL)
@@ -14,33 +14,38 @@
   \item{listOfFiles}{vector of file paths to be processed
   by function}
 
-  \item{BeginTime}{bli}
+  \item{optLogFilePath}{path to option log file}
 
-  \item{CenterTime}{blup}
+  \item{BeginTime}{start time (in ms) in file to perform
+  function on}
 
-  \item{EndTime}{bla}
+  \item{CenterTime}{???}
 
-  \item{Resolution}{bla}
+  \item{EndTime}{end time (in ms) in file to perform
+  function on}
 
-  \item{FftLength}{bli}
+  \item{Resolution}{???}
 
-  \item{WindowSize}{blup}
+  \item{FftLength}{???}
 
-  \item{WindowShift}{bla}
+  \item{WindowSize}{window size of function (in ms)}
 
-  \item{Window}{bli}
+  \item{WindowShift}{window shift of function (in ms)}
 
-  \item{Bandwidth}{blup}
+  \item{Window}{type of window (see AsspWindowTypes()
+  function)}
 
-  \item{EffectiveLength}{bla}
+  \item{Bandwidth}{???}
 
-  \item{Order}{bli}
+  \item{EffectiveLength}{???}
 
-  \item{Preemphasis}{blup}
+  \item{Order}{???}
 
-  \item{Deemphasize}{bla}
+  \item{Preemphasis}{???}
 
-  \item{NumCeps}{bli}
+  \item{Deemphasize}{???}
+
+  \item{NumCeps}{???}
 
   \item{ToFile}{write results to file (default extension is
   .cep)}

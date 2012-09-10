@@ -2,7 +2,7 @@
 \alias{afdiff}
 \title{afdiff}
 \usage{
-  afdiff(listOfFiles = NULL,
+  afdiff(listOfFiles = NULL, optLogFilePath = NULL,
     ComputeBackwardDifference = FALSE,
     ComputeCentralDifference = FALSE, Channel = 1,
     ToFile = TRUE, ExplicitExt = NULL)
@@ -10,6 +10,8 @@
 \arguments{
   \item{listOfFiles}{vector of file paths to be processed
   by function}
+
+  \item{optLogFilePath}{path to option log file}
 
   \item{ComputeBackwardDifference}{???}
 

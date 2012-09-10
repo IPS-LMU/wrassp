@@ -2,15 +2,18 @@
 \alias{rfcana}
 \title{rfcana}
 \usage{
-  rfcana(listOfFiles = NULL, BeginTime = 0,
-    CenterTime = FALSE, EndTime = 0, WindowShift = 5,
-    WindowSize = 20, EffectiveLength = TRUE,
-    Window = "BLACKMAN", Order = 0, Preemphasis = -0.95,
-    LpType = "RFC", ToFile = TRUE, ExplicitExt = NULL)
+  rfcana(listOfFiles = NULL, optLogFilePath = NULL,
+    BeginTime = 0, CenterTime = FALSE, EndTime = 0,
+    WindowShift = 5, WindowSize = 20,
+    EffectiveLength = TRUE, Window = "BLACKMAN", Order = 0,
+    Preemphasis = -0.95, LpType = "RFC", ToFile = TRUE,
+    ExplicitExt = NULL)
 }
 \arguments{
   \item{listOfFiles}{vector of file paths to be processed
   by function}
+
+  \item{optLogFilePath}{path to option log file}
 
   \item{BeginTime}{bla}
 

@@ -2,23 +2,28 @@
 \alias{zcrana}
 \title{zcrana}
 \usage{
-  zcrana(listOfFiles = NULL, BeginTime = 0,
-    CenterTime = FALSE, EndTime = 0, WindowShift = 5,
-    WindowSize = 25, ToFile = TRUE, ExplicitExt = NULL)
+  zcrana(listOfFiles = NULL, optLogFilePath = NULL,
+    BeginTime = 0, CenterTime = FALSE, EndTime = 0,
+    WindowShift = 5, WindowSize = 25, ToFile = TRUE,
+    ExplicitExt = NULL)
 }
 \arguments{
   \item{listOfFiles}{vector of file paths to be processed
   by function}
 
-  \item{BeginTime}{bla}
+  \item{optLogFilePath}{path to option log file}
 
-  \item{CenterTime}{bli}
+  \item{BeginTime}{start time (in ms) in file to perform
+  function on}
 
-  \item{EndTime}{blup}
+  \item{CenterTime}{???}
 
-  \item{WindowShift}{bla}
+  \item{EndTime}{end time (in ms) in file to perform
+  function on}
 
-  \item{WindowSize}{bli}
+  \item{WindowShift}{window shift of function (in ms)}
+
+  \item{WindowSize}{window size of function (in ms)}
 
   \item{ToFile}{write results to file (default extension is
   .zcr)}

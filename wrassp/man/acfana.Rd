@@ -2,17 +2,19 @@
 \alias{acfana}
 \title{acfana}
 \usage{
-  acfana(listOfFiles = NULL, BeginTime = 0,
-    CenterTime = FALSE, EndTime = 0, WindowShift = 5,
-    WindowSize = 20, EffectiveLength = TRUE,
-    Window = "BLACKMAN", AnalysisOrder = 0,
-    EnergyNormalization = FALSE,
+  acfana(listOfFiles = NULL, optLogFilePath = NULL,
+    BeginTime = 0, CenterTime = FALSE, EndTime = 0,
+    WindowShift = 5, WindowSize = 20,
+    EffectiveLength = TRUE, Window = "BLACKMAN",
+    AnalysisOrder = 0, EnergyNormalization = FALSE,
     LengthNormalization = FALSE, ToFile = TRUE,
     ExplicitExt = NULL)
 }
 \arguments{
   \item{listOfFiles}{vector of file paths to be processed
   by function}
+
+  \item{optLogFilePath}{path to option log file}
 
   \item{BeginTime}{start time (in ms) in file to perform
   function on}

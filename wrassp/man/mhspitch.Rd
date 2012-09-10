@@ -2,10 +2,10 @@
 \alias{mhspitch}
 \title{mhspitch}
 \usage{
-  mhspitch(listOfFiles = NULL, BeginTime = 0,
-    CenterTime = FALSE, EndTime = 0, WindowShift = 5,
-    Gender = "u", MaxF = 600, MinF = 50, MinAmp = 50,
-    MinAC1 = 0.25, MinRMS = 18, MaxZCR = 3000,
+  mhspitch(listOfFiles = NULL, optLogFilePath = NULL,
+    BeginTime = 0, CenterTime = FALSE, EndTime = 0,
+    WindowShift = 5, Gender = "u", MaxF = 600, MinF = 50,
+    MinAmp = 50, MinAC1 = 0.25, MinRMS = 18, MaxZCR = 3000,
     MinProb = 0.52, PlainSpectrum = FALSE, ToFile = TRUE,
     ExplicitExt = NULL)
 }
@@ -13,35 +13,41 @@
   \item{listOfFiles}{vector of file paths to be processed
   by function}
 
-  \item{BeginTime}{bla}
+  \item{optLogFilePath}{path to option log file}
 
-  \item{CenterTime}{bli}
+  \item{BeginTime}{start time (in ms) in file to perform
+  function on}
 
-  \item{EndTime}{blup}
+  \item{CenterTime}{???}
 
-  \item{WindowShift}{bla}
+  \item{EndTime}{end time (in ms) in file to perform
+  function on}
 
-  \item{Gender}{bli}
+  \item{WindowShift}{window shift of function (in ms)}
 
-  \item{MaxF}{blup}
+  \item{Gender}{???}
 
-  \item{MinF}{bla}
+  \item{MaxF}{???}
 
-  \item{MinAmp}{bli}
+  \item{MinF}{???}
 
-  \item{MinAC1}{blup}
+  \item{MinAmp}{???}
 
-  \item{MinRMS}{bla}
+  \item{MinAC1}{???}
 
-  \item{MaxZCR}{bli}
+  \item{MinRMS}{???}
 
-  \item{MinProb}{blup}
+  \item{MaxZCR}{???}
 
-  \item{PlainSpectrum}{bla}
+  \item{MinProb}{???}
 
-  \item{ToFile}{bli}
+  \item{PlainSpectrum}{???}
 
-  \item{ExplicitExt}{blup}
+  \item{ToFile}{write results to file (default extension is
+  .pit)}
+
+  \item{ExplicitExt}{set if you wish to overwride the
+  default extension}
 }
 \value{
   nrOfProcessedFiles or if only one file to process return

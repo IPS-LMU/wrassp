@@ -2,14 +2,16 @@
 \alias{f0ana}
 \title{f0ana}
 \usage{
-  f0ana(listOfFiles = NULL, BeginTime = 0, EndTime = 0,
-    WindowShift = 5, Gender = "u", MaxF = 600, MinF = 50,
-    MinAmp = 50, MaxZCR = 3000, ToFile = TRUE,
-    ExplicitExt = NULL)
+  f0ana(listOfFiles = NULL, optLogFilePath = NULL,
+    BeginTime = 0, EndTime = 0, WindowShift = 5,
+    Gender = "u", MaxF = 600, MinF = 50, MinAmp = 50,
+    MaxZCR = 3000, ToFile = TRUE, ExplicitExt = NULL)
 }
 \arguments{
   \item{listOfFiles}{vector of file paths to be processed
   by function}
+
+  \item{optLogFilePath}{path to option log file}
 
   \item{BeginTime}{bla}
 
