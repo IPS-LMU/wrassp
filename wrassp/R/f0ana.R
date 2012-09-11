@@ -40,6 +40,32 @@
 	
 	externalRes = invisible(.External("performAssp", listOfFiles, fname = "f0ana", BeginTime = BeginTime, EndTime = EndTime, WindowShift = WindowShift, Gender = Gender, MaxF = MaxF, MinF = MinF, MinAmp = MinAmp, MaxZCR = MaxZCR, ExplicitExt = ExplicitExt, ToFile = ToFile, ProgressBar = pb, PACKAGE = "wrassp"))
 
+        ############################
+        # write options to options log file
+
+        cat("\n##################################\n", file = optLogFilePath, append = T)
+        cat("##################################\n", file = optLogFilePath, append = T)
+        cat("######## f0ana performed #########\n", file = optLogFilePath, append = T)
+
+        cat("Timestamp: ", paste(Sys.time()), '\n', file = optLogFilePath, append = T)
+
+        cat("BeginTime: ", BeginTime, '\n',file = optLogFilePath, append = T)
+        cat("EndTime: ", EndTime, '\n',file = optLogFilePath, append = T)
+        cat("WindowShift: ", WindowShift, '\n',file = optLogFilePath, append = T)
+        cat("Gender: ", Gender, '\n',file = optLogFilePath, append = T)
+        cat("MaxF: ", MaxF, '\n',file = optLogFilePath, append = T)
+        cat("MinF: ", MinF, '\n',file = optLogFilePath, append = T)
+        cat("MinAmp: ", MinAmp, '\n',file = optLogFilePath, append = T)
+        cat("MaxZCR: ", MaxZCR, '\n',file = optLogFilePath, append = T)
+
+
+        
+        cat("ToFile: ", ToFile, "\n", file = optLogFilePath, append = T)
+        cat("ExplicitExt: ", ExplicitExt, "\n", file = optLogFilePath, append = T)
+
+        cat(" => on files:\n\t", file = optLogFilePath, append = T)
+        cat(paste(listOfFiles, collapse="\n\t"), file = optLogFilePath, append = T)
+        
         
         #############################
         # return dataObj if length only one file

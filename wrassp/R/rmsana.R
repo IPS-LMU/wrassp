@@ -45,6 +45,32 @@
 	
 	externalRes = invisible(.External("performAssp", listOfFiles, fname = "rmsana", BeginTime = BeginTime, CenterTime = CenterTime, EndTime = EndTime, WindowShift = WindowShift, WindowSize = WindowSize, EffectiveLength = EffectiveLength, Linear = Linear, Window = Window, ToFile = ToFile, ExplicitExt = ExplicitExt, ProgressBar = pb, PACKAGE = "wrassp"))
 
+
+        ############################
+        # write options to options log file
+
+        cat("\n##################################\n", file = optLogFilePath, append = T)
+        cat("##################################\n", file = optLogFilePath, append = T)
+        cat("######## rmsana performed ########\n", file = optLogFilePath, append = T)
+
+        cat("Timestamp: ", paste(Sys.time()), '\n', file = optLogFilePath, append = T)
+        cat("BeginTime: ", BeginTime, '\n', file = optLogFilePath, append = T)
+        cat("CenterTime: ", CenterTime, '\n', file = optLogFilePath, append = T)
+        cat("EndTime: ", EndTime, '\n', file = optLogFilePath, append = T)
+        cat("WindowShift: ", WindowShift, '\n', file = optLogFilePath, append = T)
+        cat("WindowSize: ", WindowSize, '\n', file = optLogFilePath, append = T)
+        cat("EffectiveLength: ", EffectiveLength, '\n', file = optLogFilePath, append = T)
+        cat("Linear: ", Linear, '\n', file = optLogFilePath, append = T)
+        cat("Window: ", Window, '\n', file = optLogFilePath, append = T)
+
+
+        cat("ToFile: ", ToFile, "\n", file = optLogFilePath, append = T)
+        cat("ExplicitExt: ", ExplicitExt, "\n", file = optLogFilePath, append = T)
+
+        cat(" => on files:\n\t", file = optLogFilePath, append = T)
+        cat(paste(listOfFiles, collapse="\n\t"), file = optLogFilePath, append = T)
+        
+        
         #############################
         # return dataObj if length only one file
         

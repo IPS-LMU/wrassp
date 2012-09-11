@@ -51,7 +51,40 @@
 	}	
 	
 	externalRes = invisible(.External("performAssp", listOfFiles, fname = "spectrum", BeginTime = BeginTime, CenterTime = CenterTime, EndTime = EndTime, SpectrumType = SpectrumType, Resolution = Resolution, FftLength = as.integer(FftLength), WindowSize = WindowSize, WindowShift = WindowShift,  Window = Window, Bandwidth = Bandwidth, EffectiveLength = EffectiveLength, Order = as.integer(Order), Preemphasis = Preemphasis, Deemphasize = Deemphasize, NumCeps = as.integer(NumCeps), ToFile = ToFile, ExplicitExt = ExplicitExt, ProgressBar = pb, PACKAGE = "wrassp"))
-	
+
+
+        ############################
+        # write options to options log file
+
+        cat("\n##################################\n", file = optLogFilePath, append = T)
+        cat("##################################\n", file = optLogFilePath, append = T)
+        cat("##### dftSpectrum performed ######\n", file = optLogFilePath, append = T)
+
+        cat("Timestamp: ", paste(Sys.time()), '\n', file = optLogFilePath, append = T)
+
+        cat("BeginTime: ", BeginTime, '\n', file = optLogFilePath, append = T)
+        cat("CenterTime: ", CenterTime, '\n', file = optLogFilePath, append = T)
+        cat("EndTime: ", EndTime, '\n', file = optLogFilePath, append = T)
+        cat("SpectrumType: ", SpectrumType, '\n', file = optLogFilePath, append = T)
+        cat("Resolution: ", Resolution, '\n', file = optLogFilePath, append = T)
+        cat("FftLength: ", FftLength, '\n', file = optLogFilePath, append = T)
+        cat("WindowSize: ", WindowSize, '\n', file = optLogFilePath, append = T)
+        cat("WindowShift: ", WindowShift, '\n', file = optLogFilePath, append = T)
+        cat("Window: ", Window, '\n', file = optLogFilePath, append = T)
+        cat("Bandwidth: ", Bandwidth, '\n', file = optLogFilePath, append = T)
+        cat("EffectiveLength: ", EffectiveLength, '\n', file = optLogFilePath, append = T)
+        cat("Order: ", Order, '\n', file = optLogFilePath, append = T)
+        cat("Preemphasis: ", Preemphasis, '\n', file = optLogFilePath, append = T)
+        cat("Deemphasize: ", Deemphasize, '\n', file = optLogFilePath, append = T)
+        cat("NumCeps: ", NumCeps, '\n', file = optLogFilePath, append = T)
+        
+
+        cat("ToFile: ", ToFile, "\n", file = optLogFilePath, append = T)
+        cat("ExplicitExt: ", ExplicitExt, "\n", file = optLogFilePath, append = T)
+
+        cat(" => on files:\n\t", file = optLogFilePath, append = T)
+        cat(paste(listOfFiles, collapse="\n\t"), file = optLogFilePath, append = T)
+        
         #############################
         # return dataObj if length only one file
         
@@ -122,6 +155,41 @@
 	externalRes = invisible(.External("performAssp", listOfFiles, fname = "spectrum", BeginTime = BeginTime, CenterTime = CenterTime, EndTime = EndTime, SpectrumType = SpectrumType, Resolution = Resolution, FftLength = as.integer(FftLength), WindowSize = WindowSize, WindowShift = WindowShift,  Window = Window, Bandwidth = Bandwidth, EffectiveLength = EffectiveLength, Order = as.integer(Order), Preemphasis = Preemphasis, Deemphasize = Deemphasize, NumCeps = as.integer(NumCeps), ToFile = ToFile, ExplicitExt = ExplicitExt, ProgressBar = pb, PACKAGE = "wrassp"))
 
 
+        ############################
+        # write options to options log file
+
+        cat("\n##################################\n", file = optLogFilePath, append = T)
+        cat("##################################\n", file = optLogFilePath, append = T)
+        cat("##### lpsSpectrum performed ######\n", file = optLogFilePath, append = T)
+
+        cat("Timestamp: ", paste(Sys.time()), '\n', file = optLogFilePath, append = T)
+
+        cat("BeginTime: ", BeginTime, '\n', file = optLogFilePath, append = T)
+        cat("CenterTime: ", CenterTime, '\n', file = optLogFilePath, append = T)
+        cat("EndTime: ", EndTime, '\n', file = optLogFilePath, append = T)
+        cat("SpectrumType: ", SpectrumType, '\n', file = optLogFilePath, append = T)
+        cat("Resolution: ", Resolution, '\n', file = optLogFilePath, append = T)
+        cat("FftLength: ", FftLength, '\n', file = optLogFilePath, append = T)
+        cat("WindowSize: ", WindowSize, '\n', file = optLogFilePath, append = T)
+        cat("WindowShift: ", WindowShift, '\n', file = optLogFilePath, append = T)
+        cat("Window: ", Window, '\n', file = optLogFilePath, append = T)
+        cat("Bandwidth: ", Bandwidth, '\n', file = optLogFilePath, append = T)
+        cat("EffectiveLength: ", EffectiveLength, '\n', file = optLogFilePath, append = T)
+        cat("Order: ", Order, '\n', file = optLogFilePath, append = T)
+        cat("Preemphasis: ", Preemphasis, '\n', file = optLogFilePath, append = T)
+        cat("Deemphasize: ", Deemphasize, '\n', file = optLogFilePath, append = T)
+        cat("NumCeps: ", NumCeps,  '\n', file = optLogFilePath, append = T)
+
+
+        
+        cat("ToFile: ", ToFile, "\n", file = optLogFilePath, append = T)
+        cat("ExplicitExt: ", ExplicitExt, "\n", file = optLogFilePath, append = T)
+
+        cat(" => on files:\n\t", file = optLogFilePath, append = T)
+        cat(paste(listOfFiles, collapse="\n\t"), file = optLogFilePath, append = T)
+        
+        
+        
         #############################
         # return dataObj if length only one file
         
@@ -191,6 +259,38 @@
 	
 	externalRes = invisible(.External("performAssp", listOfFiles, fname = "spectrum", BeginTime = BeginTime, CenterTime = CenterTime, EndTime = EndTime, SpectrumType = SpectrumType, Resolution = Resolution, FftLength = as.integer(FftLength), WindowSize = WindowSize, WindowShift = WindowShift,  Window = Window, Bandwidth = Bandwidth, EffectiveLength = EffectiveLength, Order = as.integer(Order), Preemphasis = Preemphasis, Deemphasize = Deemphasize, NumCeps = as.integer(NumCeps), ToFile = ToFile, ExplicitExt = ExplicitExt, ProgressBar = pb, PACKAGE = "wrassp"))
 
+        ############################
+        # write options to options log file
+
+        cat("\n##################################\n", file = optLogFilePath, append = T)
+        cat("##################################\n", file = optLogFilePath, append = T)
+        cat("###### cssSpectrum performed #####\n", file = optLogFilePath, append = T)
+        cat("Timestamp: ", paste(Sys.time()), '\n', file = optLogFilePath, append = T)
+        cat("BeginTime: ", BeginTime, '\n', file = optLogFilePath, append = T)
+        cat("CenterTime: ", CenterTime, '\n', file = optLogFilePath, append = T)
+        cat("EndTime: ", EndTime, '\n', file = optLogFilePath, append = T)
+        cat("SpectrumType: ", SpectrumType, '\n', file = optLogFilePath, append = T)
+        cat("Resolution: ", Resolution, '\n', file = optLogFilePath, append = T)
+        cat("FftLength: ", FftLength, '\n', file = optLogFilePath, append = T)
+        cat("WindowSize: ", WindowSize, '\n', file = optLogFilePath, append = T)
+        cat("WindowShift: ", WindowShift, '\n', file = optLogFilePath, append = T)
+        cat("Window: ", Window, '\n', file = optLogFilePath, append = T)
+        cat("Bandwidth: ", Bandwidth, '\n', file = optLogFilePath, append = T)
+        cat("EffectiveLength: ", EffectiveLength, '\n', file = optLogFilePath, append = T)
+        cat("Order: ", Order, '\n', file = optLogFilePath, append = T)
+        cat("Preemphasis: ", Preemphasis, '\n', file = optLogFilePath, append = T)
+        cat("Deemphasize: ", Deemphasize, '\n', file = optLogFilePath, append = T)
+        cat("NumCeps: ", NumCeps, '\n', file = optLogFilePath, append = T)
+
+
+        
+        cat("ToFile: ", ToFile, "\n", file = optLogFilePath, append = T)
+        cat("ExplicitExt: ", ExplicitExt, "\n", file = optLogFilePath, append = T)
+
+        cat(" => on files:\n\t", file = optLogFilePath, append = T)
+        cat(paste(listOfFiles, collapse="\n\t"), file = optLogFilePath, append = T)
+        
+        
         #############################
         # return dataObj if length only one file
         
@@ -260,6 +360,40 @@
 	
 	externalRes = invisible(.External("performAssp", listOfFiles, fname = "spectrum", BeginTime = BeginTime, CenterTime = CenterTime, EndTime = EndTime, SpectrumType = SpectrumType, Resolution = Resolution, FftLength = FftLength, WindowSize = WindowSize, WindowShift = WindowShift,  Window = Window, Bandwidth = Bandwidth, EffectiveLength = EffectiveLength, Order = Order, Preemphasis = Preemphasis, Deemphasize = Deemphasize, NumCeps = NumCeps, ToFile = ToFile, ExplicitExt = ExplicitExt, ProgressBar = pb, PACKAGE = "wrassp"))
 
+
+        ############################
+        # write options to options log file
+
+        cat("\n##################################\n", file = optLogFilePath, append = T)
+        cat("##################################\n", file = optLogFilePath, append = T)
+        cat("##### cepSpectrum performed ######\n", file = optLogFilePath, append = T)
+
+        cat("Timestamp: ", paste(Sys.time()), '\n', file = optLogFilePath, append = T)
+        cat("BeginTime: ", BeginTime, '\n', file = optLogFilePath, append = T)
+        cat("CenterTime: ", CenterTime, '\n', file = optLogFilePath, append = T)
+        cat("EndTime: ", EndTime, '\n', file = optLogFilePath, append = T)
+        cat("SpectrumType: ", SpectrumType, '\n', file = optLogFilePath, append = T)
+        cat("Resolution: ", Resolution, '\n', file = optLogFilePath, append = T)
+        cat("FftLength: ", FftLength, '\n', file = optLogFilePath, append = T)
+        cat("WindowSize: ", WindowSize, '\n', file = optLogFilePath, append = T)
+        cat("WindowShift: ", WindowShift, '\n', file = optLogFilePath, append = T)
+        cat("Window: ", Window, '\n', file = optLogFilePath, append = T)
+        cat("Bandwidth: ", Bandwidth, '\n', file = optLogFilePath, append = T)
+        cat("EffectiveLength: ", EffectiveLength, '\n', file = optLogFilePath, append = T)
+        cat("Order: ", Order, '\n', file = optLogFilePath, append = T)
+        cat("Preemphasis: ", Preemphasis, '\n', file = optLogFilePath, append = T)
+        cat("Deemphasize: ", Deemphasize, '\n', file = optLogFilePath, append = T)
+        cat("NumCeps: ", NumCeps, '\n', file = optLogFilePath, append = T)
+
+
+        cat("ToFile: ", ToFile, "\n", file = optLogFilePath, append = T)
+        cat("ExplicitExt: ", ExplicitExt, "\n", file = optLogFilePath, append = T)
+
+        cat(" => on files:\n\t", file = optLogFilePath, append = T)
+        cat(paste(listOfFiles, collapse="\n\t"), file = optLogFilePath, append = T)
+        
+
+        
 
         #############################
         # return dataObj if length only one file

@@ -44,6 +44,28 @@
                         ToFile = ToFile, 
 			ExplicitExt = ExplicitExt, ProgressBar = pb, PACKAGE = "wrassp"))
 
+     ############################
+     # write options to options log file
+
+     cat("\n##################################\n", file = optLogFilePath, append = T)
+     cat("##################################\n", file = optLogFilePath, append = T)
+     cat("####### affilter performed #######\n", file = optLogFilePath, append = T)
+
+     cat("Timestamp: ", paste(Sys.time()), '\n', file = optLogFilePath, append = T)
+     cat("HighPass", HighPass, "\n", file = optLogFilePath, append = T)
+     cat("LowPass", LowPass, "\n", file = optLogFilePath, append = T)
+     cat("StopBand", StopBand, "\n", file = optLogFilePath, append = T)
+     cat("Transition", Transition, "\n", file = optLogFilePath, append = T) 
+     cat("UseIIR", UseIIR, "\n", file = optLogFilePath, append = T)
+     cat("NumIIRsections: ", NumIIRsections, "\n", file = optLogFilePath, append = T)
+
+     cat("ToFile: ", ToFile, "\n", file = optLogFilePath, append = T)
+     cat("ExplicitExt: ", ExplicitExt, "\n", file = optLogFilePath, append = T)
+
+     cat(" => on files:\n\t", file = optLogFilePath, append = T)
+     cat(paste(listOfFiles, collapse="\n\t"), file = optLogFilePath, append = T)
+        
+
      
      #############################
      # return dataObj if length only one file
