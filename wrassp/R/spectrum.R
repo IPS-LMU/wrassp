@@ -50,7 +50,7 @@
 		pb <- txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
 	}	
 	
-	invisible(.External("performAssp", listOfFiles, fname = "spectrum", BeginTime = BeginTime, CenterTime = CenterTime, EndTime = EndTime, SpectrumType = SpectrumType, Resolution = Resolution, FftLength = as.integer(FftLength), WindowSize = WindowSize, WindowShift = WindowShift,  Window = Window, Bandwidth = Bandwidth, EffectiveLength = EffectiveLength, Order = as.integer(Order), Preemphasis = Preemphasis, Deemphasize = Deemphasize, NumCeps = as.integer(NumCeps), ToFile = ToFile, ExplicitExt = ExplicitExt, ProgressBar = pb, PACKAGE = "wrassp"))
+	externalRes = invisible(.External("performAssp", listOfFiles, fname = "spectrum", BeginTime = BeginTime, CenterTime = CenterTime, EndTime = EndTime, SpectrumType = SpectrumType, Resolution = Resolution, FftLength = as.integer(FftLength), WindowSize = WindowSize, WindowShift = WindowShift,  Window = Window, Bandwidth = Bandwidth, EffectiveLength = EffectiveLength, Order = as.integer(Order), Preemphasis = Preemphasis, Deemphasize = Deemphasize, NumCeps = as.integer(NumCeps), ToFile = ToFile, ExplicitExt = ExplicitExt, ProgressBar = pb, PACKAGE = "wrassp"))
 	
         #############################
         # return dataObj if length only one file
@@ -58,12 +58,7 @@
 	if(!(length(listOfFiles)==1)){
           close(pb)
         }else{
-          if(is.null(ExplicitExt)){
-            newExt = '.dft'
-          }else{
-            newExt = ExplicitExt
-          }
-          resDataObj = getDataObjForFileWithNewExt(listOfFiles[1], newExt)
+          resDataObj = getDObj(externalRes)
           return(resDataObj)
         }
         
@@ -124,7 +119,7 @@
 		pb <- txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
 	}
 	
-	invisible(.External("performAssp", listOfFiles, fname = "spectrum", BeginTime = BeginTime, CenterTime = CenterTime, EndTime = EndTime, SpectrumType = SpectrumType, Resolution = Resolution, FftLength = as.integer(FftLength), WindowSize = WindowSize, WindowShift = WindowShift,  Window = Window, Bandwidth = Bandwidth, EffectiveLength = EffectiveLength, Order = as.integer(Order), Preemphasis = Preemphasis, Deemphasize = Deemphasize, NumCeps = as.integer(NumCeps), ToFile = ToFile, ExplicitExt = ExplicitExt, ProgressBar = pb, PACKAGE = "wrassp"))
+	externalRes = invisible(.External("performAssp", listOfFiles, fname = "spectrum", BeginTime = BeginTime, CenterTime = CenterTime, EndTime = EndTime, SpectrumType = SpectrumType, Resolution = Resolution, FftLength = as.integer(FftLength), WindowSize = WindowSize, WindowShift = WindowShift,  Window = Window, Bandwidth = Bandwidth, EffectiveLength = EffectiveLength, Order = as.integer(Order), Preemphasis = Preemphasis, Deemphasize = Deemphasize, NumCeps = as.integer(NumCeps), ToFile = ToFile, ExplicitExt = ExplicitExt, ProgressBar = pb, PACKAGE = "wrassp"))
 
 
         #############################
@@ -133,12 +128,7 @@
 	if(!(length(listOfFiles)==1)){
           close(pb)
         }else{
-          if(is.null(ExplicitExt)){
-            newExt = '.lps'
-          }else{
-            newExt = ExplicitExt
-          }
-          resDataObj = getDataObjForFileWithNewExt(listOfFiles[1], newExt)
+          resDataObj = getDObj(externalRes)
           return(resDataObj)
         }
 }
@@ -199,7 +189,7 @@
 	}	
 	
 	
-	invisible(.External("performAssp", listOfFiles, fname = "spectrum", BeginTime = BeginTime, CenterTime = CenterTime, EndTime = EndTime, SpectrumType = SpectrumType, Resolution = Resolution, FftLength = as.integer(FftLength), WindowSize = WindowSize, WindowShift = WindowShift,  Window = Window, Bandwidth = Bandwidth, EffectiveLength = EffectiveLength, Order = as.integer(Order), Preemphasis = Preemphasis, Deemphasize = Deemphasize, NumCeps = as.integer(NumCeps), ToFile = ToFile, ExplicitExt = ExplicitExt, ProgressBar = pb, PACKAGE = "wrassp"))
+	externalRes = invisible(.External("performAssp", listOfFiles, fname = "spectrum", BeginTime = BeginTime, CenterTime = CenterTime, EndTime = EndTime, SpectrumType = SpectrumType, Resolution = Resolution, FftLength = as.integer(FftLength), WindowSize = WindowSize, WindowShift = WindowShift,  Window = Window, Bandwidth = Bandwidth, EffectiveLength = EffectiveLength, Order = as.integer(Order), Preemphasis = Preemphasis, Deemphasize = Deemphasize, NumCeps = as.integer(NumCeps), ToFile = ToFile, ExplicitExt = ExplicitExt, ProgressBar = pb, PACKAGE = "wrassp"))
 
         #############################
         # return dataObj if length only one file
@@ -207,12 +197,7 @@
 	if(!(length(listOfFiles)==1)){
           close(pb)
         }else{
-          if(is.null(ExplicitExt)){
-            newExt = '.css'
-          }else{
-            newExt = ExplicitExt
-          }
-          resDataObj = getDataObjForFileWithNewExt(listOfFiles[1], newExt)
+          resDataObj = getDObj(externalRes)
           return(resDataObj)
         }
 		
@@ -273,7 +258,7 @@
 
 	
 	
-	invisible(.External("performAssp", listOfFiles, fname = "spectrum", BeginTime = BeginTime, CenterTime = CenterTime, EndTime = EndTime, SpectrumType = SpectrumType, Resolution = Resolution, FftLength = FftLength, WindowSize = WindowSize, WindowShift = WindowShift,  Window = Window, Bandwidth = Bandwidth, EffectiveLength = EffectiveLength, Order = Order, Preemphasis = Preemphasis, Deemphasize = Deemphasize, NumCeps = NumCeps, ToFile = ToFile, ExplicitExt = ExplicitExt, ProgressBar = pb, PACKAGE = "wrassp"))
+	externalRes = invisible(.External("performAssp", listOfFiles, fname = "spectrum", BeginTime = BeginTime, CenterTime = CenterTime, EndTime = EndTime, SpectrumType = SpectrumType, Resolution = Resolution, FftLength = FftLength, WindowSize = WindowSize, WindowShift = WindowShift,  Window = Window, Bandwidth = Bandwidth, EffectiveLength = EffectiveLength, Order = Order, Preemphasis = Preemphasis, Deemphasize = Deemphasize, NumCeps = NumCeps, ToFile = ToFile, ExplicitExt = ExplicitExt, ProgressBar = pb, PACKAGE = "wrassp"))
 
 
         #############################
@@ -282,12 +267,7 @@
 	if(!(length(listOfFiles)==1)){
           close(pb)
         }else{
-          if(is.null(ExplicitExt)){
-            newExt = '.cep'
-          }else{
-            newExt = ExplicitExt
-          }
-          resDataObj = getDataObjForFileWithNewExt(listOfFiles[1], newExt)
+          resDataObj = getDObj(externalRes)
           return(resDataObj)
         }
 }

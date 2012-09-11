@@ -43,7 +43,7 @@
 		pb <- txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
 	}	
 	
-	invisible(.External("performAssp", listOfFiles, fname = "rmsana", BeginTime = BeginTime, CenterTime = CenterTime, EndTime = EndTime, WindowShift = WindowShift, WindowSize = WindowSize, EffectiveLength = EffectiveLength, Linear = Linear, Window = Window, ToFile = ToFile, ExplicitExt = ExplicitExt, ProgressBar = pb, PACKAGE = "wrassp"))
+	externalRes = invisible(.External("performAssp", listOfFiles, fname = "rmsana", BeginTime = BeginTime, CenterTime = CenterTime, EndTime = EndTime, WindowShift = WindowShift, WindowSize = WindowSize, EffectiveLength = EffectiveLength, Linear = Linear, Window = Window, ToFile = ToFile, ExplicitExt = ExplicitExt, ProgressBar = pb, PACKAGE = "wrassp"))
 
         #############################
         # return dataObj if length only one file
@@ -51,12 +51,7 @@
 	if(!(length(listOfFiles)==1)){
           close(pb)
         }else{
-          if(is.null(ExplicitExt)){
-            newExt = '.rms'
-          }else{
-            newExt = ExplicitExt
-          }
-          resDataObj = getDataObjForFileWithNewExt(listOfFiles[1], newExt)
+          resDataObj = getDObj(externalRes)
           return(resDataObj)
         }
 

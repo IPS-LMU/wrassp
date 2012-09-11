@@ -38,7 +38,7 @@
         pb <- txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
     }
     
-    invisible(.External("performAssp", listOfFiles, fname = "affilter", HighPass = HighPass, 
+    externalRes = invisible(.External("performAssp", listOfFiles, fname = "affilter", HighPass = HighPass, 
 			LowPass = LowPass, StopBand = StopBand, Transition = Transition, 
 			UseIIR = UseIIR, NumIIRsections = as.integer(NumIIRsections),
                         ToFile = ToFile, 
@@ -51,12 +51,7 @@
      if(!(length(listOfFiles)==1)){
        close(pb)
      }else{
-       if(is.null(ExplicitExt)){
-         newExt = '.hpf' ###SIC! Have to calculate according to vals
-       }else{
-         newExt = ExplicitExt
-       }
-       resDataObj = getDataObjForFileWithNewExt(listOfFiles[1], newExt)
+       resDataObj = getDObj(externalRes)
        return(resDataObj)
      }
 

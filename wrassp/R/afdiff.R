@@ -33,7 +33,7 @@
 		pb <- txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
 	}
 	
-	invisible(.External("performAssp", listOfFiles, fname = "afdiff",ComputeBackwardDifference  = ComputeBackwardDifference, Channel = as.integer(Channel), ToFile = ToFile, ExplicitExt = ExplicitExt, ProgressBar=pb, PACKAGE = "wrassp"))
+	externalRes = invisible(.External("performAssp", listOfFiles, fname = "afdiff",ComputeBackwardDifference  = ComputeBackwardDifference, Channel = as.integer(Channel), ToFile = ToFile, ExplicitExt = ExplicitExt, ProgressBar=pb, PACKAGE = "wrassp"))
 
 
         #############################
@@ -42,12 +42,7 @@
 	if(!(length(listOfFiles)==1)){
           close(pb)
         }else{
-          if(is.null(ExplicitExt)){
-            newExt = '.dwav' #have to caculate!
-          }else{
-            newExt = ExplicitExt
-          }
-          resDataObj = getDataObjForFileWithNewExt(listOfFiles[1], newExt)
+          resDataObj = getDObj(externalRes)
           return(resDataObj)
         }
 

@@ -38,7 +38,7 @@
 		pb <- txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
 	}	
 	
-	invisible(.External("performAssp", listOfFiles, fname = "f0ana", BeginTime = BeginTime, EndTime = EndTime, WindowShift = WindowShift, Gender = Gender, MaxF = MaxF, MinF = MinF, MinAmp = MinAmp, MaxZCR = MaxZCR, ExplicitExt = ExplicitExt, ToFile = ToFile, ProgressBar = pb, PACKAGE = "wrassp"))
+	externalRes = invisible(.External("performAssp", listOfFiles, fname = "f0ana", BeginTime = BeginTime, EndTime = EndTime, WindowShift = WindowShift, Gender = Gender, MaxF = MaxF, MinF = MinF, MinAmp = MinAmp, MaxZCR = MaxZCR, ExplicitExt = ExplicitExt, ToFile = ToFile, ProgressBar = pb, PACKAGE = "wrassp"))
 
         
         #############################
@@ -47,12 +47,7 @@
 	if(!(length(listOfFiles)==1)){
           close(pb)
         }else{
-          if(is.null(ExplicitExt)){
-            newExt = '.f0'
-          }else{
-            newExt = ExplicitExt
-          }
-          resDataObj = getDataObjForFileWithNewExt(listOfFiles[1], newExt)
+          resDataObj = getDObj(externalRes)
           return(resDataObj)
         }
 	

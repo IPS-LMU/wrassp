@@ -47,8 +47,9 @@
 		pb <- txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
 	}	
 
-	invisible(.External("performAssp", listOfFiles, fname = "acfana", BeginTime = BeginTime, 
+	externalRes = invisible(.External("performAssp", listOfFiles, fname = "acfana", BeginTime = BeginTime, 
 		CenterTime = CenterTime, EndTime = EndTime, WindowShift = WindowShift, WindowSize = WindowSize, EffectiveLength = EffectiveLength, Window = Window, AnalysisOrder = as.integer(AnalysisOrder), EnergyNormalization = EnergyNormalization, LengthNormalization = LengthNormalization, ToFile = ToFile, ExplicitExt = ExplicitExt, ProgressBar = pb, PACKAGE = "wrassp"))
+
 
         ############################
         # write options to options log file
@@ -81,12 +82,7 @@
 	if(!(length(listOfFiles)==1)){
           close(pb)
         }else{
-          if(is.null(ExplicitExt)){
-            newExt = '.acf'
-          }else{
-            newExt = ExplicitExt
-          }
-          resDataObj = getDataObjForFileWithNewExt(listOfFiles[1], newExt)
+          resDataObj = getDObj(externalRes)
           return(resDataObj)
         }
 

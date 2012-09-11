@@ -36,7 +36,7 @@
 		pb <- txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
 	}	
 
-	invisible(.External("performAssp", PACKAGE = "wrassp", listOfFiles, fname = "zcrana", BeginTime = BeginTime, CenterTime = CenterTime, EndTime = EndTime, WindowShift = WindowShift, WindowSize = WindowSize, ToFile = ToFile, ExplicitExt = ExplicitExt, ProgressBar = pb))
+	externalRes = invisible(.External("performAssp", PACKAGE = "wrassp", listOfFiles, fname = "zcrana", BeginTime = BeginTime, CenterTime = CenterTime, EndTime = EndTime, WindowShift = WindowShift, WindowSize = WindowSize, ToFile = ToFile, ExplicitExt = ExplicitExt, ProgressBar = pb))
 
         
         #############################
@@ -45,12 +45,7 @@
 	if(!(length(listOfFiles)==1)){
           close(pb)
         }else{
-          if(is.null(ExplicitExt)){
-            newExt = '.zcr'
-          }else{
-            newExt = ExplicitExt
-          }
-          resDataObj = getDataObjForFileWithNewExt(listOfFiles[1], newExt)
+          resDataObj = getDObj(externalRes)
           return(resDataObj)
         }
 
