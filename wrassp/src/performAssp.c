@@ -922,9 +922,14 @@ SEXP performAssp(SEXP args) {
 	eval(lang4(install("setTxtProgressBar"), pBar, newVal, R_NilValue), utilsPackage);
       }
     }
-  PROTECT(res = allocVector(INTSXP, 1));
-  INTEGER(res)[0] = i;
-
+  if (i == 1) {
+    PROTECT(res = allocVector(STRSXP, 1));
+    SET_STRING_ELT(res, 0, mkChar(outName));
+  } else {
+    PROTECT(res = allocVector(INTSXP, 1));
+    INTEGER(res)[0] = i;
+  }
+  
   if (pBar == R_NilValue)
     UNPROTECT(1);
   else

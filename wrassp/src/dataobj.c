@@ -61,7 +61,7 @@ SEXP getDObj(SEXP fname) {
      REAL(startTime)[0] = data->Start_Time;
      setAttrib(ans, install("start_time"), startTime);
      PROTECT(class = allocVector(STRSXP, 1));
-     SET_STRING_ELT(class, 0, mkChar("dobj"));
+     SET_STRING_ELT(class, 0, mkChar("AsspDataObj"));
      classgets(ans, class);
      UNPROTECT(7);
      return ans;
@@ -75,7 +75,8 @@ SEXP getDObj2(SEXP args) {
   DDESC * desc = NULL;
   long numRecs;
   int i, n;
-  char * fName = NULL, *name;
+  char * fName = NULL;
+  const char *name;
   double begin = 0, end = 0;
   int isSample = 0;
   
@@ -177,7 +178,7 @@ SEXP getDObj2(SEXP args) {
      REAL(startTime)[0] = data->Start_Time;
      setAttrib(ans, install("start_time"), startTime);
      PROTECT(class = allocVector(STRSXP, 1));
-     SET_STRING_ELT(class, 0, mkChar("dobj"));
+     SET_STRING_ELT(class, 0, mkChar("AsspDataObj"));
      classgets(ans, class);
      UNPROTECT(7);
      return ans;
