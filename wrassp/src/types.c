@@ -1,72 +1,82 @@
 #include "wrassp.h"
-#include <asspdsp.h> //windows
-#include <spectra.h> //lp types, spect types
+#include <asspdsp.h>		//windows
+#include <spectra.h>		//lp types, spect types
 
 
-SEXP AsspWindowTypes () {
-  WFLIST *wPtr = wfShortList; //defined in assp
+SEXP
+AsspWindowTypes ()
+{
+  WFLIST *wPtr = wfShortList;	//defined in assp
   int n = 0, i = 0;
-  SEXP elem, wlist;
-  
-  while (wPtr->code != NULL) 
+  SEXP wlist;
+
+  while (wPtr->code != NULL)
     {
       n++;
       wPtr++;
     }
   wPtr = wfShortList;
 
-  PROTECT(wlist = allocVector(STRSXP, n));
-  while (wPtr->code != NULL) 
+  PROTECT (wlist = allocVector (STRSXP, n));
+  while (wPtr->code != NULL)
     {
-      SET_STRING_ELT(wlist, i, mkChar(wPtr->code));
+      SET_STRING_ELT (wlist, i, mkChar (wPtr->code));
       wPtr++, i++;
     }
-  
-  UNPROTECT(1);
+
+  UNPROTECT (1);
   return wlist;
 }
 
 
-SEXP AsspLpTypes()
+SEXP
+AsspLpTypes ()
 {
-    LP_TYPE *lPtr = lpType;
-    SEXP result;
-    int n = 0, i = 0;
+  LP_TYPE *lPtr = lpType;
+  SEXP result;
+  int n = 0, i = 0;
 
-    while (lPtr->ident != NULL) {
-	lPtr++;
-	n++;
+  while (lPtr->ident != NULL)
+    {
+      lPtr++;
+      n++;
     }
 
-    lPtr=lpType;
-    PROTECT(result = allocVector(STRSXP, n));
-    while (lPtr->ident != NULL) {
-      SET_STRING_ELT(result, i, mkChar(lPtr->ident));
-      lPtr++; i++;
+  lPtr = lpType;
+  PROTECT (result = allocVector (STRSXP, n));
+  while (lPtr->ident != NULL)
+    {
+      SET_STRING_ELT (result, i, mkChar (lPtr->ident));
+      lPtr++;
+      i++;
     }
-    UNPROTECT(1);
-    return(result);
+  UNPROTECT (1);
+  return (result);
 }
 
-SEXP AsspSpectTypes ()
+SEXP
+AsspSpectTypes ()
 {
-    SPECT_TYPE *sPtr = spectType;
-    SEXP result;
-    int i = 0, n = 0;
-    
-    while (sPtr->ident != NULL) {
-	sPtr++;
-	n++;
+  SPECT_TYPE *sPtr = spectType;
+  SEXP result;
+  int i = 0, n = 0;
+
+  while (sPtr->ident != NULL)
+    {
+      sPtr++;
+      n++;
     }
 
-    sPtr = spectType;
-    PROTECT(result = allocVector(STRSXP, n));
-    while (sPtr->ident != NULL) {
-      SET_STRING_ELT(result, i, mkChar(sPtr->ident));
-      sPtr++; i++;
+  sPtr = spectType;
+  PROTECT (result = allocVector (STRSXP, n));
+  while (sPtr->ident != NULL)
+    {
+      SET_STRING_ELT (result, i, mkChar (sPtr->ident));
+      sPtr++;
+      i++;
     }
-    UNPROTECT(1);
-    return(result);
+  UNPROTECT (1);
+  return (result);
 }
 
 

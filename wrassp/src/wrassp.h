@@ -7,16 +7,17 @@
 #include <asspana.h>
 
 
-SEXP getDObj(SEXP fname);
-SEXP getDObj2(SEXP fname);
-SEXP getDObjTracks(SEXP dobj);
-SEXP getDObjTrackData(DOBJ *data, DDESC *desc);
-static void DObjFinalizer(SEXP dPtr);
+SEXP getDObj (SEXP fname);
+SEXP getDObj2 (SEXP fname);
+SEXP dobj2AsspDataObj (DOBJ * data);
+SEXP getDObjTracks (SEXP dobj);
+SEXP getDObjTrackData (DOBJ * data, DDESC * desc);
+// static void DObjFinalizer (SEXP dPtr);
 
-SEXP performAssp(SEXP args);
-SEXP showArgs(SEXP args);
+SEXP performAssp (SEXP args);
+SEXP showArgs (SEXP args);
 
-SEXP AsspWindowList();
+SEXP AsspWindowList ();
 /* Option handling */
 
 
@@ -26,7 +27,7 @@ typedef enum AsspFuncs
   AF_ACFANA,
   AF_AFDIFF,
   AF_AFFILTER,
-  AF_KSV_PITCH, // f0ana
+  AF_KSV_PITCH,			// f0ana
   AF_FOREST,
   AF_MHS_PITCH,
   AF_RFCANA,
@@ -79,8 +80,8 @@ typedef enum wrassp_option_number
   WO_LPCUTOFF,
   WO_STOPDB,
   WO_TBWIDTH,
-  WO_USEIIR,      /* use IIR filter instead of FIR */
-  WO_NUMIIRSECS,  /* number of IIR sections, default 4 */
+  WO_USEIIR,			/* use IIR filter instead of FIR */
+  WO_NUMIIRSECS,		/* number of IIR sections, default 4 */
   WO_TYPE,			/* hold-all */
   WO_FORMAT,
   WO_WINFUNC,
@@ -94,20 +95,20 @@ typedef enum wrassp_option_number
   /* options specific to afdiff */
   WO_DIFF_OPT_BACKWARD,		/* backwards difference (as opposed to forward) */
   WO_DIFF_OPT_CENTRAL,		/* compute central/interpolated/3-point difference */
-  /* options specific to rmsana*/
-  WO_RMS_OPT_LINEAR,     /* linear RMS amplitude  */
+  /* options specific to rmsana */
+  WO_RMS_OPT_LINEAR,		/* linear RMS amplitude  */
   /* options specific to spectrum */
-  WO_LPS_OPT_DEEMPH, /* omit de-emphasis */
+  WO_LPS_OPT_DEEMPH,		/* omit de-emphasis */
   /* general tclassp options */
   WO_OUTPUTDIR,
   WO_OUTPUTEXT,
   WO_TOFILE,
-  WO_PBAR        /*R Textual Progress Bar*/
+  WO_PBAR			/*R Textual Progress Bar */
 } ASSP_OPT_NUM;
 
 typedef struct wrassp_option
 {
-  char * name; /* name of option as used in R */
+  char *name;			/* name of option as used in R */
   ASSP_OPT_NUM optNum;
 } W_OPT;
 
@@ -117,26 +118,26 @@ typedef struct anaopt_function_list
   setDefProc *setFunc;		/* name of the function to set default option values */
   computeProc *compProc;	/* name of the function to call for parameter
 				 *  computation*/
-  W_OPT *options;                /* pointer to options table */
+  W_OPT *options;		/* pointer to options table */
   int major;			/*major version number */
   int minor;			/*minor version number */
   char defExt[16];		/*default extension */
-  AsspFunc_e funcNum;	/*number of function */
+  AsspFunc_e funcNum;		/*number of function */
 } A_F_LIST;
 
 typedef enum wrassp_gender_type
 {
-    TG_NONE = -1,
-    TG_FEMALE,
-    TG_MALE,
-    TG_UNKNOWN,
+  TG_NONE = -1,
+  TG_FEMALE,
+  TG_MALE,
+  TG_UNKNOWN,
 } W_GENDER_TYPE;
 
 typedef struct wrassp_gender
 {
-    char * ident;
-    W_GENDER_TYPE num;
-    char code;
+  char *ident;
+  W_GENDER_TYPE num;
+  char code;
 } W_GENDER;
 
 extern W_OPT acfanaOptions[];
@@ -151,6 +152,6 @@ extern W_OPT spectrumOptions[];
 extern W_OPT zcranaOptions[];
 
 
-DOBJ * computeFilter ( DOBJ * inpDOp, AOPTS * anaopts, DOBJ * outDOp);
-DOBJ * computeF0 (DOBJ * inpDOp, AOPTS * anaOpts, DOBJ * outDOp);
+DOBJ *computeFilter (DOBJ * inpDOp, AOPTS * anaopts, DOBJ * outDOp);
+DOBJ *computeF0 (DOBJ * inpDOp, AOPTS * anaOpts, DOBJ * outDOp);
 #endif // _WRASSP
