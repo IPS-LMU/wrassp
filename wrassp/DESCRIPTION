@@ -32,3 +32,4 @@ Collate:
     'rmsana.R'
     'spectrum.R'
     'zcrana.R'
+    'helperFunctions.R'

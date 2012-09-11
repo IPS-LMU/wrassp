@@ -40,15 +40,20 @@
 	
 	invisible(.External("performAssp", listOfFiles, fname = "f0ana", BeginTime = BeginTime, EndTime = EndTime, WindowShift = WindowShift, Gender = Gender, MaxF = MaxF, MinF = MinF, MinAmp = MinAmp, MaxZCR = MaxZCR, ExplicitExt = ExplicitExt, ToFile = ToFile, ProgressBar = pb, PACKAGE = "wrassp"))
 
+        
         #############################
         # return dataObj if length only one file
         
 	if(!(length(listOfFiles)==1)){
           close(pb)
         }else{
-          resDataObj = getDObj(listOfFiles[1])
+          if(is.null(ExplicitExt)){
+            newExt = '.f0'
+          }else{
+            newExt = ExplicitExt
+          }
+          resDataObj = getDataObjForFileWithNewExt(listOfFiles[1], newExt)
           return(resDataObj)
         }
-
 	
 }

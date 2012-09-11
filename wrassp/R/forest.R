@@ -3,7 +3,7 @@
 ##' and these are the details
 ##' @title forest
 ##' @param listOfFiles vector of file paths to be processed by function
-##' @param optLogFulePath path to option log file 
+##' @param optLogFilePath path to option log file 
 ##' @param BeginTime bla 
 ##' @param EndTime bli
 ##' @param WindowShift blup 
@@ -21,7 +21,7 @@
 ##' @param ExplicitExt set if you wish to overwride the default extension
 ##' @return nrOfProcessedFiles or if only one file to process return dataObj of that file
 ##' @author Raphael Winkelmann
-'forest' <- function(listOfFiles = NULL, optLogFulePath = NULL,BeginTime = 0.0, EndTime = 0.0, WindowShift = 5.0, WindowSize = 20.0, EffectiveLength = TRUE, NominalF1 = 500, Gender = 'm', Estimate = FALSE, Order = 0, IncrOrder = 0, NumFormants = 4, Window = 'BLACKMAN', Preemphasis = -0.8, ToFile = TRUE, ExplicitExt = NULL) {
+'forest' <- function(listOfFiles = NULL, optLogFilePath = NULL,BeginTime = 0.0, EndTime = 0.0, WindowShift = 5.0, WindowSize = 20.0, EffectiveLength = TRUE, NominalF1 = 500, Gender = 'm', Estimate = FALSE, Order = 0, IncrOrder = 0, NumFormants = 4, Window = 'BLACKMAN', Preemphasis = -0.8, ToFile = TRUE, ExplicitExt = NULL) {
 	
 	###########################
 	# a few parameter checks
@@ -56,7 +56,17 @@
 	if(!(length(listOfFiles)==1)){
           close(pb)
         }else{
-          resDataObj = getDObj(listOfFiles[1])
+          if(is.null(ExplicitExt)){
+            newExt = '.fms'
+          }else{
+            newExt = ExplicitExt
+          }
+          resDataObj = getDataObjForFileWithNewExt(listOfFiles[1], newExt)
           return(resDataObj)
         }
-}
+
+
+
+      }
+
+

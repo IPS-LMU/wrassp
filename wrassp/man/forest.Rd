@@ -2,7 +2,7 @@
 \alias{forest}
 \title{forest}
 \usage{
-  forest(listOfFiles = NULL, optLogFulePath = NULL,
+  forest(listOfFiles = NULL, optLogFilePath = NULL,
     BeginTime = 0, EndTime = 0, WindowShift = 5,
     WindowSize = 20, EffectiveLength = TRUE,
     NominalF1 = 500, Gender = "m", Estimate = FALSE,
@@ -14,7 +14,7 @@
   \item{listOfFiles}{vector of file paths to be processed
   by function}
 
-  \item{optLogFulePath}{path to option log file}
+  \item{optLogFilePath}{path to option log file}
 
   \item{BeginTime}{bla}
 

@@ -4,6 +4,7 @@ make it awesome!!!! :-)
 
 ######## LASSE ##########
 
+- rfcana produces files with no file extension!
 - (DONE) progressbar in affilter does not move!
 - f0ana dies a painfull death
 - dftSpectrum -> Out of memory
@@ -24,4 +25,4 @@ make it awesome!!!! :-)
 
 - improve rec search (seglist not wrassp)
 - overwrite check
-- getDObj when listOfFiles has length!
+- (DONE) getDObj when listOfFiles has length!

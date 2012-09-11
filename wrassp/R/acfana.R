@@ -1,4 +1,3 @@
-
 ##' acfana function adapted from assp library
 ##'
 ##' still have to write propper documentation
@@ -82,8 +81,15 @@
 	if(!(length(listOfFiles)==1)){
           close(pb)
         }else{
-          resDataObj = getDObj(listOfFiles[1])
+          if(is.null(ExplicitExt)){
+            newExt = '.acf'
+          }else{
+            newExt = ExplicitExt
+          }
+          resDataObj = getDataObjForFileWithNewExt(listOfFiles[1], newExt)
           return(resDataObj)
         }
 
 }
+
+

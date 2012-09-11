@@ -22,7 +22,7 @@
 ##' @param ExplicitExt set if you wish to overwride the default extension
 ##' @return nrOfProcessedFiles or if only one file to process return dataObj of that file
 ##' @author Raphael Winkelmann
-'dftSpectrum' <- function(listOfFiles = NULL, optLogFilePath = NULL, BeginTime = 0.0, CenterTime = FALSE, EndTime = 0.0, Resolution = 40.0, FftLength = 0, WindowSize = 0.0, WindowShift = 5.0, Window = 'BLACKMAN', Bandwidth = 0.0, EffectiveLength = FALSE, Order = 0, Preemphasis = 0.0, Deemphasize = FALSE, NumCeps = 0, ToFile = TRUE, ExplicitExt = NULL) {
+'dftSpectrum' <- function(listOfFiles = NULL, optLogFilePath = NULL, BeginTime = 0.0, CenterTime = FALSE, EndTime = 0.0, Resolution = 40.0, FftLength = 0, WindowSize = 20.0, WindowShift = 5.0, Window = 'BLACKMAN', Bandwidth = 0.0, EffectiveLength = FALSE, Order = 0, Preemphasis = 0.0, Deemphasize = FALSE, NumCeps = 0, ToFile = TRUE, ExplicitExt = NULL) {
 	
 	SpectrumType = 'DFT'
 	
@@ -54,14 +54,19 @@
 	
         #############################
         # return dataObj if length only one file
-
-        if(!(length(listOfFiles)==1)){
+        
+	if(!(length(listOfFiles)==1)){
           close(pb)
         }else{
-          resDataObj = getDObj(listOfFiles[1])
+          if(is.null(ExplicitExt)){
+            newExt = '.dft'
+          }else{
+            newExt = ExplicitExt
+          }
+          resDataObj = getDataObjForFileWithNewExt(listOfFiles[1], newExt)
           return(resDataObj)
         }
-		
+        
 }
 
 
@@ -124,14 +129,18 @@
 
         #############################
         # return dataObj if length only one file
-                
+        
 	if(!(length(listOfFiles)==1)){
           close(pb)
         }else{
-          resDataObj = getDObj(listOfFiles[1])
+          if(is.null(ExplicitExt)){
+            newExt = '.lps'
+          }else{
+            newExt = ExplicitExt
+          }
+          resDataObj = getDataObjForFileWithNewExt(listOfFiles[1], newExt)
           return(resDataObj)
         }
-		
 }
 
 
@@ -163,7 +172,7 @@
 	
 	stop("DEFAULT VALUES WRONG! NOT IMPLEMENTED YET!")
 	
-	SpectrumType = 'css'
+	SpectrumType = 'CSS'
 	
 	###########################
 	# a few parameter checks
@@ -194,11 +203,16 @@
 
         #############################
         # return dataObj if length only one file
-              
+        
 	if(!(length(listOfFiles)==1)){
           close(pb)
         }else{
-          resDataObj = getDObj(listOfFiles[1])
+          if(is.null(ExplicitExt)){
+            newExt = '.css'
+          }else{
+            newExt = ExplicitExt
+          }
+          resDataObj = getDataObjForFileWithNewExt(listOfFiles[1], newExt)
           return(resDataObj)
         }
 		
@@ -232,7 +246,7 @@
 	
 	stop("DEFAULT VALUES WRONG! NOT IMPLEMENTED YET!")
 	
-	SpectrumType = 'cep'
+	SpectrumType = 'CEP'
 	
 	###########################
 	# a few parameter checks
@@ -261,13 +275,19 @@
 	
 	invisible(.External("performAssp", listOfFiles, fname = "spectrum", BeginTime = BeginTime, CenterTime = CenterTime, EndTime = EndTime, SpectrumType = SpectrumType, Resolution = Resolution, FftLength = FftLength, WindowSize = WindowSize, WindowShift = WindowShift,  Window = Window, Bandwidth = Bandwidth, EffectiveLength = EffectiveLength, Order = Order, Preemphasis = Preemphasis, Deemphasize = Deemphasize, NumCeps = NumCeps, ToFile = ToFile, ExplicitExt = ExplicitExt, ProgressBar = pb, PACKAGE = "wrassp"))
 
+
         #############################
         # return dataObj if length only one file
-                
+        
 	if(!(length(listOfFiles)==1)){
           close(pb)
         }else{
-          resDataObj = getDObj(listOfFiles[1])
+          if(is.null(ExplicitExt)){
+            newExt = '.cep'
+          }else{
+            newExt = ExplicitExt
+          }
+          resDataObj = getDataObjForFileWithNewExt(listOfFiles[1], newExt)
           return(resDataObj)
         }
 }

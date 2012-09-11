@@ -41,13 +41,18 @@
         
         #############################
         # return dataObj if length only one file
-	
+        
 	if(!(length(listOfFiles)==1)){
           close(pb)
         }else{
-          resDataObj = getDObj(listOfFiles[1])
+          if(is.null(ExplicitExt)){
+            newExt = '.zcr'
+          }else{
+            newExt = ExplicitExt
+          }
+          resDataObj = getDataObjForFileWithNewExt(listOfFiles[1], newExt)
           return(resDataObj)
         }
 
-
 }
+
