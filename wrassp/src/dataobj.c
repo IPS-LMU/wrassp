@@ -159,7 +159,7 @@ dobj2AsspDataObj (DOBJ * data)
   PROTECT (rate = allocVector (REALSXP, 1));
   REAL (rate)[0] = data->dataRate;
   setAttrib (ans, install ("samplerate"), rate);
-  if (data->filePath == NULL)
+  if (data->filePath == NULL || strlen(data->filePath) == 0)
     protect (filePath = R_NilValue);
   else
     {
@@ -178,7 +178,7 @@ dobj2AsspDataObj (DOBJ * data)
     }
   setAttrib (ans, install ("origFreq"), origRate);
   PROTECT (startTime = allocVector (REALSXP, 1));
-  REAL (startTime)[0] = data->Start_Time;
+  REAL (startTime)[0] = data->Start_Time + (data->bufStartRec / data->dataRate);
   setAttrib (ans, install ("start_time"), startTime);
 
   PROTECT (startRec = allocVector (INTSXP, 1));
