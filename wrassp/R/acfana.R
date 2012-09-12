@@ -40,7 +40,7 @@
 
 	###########################
 	# perform analysis
-	
+
 	if(length(listOfFiles)==1){
 		pb <- NULL
 	}else{
@@ -50,6 +50,7 @@
 	externalRes = invisible(.External("performAssp", listOfFiles, fname = "acfana", BeginTime = BeginTime, 
 		CenterTime = CenterTime, EndTime = EndTime, WindowShift = WindowShift, WindowSize = WindowSize, EffectiveLength = EffectiveLength, Window = Window, AnalysisOrder = as.integer(AnalysisOrder), EnergyNormalization = EnergyNormalization, LengthNormalization = LengthNormalization, ToFile = ToFile, ExplicitExt = ExplicitExt, ProgressBar = pb, PACKAGE = "wrassp"))
 
+        cat('asddddasdasdasdas\n')
 
         ############################
         # write options to options log file
@@ -82,10 +83,7 @@
 	if(!(length(listOfFiles)==1)){
           close(pb)
         }else{
-          resDataObj = getDObj(externalRes)
-          return(resDataObj)
+          return(externalRes)
         }
 
 }
-
-

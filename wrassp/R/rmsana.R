@@ -77,8 +77,7 @@
 	if(!(length(listOfFiles)==1)){
           close(pb)
         }else{
-          resDataObj = getDObj(externalRes)
-          return(resDataObj)
+          return(externalRes)
         }
 
         
