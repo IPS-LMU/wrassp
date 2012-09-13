@@ -19,7 +19,7 @@
 'f0ana' <- function(listOfFiles = NULL, optLogFilePath = NULL, BeginTime = 0.0, EndTime = 0.0, WindowShift = 5.0, Gender = 'u', MaxF = 600, MinF = 50, MinAmp = 50, MaxZCR = 3000.0, ToFile = TRUE, ExplicitExt = NULL){
 	
 	###########################
-	# a few parameter checks
+	# a few parameter checks and expand paths
 	
 	if (is.null(listOfFiles)) {
 		stop("listOfFiles is NULL! It has to be a string or vector of file paths (min length = 1) pointing to valid file(s) to perform the given analysis function.")
@@ -28,6 +28,9 @@
         if (is.null(optLogFilePath)){
           stop("optLogFilePath is NULL!")
         }
+
+        listOfFiles = path.expand(listOfFiles)
+        optLogFilePath = path.expand(optLogFilePath)
 	
 	###########################
 	# perform analysis
