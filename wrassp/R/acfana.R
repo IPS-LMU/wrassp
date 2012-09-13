@@ -50,8 +50,6 @@
 	externalRes = invisible(.External("performAssp", listOfFiles, fname = "acfana", BeginTime = BeginTime, 
 		CenterTime = CenterTime, EndTime = EndTime, WindowShift = WindowShift, WindowSize = WindowSize, EffectiveLength = EffectiveLength, Window = Window, AnalysisOrder = as.integer(AnalysisOrder), EnergyNormalization = EnergyNormalization, LengthNormalization = LengthNormalization, ToFile = ToFile, ExplicitExt = ExplicitExt, ProgressBar = pb, PACKAGE = "wrassp"))
 
-        cat('asddddasdasdasdas\n')
-
         ############################
         # write options to options log file
 
