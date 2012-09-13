@@ -1,8 +1,9 @@
-\name{getDObj}
-\alias{getDObj}
+\name{getAsspDataObj}
+\alias{getAsspDataObj}
 \title{Get a dobj data object from a signal/parameter File}
 \usage{
-  getDObj(fname, begin = 0, end = 0, samples = FALSE)
+  getAsspDataObj(fname, begin = 0, end = 0,
+    samples = FALSE)
 }
 \arguments{
   \item{fname}{filename of the signal or parameter file}
