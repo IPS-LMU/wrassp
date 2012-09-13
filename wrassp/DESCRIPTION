@@ -33,3 +33,4 @@ Collate:
     'spectrum.R'
     'zcrana.R'
     'helperFunctions.R'
+    'dataobject.R'
