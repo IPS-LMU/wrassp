@@ -21,9 +21,9 @@
   list object containing file data
 }
 \description{
-  getDObj creates an object of class dobj from a signal or
-  parameter file readable by the ASSP Library (WAVE, SSFF,
-  AUP, ...)
+  getAsspDataObj creates an object of class dobj from a
+  signal or parameter file readable by the ASSP Library
+  (WAVE, SSFF, AUP, ...)
 }
 \details{
   and these are the details

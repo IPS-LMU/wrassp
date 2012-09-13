@@ -1,4 +1,4 @@
-##' getDObj creates an object of class dobj from a signal or parameter file readable by the ASSP Library (WAVE, SSFF, AUP, ...)
+##' getAsspDataObj creates an object of class dobj from a signal or parameter file readable by the ASSP Library (WAVE, SSFF, AUP, ...)
 ##'
 ##' and these are the details
 ##' @title Get a dobj data object from a signal/parameter File
