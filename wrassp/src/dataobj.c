@@ -152,8 +152,8 @@ dobj2AsspDataObj (DOBJ * data)
     }
   // set the names
   setAttrib (ans, R_NamesSymbol, tracks);
-  dPtr = R_MakeExternalPtr (data, install ("DOBJ"), install ("something"));
-  PROTECT (dPtr);
+  PROTECT (dPtr = R_MakeExternalPtr (data, install ("DOBJ"), 
+				    install ("something")));
   R_RegisterCFinalizerEx (dPtr, DObjFinalizer, TRUE);
   setAttrib (ans, install ("data pointer"), dPtr);
   PROTECT (rate = allocVector (REALSXP, 1));
@@ -182,10 +182,10 @@ dobj2AsspDataObj (DOBJ * data)
   setAttrib (ans, install ("start_time"), startTime);
 
   PROTECT (startRec = allocVector (INTSXP, 1));
-  INTEGER (startRec)[0] = (int) data->bufStartRec;
+  INTEGER (startRec)[0] = (int) data->bufStartRec + 1;
   setAttrib (ans, install ("start_record"), startRec);
   PROTECT (endRec = allocVector (INTSXP, 1));
-  INTEGER (endRec)[0] = (int) data->bufStartRec + data->bufNumRecs - 1;
+  INTEGER (endRec)[0] = (int) data->bufStartRec + data->bufNumRecs;
   setAttrib (ans, install ("end_record"), endRec);
 
   PROTECT (class = allocVector (STRSXP, 1));

@@ -1,8 +1,9 @@
-\name{getDObj}
-\alias{getDObj}
+\name{getAsspDataObj}
+\alias{getAsspDataObj}
 \title{Get a dobj data object from a signal/parameter File}
 \usage{
-  getDObj(fname, begin = 0, end = 0, samples = FALSE)
+  getAsspDataObj(fname, begin = 0, end = 0,
+    samples = FALSE)
 }
 \arguments{
   \item{fname}{filename of the signal or parameter file}
@@ -20,9 +21,9 @@
   list object containing file data
 }
 \description{
-  getDObj creates an object of class dobj from a signal or
-  parameter file readable by the ASSP Library (WAVE, SSFF,
-  AUP, ...)
+  getAsspDataObj creates an object of class dobj from a
+  signal or parameter file readable by the ASSP Library
+  (WAVE, SSFF, AUP, ...)
 }
 \details{
   and these are the details
