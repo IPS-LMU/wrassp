@@ -147,12 +147,12 @@ dobj2AsspDataObj (DOBJ * data)
     {
       SET_STRING_ELT (tracks, i, mkChar (desc->ident));
       // fill tracks with data
-      Rprintf ("Loading track %s.\n", desc->ident);
+      // Rprintf ("Loading track %s.\n", desc->ident);
       SET_VECTOR_ELT (ans, i, getDObjTrackData (data, desc));
     }
   // set the names
   setAttrib (ans, R_NamesSymbol, tracks);
-  PROTECT (dPtr = R_MakeExternalPtr (data, install ("DOBJ"), 
+  PROTECT (dPtr = R_MakeExternalPtr (data, install ("DOBJ"),
 				    install ("something")));
   R_RegisterCFinalizerEx (dPtr, DObjFinalizer, TRUE);
   setAttrib (ans, install ("data pointer"), dPtr);
