@@ -1,22 +1,35 @@
-##' this is the description
+##' rfcana function adapted from libassp 
 ##'
-##' and these are details
+##' Linear Prediction analysis of <listOfFiles>(s) using the
+##' autocorrelation method and the Durbin recursion.
+##' This program calculates the RMS amplitudes of the input
+##' and residual signal in dB and, per default, reflection
+##' coefficients (see '-t' option).
+##' Analysis results will be written to a file with the
+##' base name of the input file and the parameter type in
+##' lower case as extension (e.g. '.rfc').
+##' Default output is in SSFF binary format (tracks 'rms',
+##' 'gain' and the LP type in lower case).
 ##' @title rfcana
 ##' @param listOfFiles vector of file paths to be processed by function 
 ##' @param optLogFilePath path to option log file
-##' @param BeginTime bla
-##' @param CenterTime bli
-##' @param EndTime blup
-##' @param WindowShift bla
-##' @param WindowSize bli
-##' @param EffectiveLength blup
-##' @param Window bla
-##' @param Order bli
-##' @param Preemphasis blup
-##' @param LpType bla
-##' @param ToFile bli
-##' @param ExplicitExt blup
-##' @return nrOfProcessedFiles or if only one file to process return dataObj of that file
+##' @param BeginTime = <time>: set begin of analysis interval to <time> seconds (default = 0: begin of file)
+##' @param CenterTime set single-frame analysis with the analysis window centred at <time> seconds; overrules BeginTime, EndTime and WindowShift options
+##' @param EndTime = <time>: set end of analysis interval to <time> seconds (default = 0: end of file)
+##' @param WindowShift = <dur>: set analysis window shift to <dur> ms (default: 5.0)
+##' @param WindowSize = <dur>: set analysis window size to <dur> ms; overrules EffectiveLength option
+##' @param EffectiveLength = <dur>: set effective length of analysis window to <dur> ms (default: 20.0)
+##' @param Window = <type>: set analysis window function to <type> (default: BLACKMAN)
+##' @param Order = <num>: set prediction order to <num> (default: sample rate in kHz + 3)
+##' @param Preemphasis = <val>: set pre-emphasis factor to <val> (default: -0.95)
+##' @param LpType = <type>: calculate <type> LP parameters; <type> may be:
+##' "ARF": area function
+##' "LAR": log area ratios
+##' "LPC": linear prediction filter coefficients
+##' "RFC": reflection coefficients (default)
+##' @param ToFile  write results to file (default extension dependent on LpType .arf/.lar/.lpc/.rfc)
+##' @param ExplicitExt set if you wish to overwride the default extension
+##' @return nrOfProcessedFiles or if only one file to process return AsspDataObj of that file
 ##' @author Raphael Winkelmann
 'rfcana' <- function(listOfFiles = NULL, optLogFilePath = NULL, BeginTime = 0.0, CenterTime = FALSE, EndTime = 0.0, WindowShift = 5.0, WindowSize = 20.0, EffectiveLength = TRUE, Window = 'BLACKMAN', Order = 0, Preemphasis = -0.95, LpType = 'RFC', ToFile = TRUE, ExplicitExt = NULL) {
 	

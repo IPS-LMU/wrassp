@@ -13,17 +13,21 @@
 
   \item{optLogFilePath}{path to option log file}
 
-  \item{BeginTime}{start time (in ms) in file to perform
-  function on}
+  \item{BeginTime}{= <time>: set begin of analysis interval
+  to <time> seconds (default: begin of file)}
 
-  \item{CenterTime}{???}
+  \item{CenterTime}{=<time> set single-frame analysis with
+  the analysis window centred at <time> seconds; overrules
+  BeginTime, EndTime and WindowShift options}
 
-  \item{EndTime}{end time (in ms) in file to perform
-  function on}
+  \item{EndTime}{= <time>: set end of analysis interval to
+  <time> seconds (default: end of file)}
 
-  \item{WindowShift}{window shift of function (in ms)}
+  \item{WindowShift}{= <dur>: set analysis window shift to
+  <dur> ms (default: 5.0)}
 
-  \item{WindowSize}{window size of function (in ms)}
+  \item{WindowSize}{= <dur>: set analysis window size to
+  <dur> ms (default: 25.0)}
 
   \item{ToFile}{write results to file (default extension is
   .zcr)}
@@ -33,13 +37,18 @@
 }
 \value{
   nrOfProcessedFiles or if only one file to process return
-  dataObj of that file
+  AsspDataObj of that file
 }
 \description{
-  this is the description
+  zcrana function adapted from libassp
 }
 \details{
-  and these are the details
+  Analysis of the averages of the short-term positive and
+  negative zero-crossing rates of the signal in
+  <listOfFiles>. Analysis results will be written to a file
+  with the base name of the input file and extension
+  '.zcr'. Default output is in SSFF binary format (track
+  'zcr').
 }
 \author{
   Raphael Winkelmann

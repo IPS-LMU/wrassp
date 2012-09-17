@@ -13,12 +13,16 @@
 
   \item{optLogFilePath}{path to option log file}
 
-  \item{ComputeBackwardDifference}{???}
+  \item{ComputeBackwardDifference}{compute backward
+  difference (s'[n] = s[n] - s[n-1]) (default: forward
+  difference s'[n] = s[n+1] - s[n])}
 
-  \item{ComputeCentralDifference}{???}
+  \item{ComputeCentralDifference}{compute
+  central/interpolated/3-point difference}
 
-  \item{Channel}{channel of audio file to compute diff
-  (default = 1)}
+  \item{Channel}{= <num>: for multi-channel input files:
+  extract and differentiate channel <num> (1 <= <num> <= 8
+  default: channel 1)}
 
   \item{ToFile}{write results to file (default extension is
   .d+(extensionsOfAudioFile))}
@@ -28,13 +32,23 @@
 }
 \value{
   nrOfProcessedFiles or if only one file to process return
-  dataObj of that file
+  AsspDataObj of that file
 }
 \description{
-  afdiff adapted from assp
+  afdiff function adapted from libassp
 }
 \details{
-  still have to write propper manual entry
+  Computes the first difference of the signal in the audio-
+  formatted file(s) <listOfFiles>. The differentiated
+  signal will be written to a file with the base name of
+  the input file and an extension consisting of '.d',
+  followed by the extension of the input file. The format
+  of the output file will be the same as that of the input
+  file. Differentiation can improve results an F0 analysis
+  of e.g. EGG signals because it removes a DC offset,
+  attenuates very low frequency components - and in the
+  case of central differentiation also very high ones - and
+  enhances the moment of glottal closure.
 }
 \author{
   Raphael Winkelmann

@@ -9,28 +9,35 @@
     Window = "HAMMING", ToFile = TRUE, ExplicitExt = NULL)
 }
 \arguments{
-  \item{listOfFiles}{nrOfProcessedFiles or if only one file
-  to process return dataObj of that file}
+  \item{listOfFiles}{vector of file paths to be processed
+  by function}
 
   \item{optLogFilePath}{path to option log file}
 
-  \item{BeginTime}{start time (in ms) in file to perform
-  function on}
+  \item{BeginTime}{= <time>: set begin of analysis interval
+  to <time> seconds (default = 0: begin of file)}
 
-  \item{CenterTime}{???}
+  \item{CenterTime}{= <time>: set single-frame analysis
+  with the analysis window centred at <time> seconds;
+  overrules BeginTime, EndTime and WindowShift options}
 
-  \item{EndTime}{end time (in ms) in file to perform
-  function on}
+  \item{EndTime}{= <time>: set end of analysis interval to
+  <time> seconds (default: end of file)}
 
-  \item{WindowShift}{window shift of function (in ms)}
+  \item{WindowShift}{= <dur>: set analysis window shift to
+  <dur> ms (default: 5.0)}
 
-  \item{WindowSize}{window size of function (in ms)}
+  \item{WindowSize}{= <dur>: set analysis window size to
+  <dur> ms; overrules EffectiveLength option}
 
-  \item{EffectiveLength}{???}
+  \item{EffectiveLength}{= <dur>: set effective length of
+  analysis window to <dur> ms (default: 20.0)}
 
-  \item{Linear}{???}
+  \item{Linear}{calculate linear RMS values (default:
+  values in dB)}
 
-  \item{Window}{???}
+  \item{Window}{= <type>: set analysis window function to
+  <type> (default: HAMMING)}
 
   \item{ToFile}{write results to file (default extension is
   .rms)}
@@ -40,13 +47,19 @@
 }
 \value{
   nrOfProcessedFiles or if only one file to process return
-  dataObj of that file
+  AsspDataObj of that file
 }
 \description{
-  this is the description
+  rmsana function adapted from libassp
 }
 \details{
-  and these are the details
+  Analysis of short-term Root Mean Square amplitude of the
+  signal in <listOfFiles>. Per default, the RMS values are
+  expressed in decibel (dB) so that they correspond to the
+  short-term power of the signal. Analysis results will be
+  written to a file with the base name of the input file
+  and extension '.rms'. Default output is in SSFF binary
+  format (track 'rms').
 }
 \author{
   Raphael Winkelmann

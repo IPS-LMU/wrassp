@@ -15,33 +15,42 @@
 
   \item{optLogFilePath}{path to option log file}
 
-  \item{BeginTime}{start time (in ms) in file to perform
-  function on}
+  \item{BeginTime}{= <time>: set begin of analysis interval
+  to <time> seconds (default = 0: begin of file)}
 
   \item{CenterTime}{???}
 
-  \item{EndTime}{end time (in ms) in file to perform
-  function on}
+  \item{EndTime}{= <time>: set end of analysis interval to
+  <time> seconds (default = 0: end of file)}
 
-  \item{WindowShift}{window shift of function (in ms)}
+  \item{WindowShift}{= <dur>: set analysis window shift to
+  <dur> ms (default: 5.0)}
 
   \item{Gender}{???}
 
-  \item{MaxF}{???}
+  \item{MaxF}{= <freq>: set maximum pitch value to <freq>
+  Hz (default: 500.0)}
 
-  \item{MinF}{???}
+  \item{MinF}{= <freq>: set minimum pitch value to <freq>
+  Hz (default: 50.0 minimum: 25.0)}
 
-  \item{MinAmp}{???}
+  \item{MinAmp}{= <amp>: minimum signal amplitude (default:
+  50)}
 
-  \item{MinAC1}{???}
+  \item{MinAC1}{= <freq>: minimum 1st correlation
+  coefficient (default: 0.250)}
 
-  \item{MinRMS}{???}
+  \item{MinRMS}{= <num>: minimum RMS amplitude in dB
+  (default: 18.0)}
 
-  \item{MaxZCR}{???}
+  \item{MaxZCR}{= <freq>: maximum zero crossing rate in Hz
+  (default: 3000)}
 
-  \item{MinProb}{???}
+  \item{MinProb}{= <num>: minimum quality value of F0 fit
+  (default: 0.520)}
 
-  \item{PlainSpectrum}{???}
+  \item{PlainSpectrum}{use plain rather than masked power
+  spectrum}
 
   \item{ToFile}{write results to file (default extension is
   .pit)}
@@ -51,13 +60,17 @@
 }
 \value{
   nrOfProcessedFiles or if only one file to process return
-  dataObj of that file
+  AsspDataObj of that file
 }
 \description{
-  this is the description
+  mhspitch function adapted from libassp
 }
 \details{
-  and these details
+  Pitch analysis of the speech signal in <listOfFile> using
+  Michel's/Modified Harmonic Sieve algorithm. Analysis
+  results will be written to a file with the base name of
+  the input file and extension '.pit'. Default output is in
+  SSFF binary format (track 'pitch').
 }
 \author{
   Raphael Winkelmann

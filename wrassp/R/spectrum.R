@@ -1,30 +1,50 @@
-##' descritopns
+##' spectrum function adapted from libassp
 ##'
-##' details
-##' @title dftspectrum
+##' Short-term spectral analysis of the signal in <listOfFiles>
+##' using the Fast Fourier Transform. The default is to
+##' calculate an unsmoothed narrow-band spectrum with the
+##' size of the analysis window equal to the length of the
+##' FFT. The output from the FFT will be converted to a
+##' power spectrum in dB from 0 Hz to half the sampling
+##' rate (Nyquist frequency).
+##' Alternatively, the program can calculate a smoothed
+##' spectrum or cepstral coefficients. In the latter case
+##' the number of coefficients per output record will also
+##' equal the FFT length / 2 + 1 (i.e. be non-mirrored).
+##' Analysis results will be written to a file with the
+##' base name of the input file and the spectrum type in
+##' lower case as extension (e.g. '.dft').
+##' Default output is in single precision floating point
+##' binary in SSFF format with the spectrum type in lower
+##' case as keyword.
+##' @title spectrum
 ##' @param listOfFiles vector of file paths to be processed by function 
 ##' @param optLogFilePath path to option log file
-##' @param BeginTime bla
-##' @param CenterTime bli
-##' @param EndTime blup
-##' @param Resolution bla
-##' @param FftLength bli
-##' @param WindowSize blup
-##' @param WindowShift bla
-##' @param Window bli
-##' @param Bandwidth blup
-##' @param EffectiveLength bla
-##' @param Order bli
-##' @param Preemphasis blup
-##' @param Deemphasize bla
-##' @param NumCeps bli
-##' @param ToFile write results to file (default extension is .acf)
+##' @param BeginTime = <time>: set begin of analysis interval to <time> seconds (default: begin of data)
+##' @param CenterTime ???
+##' @param EndTime = <time>: set end of analysis interval to <time> seconds (default: end of data)
+##' @param Resolution = <freq>: set FFT length to the smallest value which results in a frequency resolution of <freq> Hz or better (default: 40.0)
+##' @param FftLength = <num>: set FFT length to <num> points (overrules default and 'Resolution' option)
+##' @param WindowSize = <dur>: set analysis window size to <dur> ms (overrules 'Bandwidth' option and restriction by FFT length) additional option for cepstrally smoothed spectrum:
+##' @param WindowShift = <dur>: set analysis window shift to <dur> ms (default: 5.0)
+##' @param Window = <type>: set analysis window function to <type> (default: BLACKMAN)
+##' @param Bandwidth = <freq>: set the effective analysis bandwidth to <freq> Hz (default: 0, yielding the smallest possible value given the length of the FFT)
+##' @param SpectrumType =<type>  set analysis type; <type> may be:
+##' DFT : unsmoothed spectrum (default)
+##' LPS : linear prediction smoothed spectrum
+##' CSS : cepstrally smoothed spectrum
+##' CEP : cepstral coefficients
+##' @param EffectiveLength ???
+##' @param Order = <num>: set prediction order to <num> (default: sampling rate in kHz + 3)
+##' @param Preemphasis = <val>: set pre-emphasis factor to <val> (default: -0.95)
+##' @param Deemphasize ???
+##' @param NumCeps = <num>: set number of cepstral coeffcients used to <num> (default: sampling rate in kHz + 1; minimum: 2)
+##' @param ToFile write results to file (default extension depends on )
 ##' @param ExplicitExt set if you wish to overwride the default extension
-##' @return nrOfProcessedFiles or if only one file to process return dataObj of that file
+##' @return nrOfProcessedFiles or if only one file to process return AsspDataObj of that file
 ##' @author Raphael Winkelmann
-'dftSpectrum' <- function(listOfFiles = NULL, optLogFilePath = NULL, BeginTime = 0.0, CenterTime = FALSE, EndTime = 0.0, Resolution = 40.0, FftLength = 0, WindowSize = 20.0, WindowShift = 5.0, Window = 'BLACKMAN', Bandwidth = 0.0, EffectiveLength = FALSE, Order = 0, Preemphasis = 0.0, Deemphasize = FALSE, NumCeps = 0, ToFile = TRUE, ExplicitExt = NULL) {
+'spectrum' <- function(listOfFiles = NULL, optLogFilePath = NULL, BeginTime = 0.0, CenterTime = FALSE, EndTime = 0.0, Resolution = 40.0, FftLength = 0, WindowSize = 20.0, WindowShift = 5.0, Window = 'BLACKMAN', Bandwidth = 0.0, SpectrumType = 'DFT',EffectiveLength = FALSE, Order = 0, Preemphasis = 0.0, Deemphasize = FALSE, NumCeps = 0, ToFile = TRUE, ExplicitExt = NULL) {
 	
-	SpectrumType = 'DFT'
 	
 	###########################
 	# a few parameter checks and expand paths
@@ -98,322 +118,4 @@
           return(externalRes)
         }
         
-}
-
-
-##' description
-##'
-##' details
-##' @title lpsSpectrum
-##' @param listOfFiles vector of file paths to be processed by function
-##' @param optLogFilePath path to option log file
-##' @param BeginTime bli
-##' @param CenterTime blup
-##' @param EndTime bla
-##' @param Resolution bli
-##' @param FftLength blup
-##' @param WindowSize bla
-##' @param WindowShift bli
-##' @param Window blup
-##' @param Bandwidth bla
-##' @param EffectiveLength bli
-##' @param Order blup
-##' @param Preemphasis bla 
-##' @param Deemphasize bli
-##' @param NumCeps blup
-##' @param ToFile write results to file (default extension is .lps)
-##' @param ExplicitExt set if you wish to overwride the default extension
-##' @return nrOfProcessedFiles or if only one file to process return dataObj of that file
-##' @author Raphael Winkelmann
-'lpsSpectrum' <- function(listOfFiles = NULL, optLogFilePath = NULL, BeginTime = 0.0, CenterTime = FALSE, EndTime = 0.0, Resolution = 40.0, FftLength = 0, WindowSize = 20.0, WindowShift = 5.0, Window = 'BLACKMAN', Bandwidth = 0.0, EffectiveLength = FALSE, Order = 0, Preemphasis = -0.95, Deemphasize = FALSE, NumCeps = 0, ToFile = TRUE, ExplicitExt = NULL) {
-	
-	stop("DEFAULT VALUES WRONG! NOT IMPLEMENTED YET!")
-	
-	SpectrumType = 'LPS'
-	
-	###########################
-	# a few parameter checks and expand paths
-	
-	if (is.null(listOfFiles)) {
-		stop("listOfFiles is NULL! It has to be a string or vector of file paths (min length = 1) pointing to valid file(s) to perform the given analysis function.")
-	}
-
-        if (is.null(optLogFilePath)){
-          stop("optLogFilePath is NULL!")
-        }
-        
-	if(!isAsspWindowType(Window)){
-		stop("WindowFunction of type '", Window,"' is not supported!")
-	}
-
-        listOfFiles = path.expand(listOfFiles)
-        optLogFilePath = path.expand(optLogFilePath)
-	
-	###########################
-	# perform analysis
-
-	if(length(listOfFiles)==1){
-          pb <- NULL
-	}else{
-          cat('\n  INFO: applying lpsSpectrum to', length(listOfFiles), 'files\n')
-          pb <- txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
-	}
-	
-	externalRes = invisible(.External("performAssp", listOfFiles, fname = "spectrum", BeginTime = BeginTime, CenterTime = CenterTime, EndTime = EndTime, SpectrumType = SpectrumType, Resolution = Resolution, FftLength = as.integer(FftLength), WindowSize = WindowSize, WindowShift = WindowShift,  Window = Window, Bandwidth = Bandwidth, EffectiveLength = EffectiveLength, Order = as.integer(Order), Preemphasis = Preemphasis, Deemphasize = Deemphasize, NumCeps = as.integer(NumCeps), ToFile = ToFile, ExplicitExt = ExplicitExt, ProgressBar = pb, PACKAGE = "wrassp"))
-
-
-        ############################
-        # write options to options log file
-
-        cat("\n##################################\n", file = optLogFilePath, append = T)
-        cat("##################################\n", file = optLogFilePath, append = T)
-        cat("##### lpsSpectrum performed ######\n", file = optLogFilePath, append = T)
-
-        cat("Timestamp: ", paste(Sys.time()), '\n', file = optLogFilePath, append = T)
-
-        cat("BeginTime: ", BeginTime, '\n', file = optLogFilePath, append = T)
-        cat("CenterTime: ", CenterTime, '\n', file = optLogFilePath, append = T)
-        cat("EndTime: ", EndTime, '\n', file = optLogFilePath, append = T)
-        cat("SpectrumType: ", SpectrumType, '\n', file = optLogFilePath, append = T)
-        cat("Resolution: ", Resolution, '\n', file = optLogFilePath, append = T)
-        cat("FftLength: ", FftLength, '\n', file = optLogFilePath, append = T)
-        cat("WindowSize: ", WindowSize, '\n', file = optLogFilePath, append = T)
-        cat("WindowShift: ", WindowShift, '\n', file = optLogFilePath, append = T)
-        cat("Window: ", Window, '\n', file = optLogFilePath, append = T)
-        cat("Bandwidth: ", Bandwidth, '\n', file = optLogFilePath, append = T)
-        cat("EffectiveLength: ", EffectiveLength, '\n', file = optLogFilePath, append = T)
-        cat("Order: ", Order, '\n', file = optLogFilePath, append = T)
-        cat("Preemphasis: ", Preemphasis, '\n', file = optLogFilePath, append = T)
-        cat("Deemphasize: ", Deemphasize, '\n', file = optLogFilePath, append = T)
-        cat("NumCeps: ", NumCeps,  '\n', file = optLogFilePath, append = T)
-
-
-        
-        cat("ToFile: ", ToFile, "\n", file = optLogFilePath, append = T)
-        cat("ExplicitExt: ", ExplicitExt, "\n", file = optLogFilePath, append = T)
-
-        cat(" => on files:\n\t", file = optLogFilePath, append = T)
-        cat(paste(listOfFiles, collapse="\n\t"), file = optLogFilePath, append = T)
-        
-        
-        
-        #############################
-        # return dataObj if length only one file
-        
-	if(!(length(listOfFiles)==1)){
-          close(pb)
-        }else{
-          return(externalRes)
-        }
-}
-
-
-##' description
-##'
-##' details
-##' @title cssSpectrum 
-##' @param listOfFiles vector of file paths to be processed by function 
-##' @param optLogFilePath path to option log file
-##' @param BeginTime bla
-##' @param CenterTime bli
-##' @param EndTime blup
-##' @param Resolution bla
-##' @param FftLength bli
-##' @param WindowSize blup
-##' @param WindowShift bla
-##' @param Window bli
-##' @param Bandwidth blup
-##' @param EffectiveLength bla
-##' @param Order bli
-##' @param Preemphasis blup
-##' @param Deemphasize bla
-##' @param NumCeps bli
-##' @param ToFile write results to file (default extension is .css)
-##' @param ExplicitExt set if you wish to overwride the default extension
-##' @return nrOfProcessedFiles or if only one file to process return dataObj of that file
-##' @author Raphael Winkelmann
-'cssSpectrum' <- function(listOfFiles = NULL, optLogFilePath = NULL, BeginTime = 0.0, CenterTime = FALSE, EndTime = 0.0, Resolution = 40.0, FftLength = 0, WindowSize = 0.0, WindowShift = 5.0, Window = 'BLACKMAN', Bandwidth = 0.0, EffectiveLength = FALSE, Order = 0, Preemphasis = 0.0, Deemphasize = FALSE, NumCeps = 0, ToFile = TRUE, ExplicitExt = NULL) {
-	
-	stop("DEFAULT VALUES WRONG! NOT IMPLEMENTED YET!")
-	
-	SpectrumType = 'CSS'
-	
-	###########################
-	# a few parameter checks and expand paths
-	
-	if (is.null(listOfFiles)) {
-		stop("listOfFiles is NULL! It has to be a string or vector of file paths (min length = 1) pointing to valid file(s) to perform the given analysis function.")
-	}
-
-        if (is.null(optLogFilePath)){
-          stop("optLogFilePath is NULL!")
-        }
-	
-	if(!isAsspWindowType(Window)){
-          stop("WindowFunction of type '", Window,"' is not supported!")
-	}
-
-        listOfFiles = path.expand(listOfFiles)
-        optLogFilePath = path.expand(optLogFilePath)
-	
-	###########################
-	# perform analysis
-
-	if(length(listOfFiles)==1){
-          pb <- NULL
-	}else{
-          cat('\n  INFO: applying cssSpectrum to', length(listOfFiles), 'files\n')
-          pb <- txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
-	}	
-	
-	
-	externalRes = invisible(.External("performAssp", listOfFiles, fname = "spectrum", BeginTime = BeginTime, CenterTime = CenterTime, EndTime = EndTime, SpectrumType = SpectrumType, Resolution = Resolution, FftLength = as.integer(FftLength), WindowSize = WindowSize, WindowShift = WindowShift,  Window = Window, Bandwidth = Bandwidth, EffectiveLength = EffectiveLength, Order = as.integer(Order), Preemphasis = Preemphasis, Deemphasize = Deemphasize, NumCeps = as.integer(NumCeps), ToFile = ToFile, ExplicitExt = ExplicitExt, ProgressBar = pb, PACKAGE = "wrassp"))
-
-        ############################
-        # write options to options log file
-
-        cat("\n##################################\n", file = optLogFilePath, append = T)
-        cat("##################################\n", file = optLogFilePath, append = T)
-        cat("###### cssSpectrum performed #####\n", file = optLogFilePath, append = T)
-        cat("Timestamp: ", paste(Sys.time()), '\n', file = optLogFilePath, append = T)
-        cat("BeginTime: ", BeginTime, '\n', file = optLogFilePath, append = T)
-        cat("CenterTime: ", CenterTime, '\n', file = optLogFilePath, append = T)
-        cat("EndTime: ", EndTime, '\n', file = optLogFilePath, append = T)
-        cat("SpectrumType: ", SpectrumType, '\n', file = optLogFilePath, append = T)
-        cat("Resolution: ", Resolution, '\n', file = optLogFilePath, append = T)
-        cat("FftLength: ", FftLength, '\n', file = optLogFilePath, append = T)
-        cat("WindowSize: ", WindowSize, '\n', file = optLogFilePath, append = T)
-        cat("WindowShift: ", WindowShift, '\n', file = optLogFilePath, append = T)
-        cat("Window: ", Window, '\n', file = optLogFilePath, append = T)
-        cat("Bandwidth: ", Bandwidth, '\n', file = optLogFilePath, append = T)
-        cat("EffectiveLength: ", EffectiveLength, '\n', file = optLogFilePath, append = T)
-        cat("Order: ", Order, '\n', file = optLogFilePath, append = T)
-        cat("Preemphasis: ", Preemphasis, '\n', file = optLogFilePath, append = T)
-        cat("Deemphasize: ", Deemphasize, '\n', file = optLogFilePath, append = T)
-        cat("NumCeps: ", NumCeps, '\n', file = optLogFilePath, append = T)
-
-
-        
-        cat("ToFile: ", ToFile, "\n", file = optLogFilePath, append = T)
-        cat("ExplicitExt: ", ExplicitExt, "\n", file = optLogFilePath, append = T)
-
-        cat(" => on files:\n\t", file = optLogFilePath, append = T)
-        cat(paste(listOfFiles, collapse="\n\t"), file = optLogFilePath, append = T)
-        
-        
-        #############################
-        # return dataObj if length only one file
-        
-	if(!(length(listOfFiles)==1)){
-          close(pb)
-        }else{
-          return(externalRes)
-        }
-		
-}
-
-##' description
-##'
-##' details
-##' @title cep 
-##' @param listOfFiles vector of file paths to be processed by function 
-##' @param optLogFilePath path to option log file
-##' @param BeginTime start time (in ms) in file to perform function on 
-##' @param CenterTime ???
-##' @param EndTime end time (in ms) in file to perform function on
-##' @param Resolution ???
-##' @param FftLength ???
-##' @param WindowSize window size of function (in ms)
-##' @param WindowShift window shift of function (in ms) 
-##' @param Window type of window (see AsspWindowTypes() function)
-##' @param Bandwidth ???
-##' @param EffectiveLength ??? 
-##' @param Order ???
-##' @param Preemphasis ??? 
-##' @param Deemphasize ??? 
-##' @param NumCeps ???
-##' @param ToFile write results to file (default extension is .cep)
-##' @param ExplicitExt set if you wish to overwride the default extension
-##' @return nrOfProcessedFiles or if only one file to process return dataObj of that file
-##' @author Raphael Winkelmann
-'cepSpectrum' <- function(listOfFiles = NULL, optLogFilePath = NULL, BeginTime = 0.0, CenterTime = FALSE, EndTime = 0.0, Resolution = 40.0, FftLength = 0, WindowSize = 0.0, WindowShift = 5.0, Window = 'BLACKMAN', Bandwidth = 0.0, EffectiveLength = FALSE, Order = 0, Preemphasis = 0.0, Deemphasize = FALSE, NumCeps = 0, ToFile = TRUE, ExplicitExt = NULL) {
-	
-	stop("DEFAULT VALUES WRONG! NOT IMPLEMENTED YET!")
-	
-	SpectrumType = 'CEP'
-	
-	###########################
-	# a few parameter checks and expand paths
-	
-	if (is.null(listOfFiles)) {
-		stop("listOfFiles is NULL! It has to be a string or vector of file paths (min length = 1) pointing to valid file(s) to perform the given analysis function.")
-	}
-        if (is.null(optLogFilePath)){
-          stop("optLogFilePath is NULL!")
-        }
-	
-	if(!isAsspWindowType(Window)){
-		stop("WindowFunction of type '", Window,"' is not supported!")
-	}
-
-        listOfFiles = path.expand(listOfFiles)
-        optLogFilePath = path.expand(optLogFilePath)
-	
-	###########################
-	# perform analysis
-
-	if(length(listOfFiles)==1){
-          pb <- NULL
-	}else{
-          cat('\n  INFO: applying cepSpectrum to', length(listOfFiles), 'files\n')
-          pb <- txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
-	}	
-
-	
-	
-	externalRes = invisible(.External("performAssp", listOfFiles, fname = "spectrum", BeginTime = BeginTime, CenterTime = CenterTime, EndTime = EndTime, SpectrumType = SpectrumType, Resolution = Resolution, FftLength = FftLength, WindowSize = WindowSize, WindowShift = WindowShift,  Window = Window, Bandwidth = Bandwidth, EffectiveLength = EffectiveLength, Order = Order, Preemphasis = Preemphasis, Deemphasize = Deemphasize, NumCeps = NumCeps, ToFile = ToFile, ExplicitExt = ExplicitExt, ProgressBar = pb, PACKAGE = "wrassp"))
-
-
-        ############################
-        # write options to options log file
-
-        cat("\n##################################\n", file = optLogFilePath, append = T)
-        cat("##################################\n", file = optLogFilePath, append = T)
-        cat("##### cepSpectrum performed ######\n", file = optLogFilePath, append = T)
-
-        cat("Timestamp: ", paste(Sys.time()), '\n', file = optLogFilePath, append = T)
-        cat("BeginTime: ", BeginTime, '\n', file = optLogFilePath, append = T)
-        cat("CenterTime: ", CenterTime, '\n', file = optLogFilePath, append = T)
-        cat("EndTime: ", EndTime, '\n', file = optLogFilePath, append = T)
-        cat("SpectrumType: ", SpectrumType, '\n', file = optLogFilePath, append = T)
-        cat("Resolution: ", Resolution, '\n', file = optLogFilePath, append = T)
-        cat("FftLength: ", FftLength, '\n', file = optLogFilePath, append = T)
-        cat("WindowSize: ", WindowSize, '\n', file = optLogFilePath, append = T)
-        cat("WindowShift: ", WindowShift, '\n', file = optLogFilePath, append = T)
-        cat("Window: ", Window, '\n', file = optLogFilePath, append = T)
-        cat("Bandwidth: ", Bandwidth, '\n', file = optLogFilePath, append = T)
-        cat("EffectiveLength: ", EffectiveLength, '\n', file = optLogFilePath, append = T)
-        cat("Order: ", Order, '\n', file = optLogFilePath, append = T)
-        cat("Preemphasis: ", Preemphasis, '\n', file = optLogFilePath, append = T)
-        cat("Deemphasize: ", Deemphasize, '\n', file = optLogFilePath, append = T)
-        cat("NumCeps: ", NumCeps, '\n', file = optLogFilePath, append = T)
-
-
-        cat("ToFile: ", ToFile, "\n", file = optLogFilePath, append = T)
-        cat("ExplicitExt: ", ExplicitExt, "\n", file = optLogFilePath, append = T)
-
-        cat(" => on files:\n\t", file = optLogFilePath, append = T)
-        cat(paste(listOfFiles, collapse="\n\t"), file = optLogFilePath, append = T)
-        
-
-        
-
-        #############################
-        # return dataObj if length only one file
-        
-	if(!(length(listOfFiles)==1)){
-          close(pb)
-        }else{
-          return(externalRes)
-        }
 }

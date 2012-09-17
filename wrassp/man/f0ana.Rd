@@ -13,21 +13,27 @@
 
   \item{optLogFilePath}{path to option log file}
 
-  \item{BeginTime}{bla}
+  \item{BeginTime}{= <time>: set begin of analysis interval
+  to <time> seconds (default = 0: begin of data)}
 
-  \item{EndTime}{bli}
+  \item{EndTime}{set end of analysis interval to <time>
+  seconds (default = 0: end of data)}
 
-  \item{WindowShift}{blup}
+  \item{WindowShift}{= <dur>: set frame shift to <dur> ms
+  (default: 5.0)}
 
-  \item{Gender}{bla}
+  \item{Gender}{???}
 
-  \item{MaxF}{bli}
+  \item{MaxF}{= <freq>: set maximum F0 value to <freq> Hz
+  (default: 500.0)}
 
-  \item{MinF}{blup}
+  \item{MinF}{= <freq>: set minimum F0 value to <freq> Hz
+  (default: 50.0)}
 
-  \item{MinAmp}{bla}
+  \item{MinAmp}{= <amp>: set amplitude threshold for voiced
+  samples to <amp> (default: 100)}
 
-  \item{MaxZCR}{bli}
+  \item{MaxZCR}{???}
 
   \item{ToFile}{write results to file (default extension is
   .f0)}
@@ -37,13 +43,22 @@
 }
 \value{
   nrOfProcessedFiles or if only one file to process return
-  dataObj of that file
+  AsspDataObj of that file
 }
 \description{
-  this is the description
+  f0ana function adapted from libassp
 }
 \details{
-  and these are the details
+  F0 analysis of the signal in <listOfFile> using the
+  Schaefer- Vincent periodicity detector (Phonetica 40,
+  1983). Analysis results will be written to a file with
+  the base name of the input file and extension '.f0'.
+  Default output is in single precision floating point
+  binary in SSFF format (keyword 'F0'). Optionally,
+  location and type of the signal extrema on which the F0
+  data are based, may be stored in a label file. The name
+  of this file will consist of the base name of the F0 file
+  and the extension '.prd'.
 }
 \author{
   Raphael Winkelmann

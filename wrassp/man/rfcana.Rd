@@ -15,39 +15,62 @@
 
   \item{optLogFilePath}{path to option log file}
 
-  \item{BeginTime}{bla}
+  \item{BeginTime}{= <time>: set begin of analysis interval
+  to <time> seconds (default = 0: begin of file)}
 
-  \item{CenterTime}{bli}
+  \item{CenterTime}{set single-frame analysis with the
+  analysis window centred at <time> seconds; overrules
+  BeginTime, EndTime and WindowShift options}
 
-  \item{EndTime}{blup}
+  \item{EndTime}{= <time>: set end of analysis interval to
+  <time> seconds (default = 0: end of file)}
 
-  \item{WindowShift}{bla}
+  \item{WindowShift}{= <dur>: set analysis window shift to
+  <dur> ms (default: 5.0)}
 
-  \item{WindowSize}{bli}
+  \item{WindowSize}{= <dur>: set analysis window size to
+  <dur> ms; overrules EffectiveLength option}
 
-  \item{EffectiveLength}{blup}
+  \item{EffectiveLength}{= <dur>: set effective length of
+  analysis window to <dur> ms (default: 20.0)}
 
-  \item{Window}{bla}
+  \item{Window}{= <type>: set analysis window function to
+  <type> (default: BLACKMAN)}
 
-  \item{Order}{bli}
+  \item{Order}{= <num>: set prediction order to <num>
+  (default: sample rate in kHz + 3)}
 
-  \item{Preemphasis}{blup}
+  \item{Preemphasis}{= <val>: set pre-emphasis factor to
+  <val> (default: -0.95)}
 
-  \item{LpType}{bla}
+  \item{LpType}{= <type>: calculate <type> LP parameters;
+  <type> may be: "ARF": area function "LAR": log area
+  ratios "LPC": linear prediction filter coefficients
+  "RFC": reflection coefficients (default)}
 
-  \item{ToFile}{bli}
+  \item{ToFile}{write results to file (default extension
+  dependent on LpType .arf/.lar/.lpc/.rfc)}
 
-  \item{ExplicitExt}{blup}
+  \item{ExplicitExt}{set if you wish to overwride the
+  default extension}
 }
 \value{
   nrOfProcessedFiles or if only one file to process return
-  dataObj of that file
+  AsspDataObj of that file
 }
 \description{
-  this is the description
+  rfcana function adapted from libassp
 }
 \details{
-  and these are details
+  Linear Prediction analysis of <listOfFiles>(s) using the
+  autocorrelation method and the Durbin recursion. This
+  program calculates the RMS amplitudes of the input and
+  residual signal in dB and, per default, reflection
+  coefficients (see '-t' option). Analysis results will be
+  written to a file with the base name of the input file
+  and the parameter type in lower case as extension (e.g.
+  '.rfc'). Default output is in SSFF binary format (tracks
+  'rms', 'gain' and the LP type in lower case).
 }
 \author{
   Raphael Winkelmann

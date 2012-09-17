@@ -1,20 +1,26 @@
-##' this is the description
+##' rmsana function adapted from libassp
 ##'
-##' and these are the details
+##' Analysis of short-term Root Mean Square amplitude of
+##' the signal in <listOfFiles>. Per default, the RMS values are
+##' expressed in decibel (dB) so that they correspond to
+##' the short-term power of the signal.
+##' Analysis results will be written to a file with the
+##' base name of the input file and extension '.rms'.
+##' Default output is in SSFF binary format (track 'rms').
 ##' @title rmsana
-##' @param listOfFiles nrOfProcessedFiles or if only one file to process return dataObj of that file 
+##' @param listOfFiles vector of file paths to be processed by function
 ##' @param optLogFilePath path to option log file
-##' @param BeginTime start time (in ms) in file to perform function on 
-##' @param CenterTime ???
-##' @param EndTime end time (in ms) in file to perform function on
-##' @param WindowShift window shift of function (in ms) 
-##' @param WindowSize window size of function (in ms)
-##' @param EffectiveLength ???
-##' @param Linear ???
-##' @param Window ???
+##' @param BeginTime = <time>:  set begin of analysis interval to <time> seconds (default = 0: begin of file)
+##' @param CenterTime = <time>: set single-frame analysis with the analysis window centred at <time> seconds; overrules BeginTime, EndTime and WindowShift options
+##' @param EndTime = <time>: set end of analysis interval to <time> seconds (default: end of file)
+##' @param WindowShift = <dur>: set analysis window shift to <dur> ms (default: 5.0)
+##' @param WindowSize = <dur>: set analysis window size to <dur> ms; overrules EffectiveLength option
+##' @param EffectiveLength = <dur>: set effective length of analysis window to <dur> ms (default: 20.0)
+##' @param Linear calculate linear RMS values (default: values in dB)
+##' @param Window = <type>: set analysis window function to <type> (default: HAMMING)
 ##' @param ToFile write results to file (default extension is .rms)
 ##' @param ExplicitExt set if you wish to overwride the default extension
-##' @return  nrOfProcessedFiles or if only one file to process return dataObj of that file 
+##' @return  nrOfProcessedFiles or if only one file to process return AsspDataObj of that file 
 ##' @author Raphael Winkelmann
 'rmsana' <- function(listOfFiles = NULL, optLogFilePath = NULL,BeginTime = 0.0, CenterTime = FALSE, EndTime = 0.0, WindowShift = 5.0, WindowSize = 20.0, EffectiveLength = TRUE, Linear = FALSE, Window = 'HAMMING', ToFile = TRUE, ExplicitExt = NULL) {
 

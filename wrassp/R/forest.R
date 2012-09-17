@@ -1,25 +1,39 @@
-##' this is the description
+##' forest function adapted from libassp
 ##'
-##' and these are the details
+##' Formant estimation of the signal(s) in <listOfFiles>.
+##' Raw resonance frequency and bandwidth values are
+##' obtained by root-solving of the Linear Prediction
+##' polynomial from the autocorrelation method and the
+##' Split-Levinson algorithm (SLA). Resonances are then
+##' classified as formants using the so-called Pisarenko
+##' frequencies (by-product of the SLA) and a formant
+##' frequeny range table derived from the nominal F1
+##' frequency. The latter may have to be increased by
+##' about 10% for female voices (see NominalF1 option).
+##' Formant estimates will be written to a file with the
+##' base name of the input file and extension '.fms'.
+##' Default output is in double precision floating point
+##' binary in SSFF format (keywords 'rms', 'gain', 'fm'
+##' and 'bw')
 ##' @title forest
 ##' @param listOfFiles vector of file paths to be processed by function
-##' @param optLogFilePath path to option log file 
-##' @param BeginTime bla 
-##' @param EndTime bli
-##' @param WindowShift blup 
-##' @param WindowSize bla
-##' @param EffectiveLength bli 
-##' @param NominalF1 blup
-##' @param Gender bla
-##' @param Estimate bli
-##' @param Order blup
-##' @param IncrOrder bla
-##' @param NumFormants bli
-##' @param Window blup
-##' @param Preemphasis bla 
+##' @param optLogFilePath path to option log file
+##' @param BeginTime = <time>: set begin of analysis interval to <time> seconds (default = 0: begin of data)
+##' @param EndTime = <time>:  set end of analysis interval to <time> seconds (default = 0: end of data)
+##' @param WindowShift = <dur>: set analysis window shift to <dur> ms (default: 5.0)
+##' @param WindowSize  = <dur>: set analysis window size to <dur> ms (default: 30.0)
+##' @param EffectiveLength ???
+##' @param NominalF1 = <freq>: set nominal F1 frequency to <freq> Hz (default: 500.0 Hz)
+##' @param Gender ???
+##' @param Estimate insert rough frequency estimates of missing formants (default: frequency set to zero)
+##' @param Order decrease default order by 2 (one resonance less)
+##' @param IncrOrder increase default order by 2 (one resonance more)
+##' @param NumFormants = <num>: set number of formants to <num> (default: 4;  maximum: 8 or half the LP order)
+##' @param Window = <type>: set analysis window function to <type> (default: BLACKMAN)
+##' @param Preemphasis = <val>: set pre-emphasis factor to <val> (-1 <= val <= 0) (default: dependent on sample rate and nominal F1)
 ##' @param ToFile write results to file (default extension is .fms)
 ##' @param ExplicitExt set if you wish to overwride the default extension
-##' @return nrOfProcessedFiles or if only one file to process return dataObj of that file
+##' @return nrOfProcessedFiles or if only one file to process return AsspDataObj of that file
 ##' @author Raphael Winkelmann
 'forest' <- function(listOfFiles = NULL, optLogFilePath = NULL,BeginTime = 0.0, EndTime = 0.0, WindowShift = 5.0, WindowSize = 20.0, EffectiveLength = TRUE, NominalF1 = 500, Gender = 'm', Estimate = FALSE, Order = 0, IncrOrder = 0, NumFormants = 4, Window = 'BLACKMAN', Preemphasis = -0.8, ToFile = TRUE, ExplicitExt = NULL) {
 	

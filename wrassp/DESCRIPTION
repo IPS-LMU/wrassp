@@ -7,7 +7,7 @@ Authors@R: c(person("Lasse", "Bombien", role = c("aut", "cre"), email =
     "Winkelmann", role = c("aut","cre"), email =
     "raphael@phonetik.uni-muenchen.de"), person("Michel",
     "Scheffers", role = "ctb"))
-Description: rassp is a wrapper to Michel Scheffers' libassp (Advances
+Description: wrassp is a wrapper to Michel Scheffers' libassp (Advances
     Speech Signal Processor) library for handling and processing
     speech data. X formats are supproted and a absolutely awesome
     number of analysis procedures are available.

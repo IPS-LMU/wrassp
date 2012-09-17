@@ -1,18 +1,35 @@
-##' affilter function adapted from assp
+##' affilter function adapted from libassp
 ##'
-##' still have to write propper man pages
+##' Filters the audio signal in <listOfFiles>.
+##' By specifying the high-pass and/or low-pass cut-off
+##' frequency one of four filter characteristics may be
+##' selected as shown in the table below.\cr
+##' hp     lp     filter characteristic         extension\cr
+##' -------------------------------------------------------\cr
+##' > 0     [0]    high-pass from hp             '.hpf'\cr
+##' [0]   > 0     low-pass up to lp             '.lpf'\cr
+##' > 0    > hp    band-pass from hp to lp       '.bpf'\cr
+##' > lp   > 0     band-stop between lp and hp   '.bsf'\cr
+##' The Kaiser-window design method is used to compute the
+##' coefficients of a linear-phase FIR filter with unity gain
+##' in the pass-band. The cut-off frequencies (-6 dB points)
+##' of the filters are in the middle of the transition band.
+##' The filtered signal will be written to a file with the
+##' base name of the input file and an extension corresponding
+##' to the filter characteristic (see table). The format of
+##' the output file will be the same as that of the input file.
 ##' @title affilter
 ##' @param listOfFiles vector of file paths to be processed by function
 ##' @param optLogFilePath path to option log file 
-##' @param HighPass bli
-##' @param LowPass blup
-##' @param StopBand bla
-##' @param Transition bli
-##' @param UseIIR blup
-##' @param NumIIRsections bla
-##' @param ToFile bla
-##' @param ExplicitExt bli
-##' @return number of files processed
+##' @param HighPass = <num>: set the high-pass cut-off frequency to <num> Hz (default: 0, no high-pass filtering)
+##' @param LowPass = <num>: set the low-pass cut-off frequency to <num> Hz (default: 0, no low-pass filtering)
+##' @param StopBand = <num>: set the stop-band attenuation to <num> dB (default: 93.0 dB, minimum: 21.0 dB)
+##' @param Transition = <num>: set the width of the transition band to <num> Hz (default: 250.0 Hz)
+##' @param UseIIR ???
+##' @param NumIIRsections ???
+##' @param ToFile write results to file (for default extension see details section))
+##' @param ExplicitExt set if you wish to overwride the default extension 
+##' @return nrOfProcessedFiles or if only one file to process return AsspDataObj of that file
 ##' @author Raphael Winkelmann
 'affilter' <- function(listOfFiles = NULL, optLogFilePath = NULL, HighPass = 4000, LowPass = 0, StopBand = 96, 
                        Transition = 250, UseIIR = FALSE, NumIIRsections = 4, ToFile = TRUE,

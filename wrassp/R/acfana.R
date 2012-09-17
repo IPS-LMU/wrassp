@@ -1,4 +1,4 @@
-##' acfana function adapted from assp library
+##' acfana function adapted from libassp
 ##'
 ##' Analysis of short-term autocorrelation function of
 ##' the signals in <listOFFiles>.
@@ -9,19 +9,19 @@
 ##' @title acfana
 ##' @param listOfFiles vector of file paths to be processed by function
 ##' @param optLogFilePath path to option log file
-##' @param BeginTime set begin of analysis interval to <time> seconds (default: 0 = beginning of file)
-##' @param CenterTime set single-frame analysis with the analysis window centred at <time> seconds; overrules BeginTime, EndTime and WindowShift options
-##' @param EndTime set end of analysis interval to <time> seconds (default: 0 = end of file)
-##' @param WindowShift set analysis window shift to <dur> ms (default: 5.0)
-##' @param WindowSize set analysis window size to <dur> ms; overrules EffectiveLength parameter
-##' @param EffectiveLength set effective length of analysis window to <dur> ms (default: 20.0)
-##' @param Window set analysis window function to <type> (default: BLACKMAN)
-##' @param AnalysisOrder set analysis order to <num> (default: 0 = sample rate in kHz + 3)
+##' @param BeginTime = <time>: set begin of analysis interval to <time> seconds (default: 0 = beginning of file)
+##' @param CenterTime = <time>: set single-frame analysis with the analysis window centred at <time> seconds; overrules BeginTime, EndTime and WindowShift options
+##' @param EndTime = <time>: set end of analysis interval to <time> seconds (default: 0 = end of file)
+##' @param WindowShift = <dur>: set analysis window shift to <dur> ms (default: 5.0)
+##' @param WindowSize = <dur>: set analysis window size to <dur> ms; overrules EffectiveLength parameter
+##' @param EffectiveLength = <dur>: set effective length of analysis window to <dur> ms (default: 20.0)
+##' @param Window = <type>: set analysis window function to <type> (default: BLACKMAN)
+##' @param AnalysisOrder = <num>: set analysis order to <num> (default: 0 = sample rate in kHz + 3)
 ##' @param EnergyNormalization calculate energy-normalized autocorrelation
 ##' @param LengthNormalization calculate length-normalized autocorrelation
 ##' @param ToFile write results to file (default extension is .acf)
 ##' @param ExplicitExt set if you wish to overwride the default extension
-##' @return nrOfProcessedFiles or if only one file to process return dataObj of that file
+##' @return nrOfProcessedFiles or if only one file to process return AsspDataObj of that file
 ##' @author Raphael Winkelmann
 'acfana' <- function(listOfFiles = NULL, optLogFilePath = NULL, BeginTime = 0.0, CenterTime = FALSE, 
 	EndTime = 0.0, WindowShift = 5.0, WindowSize = 20.0, EffectiveLength = TRUE, 

@@ -1,20 +1,29 @@
-##' this is the description
+##' f0ana function adapted from libassp
 ##'
-##' and these are the details
+##' F0 analysis of the signal in <listOfFile> using the Schaefer-
+##' Vincent periodicity detector (Phonetica 40, 1983).
+##' Analysis results will be written to a file with the
+##' base name of the input file and extension '.f0'.
+##' Default output is in single precision floating point
+##' binary in SSFF format (keyword 'F0').
+##' Optionally, location and type of the signal extrema on
+##' which the F0 data are based, may be stored in a label
+##' file. The name of this file will consist of the base
+##' name of the F0 file and the extension '.prd'.
 ##' @title f0ana
 ##' @param listOfFiles vector of file paths to be processed by function 
 ##' @param optLogFilePath path to option log file
-##' @param BeginTime bla  
-##' @param EndTime bli
-##' @param WindowShift blup 
-##' @param Gender bla
-##' @param MaxF bli
-##' @param MinF blup
-##' @param MinAmp bla
-##' @param MaxZCR bli
+##' @param BeginTime = <time>: set begin of analysis interval to <time> seconds (default = 0: begin of data)
+##' @param EndTime set end of analysis interval to <time> seconds (default = 0: end of data)
+##' @param WindowShift = <dur>: set frame shift to <dur> ms (default: 5.0)
+##' @param Gender ???
+##' @param MaxF = <freq>: set maximum F0 value to <freq> Hz (default: 500.0)
+##' @param MinF = <freq>: set minimum F0 value to <freq> Hz (default: 50.0)
+##' @param MinAmp = <amp>: set amplitude threshold for voiced samples to <amp> (default: 100)
+##' @param MaxZCR ???
 ##' @param ToFile write results to file (default extension is .f0)
 ##' @param ExplicitExt set if you wish to overwride the default extension
-##' @return  nrOfProcessedFiles or if only one file to process return dataObj of that file
+##' @return  nrOfProcessedFiles or if only one file to process return AsspDataObj of that file
 ##' @author Raphael Winkelmann
 'f0ana' <- function(listOfFiles = NULL, optLogFilePath = NULL, BeginTime = 0.0, EndTime = 0.0, WindowShift = 5.0, Gender = 'u', MaxF = 600, MinF = 50, MinAmp = 50, MaxZCR = 3000.0, ToFile = TRUE, ExplicitExt = NULL){
 	

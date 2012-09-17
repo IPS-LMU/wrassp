@@ -16,29 +16,29 @@
 
   \item{optLogFilePath}{path to option log file}
 
-  \item{BeginTime}{set begin of analysis interval to <time>
-  seconds (default: 0 = beginning of file)}
+  \item{BeginTime}{= <time>: set begin of analysis interval
+  to <time> seconds (default: 0 = beginning of file)}
 
-  \item{CenterTime}{set single-frame analysis with the
-  analysis window centred at <time> seconds; overrules
-  BeginTime, EndTime and WindowShift options}
+  \item{CenterTime}{= <time>: set single-frame analysis
+  with the analysis window centred at <time> seconds;
+  overrules BeginTime, EndTime and WindowShift options}
 
-  \item{EndTime}{set end of analysis interval to <time>
-  seconds (default: 0 = end of file)}
+  \item{EndTime}{= <time>: set end of analysis interval to
+  <time> seconds (default: 0 = end of file)}
 
-  \item{WindowShift}{set analysis window shift to <dur> ms
-  (default: 5.0)}
+  \item{WindowShift}{= <dur>: set analysis window shift to
+  <dur> ms (default: 5.0)}
 
-  \item{WindowSize}{set analysis window size to <dur> ms;
-  overrules EffectiveLength parameter}
+  \item{WindowSize}{= <dur>: set analysis window size to
+  <dur> ms; overrules EffectiveLength parameter}
 
-  \item{EffectiveLength}{set effective length of analysis
-  window to <dur> ms (default: 20.0)}
+  \item{EffectiveLength}{= <dur>: set effective length of
+  analysis window to <dur> ms (default: 20.0)}
 
-  \item{Window}{set analysis window function to <type>
-  (default: BLACKMAN)}
+  \item{Window}{= <type>: set analysis window function to
+  <type> (default: BLACKMAN)}
 
-  \item{AnalysisOrder}{set analysis order to <num>
+  \item{AnalysisOrder}{= <num>: set analysis order to <num>
   (default: 0 = sample rate in kHz + 3)}
 
   \item{EnergyNormalization}{calculate energy-normalized
@@ -55,10 +55,10 @@
 }
 \value{
   nrOfProcessedFiles or if only one file to process return
-  dataObj of that file
+  AsspDataObj of that file
 }
 \description{
-  acfana function adapted from assp library
+  acfana function adapted from libassp
 }
 \details{
   Analysis of short-term autocorrelation function of the

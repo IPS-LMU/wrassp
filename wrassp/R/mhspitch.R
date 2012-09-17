@@ -1,25 +1,29 @@
-##' this is the description
+##' mhspitch function adapted from libassp
 ##'
-##' and these details
+##' Pitch analysis of the speech signal in <listOfFile> using
+##' Michel's/Modified Harmonic Sieve algorithm.
+##' Analysis results will be written to a file with the
+##' base name of the input file and extension '.pit'.
+##' Default output is in SSFF binary format (track 'pitch').
 ##' @title mhspitch
 ##' @param listOfFiles vector of file paths to be processed by function
 ##' @param optLogFilePath path to option log file
-##' @param BeginTime start time (in ms) in file to perform function on 
+##' @param BeginTime = <time>: set begin of analysis interval to <time> seconds (default = 0: begin of file) 
 ##' @param CenterTime ???
-##' @param EndTime end time (in ms) in file to perform function on
-##' @param WindowShift window shift of function (in ms) 
+##' @param EndTime = <time>: set end of analysis interval to <time> seconds (default = 0: end of file)
+##' @param WindowShift = <dur>: set analysis window shift to <dur> ms (default: 5.0)
 ##' @param Gender ???
-##' @param MaxF ???
-##' @param MinF ???
-##' @param MinAmp ???
-##' @param MinAC1 ???
-##' @param MinRMS ???
-##' @param MaxZCR ???
-##' @param MinProb ???
-##' @param PlainSpectrum ???
+##' @param MaxF = <freq>: set maximum pitch value to <freq> Hz (default: 500.0)
+##' @param MinF = <freq>:  set minimum pitch value to <freq> Hz (default: 50.0  minimum: 25.0)
+##' @param MinAmp = <amp>:  minimum signal amplitude (default: 50)
+##' @param MinAC1 = <freq>: minimum 1st correlation coefficient (default: 0.250)
+##' @param MinRMS = <num>:  minimum RMS amplitude in dB (default: 18.0)
+##' @param MaxZCR = <freq>: maximum zero crossing rate in Hz (default: 3000)
+##' @param MinProb = <num>: minimum quality value of F0 fit (default: 0.520)
+##' @param PlainSpectrum use plain rather than masked power spectrum
 ##' @param ToFile write results to file (default extension is .pit)
 ##' @param ExplicitExt set if you wish to overwride the default extension
-##' @return nrOfProcessedFiles or if only one file to process return dataObj of that file
+##' @return nrOfProcessedFiles or if only one file to process return AsspDataObj of that file
 ##' @author Raphael Winkelmann
 'mhspitch' <-function(listOfFiles = NULL, optLogFilePath = NULL,BeginTime = 0.0, CenterTime = FALSE, EndTime = 0.0, WindowShift = 5.0, Gender = 'u', MaxF = 600.0, MinF = 50.0, MinAmp = 50.0, MinAC1 = 0.25, MinRMS = 18.0, MaxZCR = 3000.0, MinProb = 0.52, PlainSpectrum = FALSE, ToFile = TRUE, ExplicitExt = NULL) {
 	
