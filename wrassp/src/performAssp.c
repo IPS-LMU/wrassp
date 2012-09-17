@@ -854,6 +854,7 @@ performAssp (SEXP args)
 	    {
 	      strncpy (ext, cPtr, strlen (cPtr));
 	    }
+	  free(cPtr);
 	  expExt = 1;
 	  switch (anaFunc->funcNum)
 	    {
@@ -956,7 +957,7 @@ performAssp (SEXP args)
 
 	  /* parse the input path to get directory (dPath),
 	     base file name (bPath) and original extension (oExt) */
-	  parsepath (strdup (name), &dPath, &bPath, &oExt);
+	  parsepath (name, &dPath, &bPath, &oExt);
 	  /* outName is the same except for extension */
 	  strcpy (outName, "");
 	  strcat (outName, dPath);
@@ -996,6 +997,7 @@ performAssp (SEXP args)
 	  asspFClose (outPtr, AFC_KEEP);
 	}
 
+      free(name);
 
       // if a progress bar was passed over, increment its value
       if (pBar != R_NilValue)
