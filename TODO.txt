@@ -23,6 +23,7 @@ make it awesome!!!! :-)
 
 ####### RAPHAEL #########
 
-- improve rec search (seglist not wrassp)
 - overwrite check
 - (DONE) getDObj when listOfFiles has length!
+- more details on progressbar (e.g. nr of file)
+
