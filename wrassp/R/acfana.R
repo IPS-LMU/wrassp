@@ -1,19 +1,24 @@
 ##' acfana function adapted from assp library
 ##'
-##' still have to write propper documentation
+##' Analysis of short-term autocorrelation function of
+##' the signals in <listOFFiles>.
+##' Analysis results will be written to a file with the
+##' base name of the input file and extension '.acf'.
+##' Default output is in SSFF binary format (track 'acf').
+
 ##' @title acfana
 ##' @param listOfFiles vector of file paths to be processed by function
 ##' @param optLogFilePath path to option log file
-##' @param BeginTime start time (in ms) in file to perform function on 
-##' @param CenterTime ???
-##' @param EndTime end time (in ms) in file to perform function on
-##' @param WindowShift window shift of function (in ms) 
-##' @param WindowSize window size of function (in ms)
-##' @param EffectiveLength ???
-##' @param Window type of window see isAsspWindowType function  
-##' @param AnalysisOrder ???
-##' @param EnergyNormalization ???
-##' @param LengthNormalization ???
+##' @param BeginTime set begin of analysis interval to <time> seconds (default: 0 = beginning of file)
+##' @param CenterTime set single-frame analysis with the analysis window centred at <time> seconds; overrules BeginTime, EndTime and WindowShift options
+##' @param EndTime set end of analysis interval to <time> seconds (default: 0 = end of file)
+##' @param WindowShift set analysis window shift to <dur> ms (default: 5.0)
+##' @param WindowSize set analysis window size to <dur> ms; overrules EffectiveLength parameter
+##' @param EffectiveLength set effective length of analysis window to <dur> ms (default: 20.0)
+##' @param Window set analysis window function to <type> (default: BLACKMAN)
+##' @param AnalysisOrder set analysis order to <num> (default: 0 = sample rate in kHz + 3)
+##' @param EnergyNormalization calculate energy-normalized autocorrelation
+##' @param LengthNormalization calculate length-normalized autocorrelation
 ##' @param ToFile write results to file (default extension is .acf)
 ##' @param ExplicitExt set if you wish to overwride the default extension
 ##' @return nrOfProcessedFiles or if only one file to process return dataObj of that file

@@ -16,28 +16,36 @@
 
   \item{optLogFilePath}{path to option log file}
 
-  \item{BeginTime}{start time (in ms) in file to perform
-  function on}
+  \item{BeginTime}{set begin of analysis interval to <time>
+  seconds (default: 0 = beginning of file)}
 
-  \item{CenterTime}{???}
+  \item{CenterTime}{set single-frame analysis with the
+  analysis window centred at <time> seconds; overrules
+  BeginTime, EndTime and WindowShift options}
 
-  \item{EndTime}{end time (in ms) in file to perform
-  function on}
+  \item{EndTime}{set end of analysis interval to <time>
+  seconds (default: 0 = end of file)}
 
-  \item{WindowShift}{window shift of function (in ms)}
+  \item{WindowShift}{set analysis window shift to <dur> ms
+  (default: 5.0)}
 
-  \item{WindowSize}{window size of function (in ms)}
+  \item{WindowSize}{set analysis window size to <dur> ms;
+  overrules EffectiveLength parameter}
 
-  \item{EffectiveLength}{???}
+  \item{EffectiveLength}{set effective length of analysis
+  window to <dur> ms (default: 20.0)}
 
-  \item{Window}{type of window see isAsspWindowType
-  function}
+  \item{Window}{set analysis window function to <type>
+  (default: BLACKMAN)}
 
-  \item{AnalysisOrder}{???}
+  \item{AnalysisOrder}{set analysis order to <num>
+  (default: 0 = sample rate in kHz + 3)}
 
-  \item{EnergyNormalization}{???}
+  \item{EnergyNormalization}{calculate energy-normalized
+  autocorrelation}
 
-  \item{LengthNormalization}{???}
+  \item{LengthNormalization}{calculate length-normalized
+  autocorrelation}
 
   \item{ToFile}{write results to file (default extension is
   .acf)}
@@ -53,7 +61,11 @@
   acfana function adapted from assp library
 }
 \details{
-  still have to write propper documentation
+  Analysis of short-term autocorrelation function of the
+  signals in <listOFFiles>. Analysis results will be
+  written to a file with the base name of the input file
+  and extension '.acf'. Default output is in SSFF binary
+  format (track 'acf').
 }
 \author{
   Raphael Winkelmann
