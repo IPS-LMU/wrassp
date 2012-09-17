@@ -34,9 +34,10 @@
 	# perform analysis
 
 	if(length(listOfFiles)==1){
-		pb <- NULL
+          pb <- NULL
 	}else{
-		pb <- txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
+          cat('\n  INFO: applying zcrana to', length(listOfFiles), 'files\n')
+          pb <- txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
 	}	
 
 	externalRes = invisible(.External("performAssp", PACKAGE = "wrassp", listOfFiles, fname = "zcrana", BeginTime = BeginTime, CenterTime = CenterTime, EndTime = EndTime, WindowShift = WindowShift, WindowSize = WindowSize, ToFile = ToFile, ExplicitExt = ExplicitExt, ProgressBar = pb))

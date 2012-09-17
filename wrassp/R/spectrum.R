@@ -48,9 +48,10 @@
 	# perform analysis
 
 	if(length(listOfFiles)==1){
-		pb <- NULL
+          pb <- NULL
 	}else{
-		pb <- txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
+          cat('\n  INFO: applying dftSpectrum to', length(listOfFiles), 'files\n')
+          pb <- txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
 	}	
 	
 	externalRes = invisible(.External("performAssp", listOfFiles, fname = "spectrum", BeginTime = BeginTime, CenterTime = CenterTime, EndTime = EndTime, SpectrumType = SpectrumType, Resolution = Resolution, FftLength = as.integer(FftLength), WindowSize = WindowSize, WindowShift = WindowShift,  Window = Window, Bandwidth = Bandwidth, EffectiveLength = EffectiveLength, Order = as.integer(Order), Preemphasis = Preemphasis, Deemphasize = Deemphasize, NumCeps = as.integer(NumCeps), ToFile = ToFile, ExplicitExt = ExplicitExt, ProgressBar = pb, PACKAGE = "wrassp"))
@@ -152,9 +153,10 @@
 	# perform analysis
 
 	if(length(listOfFiles)==1){
-		pb <- NULL
+          pb <- NULL
 	}else{
-		pb <- txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
+          cat('\n  INFO: applying lpsSpectrum to', length(listOfFiles), 'files\n')
+          pb <- txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
 	}
 	
 	externalRes = invisible(.External("performAssp", listOfFiles, fname = "spectrum", BeginTime = BeginTime, CenterTime = CenterTime, EndTime = EndTime, SpectrumType = SpectrumType, Resolution = Resolution, FftLength = as.integer(FftLength), WindowSize = WindowSize, WindowShift = WindowShift,  Window = Window, Bandwidth = Bandwidth, EffectiveLength = EffectiveLength, Order = as.integer(Order), Preemphasis = Preemphasis, Deemphasize = Deemphasize, NumCeps = as.integer(NumCeps), ToFile = ToFile, ExplicitExt = ExplicitExt, ProgressBar = pb, PACKAGE = "wrassp"))
@@ -248,7 +250,7 @@
         }
 	
 	if(!isAsspWindowType(Window)){
-		stop("WindowFunction of type '", Window,"' is not supported!")
+          stop("WindowFunction of type '", Window,"' is not supported!")
 	}
 
         listOfFiles = path.expand(listOfFiles)
@@ -258,9 +260,10 @@
 	# perform analysis
 
 	if(length(listOfFiles)==1){
-		pb <- NULL
+          pb <- NULL
 	}else{
-		pb <- txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
+          cat('\n  INFO: applying cssSpectrum to', length(listOfFiles), 'files\n')
+          pb <- txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
 	}	
 	
 	
@@ -360,9 +363,10 @@
 	# perform analysis
 
 	if(length(listOfFiles)==1){
-		pb <- NULL
+          pb <- NULL
 	}else{
-		pb <- txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
+          cat('\n  INFO: applying cepSpectrum to', length(listOfFiles), 'files\n')
+          pb <- txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
 	}	
 
 	

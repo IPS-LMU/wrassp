@@ -45,9 +45,10 @@
 	#perform analysis
 	
 	if(length(listOfFiles)==1){
-		pb <- NULL
+          pb <- NULL
 	}else{
-		pb <- txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
+          cat('\n  INFO: applying forest to', length(listOfFiles), 'files\n')
+          pb <- txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
 	}	
 	
 	

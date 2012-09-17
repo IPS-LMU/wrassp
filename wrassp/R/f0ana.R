@@ -36,9 +36,10 @@
 	# perform analysis
 	
 	if(length(listOfFiles)==1){
-		pb <- NULL
+          pb <- NULL
 	}else{
-		pb <- txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
+          cat('\n  INFO: applying f0ana to', length(listOfFiles), 'files\n')
+          pb <- txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
 	}	
 	
 	externalRes = invisible(.External("performAssp", listOfFiles, fname = "f0ana", BeginTime = BeginTime, EndTime = EndTime, WindowShift = WindowShift, Gender = Gender, MaxF = MaxF, MinF = MinF, MinAmp = MinAmp, MaxZCR = MaxZCR, ExplicitExt = ExplicitExt, ToFile = ToFile, ProgressBar = pb, PACKAGE = "wrassp"))
