@@ -14,15 +14,15 @@ getDObj (SEXP fname)
   long numRecs;
   // read the data
   data =
-    asspFOpen (strdup (CHAR (STRING_ELT (fname, 0))), AFO_READ,
-	       (DOBJ *) NULL);
+     asspFOpen (strdup (CHAR (STRING_ELT (fname, 0))), AFO_READ,
+		(DOBJ *) NULL);
   if (data == NULL)
-    error (getAsspMsg (asspMsgNum));
+     error (getAsspMsg (asspMsgNum));
   //error(CHAR(STRING_ELT(fname,0)));
   allocDataBuf (data, data->numRecords);
   data->bufStartRec = data->startRecord;
   if ((numRecs = asspFFill (data)) < 0)
-    error (getAsspMsg (asspMsgNum));
+     error (getAsspMsg (asspMsgNum));
   asspFClose (data, AFC_KEEP);
   return dobj2AsspDataObj (data);
 }
@@ -102,7 +102,7 @@ getDObj2 (SEXP args)
       error ("Begin after end of data. That's not clever, dude!");
     }
 
-  numRecs = (long) (end - begin);
+  numRecs = (long) (end - begin) + 1;
   // read the data
   allocDataBuf (data, numRecs);
   data->bufStartRec = (long) begin;
