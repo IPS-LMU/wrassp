@@ -62,7 +62,7 @@
   rfcana function adapted from libassp
 }
 \details{
-  Linear Prediction analysis of <listOfFiles>(s) using the
+  Linear Prediction analysis of <listOfFiles> using the
   autocorrelation method and the Durbin recursion. This
   program calculates the RMS amplitudes of the input and
   residual signal in dB and, per default, reflection

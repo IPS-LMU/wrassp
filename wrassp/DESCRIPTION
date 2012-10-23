@@ -34,3 +34,4 @@ Collate:
     'zcrana.R'
     'helperFunctions.R'
     'dataobject.R'
+    'rVek2SingleColSsff.R'
