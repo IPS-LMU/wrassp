@@ -864,7 +864,7 @@ int getCSSpectrum(DOBJ *dop)
     buf[2*n +1] = 0.0;                  /* set imaginary part to zero */
   }
   while(n < N)                                     /* pad with zeroes */
-    buf[2*n +1] = buf[2*n] = 0.0;
+    buf[2*n +1] = buf[2*n++] = 0.0;
   fft(buf, N, FFT_FORWARD);
   fftPower(buf, N);                           /* power spectrum in dB */
   fft(buf, N, FFT_INVERSE);                    /* convert to cepstrum */
@@ -942,7 +942,7 @@ int getCepstrum(DOBJ *dop)
     buf[2*n +1] = 0.0;                  /* set imaginary part to zero */
   }
   while(n < N)                                     /* pad with zeroes */
-    buf[2*n +1] = buf[2*n] = 0.0;
+    buf[2*n +1] = buf[2*n++] = 0.0;
   fft(buf, N, FFT_FORWARD);
   fftlnMag(buf, N);                         /* log magnitude spectrum */
   fft(buf, N, FFT_INVERSE);                    /* convert to cepstrum */
