@@ -4,26 +4,16 @@ make it awesome!!!! :-)
 
 ######## LASSE ##########
 
-- rfcana produces files with no file extension!
-- (DONE) progressbar in affilter does not move!
-- f0ana dies a painfull death
-- dftSpectrum -> Out of memory
-- remove pointer from data objects
-- (DONE) fix ExplicitExtension
-
-- multiple calls of f0ana cause:
-  *** caught segfault ***
-  address 0x4a44fc8, cause 'memory not mapped'
-
-  Traceback:
-	1: .External("performAssp", listOfFiles, fname = "f0ana", BeginTime = BeginTime,     EndTime = EndTime, WindowShift = WindowShift, Gender = Gender,     MaxF = MaxF, MinF = MinF, MinAmp = MinAmp, MaxZCR = MaxZCR,     ExplicitExt = ExplicitExt, ToFile = ToFile, ProgressBar = pb)
- 	2: f0ana(res$signals, ExplicitExt = ".f0")
-...
-
+- clean up src folder
+- delTrack, addTrack
+- function names
+- R CMD CHECK
 
 ####### RAPHAEL #########
 
 - overwrite check
-- (DONE) getDObj when listOfFiles has length!
-- more details on progressbar (e.g. nr of file)
-
+- test
+- clean up R folder
+- finish documenting
+- check CRAN
+- autogen collate roxygen 
