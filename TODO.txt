@@ -2,6 +2,10 @@
 make it awesome!!!! :-)
 
 
+###### DEADLINE #########
+
+MAY 12, 2013!!!
+
 ######## LASSE ##########
 
 - clean up src folder
