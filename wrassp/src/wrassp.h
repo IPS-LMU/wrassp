@@ -151,7 +151,12 @@ extern W_OPT rfcanaOptions[];
 extern W_OPT spectrumOptions[];
 extern W_OPT zcranaOptions[];
 
+#define WRASSP_CLASS "AsspDataObj"
 
+char * asspDF2ssffString(int df);
+SEXP writeDObj(SEXP,SEXP);
+int addTrackData (DOBJ * dop, DDESC * ddl, SEXP rdobj);
 DOBJ *computeFilter (DOBJ * inpDOp, AOPTS * anaopts, DOBJ * outDOp);
 DOBJ *computeF0 (DOBJ * inpDOp, AOPTS * anaOpts, DOBJ * outDOp);
+DOBJ* sexp2dobj(SEXP rdobj);
 #endif // _WRASSP

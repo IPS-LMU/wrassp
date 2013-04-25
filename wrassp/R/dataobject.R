@@ -26,3 +26,9 @@
         cat(paste(" (", ncol(dobj[[track]]), " fields)\n", sep=''))
     }
 }
+
+"write.AsspDataObj" <- function (dobj, file)
+  {
+    file <- path.expand(file)
+    .Call("writeDObj", dobj, file, PACKAGE="wrassp")
+  }
