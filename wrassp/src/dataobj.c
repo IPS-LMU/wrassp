@@ -10,7 +10,7 @@
 SEXP
 getDObj (SEXP fname)
 {
-   
+   SEXP res;
    DOBJ *data = NULL;
    long numRecs;
    // read the data
@@ -25,7 +25,9 @@ getDObj (SEXP fname)
    if ((numRecs = asspFFill (data)) < 0)
       error (getAsspMsg (asspMsgNum));
    asspFClose (data, AFC_KEEP);
-   return dobj2AsspDataObj (data);
+   res = dobj2AsspDataObj (data);
+   asspFClose (data, AFC_FREE);
+   return res;
 }
 
 
@@ -204,7 +206,6 @@ dobj2AsspDataObj (DOBJ * data)
    setAttrib (ans, install ("file_info"), finfo);
 
    UNPROTECT (11);
-   asspFClose (data, AFC_FREE);
    return ans;
 
 }
