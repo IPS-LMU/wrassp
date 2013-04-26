@@ -1189,8 +1189,12 @@ LOCAL int putAIFhdr(DOBJ *dop)
 /*
  * write header
  */
+#ifndef WRASSP
   if(dop->fp != stdout)
     rewind(dop->fp);
+#else
+  rewind(dop->fp);
+#endif
   numBytes = (size_t)dop->headerSize;
   if(fwrite(header, 1, numBytes, dop->fp) != numBytes) {
     setAsspMsg(AEF_ERR_WRIT, dop->filePath);
@@ -1407,8 +1411,12 @@ LOCAL int putCSLhdr(DOBJ *dop)
 /*
  * write header
  */
+#ifndef WRASSP
   if(dop->fp != stdout)
     rewind(dop->fp);
+#else
+  rewind(dop->fp);
+#endif
   numBytes = (size_t)dop->headerSize;
   if(fwrite(header, 1, numBytes, dop->fp) != numBytes) {
     setAsspMsg(AEF_ERR_WRIT, dop->filePath);
@@ -1555,7 +1563,9 @@ LOCAL int putADFhdr(DOBJ *dop)
 /*
  * write header
  */
+#ifndef WRASSP
   if(dop->fp != stdout)
+#endif
     rewind(dop->fp);
   numBytes = (size_t)dop->headerSize;
   if(fwrite(header, 1, numBytes, dop->fp) != numBytes) {
@@ -1776,7 +1786,9 @@ LOCAL int putSNDhdr(DOBJ *dop)
 /*
  * write header
  */
+#ifndef WRASSP
   if(dop->fp != stdout)
+#endif
     rewind(dop->fp);
   numBytes = (size_t)dop->headerSize;
   if(fwrite(header, 1, numBytes, dop->fp) != numBytes) {
@@ -2102,7 +2114,9 @@ LOCAL int putWAVhdr(DOBJ *dop)
 /*
  * write header
  */
+#ifndef WRASSP
   if(dop->fp != stdout)
+#endif
     rewind(dop->fp);
   numBytes = (size_t)(dop->headerSize);
   if(fwrite(header, 1, numBytes, dop->fp) != numBytes) {
@@ -2306,7 +2320,9 @@ LOCAL int putKTHhdr(DOBJ *dop)
 /*
  * write header
  */
+#ifndef WRASSP
   if(dop->fp != stdout)
+#endif
     rewind(dop->fp);
   if(fwrite(header, 1, KTH_DEF_HDR, dop->fp) != KTH_DEF_HDR) {
     setAsspMsg(AEF_ERR_WRIT, dop->filePath);
@@ -2520,7 +2536,9 @@ LOCAL int putNISThdr(DOBJ *dop)
 /*
  * write header
  */
+#ifndef WRASSP
   if(dop->fp != stdout)
+#endif
     rewind(dop->fp);
   numBytes = (size_t)dop->headerSize;
   if(fwrite(header, 1, numBytes, dop->fp) != numBytes) {
@@ -2808,7 +2826,9 @@ LOCAL int putSSFFhdr(DOBJ *dop)
 /*
  * write header
  */
+#ifndef WRASSP
   if(dop->fp != stdout)
+#endif
     rewind(dop->fp);
   if(fwrite(header, 1, numBytes, dop->fp) != numBytes) {
     setAsspMsg(AEF_ERR_WRIT, dop->filePath);
@@ -2995,7 +3015,9 @@ LOCAL int putXASSPhdr(DOBJ *dop)
 /*
  * write header
  */
+#ifndef WRASSP
   if(dop->fp != stdout)
+#endif
     rewind(dop->fp);
   if(fwrite(header, 1, numBytes, dop->fp) != numBytes) {
     setAsspMsg(AEF_ERR_WRIT, dop->filePath);
@@ -3113,7 +3135,9 @@ LOCAL int putMIXhdr(DOBJ *dop)
     ptr = headLine;
     numBytes = strlen(ptr);
   }
+#ifndef WRASSP
   if(dop->fp != stdout)
+#endif
     rewind(dop->fp);
   if(fwrite(ptr, 1, numBytes, dop->fp) != numBytes) {
     setAsspMsg(AEF_ERR_WRIT, dop->filePath);
@@ -3231,7 +3255,9 @@ LOCAL int putSAMhdr(DOBJ *dop)
   if(MARKSUNDEF(dd->orientation))
     SETBEGIN(dd->orientation);
 
+#ifndef WRASSP
   if(dop->fp != stdout)
+#endif
     rewind(dop->fp);
   name = myfilename(dop->filePath);          /* remove directory path */
   fprintf(dop->fp, "%s%s", name, dop->eol); /* print (bad) identification */
@@ -3259,7 +3285,9 @@ LOCAL int putSAMhdr(DOBJ *dop)
  * NOTE: Header must be extended by [variant field and]
  *       the end-of-header code by the calling function.
  */
+#ifndef WRASSP
   if(dop->fp != stdout)
+#endif
     dop->headerSize = ftell(dop->fp);
   return(0);
 }
@@ -3461,7 +3489,9 @@ LOCAL int putXLBLhdr(DOBJ *dop)
 /*
  * write header
  */
+#ifndef WRASSP
   if(dop->fp != stdout)
+#endif
     rewind(dop->fp);
   if(fwrite(header, 1, numBytes, dop->fp) != numBytes) {
     setAsspMsg(AEF_ERR_WRIT, dop->filePath);

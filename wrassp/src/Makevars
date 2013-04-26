@@ -1,3 +1,3 @@
-PKG_CPPFLAGS = -I assp
+PKG_CPPFLAGS = -I assp -DWRASSP
 SOURCES = $(wildcard assp/*.c *.c)
 OBJECTS = $(SOURCES:.c=.o)

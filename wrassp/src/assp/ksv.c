@@ -167,12 +167,14 @@ DOC*/
 
 void printKSVrefs(void)
 {
+#ifndef WRASSP
   printf("\nReferences:\n");
   printf("Schäfer-Vincent, K. (1982), \"Significant points: Pitch period\n");
   printf("   detection as a problem of segmentation,\" Phonetica 39,\n");
   printf("   pp. 241-253\n");
   printf("Schäfer-Vincent, K. (1983), \"Pitch period detection and chaining:\n");
   printf("   Method and evaluation,\" Phonetica 40, pp. 177-202\n");
+#endif
   return;
 }
 
@@ -579,9 +581,10 @@ DOBJ *computeKSV(DOBJ *smpDOp, AOPTS *aoPtr, DOBJ *f0DOp, DOBJ *prdDOp)
   workDOp->generic = f0DOp->generic;
   workDOp->doFreeGeneric = (DOfreeFunc)NULL;
 
+#ifndef WRASSP
   if(TRACE['A']) {
-    fprintf(traceFP, "Analysis parameters\n");
-    fprintf(traceFP, "  sample rate = %.1f Hz\n", f0DOp->sampFreq);
+     fprintf(traceFP, "Analysis parameters\n");
+     fprintf(traceFP, "  sample rate = %.1f Hz\n", f0DOp->sampFreq);
     fprintf(traceFP, "  frame shift = %ld samples\n", f0DOp->frameDur);
     fprintf(traceFP, "  F0 range = %.1f to %.1f Hz\n",\
 	    gd->minF0, gd->maxF0);
@@ -603,7 +606,7 @@ DOBJ *computeKSV(DOBJ *smpDOp, AOPTS *aoPtr, DOBJ *f0DOp, DOBJ *prdDOp)
     fprintf(traceFP, "  workspace      : %ld samples\n", workDOp->maxBufRecs);
     fprintf(traceFP, "  F0 buffer      : %ld frames\n", f0DOp->maxBufRecs);
   }
-
+#endif
   /* enforce a full pre-load of the workspace */
   workDOp->bufNumRecs = 0;
   head = 0;
@@ -1220,9 +1223,11 @@ LOCAL int ksvTwin(long sn3, float a3, int type)
     if(gd->voiZCR > gd->maxF0) {
       zxRate = ksvZCR(sn2, dur23);
       if(zxRate > gd->voiZCR) {                /* rejected: too noisy */
+#ifndef WRASSP
 	if(TRACE['R'])
 	  fprintf(traceFP, "period %ld - %ld rejected on ZCR %.0f\n",\
 		  sn2, sn3, zxRate);
+#endif
 	continue;
       }
     }
@@ -1263,10 +1268,12 @@ LOCAL int ksvTwin(long sn3, float a3, int type)
       }
       dVar += dVar;                    /* 2*dVar (inverse from paper) */
       if(dVar > sVar) {             /* rejected: AMV's too dissimilar */
+#ifndef WRASSP
 	if(TRACE['r']) {
 	  fprintf(traceFP, "twin %ld - %ld - %ld rejected on AMV\n",\
 		  sn1, sn2, sn3);
 	}
+#endif
 	continue;
       }
       /*
@@ -1446,10 +1453,12 @@ LOCAL int ksvChain(long sn1, long sn2, long sn3, int type)
   }
   if(j >= maxTwins) {                  /* should not but could happen */
     j = maxTwins;                                   /* just make sure */
+#ifndef WRASSP
     if(TRACE['x']) {
       fprintf(traceFP, "extending twin buffer at sample #%ld\n",\
 	      tPtr->sn3);
     }
+#endif
     tmpPtr = realloc((void *)twinBuf, (size_t)(maxTwins+1)*sizeof(TWIN));
     if(tmpPtr == NULL) {
       setAsspMsg(AEG_ERR_MEM, "while trying to extend twin buffer");
@@ -1546,12 +1555,14 @@ LOCAL int ksvChain(long sn1, long sn2, long sn3, int type)
       }
     }
   }
+#ifndef WRASSP
   if(TRACE['c'] && CURRENT) {
     tPtr = &twinBuf[aliveIndex];
     fprintf(traceFP, "current: sn3 = %ld d23 = %d d12 = %d num = %ld "\
 	    "dur = %ld\n", tPtr->sn3, tPtr->dur23, tPtr->dur12,\
 	    tPtr->nTwins, tPtr->totDur);
   }
+#endif
   return(0);
 }
 /***********************************************************************

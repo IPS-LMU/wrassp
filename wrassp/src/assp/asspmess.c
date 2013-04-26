@@ -168,6 +168,7 @@ int prtAsspMsg(FILE *fp)
   char *msg, *bug, indent[16];
   int   funcVal;
 
+#ifndef WRASSP
   if(fp == NULL) fp = stderr;
   if((TRACE['F'] || TRACE['f']) && traceFP != NULL &&
      traceFP != stderr && traceFP != stdout) { /* print to trace file */
@@ -227,6 +228,9 @@ int prtAsspMsg(FILE *fp)
   if(fp == stderr || fp == stdout)
     clrAsspMsg();                    /* clear message/error variables */
   return(funcVal);
+#else
+  return(0);
+#endif
 }
 
 /***********************************************************************

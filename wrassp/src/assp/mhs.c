@@ -158,6 +158,7 @@ DOC*/
 
 void printMHSrefs(void)
 {
+#ifndef WRASSP
   printf("\nReferences:\n");
   printf("Duifhuis, H., Willems, L.F., and Sluyter, R.J. (1982). \"Measurement\n");
   printf("   of pitch in speech: An implementation of Goldstein's theory of\n");
@@ -168,6 +169,7 @@ void printMHSrefs(void)
   printf("Allik, J., Mihkla, M. and Ross, J. (1984). \"Comment on 'Measurement\n");
   printf("   of pitch in speech: An implementation of Goldstein's theory of\n");
   printf("   pitch perception',\" J.Acoust.Soc.Am. 75, 1855-1857.\n");
+#endif
   return;
 }
 
@@ -522,6 +524,7 @@ DOBJ *computeMHS(DOBJ *smpDOp, AOPTS *aoPtr, DOBJ *pitDOp)
       freeDObj(pitDOp);
     return(NULL);
   }
+#ifndef WRASSP
   if(TRACE['A']) {
     fprintf(traceFP, "Analysis parameters\n");
     fprintf(traceFP, "  sample rate = %.1f Hz\n", pitDOp->sampFreq);
@@ -538,7 +541,7 @@ DOBJ *computeMHS(DOBJ *smpDOp, AOPTS *aoPtr, DOBJ *pitDOp)
 	    gd->minQval);
     fprintf(traceFP, "  masked spectrum = %s\n",\
 	    (gd->options & MHS_OPT_POWER) ? "OFF":"ON");
-    fprintf(traceFP, "  harmonic sieve: %u meshes  width %.4f"\
+    fprintf(traceFP, "  harmonic sieve: %zd meshes  width %.4f"\
 	             "  tolerance %.4f\n",\
 	    maxMesh, meshWidth, meshTol);
     fprintf(traceFP, "  tracking: minF0Diff=%.4f  maxDelta=%.4f\n",\
@@ -549,12 +552,15 @@ DOBJ *computeMHS(DOBJ *smpDOp, AOPTS *aoPtr, DOBJ *pitDOp)
     fprintf(traceFP, "  processing mode = %s-to-%s\n",\
 	    FILE_IN ? "file" : "memory", FILE_OUT ? "file" : "memory");
   }
+#endif
   /* loop over frames */
   for(err = 0, fn = gd->begFrameNr; fn < gd->endFrameNr; fn++) {
+#ifndef WRASSP
     if(TRACE['c'] || TRACE['P'] || TRACE['v']) {
       fprintf(traceFP, secFormat, (double)fn * winShift);
       fflush(traceFP);
     }
+#endif
     if((err=getSmpFrame(smpDOp, fn, frameSize, frameShift, 0, 0,\
 			gd->channel, (void *)fftBuf, MHS_PFORMAT)) < 0) {
       break;
@@ -619,6 +625,7 @@ DOBJ *computeMHS(DOBJ *smpDOp, AOPTS *aoPtr, DOBJ *pitDOp)
 	}
       }
     }
+#ifndef WRASSP
     if(TRACE['v']) {
       fprintf(traceFP, "MAG=%5.0f  ZCR=%5.0f  RMS=%6.2f  AC1=%+4.2f "\
 		       "NP=%2i  NC=%1i  Q[0]=%3i\n",\
@@ -634,6 +641,7 @@ DOBJ *computeMHS(DOBJ *smpDOp, AOPTS *aoPtr, DOBJ *pitDOp)
       }
       fprintf(traceFP, "\n");
     }
+#endif
     if(!VOICED) {
       for(n = 0; n < MHS_MAXTRACKS; n++)  /* no valid tracks possible */
 	delTrack(&track[n]);
@@ -945,18 +953,22 @@ LOCAL int findPeaks(double *linPower, MHS_PEAK *peak, MHS_GD *gd)
 	  continue;
 	peak[num].amp = SQRtodB(peakPower) - wfGain;
         if(gd->options & MHS_OPT_POWER) {
+#ifndef WRASSP
 	  if(TRACE['P']) {
 	    fprintf(traceFP, "  F %.0f A %.1f",\
 		    peak[num].freq, peak[num].amp);
 	  }
+#endif
 	  num++;                         /* component always accepted */
 	}
 	else {                                     /* check bandwidth */
 	  bandwidth = sqrt(-2.0 * peakPower / scale);        /* -3 dB */
+#ifndef WRASSP
 	  if(TRACE['P']) {
 	    fprintf(traceFP, "  F %.0f A %.1f B %.1f",\
 		    peak[num].freq, peak[num].amp, bandwidth);
 	  }
+#endif
 	  maxBW = 0.25 * peak[num].freq;             /* maximally 25% */
 	  if(maxBW < 125.0)
 	    maxBW = 125.0;                     /* but at least 125 Hz */
@@ -966,8 +978,10 @@ LOCAL int findPeaks(double *linPower, MHS_PEAK *peak, MHS_GD *gd)
       }
     }
   }
+#ifndef WRASSP
   if(TRACE['P'] && num > 0)
     fprintf(traceFP, "\n");
+#endif
 
   return(num);
 }
@@ -1013,9 +1027,11 @@ LOCAL int sievePeaks(MHS_PEAK *peak, int numPeaks, MHS_CAND *cand,\
 	sieveF0[numSieves++] = subHarm * df;
     }
   }
+#ifndef WRASSP
   if(TRACE['s']) {
-    fprintf(traceFP, "NS = %i\n", numSieves);
+    fprintf(traceFP, "NS = %zd\n", numSieves);
   }
+#endif
 
   for(ns = 0; ns < numSieves; ns++) {
     estF0 = sieveF0[ns];
@@ -1238,6 +1254,7 @@ LOCAL int trackPitch(long frameNr, MHS_CAND *cand, DOBJ *dop)
       return(-1);
   }
 
+#ifndef WRASSP
   if(TRACE['t']) {
     if(active >= 0)
       fprintf(traceFP, "* F0 = %.1f  Q = %i  TQ = %.1f  dur = %.1f\n",\
@@ -1250,7 +1267,7 @@ LOCAL int trackPitch(long frameNr, MHS_CAND *cand, DOBJ *dop)
 		track[i].trackQ, track[i].duration);
     }
   }
-
+#endif
   return(0);
 }
 /***********************************************************************

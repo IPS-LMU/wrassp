@@ -476,7 +476,8 @@ int statPrintHist(STAT *s, FILE *fp)
   int    nd, nd1;
   size_t i;
   double centre;
-  
+
+#ifndef WRASSP 
   if(s != NULL) {
     if(s->histBuf == NULL || s->histNum < 1) {
       s->error = STATERR_NO_DATA;
@@ -507,6 +508,8 @@ int statPrintHist(STAT *s, FILE *fp)
     return(0);
   }
   return(-1);
+#endif
+  return(0);
 }
 /***********************************************************************
 * calculate and return slope of linear regression line                 *

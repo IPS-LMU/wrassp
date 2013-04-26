@@ -178,11 +178,13 @@ DOBJ *asspFOpen(char *filePath, int mode, DOBJ *doPtr)
       strcpy(Cmode, "w+");
       if(!(mode & AFO_TEXT))
 	strcat(Cmode, "b");
+#ifndef WRASSP
       if(strcmp(filePath, "stdout") == 0)
 	dop->fp = stdout;
       else if(strcmp(filePath, "stderr") == 0)
 	dop->fp = stderr;
       else
+#endif
 	dop->fp = fopen(filePath, Cmode);
       if(dop->fp == NULL) {
 	if(dop != doPtr)
@@ -233,8 +235,10 @@ int asspFClose(DOBJ *dop, int action)
     return(-1);
   }
   if(dop->fp != NULL) {
+#ifndef WRASSP
     if(dop->fp != stdout && dop->fp != stderr && dop->fp != stdin)
       fclose(dop->fp);
+#endif
     dop->fp = NULL;
   }
   if(action == AFC_FREE)

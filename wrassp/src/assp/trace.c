@@ -71,7 +71,9 @@ void openTrace(char *id)
       traceFP = fopen(traceFile, "w+");
     if(traceFP == NULL) {
       perror("Could not open trace file");
+#ifndef WRASSP
       traceFP = stderr;
+#endif
     }
     else { 
       if(id != NULL) { /* head new block with identification */
@@ -88,7 +90,11 @@ void openTrace(char *id)
     }
   }
   else
+#ifdef WRASSP
+     traceFP = NULL;
+#else
     traceFP = stderr; /* default output */
+#endif
   return;
 }
 /***********************************************************************
@@ -96,7 +102,11 @@ void openTrace(char *id)
 ***********************************************************************/
 void closeTrace(void)
 {
+#ifndef WRASSP
   if(traceFP != NULL && traceFP != stderr && traceFP != stdout)
+#else
+  if (traceFP != NULL)
+#endif
     fclose(traceFP);
   traceFP = NULL;
   return;

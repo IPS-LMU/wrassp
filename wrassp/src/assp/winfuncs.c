@@ -1138,6 +1138,7 @@ void listWFs(WFLIST *list, FILE *fp)
   WFLIST *wPtr;
   WFDATA *specs;
 
+#ifndef WRASSP
   if(fp == NULL)
     fp = stdout;
   for(m = 0, wPtr = list; wPtr->code != NULL; wPtr++) {
@@ -1155,6 +1156,7 @@ void listWFs(WFLIST *list, FILE *fp)
 	      1.0/(specs->enbw), specs->hsll, specs->roff);
   }
   fprintf(fp, "\n");
+#endif
   return;
 }
 

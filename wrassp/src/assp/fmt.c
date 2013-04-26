@@ -144,6 +144,7 @@ DOC*/
 
 void printFMTrefs(void)
 {
+#ifndef WRASSP
   printf("\nReferences:\n");
   printf("Delsarte, P. and Genin, Y.V. (1986). \"The Split Levinson\n");
   printf("   Algorithm,\" IEEE Trans. ASSP, Vol. 34, 470-478.\n");
@@ -153,6 +154,7 @@ void printFMTrefs(void)
   printf("Scheffers, M. and Simpson, A. (1995). \"LACS: Label Assisted Copy\n");
   printf("   Synthesis, \" Proc. XIIIth Int. Congress of Phonetic Sciences\n");
   printf("   Vol. 2, 346-349.\n");
+#endif
   return;
 }
 
@@ -530,6 +532,7 @@ DOBJ *computeFMT(DOBJ *smpDOp, AOPTS *aoPtr, DOBJ *fmtDOp)
   /* determine how many formants we are going to analyse/evaluate */
   anaFormants = gd->lpOrder / 2;    /* number of formants in raw data */
   bufFormants = MIN(anaFormants, FMT_MAX_BUF);   /* maximum in buffer */
+#ifndef WRASSP
   if(TRACE['A']) {
     fprintf(traceFP, "Analysis parameters\n");
     fprintf(traceFP, "  sample rate = %.1f Hz\n", sampFreq);
@@ -555,6 +558,7 @@ DOBJ *computeFMT(DOBJ *smpDOp, AOPTS *aoPtr, DOBJ *fmtDOp)
 	             "            absQeps = %.4e relQeps %.4e\n",\
 	    term.absPeps, term.relPeps, term.absQeps, term.relQeps);
   }
+#endif
   /* loop over frames */
   clrAsspMsg();
   RESET_PQ = TRUE;
@@ -591,10 +595,12 @@ DOBJ *computeFMT(DOBJ *smpDOp, AOPTS *aoPtr, DOBJ *fmtDOp)
       sortBuf.gain = GAIN_MIN_dB;           /* set to a defined value */
       nomFData(&sortBuf, bufFormants);     /* reset to nominal values */
       RESET_PQ = TRUE; /* NEW in R2.3 */
+#ifndef WRASSP
       if(TRACE['0'] || TRACE['1'] || TRACE['2'] ||
 	 TRACE['3'] || TRACE['4']) {
 	printRaw(&sortBuf, fn, bufFormants, fmtDOp);
       }
+#endif
     }
     else { /* run LP analysis */
       dPtr = &frame[head];                           /* reset pointer */
@@ -616,8 +622,10 @@ DOBJ *computeFMT(DOBJ *smpDOp, AOPTS *aoPtr, DOBJ *fmtDOp)
 	    else
 	      sprintf(bPtr, "\nat T = %.4f",\
 		      FRMNRtoTIME(fn, sampFreq, frameShift));
+#ifndef WRASSP
 	    if(TRACE['F'] || TRACE['f'])
 	      prtAsspMsg(traceFP);
+#endif
 	    err = 1;
 	  }
 	  else {                         /* FATAL error in PF search */
@@ -664,8 +672,10 @@ DOBJ *computeFMT(DOBJ *smpDOp, AOPTS *aoPtr, DOBJ *fmtDOp)
 	  else
 	    sprintf(bPtr, "\nat T = %.4f",\
 		    FRMNRtoTIME(fn, sampFreq, frameShift));
+#ifndef WRASSP
 	  if(TRACE['F'] || TRACE['f'])
 	    prtAsspMsg(traceFP);
+#endif
 	  err = 1;                                 /* instable filter */
 	}
       }
@@ -709,6 +719,7 @@ DOBJ *computeFMT(DOBJ *smpDOp, AOPTS *aoPtr, DOBJ *fmtDOp)
 	    pqStart(refFreq, pqp, anaFormants, sampFreq);
 	}
 	if(i < 0) {
+#ifndef WRASSP
 	  if(TRACE['c'] || TRACE['0'] || TRACE['1'] ||
 	     TRACE['2'] || TRACE['3'] || TRACE['4']) {
 	    if(FILE_IN)
@@ -723,6 +734,7 @@ DOBJ *computeFMT(DOBJ *smpDOp, AOPTS *aoPtr, DOBJ *fmtDOp)
 	  }
 	  if(TRACE['s'])
 	    totFMTfail++;
+#endif
 	  /* OLD: leave previous values in output buffer */
 	  nomFData(&sortBuf, bufFormants); /* NEW in R2.0  reset */
 	  RESET_PQ = TRUE; /* NEW in R2.3 */
@@ -753,8 +765,10 @@ DOBJ *computeFMT(DOBJ *smpDOp, AOPTS *aoPtr, DOBJ *fmtDOp)
 	}
 	if(gd->options & FMT_OPT_INS_ESTS) {
 	  fillGaps(&sortBuf, gd->numFormants, sampFreq);
+#ifndef WRASSP
 	  if(TRACE['5'])
 	    printRaw(&sortBuf, fn, bufFormants, fmtDOp);
+#endif
 	}
       }
     }
@@ -1056,6 +1070,7 @@ LOCAL void setRefTables(double F1)
     if(limits[i].pHi < limits[i].nom)
       limits[i].pHi = limits[i].nom;
   }
+#ifndef WRASSP
   if(TRACE['l']) {
     fprintf(traceFP, "Formant limits and private range:\n");
     for(i = 0; i < FMT_MAX_BUF; i++) {
@@ -1065,6 +1080,7 @@ LOCAL void setRefTables(double F1)
     }
     TRACE['l'] = FALSE;                            /* print only once */
   }
+#endif
   return;
 }
 /***********************************************************************
@@ -1166,18 +1182,22 @@ LOCAL int classFmt(long frameNr, FMTDATA *fPtr, int numFmt, DOBJ *dop)
   double  probEq, maxBW, maxDist, bwFact;
   FMT_GD *gd;
 
+#ifndef WRASSP
   if(TRACE['0']) {
     printRaw(fPtr, frameNr, numFmt, dop);
   }
+#endif
   gd = (FMT_GD *)(dop->generic);
   /* first remove non-interesting poles */
   numFmt = cleanRsn(fPtr, numFmt, dop);
   if(numFmt <= gd->numFormants)
     numFmt = gd->numFormants + 1;
 
+#ifndef WRASSP
   if(TRACE['1']) {
     printRaw(fPtr, frameNr, numFmt, dop);
   }
+#endif
   /*
    * Estimate formant numbers of resonances.
    * NEW in R1.0
@@ -1192,6 +1212,7 @@ LOCAL int classFmt(long frameNr, FMTDATA *fPtr, int numFmt, DOBJ *dop)
   maxDist = 0.5 * (gd->nomF1);                            /* constant */
   for(pass = 1; pass <= FMT_MAX_PASSES; pass++) {
     probRiFn(fPtr, numFmt, gd, probEq);  /* get most probable mapping */
+#ifndef WRASSP
     if(TRACE['2']) {
       printRaw(fPtr, frameNr, numFmt, dop);
       if(TRACE['p']) {
@@ -1203,6 +1224,7 @@ LOCAL int classFmt(long frameNr, FMTDATA *fPtr, int numFmt, DOBJ *dop)
 	fprintf(traceFP, "\n");
       }
     }
+#endif
     /*
      * Try to solve double assignments by merging nearby resonances
      * one of which having a large bandwidth.
@@ -1258,6 +1280,7 @@ LOCAL int classFmt(long frameNr, FMTDATA *fPtr, int numFmt, DOBJ *dop)
   if(merges > 0 || clashes > 0) {
     probEq = 0.0;                       /* no double mappings allowed */
     probRiFn(fPtr, numFmt, gd, probEq);
+#ifndef WRASSP
     if(TRACE['3']) {
       printRaw(fPtr, frameNr, numFmt, dop);
       if(TRACE['p']) {
@@ -1269,6 +1292,7 @@ LOCAL int classFmt(long frameNr, FMTDATA *fPtr, int numFmt, DOBJ *dop)
 	fprintf(traceFP, "\n");
       }
     }
+#endif
   }
   /* finally, shift each resonance into its formant slot */
   for(n = 0; n < FMT_MAX_BUF; n++) {              /* go back to front */
@@ -1289,9 +1313,11 @@ LOCAL int classFmt(long frameNr, FMTDATA *fPtr, int numFmt, DOBJ *dop)
       fPtr->slot[n] = n;
     }
   }
+#ifndef WRASSP
   if(TRACE['4']) {
     printRaw(fPtr, frameNr, numFmt, dop);
   }
+#endif
   return(0);
 }
 /***********************************************************************
