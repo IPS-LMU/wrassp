@@ -1,0 +1,46 @@
+\name{addTrack}
+\alias{addTrack}
+\title{Add a track to an AsspDataObj}
+\usage{
+  addTrack(dobj, trackname, data, format = "INT16",
+    deleteExisting = FALSE)
+}
+\arguments{
+  \item{dobj}{The data object to which the data is to be
+  added}
+
+  \item{trackname}{The name of the new track}
+
+  \item{data}{a matrix with values}
+
+  \item{format}{format for binary writing to file (defaults
+  to 'INT16')}
+
+  \item{deleteExisting}{Delete existing track with the same
+  (default: FALSE)}
+}
+\value{
+  the object including the new track
+}
+\description{
+  Add a track to an AsspDataObj
+}
+\details{
+  The specified data object is extended by a new track
+  named \code{trackname}. If there already is a track with
+  the same name and \code{deleteExisiting} is \code{FALSE}
+  the function does nothing but returns with an error. If
+  \code{deleteExisting} is \code{TRUE} the existing track
+  will be removed (see \code{\link{delTrack}}. \code{data}
+  to be added is a numeric matrix (or will be coerced to
+  one). It must have the same number of rows as the tracks
+  that already exist in the object (if any). TODO add
+  \code{format} information.
+}
+\author{
+  Lasse Bombien
+}
+\seealso{
+  \code{\link{delTrack}}
+}
+

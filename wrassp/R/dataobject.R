@@ -8,6 +8,7 @@
 ##' @param samples (BOOL) if set to false ms values of begin/end are sample numbers
 ##' @return list object containing file data
 ##' @author Lasse Bombien
+##' @aliases getAsspDataObj
 'read.AsspDataObj' <- 'getAsspDataObj' <- function(fname, begin=0, end=0, samples=FALSE) {
   fname <- path.expand(fname)
   .External("getDObj2", fname, begin=begin, end=end, samples=samples, PACKAGE="wrassp")

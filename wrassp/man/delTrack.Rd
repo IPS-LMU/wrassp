@@ -1,0 +1,24 @@
+\name{delTrack}
+\alias{delTrack}
+\title{Remove track from an AsspDataObj}
+\usage{
+  delTrack(dobj, trackname)
+}
+\arguments{
+  \item{dobj}{An object of class AsspDataObj}
+
+  \item{trackname}{the name of a track in this object}
+}
+\value{
+  The object without the track named trackname
+}
+\description{
+  Remove a track from an AsspDataObj object
+}
+\details{
+  .. content for \details{} ..
+}
+\author{
+  Lasse Bombien
+}
+
