@@ -1,11 +1,14 @@
 \name{print.AsspDataObj}
 \alias{print.AsspDataObj}
-\title{print.AsspDataObj}
+\title{print aa summary of an AsspDataObj}
 \usage{
-  print.AsspDataObj(dobj)
+  print.AsspDataObj(x, ...)
 }
 \arguments{
-  \item{dobj}{an object of class AsspDataObj}
+  \item{x}{an object of class AsspDataObj}
+
+  \item{...}{other arguments that might be passed on to
+  other functions}
 }
 \description{
   Prints an overview of ASSP Data Objects

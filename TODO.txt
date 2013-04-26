@@ -9,7 +9,7 @@ MAY 12, 2013!!!
 ######## LASSE ##########
 
 - clean up src folder
-- delTrack, addTrack
+- as.AsspDataObj, delField, addField
 - function names
 - R CMD CHECK
 
