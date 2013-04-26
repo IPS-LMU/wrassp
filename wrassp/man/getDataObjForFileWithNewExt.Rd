@@ -12,7 +12,7 @@
   \item{newExt}{new file extension (e.g. .fms)}
 }
 \value{
-  SSFFdataObj
+  AsspDataObj
 }
 \description{
   Get SSFFdataObj for a file with different extension

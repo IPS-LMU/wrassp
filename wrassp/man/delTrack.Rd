@@ -16,7 +16,7 @@
   Remove a track from an AsspDataObj object
 }
 \details{
-  .. content for \details{} ..
+  .. content for details{} ..
 }
 \author{
   Lasse Bombien

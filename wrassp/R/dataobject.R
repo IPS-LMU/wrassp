@@ -59,9 +59,9 @@
     .Call("writeDObj", dobj, file, PACKAGE="wrassp")
   }
 
-##' .. content for \description{} (no empty lines) ..
+##' .. content for description{} (no empty lines) ..
 ##'
-##' .. content for \details{} ..
+##' .. content for details{} ..
 ##' @title Checks whether x is a valid AsspDataObj
 ##' @param x 
 ##' @param ... 
@@ -78,7 +78,7 @@ is.AsspDataObj <- function (x, ...)
 ##' Remove a track from an
 ##' AsspDataObj object
 ##'
-##' .. content for \details{} ..
+##' .. content for details{} ..
 ##' @title Remove track from an AsspDataObj
 ##' @param dobj An object of class AsspDataObj
 ##' @param trackname the name of a track in this object

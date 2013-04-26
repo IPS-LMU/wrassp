@@ -5,14 +5,14 @@
 ##' @title getDataObjForFileWithNewExt
 ##' @param OrigFilePath file path to the original file (e.g. .wav file)
 ##' @param newExt new file extension (e.g. .fms)
-##' @return SSFFdataObj
+##' @return AsspDataObj
 ##' @author Raphael Winkelmann
 getDataObjForFileWithNewExt <- function(OrigFilePath = NULL, newExt = NULL){
 
 
   splitPath = unlist(strsplit(OrigFilePath, ".", fixed=T))
   path = paste(c(splitPath[1:length(splitPath)-1], newExt), collapse='')
-  resDataObj = getDObj(path)
+  resDataObj = read.AsspDataObj(path)
 
   return(resDataObj)
 
