@@ -5,9 +5,10 @@
   is.AsspDataObj(x, ...)
 }
 \arguments{
-  \item{x}{}
+  \item{x}{an object of class AsspDataObj}
 
-  \item{...}{}
+  \item{...}{optional other arguments passed to further
+  functions}
 }
 \value{
   TRUE or FALSE

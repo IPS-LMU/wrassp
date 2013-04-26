@@ -22,7 +22,8 @@
 ##'
 ##' @param ... other arguments that might be passed on to other functions 
 ##' @author Lasse Bombien
-##' @seealso \code{\link{getDObj}}
+##' @method print AsspDataObj
+##' @seealso \code{\link{read.AsspDataObj}}
 "print.AsspDataObj" <- function(x, ...)
 {
     temp <- attr(x, "filePath")
@@ -63,8 +64,8 @@
 ##'
 ##' .. content for details{} ..
 ##' @title Checks whether x is a valid AsspDataObj
-##' @param x 
-##' @param ... 
+##' @param x an object of class AsspDataObj
+##' @param ... optional other arguments passed to further functions
 ##' @return TRUE or FALSE
 ##' @author Lasse Bombien
 is.AsspDataObj <- function (x, ...)

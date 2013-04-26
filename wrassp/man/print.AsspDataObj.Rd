@@ -2,7 +2,7 @@
 \alias{print.AsspDataObj}
 \title{print aa summary of an AsspDataObj}
 \usage{
-  print.AsspDataObj(x, ...)
+  \method{print}{AsspDataObj} (x, ...)
 }
 \arguments{
   \item{x}{an object of class AsspDataObj}
@@ -20,6 +20,6 @@
   Lasse Bombien
 }
 \seealso{
-  \code{\link{getDObj}}
+  \code{\link{read.AsspDataObj}}
 }
 

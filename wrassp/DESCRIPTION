@@ -26,7 +26,6 @@ Collate:
     'AsspTypes.R'
     'f0ana.R'
     'forest.R'
-    'getDObj.R'
     'mhspitch.R'
     'rfcana.R'
     'rmsana.R'
