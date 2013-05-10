@@ -9,7 +9,7 @@ Authors@R: c(person("Lasse", "Bombien", role = c("aut", "cre"), email =
     "Scheffers", role = "ctb"))
 Description: wrassp is a wrapper to Michel Scheffers' libassp (Advances
     Speech Signal Processor) library for handling and processing
-    speech data. X formats are supproted and a absolutely awesome
+    speech data. X formats are supported and a absolutely awesome
     number of analysis procedures are available.
 License: GPL (>= 2)
 Packaged: 2012-07-04 20:04:08 UTC; lasse

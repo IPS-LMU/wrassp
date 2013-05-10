@@ -19,7 +19,9 @@
   \item{BeginTime}{= <time>: set begin of analysis interval
   to <time> seconds (default: begin of data)}
 
-  \item{CenterTime}{???}
+  \item{CenterTime}{= <time>: set single-frame analysis
+  with the analysis window centred at <time> seconds;
+  overrules BeginTime, EndTime and WindowShift options}
 
   \item{EndTime}{= <time>: set end of analysis interval to
   <time> seconds (default: end of data)}
@@ -51,7 +53,8 @@
   prediction smoothed spectrum CSS : cepstrally smoothed
   spectrum CEP : cepstral coefficients}
 
-  \item{EffectiveLength}{???}
+  \item{EffectiveLength}{make window size effective rather
+  than exact}
 
   \item{Order}{= <num>: set prediction order to <num>
   (default: sampling rate in kHz + 3)}
@@ -59,7 +62,8 @@
   \item{Preemphasis}{= <val>: set pre-emphasis factor to
   <val> (default: -0.95)}
 
-  \item{Deemphasize}{???}
+  \item{Deemphasize}{omit de-emphasis (default: undo
+  spectral tilt due to pre-emphasis used in LP analysis)}
 
   \item{NumCeps}{= <num>: set number of cepstral
   coeffcients used to <num> (default: sampling rate in kHz
@@ -84,17 +88,16 @@
   default is to calculate an unsmoothed narrow-band
   spectrum with the size of the analysis window equal to
   the length of the FFT. The output from the FFT will be
-  converted to a power spectrum in dB from 0 Hz to half the
-  sampling rate (Nyquist frequency). Alternatively, the
-  program can calculate a smoothed spectrum or cepstral
-  coefficients. In the latter case the number of
-  coefficients per output record will also equal the FFT
-  length / 2 + 1 (i.e. be non-mirrored). Analysis results
-  will be written to a file with the base name of the input
-  file and the spectrum type in lower case as extension
-  (e.g. '.dft'). Default output is in single precision
-  floating point binary in SSFF format with the spectrum
-  type in lower case as keyword.
+  converted to a power spectrum in dB from 0 Hz up to and
+  including the Nyquist rate. Alternatively, the program
+  can calculate smoothed spectra or cepstra. In the latter
+  case the number of coefficients per output record will
+  also equal the FFT length / 2 + 1 (i.e. be non-mirrored).
+  Analysis results will be written to a file with the base
+  name of the input file and the spectrum type in lower
+  case as extension (e.g. '.dft'). Default output is in
+  SSFF format with the spectrum type in lower case as track
+  name.
 }
 \author{
   Raphael Winkelmann

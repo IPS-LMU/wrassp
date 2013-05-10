@@ -31,8 +31,8 @@
   \item{WindowSize}{= <dur>: set analysis window size to
   <dur> ms; overrules EffectiveLength option}
 
-  \item{EffectiveLength}{= <dur>: set effective length of
-  analysis window to <dur> ms (default: 20.0)}
+  \item{EffectiveLength}{make window size effective rather
+  than exact}
 
   \item{Window}{= <type>: set analysis window function to
   <type> (default: BLACKMAN)}

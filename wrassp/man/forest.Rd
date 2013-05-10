@@ -28,12 +28,16 @@
   \item{WindowSize}{= <dur>: set analysis window size to
   <dur> ms (default: 30.0)}
 
-  \item{EffectiveLength}{???}
+  \item{EffectiveLength}{make window size effective rather
+  than exact}
 
   \item{NominalF1}{= <freq>: set nominal F1 frequency to
   <freq> Hz (default: 500.0 Hz)}
 
-  \item{Gender}{???}
+  \item{Gender}{= <type>: set gender specific parameters
+  where <type> can be f=female, m=male or u=unspecified
+  (when <type>=f: eff. window length = 12.5 ms nominal F1 =
+  560.0 Hz)}
 
   \item{Estimate}{insert rough frequency estimates of
   missing formants (default: frequency set to zero)}
@@ -71,16 +75,16 @@
   Formant estimation of the signal(s) in <listOfFiles>. Raw
   resonance frequency and bandwidth values are obtained by
   root-solving of the Linear Prediction polynomial from the
-  autocorrelation method and the Split-Levinson algorithm
+  autocorrelation method and the Split-Levinson-Algorithm
   (SLA). Resonances are then classified as formants using
   the so-called Pisarenko frequencies (by-product of the
   SLA) and a formant frequeny range table derived from the
   nominal F1 frequency. The latter may have to be increased
-  by about 10% for female voices (see NominalF1 option).
-  Formant estimates will be written to a file with the base
-  name of the input file and extension '.fms'. Default
-  output is in double precision floating point binary in
-  SSFF format (keywords 'rms', 'gain', 'fm' and 'bw')
+  by about 12% for female voices (see NominalF1 and Gender
+  options). Formant estimates will be written to a file
+  with the base name of the input file and extension
+  '.fms'. Default output is in SSFF binary format (tracks
+  'fm' and ''bw)
 }
 \author{
   Raphael Winkelmann
