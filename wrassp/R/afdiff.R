@@ -21,6 +21,7 @@
 ##' @param ExplicitExt set if you wish to overwride the default extension 
 ##' @return nrOfProcessedFiles or if only one file to process return AsspDataObj of that file
 ##' @author Raphael Winkelmann
+##' @useDynLib wrassp
 'afdiff' <- function(listOfFiles = NULL, optLogFilePath = NULL, 
                      ComputeBackwardDifference = FALSE, ComputeCentralDifference = FALSE, 
                      Channel = 1, ToFile = TRUE, 

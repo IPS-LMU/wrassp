@@ -56,6 +56,7 @@
 ##' @return nrOfProcessedFiles or if only one file to process return
 ##' AsspDataObj of that file
 ##' @author Raphael Winkelmann
+##' @useDynLib wrassp
 'spectrum' <- function(listOfFiles = NULL, optLogFilePath = NULL,
                        BeginTime = 0.0, CenterTime = FALSE, 
                        EndTime = 0.0, Resolution = 40.0, 
