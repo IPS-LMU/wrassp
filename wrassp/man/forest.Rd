@@ -34,10 +34,10 @@
   \item{NominalF1}{= <freq>: set nominal F1 frequency to
   <freq> Hz (default: 500.0 Hz)}
 
-  \item{Gender}{= <type>: set gender specific parameters
-  where <type> can be f=female, m=male or u=unspecified
-  (when <type>=f: eff. window length = 12.5 ms nominal F1 =
-  560.0 Hz)}
+  \item{Gender}{= <code>: set gender specific parameters
+  where <code> = f[emale], m[ale] or u[nknown] (when
+  <code>=f: eff. window length = 12.5 ms nominal F1 = 560.0
+  Hz)}
 
   \item{Estimate}{insert rough frequency estimates of
   missing formants (default: frequency set to zero)}

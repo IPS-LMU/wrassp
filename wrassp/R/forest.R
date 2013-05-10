@@ -23,7 +23,7 @@
 ##' @param WindowSize  = <dur>: set analysis window size to <dur> ms (default: 30.0)
 ##' @param EffectiveLength make window size effective rather than exact
 ##' @param NominalF1 = <freq>: set nominal F1 frequency to <freq> Hz (default: 500.0 Hz)
-##' @param Gender = <type>: set gender specific parameters where <type> can be f=female, m=male or u=unspecified (when <type>=f: eff. window length = 12.5 ms nominal F1 = 560.0 Hz)
+##' @param Gender = <code>: set gender specific parameters where <code> = f[emale], m[ale] or u[nknown] (when <code>=f: eff. window length = 12.5 ms nominal F1 = 560.0 Hz)
 ##' @param Estimate insert rough frequency estimates of missing formants (default: frequency set to zero)
 ##' @param Order decrease default order by 2 (one resonance less)
 ##' @param IncrOrder increase default order by 2 (one resonance more)

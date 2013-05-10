@@ -16,7 +16,7 @@
   \item{BeginTime}{= <time>: set begin of analysis interval
   to <time> seconds (default: begin of file)}
 
-  \item{CenterTime}{=<time> set single-frame analysis with
+  \item{CenterTime}{= <time> set single-frame analysis with
   the analysis window centred at <time> seconds; overrules
   BeginTime, EndTime and WindowShift options}
 

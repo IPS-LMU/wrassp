@@ -9,7 +9,7 @@
 ##' @param listOfFiles vector of file paths to be processed by function 
 ##' @param optLogFilePath path to option log file
 ##' @param BeginTime = <time>: set begin of analysis interval to <time> seconds (default: begin of file)
-##' @param CenterTime =<time>  set single-frame analysis with the analysis window centred at <time> seconds; overrules BeginTime, EndTime and WindowShift options
+##' @param CenterTime = <time>  set single-frame analysis with the analysis window centred at <time> seconds; overrules BeginTime, EndTime and WindowShift options
 ##' @param EndTime = <time>: set end of analysis interval to <time> seconds (default: end of file)
 ##' @param WindowShift = <dur>: set analysis window shift to <dur> ms (default: 5.0)
 ##' @param WindowSize = <dur>:  set analysis window size to <dur> ms (default: 25.0)

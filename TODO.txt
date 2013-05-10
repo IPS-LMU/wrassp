@@ -17,7 +17,5 @@ MAY 12, 2013!!!
 
 - overwrite check
 - test
-- clean up R folder
-- finish documenting
 - check CRAN
-- autogen collate roxygen 
+- autogen NAMESPACE roxygen2 overwrite fix

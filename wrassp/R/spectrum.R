@@ -102,7 +102,7 @@
   externalRes = invisible(.External("performAssp", listOfFiles, 
                                     fname = "spectrum", BeginTime = BeginTime, 
                                     CenterTime = CenterTime, EndTime = EndTime, 
-                                    pectrumType = SpectrumType, Resolution = Resolution, 
+                                    SpectrumType = SpectrumType, Resolution = Resolution, 
                                     FftLength = as.integer(FftLength), WindowSize = WindowSize, 
                                     WindowShift = WindowShift, Window = Window, 
                                     Bandwidth = Bandwidth, EffectiveLength = EffectiveLength, 
