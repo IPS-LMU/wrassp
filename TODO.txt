@@ -11,11 +11,11 @@ MAY 12, 2013!!!
 - clean up src folder
 - as.AsspDataObj, delField, addField
 - function names
+- clean roxygen Doku
 - R CMD CHECK
 
 ####### RAPHAEL #########
 
 - overwrite check
-- test
 - check CRAN
-- autogen NAMESPACE explicit export fix!
+- write testthat tests...
