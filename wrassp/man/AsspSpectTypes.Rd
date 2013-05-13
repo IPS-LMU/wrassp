@@ -8,10 +8,11 @@
   vector containing spectrogram types
 }
 \description{
-  this is the description
+  returns all valid AsspSpectTypes according to the assp
+  library
 }
 \details{
-  and these are the details
+  wrapper function for AsspSpectTypes of wrassp
 }
 \author{
   Raphael Winkelmann

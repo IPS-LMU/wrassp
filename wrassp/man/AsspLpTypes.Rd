@@ -8,10 +8,11 @@
   vector containing lp types
 }
 \description{
-  this is the description
+  returns all valid AsspLpTypes according to the assp
+  library
 }
 \details{
-  an these are the details
+  wrapper function for AsspLpTypes of wrassp
 }
 \author{
   Raphael Winkelmann

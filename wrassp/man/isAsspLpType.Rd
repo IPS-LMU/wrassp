@@ -8,13 +8,11 @@
   \item{lpName}{name of lp type}
 }
 \value{
-  (BOOL) true if lpName is valid
+  (BOOL) true if lpName is valid; false otherwise
 }
 \description{
-  this is the description
-}
-\details{
-  and these are the details
+  checks if given string is a valid AsspLpType according to
+  the assp library
 }
 \author{
   Raphael Winkelmann

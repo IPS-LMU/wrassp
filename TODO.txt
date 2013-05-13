@@ -18,4 +18,4 @@ MAY 12, 2013!!!
 - overwrite check
 - test
 - check CRAN
-- autogen NAMESPACE roxygen2 overwrite fix
+- autogen NAMESPACE explicit export fix!

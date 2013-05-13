@@ -1,10 +1,11 @@
-##' this is the description
-##'
-##' and these are the details
+##' checks if given string is a valid AsspWindowType according to the assp library
+##' 
 ##' @title isAsspWindowType
 ##' @param windowName name of window
-##' @return (BOOL) true if windowName is valid 
+##' @return (BOOL) true if windowName is valid; false otherwise
 ##' @author Raphael Winkelmann
+##' @useDynLib wrassp
+##' @export
 "isAsspWindowType" <- function(windowName = NULL) {
 	if (is.null(windowName)) {
 		stop("No windowName given!")
@@ -23,13 +24,14 @@
 	return(isValidWindow)
 }
 
-##' this is the description
-##'
-##' and these are the details
+##' checks if given string is a valid AsspLpType according to the assp library
+##' 
 ##' @title isAsspLpType
 ##' @param lpName name of lp type
-##' @return (BOOL) true if lpName is valid
+##' @return (BOOL) true if lpName is valid; false otherwise
 ##' @author Raphael Winkelmann
+##' @useDynLib wrassp
+##' @export
 "isAsspLpType" <- function(lpName = NULL) {
 	if (is.null(lpName)) {
 		stop("No lpName given!")
@@ -48,49 +50,28 @@
 	return(isValidLp)
 }
 
-
-##' this is the description
+##' checks if given string is a valid AsspSpectType according to the assp library
 ##'
-##' and these are the details
-##' @title hasDupicateFiles
-##' @param listOfFilePaths 
-##' @param newExt 
-##' @return (BOOL)
+##' @title isAsspSpectType
+##' @param spectName name of lp type
+##' @return (BOOL) true if spectName is valid; false otherwise
 ##' @author Raphael Winkelmann
-#"hasDuplicateFiles" <- function(listOfFilePaths, newExt) {
-
-#	problemFiles <- NULL
-
-#	for (file in listOfFilePaths) {
-#		basePath = unlist(strsplit(file, ".", fixed = T))[1]
-#		newPath = paste(basePath, newExt, sep = "")
-#		if (!file.exists(newPath)) {
-#			print(newPath)
-#			problemFiles <- c(problemFiles, newPath)
-#		}
-#	}
-#
-#	userInput = "xxx"
-#	if (!is.null(problemFiles)) {
-#		while (!((userInput == "y") | (userInput == "n"))) {
-#			cat("######################\n")
-#			print(problemFiles)
-##			cat("\n", "Following files exist with the extension '", newExt, 
-#				"'! Do you wish to overwrite them?", 
-#				"\n")
-#			userInput <- readline("type 'y' for yes or 'n' for no: ")
-#			if (nchar(userInput) == 0) {
-#				userInput = "xxx"
-#			}
-#		}
-#	} else {
-#		userInput = "y"
-#	}
-#
-#	if (userInput == "y") {
-#		return(TRUE)
-#	} else {
-#		return(FALSE)
-#	}
-#
-#}
+##' @useDynLib wrassp
+##' @export
+"isAsspSpectType" <- function(spectName = NULL) {
+  if (is.null(spectName)) {
+    stop("No lpName given!")
+  }
+  
+  spectTypes = AsspSpectTypes()
+  
+  isValidSpect = FALSE
+  
+  for (type in spectTypes) {
+    if (spectName == type) {
+      isValidSpect = TRUE
+      break
+    }
+  }
+  return(isValidSpect)
+}

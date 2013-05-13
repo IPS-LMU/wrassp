@@ -57,6 +57,7 @@
 ##' AsspDataObj of that file
 ##' @author Raphael Winkelmann
 ##' @useDynLib wrassp
+##' @export
 'spectrum' <- function(listOfFiles = NULL, optLogFilePath = NULL,
                        BeginTime = 0.0, CenterTime = FALSE, 
                        EndTime = 0.0, Resolution = 40.0, 
@@ -86,6 +87,10 @@
   
   if(!isAsspWindowType(Window)){
     stop("WindowFunction of type '", Window,"' is not supported!")
+  }
+  
+  if(!isAsspSpectType(SpectrumType)){
+    stop("SpectrumType of type '", SpectrumType, "' is not supported!")
   }
 
   listOfFiles = path.expand(listOfFiles)

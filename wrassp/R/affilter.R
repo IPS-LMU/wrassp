@@ -32,6 +32,7 @@
 ##' @return nrOfProcessedFiles or if only one file to process return AsspDataObj of that file
 ##' @author Raphael Winkelmann
 ##' @useDynLib wrassp
+##' @export
 'affilter' <- function(listOfFiles = NULL, optLogFilePath = NULL, 
                        HighPass = 4000, LowPass = 0, 
                        StopBand = 96, Transition = 250, 

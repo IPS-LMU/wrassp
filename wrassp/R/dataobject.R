@@ -9,6 +9,8 @@
 ##' @return list object containing file data
 ##' @author Lasse Bombien
 ##' @aliases getAsspDataObj
+##' @useDynLib wrassp
+##' @export
 'read.AsspDataObj' <- 'getAsspDataObj' <- function(fname, begin=0, end=0, samples=FALSE) {
   fname <- path.expand(fname)
   .External("getDObj2", fname, begin=begin, end=end, samples=samples, PACKAGE="wrassp")
@@ -24,6 +26,8 @@
 ##' @author Lasse Bombien
 ##' @method print AsspDataObj
 ##' @seealso \code{\link{read.AsspDataObj}}
+##' @useDynLib wrassp
+##' @export
 "print.AsspDataObj" <- function(x, ...)
 {
     temp <- attr(x, "filePath")
@@ -54,6 +58,8 @@
 ##' \code{filePath} attribute of the AsspDataObj
 ##' @return NULL
 ##' @author Lasse Bombien
+##' @useDynLib wrassp
+##' @export
 "write.AsspDataObj" <- function (dobj, file=attr(dobj, 'filePath'))
   {
     file <- path.expand(file)
@@ -68,6 +74,8 @@
 ##' @param ... optional other arguments passed to further functions
 ##' @return TRUE or FALSE
 ##' @author Lasse Bombien
+##' @useDynLib wrassp
+##' @export
 is.AsspDataObj <- function (x, ...)
   {
     if (class (x) != "AsspDataObj")
@@ -85,6 +93,8 @@ is.AsspDataObj <- function (x, ...)
 ##' @param trackname the name of a track in this object
 ##' @return The object without the track named trackname
 ##' @author Lasse Bombien
+##' @useDynLib wrassp
+##' @export
 delTrack <- function (dobj, trackname)
   {
     if (!is.AsspDataObj (dobj))
@@ -122,6 +132,8 @@ delTrack <- function (dobj, trackname)
 ##' @return the object including the new track
 ##' @author Lasse Bombien
 ##' @seealso \code{\link{delTrack}}
+##' @useDynLib wrassp
+##' @export
 addTrack <- function (dobj, trackname, data, format = 'INT16',
                       deleteExisting=FALSE) {
   if (!is.AsspDataObj(dobj))

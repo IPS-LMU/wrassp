@@ -1,32 +1,41 @@
-##' this is the description
+##' returns all valid AsspWindowTypes according to the assp library
 ##'
-##' and these are the details
+##' wrapper function for AsspWindowTypes of wrassp
 ##' @title AsspWindowTypes
 ##' @return vector containing window types
 ##' @author Raphael Winkelmann
-'AsspWindowTypes' <-function(){
+##' @useDynLib wrassp
+##' @export
+'AsspWindowTypes' <- function(){
 	
 	return(.Call("AsspWindowTypes", PACKAGE = "wrassp"))
+  
 }
 
-##' this is the description
+##' returns all valid AsspLpTypes according to the assp library
 ##'
-##' an these are the details
+##' wrapper function for AsspLpTypes of wrassp
 ##' @title AsspLpTypes
 ##' @return vector containing lp types
 ##' @author Raphael Winkelmann
-'AsspLpTypes' <-function(){
+##' @useDynLib wrassp
+##' @export
+'AsspLpTypes' <- function(){
 	
 	return(.Call("AsspLpTypes", PACKAGE = "wrassp"))
+
 }
 
-##' this is the description
+##' returns all valid AsspSpectTypes according to the assp library
 ##'
-##' and these are the details
+##' wrapper function for AsspSpectTypes of wrassp
 ##' @title AsspSpectTypes
 ##' @return vector containing spectrogram types
 ##' @author Raphael Winkelmann
-'AsspSpectTypes' <-function(){
+##' @useDynLib wrassp
+##' @export
+'AsspSpectTypes' <- function(){
 	
 	return(.Call("AsspSpectTypes", PACKAGE = "wrassp"))
+
 }

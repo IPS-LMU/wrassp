@@ -23,6 +23,7 @@
 ##' @return nrOfProcessedFiles or if only one file to process return AsspDataObj of that file
 ##' @author Raphael Winkelmann
 ##' @useDynLib wrassp
+##' @export
 'rmsana' <- function(listOfFiles = NULL, optLogFilePath = NULL,
                      BeginTime = 0.0, CenterTime = FALSE, 
                      EndTime = 0.0, WindowShift = 5.0, 

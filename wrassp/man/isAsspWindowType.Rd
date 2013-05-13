@@ -8,13 +8,11 @@
   \item{windowName}{name of window}
 }
 \value{
-  (BOOL) true if windowName is valid
+  (BOOL) true if windowName is valid; false otherwise
 }
 \description{
-  this is the description
-}
-\details{
-  and these are the details
+  checks if given string is a valid AsspWindowType
+  according to the assp library
 }
 \author{
   Raphael Winkelmann

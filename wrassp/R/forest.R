@@ -35,6 +35,7 @@
 ##' @return nrOfProcessedFiles or if only one file to process return AsspDataObj of that file
 ##' @author Raphael Winkelmann
 ##' @useDynLib wrassp
+##' @export
 'forest' <- function(listOfFiles = NULL, optLogFilePath = NULL,
                      BeginTime = 0.0, EndTime = 0.0, 
                      WindowShift = 5.0, WindowSize = 20.0, 

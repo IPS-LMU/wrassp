@@ -8,10 +8,11 @@
   vector containing window types
 }
 \description{
-  this is the description
+  returns all valid AsspWindowTypes according to the assp
+  library
 }
 \details{
-  and these are the details
+  wrapper function for AsspWindowTypes of wrassp
 }
 \author{
   Raphael Winkelmann

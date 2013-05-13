@@ -22,6 +22,7 @@
 ##' @return nrOfProcessedFiles or if only one file to process return AsspDataObj of that file
 ##' @author Raphael Winkelmann
 ##' @useDynLib wrassp
+##' @export
 'afdiff' <- function(listOfFiles = NULL, optLogFilePath = NULL, 
                      ComputeBackwardDifference = FALSE, ComputeCentralDifference = FALSE, 
                      Channel = 1, ToFile = TRUE, 
