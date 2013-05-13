@@ -13,7 +13,8 @@ MAY 12, 2013!!!
 - function names
 - clean roxygen Doku
 - R CMD CHECK
-
+- Empty file error message does not tell you what file is empty
+- Can't open file ""
 ####### RAPHAEL #########
 
 - overwrite check
