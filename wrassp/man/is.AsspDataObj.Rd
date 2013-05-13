@@ -14,10 +14,7 @@
   TRUE or FALSE
 }
 \description{
-  .. content for description{} (no empty lines) ..
-}
-\details{
-  .. content for details{} ..
+  Checks whether x is a valid AsspDataObj
 }
 \author{
   Lasse Bombien

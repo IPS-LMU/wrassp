@@ -1,7 +1,7 @@
 \name{read.AsspDataObj}
 \alias{getAsspDataObj}
 \alias{read.AsspDataObj}
-\title{Get a dobj data object from a signal/parameter File}
+\title{read.AsspDataObj from a signal/parameter file}
 \usage{
   read.AsspDataObj(fname, begin = 0, end = 0,
     samples = FALSE)
@@ -24,10 +24,7 @@
 \description{
   read.AsspDataObj creates an object of class dobj from a
   signal or parameter file readable by the ASSP Library
-  (WAVE, SSFF, AUP, ...)
-}
-\details{
-  and these are the details
+  (WAVE, SSFF, AU, ...)
 }
 \author{
   Lasse Bombien

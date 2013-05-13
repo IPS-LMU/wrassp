@@ -1,6 +1,6 @@
 \name{write.AsspDataObj}
 \alias{write.AsspDataObj}
-\title{write}
+\title{write.AsspDataObj to file}
 \usage{
   write.AsspDataObj(dobj, file = attr(dobj, "filePath"))
 }
@@ -14,11 +14,8 @@
   NULL
 }
 \description{
-  Writes an object of class ASspDataObj to a file given the
+  Writes an object of class AsspDataObj to a file given the
   meta information contained in the object.
-}
-\details{
-  Details
 }
 \author{
   Lasse Bombien

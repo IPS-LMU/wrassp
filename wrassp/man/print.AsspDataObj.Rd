@@ -1,6 +1,6 @@
 \name{print.AsspDataObj}
 \alias{print.AsspDataObj}
-\title{print aa summary of an AsspDataObj}
+\title{print a summary of an AsspDataObj}
 \usage{
   \method{print}{AsspDataObj} (x, ...)
 }
@@ -12,9 +12,6 @@
 }
 \description{
   Prints an overview of ASSP Data Objects
-}
-\details{
-  nothing really
 }
 \author{
   Lasse Bombien

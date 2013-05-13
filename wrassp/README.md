@@ -15,18 +15,18 @@ wrassp is a wrapper to Michel Scheffer's [libassp](http://libassp.sourceforge.ne
 
 ## Available signal processing functions
 
-+ `acfana()` 
-+ `afdiff()`
-+ `affilter()` 
-+ `f0_ksv()`
-+ `f0_mhs()`
-+ `forest()`
-+ `rfcana()`
-+ `rmsana()`
-+ `spectrum()`
-+ `zcrana()`
++ `acfana()` = Analysis of short-term autocorrelation function
++ `afdiff()` = Computes the first difference of the signal
++ `affilter()` = Filters the audio signal (see docs for types)
++ `f0_ksv()` = F0 analysis of the signal
++ `f0_mhs()` = Pitch analysis of the speech signal using Michel's/Modified Harmonic Sieve algorithm
++ `forest()` = Formant estimation
++ `rfcana()` = Linear Prediction analysis
++ `rmsana()` = Analysis of short-term Root Mean Square amplitude
++ `spectrum()` = Short-term spectral analysis (see docs for types)
++ `zcrana()` = Analysis of the averages of the short-term positive and negative zero-crossing rates
 
-(see the R documentation of these functions for more details)
+(see the respective R documentation for more details on all of these functions)
 
 ## Available file handling functions
 

@@ -1,7 +1,7 @@
-##' read.AsspDataObj creates an object of class dobj from a signal or parameter file readable by the ASSP Library (WAVE, SSFF, AUP, ...)
+##' read.AsspDataObj creates an object of class dobj from a signal or parameter 
+##' file readable by the ASSP Library (WAVE, SSFF, AU, ...)
 ##'
-##' and these are the details
-##' @title Get a dobj data object from a signal/parameter File
+##' @title read.AsspDataObj from a signal/parameter file
 ##' @param fname filename of the signal or parameter file
 ##' @param begin begin time (default is in ms) of segment to retrieve
 ##' @param end end time (default is in ms) of segment to retrieve
@@ -18,8 +18,7 @@
 
 ##' Prints an overview of ASSP Data Objects
 ##'
-##' nothing really
-##' @title print aa summary of an AsspDataObj
+##' @title print a summary of an AsspDataObj
 ##' @param x an object of class AsspDataObj
 ##'
 ##' @param ... other arguments that might be passed on to other functions 
@@ -48,11 +47,10 @@
     }
 }
 
-##' Writes an object of class ASspDataObj to a file given the meta information
+##' Writes an object of class AsspDataObj to a file given the meta information
 ##' contained in the object.
 ##'
-##' Details
-##' @title write
+##' @title write.AsspDataObj to file
 ##' @param dobj an object of class AsspDataObj
 ##' @param file file name as a character string, defaults to the
 ##' \code{filePath} attribute of the AsspDataObj
@@ -66,9 +64,8 @@
     .Call("writeDObj", dobj, file, PACKAGE="wrassp")
   }
 
-##' .. content for description{} (no empty lines) ..
+##' Checks whether x is a valid AsspDataObj
 ##'
-##' .. content for details{} ..
 ##' @title Checks whether x is a valid AsspDataObj
 ##' @param x an object of class AsspDataObj
 ##' @param ... optional other arguments passed to further functions
@@ -87,7 +84,6 @@ is.AsspDataObj <- function (x, ...)
 ##' Remove a track from an
 ##' AsspDataObj object
 ##'
-##' .. content for details{} ..
 ##' @title Remove track from an AsspDataObj
 ##' @param dobj An object of class AsspDataObj
 ##' @param trackname the name of a track in this object
