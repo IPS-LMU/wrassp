@@ -30,6 +30,9 @@
 
   \item{ExplicitExt}{set if you wish to overwride the
   default extension}
+
+  \item{forceToLog}{option to override the package default.
+  Option should be left alone by normal user}
 }
 \value{
   nrOfProcessedFiles or if only one file to process return

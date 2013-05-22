@@ -32,6 +32,7 @@
 ##' @param Preemphasis = <val>: set pre-emphasis factor to <val> (-1 <= val <= 0) (default: dependent on sample rate and nominal F1)
 ##' @param ToFile write results to file (default extension is .fms)
 ##' @param ExplicitExt set if you wish to overwride the default extension
+##' @param forceToLog option to override the package default. Option should be left alone by normal user
 ##' @return nrOfProcessedFiles or if only one file to process return AsspDataObj of that file
 ##' @author Raphael Winkelmann
 ##' @useDynLib wrassp

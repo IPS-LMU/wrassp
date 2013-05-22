@@ -53,6 +53,7 @@
 ##' (default: sampling rate in kHz + 1; minimum: 2)
 ##' @param ToFile write results to file (default extension depends on )
 ##' @param ExplicitExt set if you wish to overwride the default extension
+##' @param forceToLog option to override the package default. Option should be left alone by normal user
 ##' @return nrOfProcessedFiles or if only one file to process return
 ##' AsspDataObj of that file
 ##' @author Raphael Winkelmann
