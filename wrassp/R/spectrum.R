@@ -60,17 +60,17 @@
 ##' @useDynLib wrassp
 ##' @export
 'spectrum' <- function(listOfFiles = NULL, optLogFilePath = NULL,
-                       BeginTime = 0.0, CenterTime = FALSE, 
-                       EndTime = 0.0, Resolution = 40.0, 
+                       BeginTime = 0.0, CenterTime = FALSE,
+                       EndTime = 0.0, Resolution = 40.0,
                        FftLength = 0, WindowSize = 20.0,
-                       WindowShift = 5.0, Window = 'BLACKMAN', 
+                       WindowShift = 5.0, Window = 'BLACKMAN',
                        Bandwidth = 0.0, SpectrumType = 'DFT',
                        EffectiveLength = FALSE, Order = 0,
-                       Preemphasis = 0.0, Deemphasize = FALSE, 
-                       NumCeps = 0, ToFile = TRUE, 
+                       Preemphasis = -0.95, Deemphasize = FALSE,
+                       NumCeps = 0, ToFile = TRUE,
                        ExplicitExt = NULL, forceToLog = forceToLogDefault){
   
-  ## #########################
+  ###########################
   ## a few parameter checks and expand paths
   
   if (is.null(listOfFiles)) {
