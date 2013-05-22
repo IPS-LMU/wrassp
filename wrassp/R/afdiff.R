@@ -26,7 +26,7 @@
 'afdiff' <- function(listOfFiles = NULL, optLogFilePath = NULL, 
                      ComputeBackwardDifference = FALSE, ComputeCentralDifference = FALSE, 
                      Channel = 1, ToFile = TRUE, 
-                     ExplicitExt=NULL) {
+                     ExplicitExt=NULL, forceToLog = forceToLogDefault){
 
 	###########################
 	# a few parameter checks and expand paths
@@ -37,11 +37,13 @@
 		           "the given analysis function."))
 	}
 
-  if (is.null(optLogFilePath)){
-    warning("optLogFilePath is NULL! -> not logging!")
-  }else{
-    optLogFilePath = path.expand(optLogFilePath)          
-  }
+	if (is.null(optLogFilePath) && forceToLog){
+	  stop("optLogFilePath is NULL! -> not logging!")
+	}else{
+	  if(forceToLog){
+	    optLogFilePath = path.expand(optLogFilePath)  
+	  }
+	}
 
   listOfFiles = path.expand(listOfFiles)
         
@@ -65,7 +67,7 @@
   ############################
 	# write options to options log file
 
-	if (!is.null(optLogFilePath)){
+	if (forceToLog){
 	  cat("\n##################################\n", file = optLogFilePath, append = T)
 	  cat("##################################\n", file = optLogFilePath, append = T)
 	  cat("######## afdiff performed ########\n", file = optLogFilePath, append = T)

@@ -8,7 +8,7 @@
     WindowShift = 5, Gender = "u", MaxF = 600, MinF = 50,
     MinAmp = 50, MinAC1 = 0.25, MinRMS = 18, MaxZCR = 3000,
     MinProb = 0.52, PlainSpectrum = FALSE, ToFile = TRUE,
-    ExplicitExt = NULL)
+    ExplicitExt = NULL, forceToLog = forceToLogDefault)
 }
 \arguments{
   \item{listOfFiles}{vector of file paths to be processed

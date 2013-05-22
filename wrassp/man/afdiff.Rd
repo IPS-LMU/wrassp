@@ -5,7 +5,8 @@
   afdiff(listOfFiles = NULL, optLogFilePath = NULL,
     ComputeBackwardDifference = FALSE,
     ComputeCentralDifference = FALSE, Channel = 1,
-    ToFile = TRUE, ExplicitExt = NULL)
+    ToFile = TRUE, ExplicitExt = NULL,
+    forceToLog = forceToLogDefault)
 }
 \arguments{
   \item{listOfFiles}{vector of file paths to be processed

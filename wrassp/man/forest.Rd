@@ -8,7 +8,7 @@
     NominalF1 = 500, Gender = "m", Estimate = FALSE,
     Order = 0, IncrOrder = 0, NumFormants = 4,
     Window = "BLACKMAN", Preemphasis = -0.8, ToFile = TRUE,
-    ExplicitExt = NULL)
+    ExplicitExt = NULL, forceToLog = forceToLogDefault)
 }
 \arguments{
   \item{listOfFiles}{vector of file paths to be processed

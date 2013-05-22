@@ -31,7 +31,8 @@
                      WindowSize = 20.0, EffectiveLength = TRUE, 
                      Window = "BLACKMAN", AnalysisOrder = 0, 
                      EnergyNormalization = FALSE, LengthNormalization = FALSE, 
-                     ToFile = TRUE, ExplicitExt = NULL) {
+                     ToFile = TRUE, ExplicitExt = NULL,
+                     forceToLog = forceToLogDefault){
 
 	###########################
 	# a few parameter checks and expand paths
@@ -42,10 +43,12 @@
 		           "the given analysis function."))
 	}
 
-  if (is.null(optLogFilePath)){
-    warning("optLogFilePath is NULL! -> not logging!")
+  if (is.null(optLogFilePath) && forceToLog){
+    stop("optLogFilePath is NULL! -> not logging!")
   }else{
-    optLogFilePath = path.expand(optLogFilePath)
+    if(forceToLog){
+      optLogFilePath = path.expand(optLogFilePath)  
+    }
   }
         
 	if(!isAsspWindowType(Window)){
@@ -76,7 +79,7 @@
 
 	############################
 	# write options to options log file
-	if (!is.null(optLogFilePath)){
+	if (forceToLog){
 	  
 	  cat("\n##################################\n", file = optLogFilePath, append = T)
 	  cat("##################################\n", file = optLogFilePath, append = T)

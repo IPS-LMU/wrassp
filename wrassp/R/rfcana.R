@@ -39,7 +39,8 @@
                      WindowSize = 20.0, EffectiveLength = TRUE, 
                      Window = 'BLACKMAN', Order = 0, 
                      Preemphasis = -0.95, LpType = 'RFC', 
-                     ToFile = TRUE, ExplicitExt = NULL) {
+                     ToFile = TRUE, ExplicitExt = NULL,
+                     forceToLog = forceToLogDefault){
 	
 	
 	###########################
@@ -51,11 +52,13 @@
 		           "the given analysis function."))
 	}
 
-  if (is.null(optLogFilePath)){
-    warning("optLogFilePath is NULL! -> not logging!")
-  }else{
-    optLogFilePath = path.expand(optLogFilePath)  
-  }
+	if (is.null(optLogFilePath) && forceToLog){
+	  stop("optLogFilePath is NULL! -> not logging!")
+	}else{
+	  if(forceToLog){
+	    optLogFilePath = path.expand(optLogFilePath)  
+	  }
+	}
 	
 	if(!isAsspWindowType(Window)){
 		stop("WindowFunction of type '", Window,"' is not supported!")
@@ -92,7 +95,7 @@
   ############################
   # write options to options log file
   
-	if (!is.null(optLogFilePath)){
+	if (forceToLog){
     cat("\n##################################\n", file = optLogFilePath, append = T)
     cat("##################################\n", file = optLogFilePath, append = T)
     cat("######## rfcana performed ########\n", file = optLogFilePath, append = T)

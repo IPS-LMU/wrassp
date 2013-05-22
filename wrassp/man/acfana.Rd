@@ -8,7 +8,7 @@
     EffectiveLength = TRUE, Window = "BLACKMAN",
     AnalysisOrder = 0, EnergyNormalization = FALSE,
     LengthNormalization = FALSE, ToFile = TRUE,
-    ExplicitExt = NULL)
+    ExplicitExt = NULL, forceToLog = forceToLogDefault)
 }
 \arguments{
   \item{listOfFiles}{vector of file paths to be processed

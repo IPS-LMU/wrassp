@@ -1,27 +1,6 @@
-##' force user to use logging (BOOL)
+##' Bool switch as default for logging options
 ##'
-##' package global to force user to log function calls and parameters (done automatically)
-##' @title forceToLog
+##' this is used to switch of force logging of all signal processing functions
+##' @title forceToLogDefault (BOOL)
 ##' @author Raphael Winkelmann
-##' @useDynLib wrassp
-##' @export
-'forceToLog' <- TRUE;
-
-##' bla
-##'
-##' bli
-##' @title toggleForceToLog
-##' @author Raphael Winkelmann
-##' @useDynLib wrassp
-##' @export
-'toggleForceToLog' <- function(){
-  
-  if(forceToLog){
-    cat("is true -> swtiching to false")
-    forceToLog <<- FALSE
-  }else{
-    cat("is false -> switching to true")
-    forceToLog <<- TRUE
-  }
- 
-}
+'forceToLogDefault' <- TRUE
