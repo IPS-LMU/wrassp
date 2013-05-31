@@ -41,7 +41,7 @@ wrassp is a wrapper to Michel Scheffer's [libassp](http://libassp.sourceforge.ne
 
 **Lasse Bombien**
 
-+ [github](http://github.com/lassesGitUserName)
++ [github](http://github.com/quabolasse)
 
 
 **Affiliations**
