@@ -5,7 +5,7 @@ wrassp is a wrapper to Michel Scheffer's [libassp](http://libassp.sourceforge.ne
 
 ## Quick start
  
-* Download and install the package: `install.packages("wrassp")`
+* Download then install the package with: `install.packages("path/to/wrassp", repos = NULL, type="source")`
 
 * load the library: `library("wrassp")`
 
@@ -37,12 +37,10 @@ wrassp is a wrapper to Michel Scheffer's [libassp](http://libassp.sourceforge.ne
 
 **Raphael Winkelmann**
 
-+ [email](raphael@phonetik.uni-muenchen.de)
 + [github](http://github.com/raphywink)
 
 **Lasse Bombien**
 
-+ [email](lasse@phonetik.uni-muenchen.de)
 + [github](http://github.com/lassesGitUserName)
 
 
