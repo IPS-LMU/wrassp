@@ -1,6 +1,6 @@
 Package: wrassp
-Version: 0.2
-Date: 2012-07-04
+Version: 0.3
+Date: 2013-06-06
 Title: R interface to ASSP Library
 Authors@R: c(person("Lasse", "Bombien", role = c("aut", "cre"), email =
     "lasse@phonetik.uni-muenchen.de"), person("Raphael",
@@ -16,7 +16,7 @@ Description: wrassp is a wrapper to Michel Scheffer's libassp (Advanced Speech
     rate, filtering etc. This wrapper library for R exposes a large subset of
     the signal processing functions to R in a (hopefully) user friendly manor.
 License: GPL (>= 2)
-Packaged: 2012-07-04 20:04:08 UTC; lasse
+Packaged: 2013-06-06 15:09:08 UTC; raphael
 Author: Lasse Bombien [aut, cre],
     Raphael Winkelmann [aut, cre],
     Michel Scheffers [ctb]
