@@ -24,7 +24,7 @@
                      BeginTime = 0.0, CenterTime = FALSE, 
                      EndTime = 0.0, WindowShift = 5.0, 
                      WindowSize = 25.0, ToFile = TRUE, 
-                     ExplicitExt = NULL, forceToLog = forceToLogDefault){
+                     ExplicitExt = NULL, forceToLog = TRUE){
 
 	###########################
 	# a few parameter checks and expand paths

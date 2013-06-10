@@ -7,7 +7,7 @@
     WindowShift = 5, WindowSize = 20,
     EffectiveLength = TRUE, Linear = FALSE,
     Window = "HAMMING", ToFile = TRUE, ExplicitExt = NULL,
-    forceToLog = forceToLogDefault)
+    forceToLog = TRUE)
 }
 \arguments{
   \item{listOfFiles}{vector of file paths to be processed

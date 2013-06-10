@@ -68,7 +68,7 @@
                        EffectiveLength = FALSE, Order = 0,
                        Preemphasis = -0.95, Deemphasize = FALSE,
                        NumCeps = 0, ToFile = TRUE,
-                       ExplicitExt = NULL, forceToLog = forceToLogDefault){
+                       ExplicitExt = NULL, forceToLog = TRUE){
   
   ###########################
   ## a few parameter checks and expand paths

@@ -33,7 +33,7 @@
                      Window = "BLACKMAN", AnalysisOrder = 0, 
                      EnergyNormalization = FALSE, LengthNormalization = FALSE, 
                      ToFile = TRUE, ExplicitExt = NULL,
-                     forceToLog = forceToLogDefault){
+                     forceToLog = TRUE){
 
 	###########################
 	# a few parameter checks and expand paths

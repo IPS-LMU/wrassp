@@ -27,7 +27,7 @@
 'afdiff' <- function(listOfFiles = NULL, optLogFilePath = NULL, 
                      ComputeBackwardDifference = FALSE, ComputeCentralDifference = FALSE, 
                      Channel = 1, ToFile = TRUE, 
-                     ExplicitExt=NULL, forceToLog = forceToLogDefault){
+                     ExplicitExt=NULL, forceToLog = TRUE){
 
 	###########################
 	# a few parameter checks and expand paths

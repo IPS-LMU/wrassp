@@ -7,9 +7,9 @@
     Resolution = 40, FftLength = 0, WindowSize = 20,
     WindowShift = 5, Window = "BLACKMAN", Bandwidth = 0,
     SpectrumType = "DFT", EffectiveLength = FALSE,
-    Order = 0, Preemphasis = 0, Deemphasize = FALSE,
+    Order = 0, Preemphasis = -0.95, Deemphasize = FALSE,
     NumCeps = 0, ToFile = TRUE, ExplicitExt = NULL,
-    forceToLog = forceToLogDefault)
+    forceToLog = TRUE)
 }
 \arguments{
   \item{listOfFiles}{vector of file paths to be processed

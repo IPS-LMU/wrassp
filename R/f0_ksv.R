@@ -37,7 +37,7 @@
                                 MaxF = 600, MinF = 50, 
                                 MinAmp = 50, MaxZCR = 3000.0, 
                                 ToFile = TRUE, ExplicitExt = NULL,
-                                forceToLog = forceToLogDefault){
+                                forceToLog = TRUE){
   
   ###########################
   # a few parameter checks and expand paths

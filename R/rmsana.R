@@ -31,7 +31,7 @@
                      WindowSize = 20.0, EffectiveLength = TRUE, 
                      Linear = FALSE, Window = 'HAMMING', 
                      ToFile = TRUE, ExplicitExt = NULL,
-                     forceToLog = forceToLogDefault){
+                     forceToLog = TRUE){
 
 
 	###########################

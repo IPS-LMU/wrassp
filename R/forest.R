@@ -45,7 +45,7 @@
                      Order = 0, IncrOrder = 0, 
                      NumFormants = 4, Window = 'BLACKMAN', 
                      Preemphasis = -0.8, ToFile = TRUE, 
-                     ExplicitExt = NULL, forceToLog = forceToLogDefault){
+                     ExplicitExt = NULL, forceToLog = TRUE){
 	
 	###########################
 	# a few parameter checks and expand paths
