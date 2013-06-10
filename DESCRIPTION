@@ -36,4 +36,3 @@ Collate:
     'spectrum.R'
     'zcrana.R'
     'dataobject.R'
-    'packageStateVars.R'
