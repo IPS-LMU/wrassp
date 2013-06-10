@@ -95,6 +95,10 @@
     stop("SpectrumType of type '", SpectrumType, "' is not supported!")
   }
 
+  ###########################
+  # remove file:// and expand listOfFiles (SIC)
+  
+  listOfFiles = gsub("^file://","", listOfFiles)
   listOfFiles = path.expand(listOfFiles)
   
   ##########################

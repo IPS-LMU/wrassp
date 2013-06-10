@@ -55,9 +55,13 @@
 	if(!isAsspWindowType(Window)){
 		stop("WindowFunction of type '", Window,"' is not supported!")
 	}
-        
-  listOfFiles = path.expand(listOfFiles)
-        
+  
+  ###########################
+  # remove file:// and expand listOfFiles (SIC)
+  
+	listOfFiles = gsub("^file://","", listOfFiles)
+	listOfFiles = path.expand(listOfFiles)
+  
 	###########################
 	# perform analysis
 

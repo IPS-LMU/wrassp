@@ -55,7 +55,11 @@
       optLogFilePath = path.expand(optLogFilePath)  
     }
   }
+
+  ###########################
+  # remove file:// and expand listOfFiles (SIC)
   
+  listOfFiles = gsub("^file://","", listOfFiles)
   listOfFiles = path.expand(listOfFiles)
   
   ###########################

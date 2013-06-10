@@ -69,7 +69,11 @@
 		stop("LpType of type '", LpType,"' is not supported!")
 	}
         
-  listOfFiles = path.expand(listOfFiles)
+	###########################
+	# remove file:// and expand listOfFiles (SIC)
+	
+	listOfFiles = gsub("^file://","", listOfFiles)
+	listOfFiles = path.expand(listOfFiles)
   
 	
 	###########################
