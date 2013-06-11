@@ -86,24 +86,27 @@
   # write options to options log file
   
   if (forceToLog){
-    cat("\n##################################\n", file = optLogFilePath, append = T)
-    cat("##################################\n", file = optLogFilePath, append = T)
-    cat("####### affilter performed #######\n", file = optLogFilePath, append = T)
+    optionsGivenAsArgs = as.list(match.call(expand.dots = TRUE))
+    wrassp.logger(optionsGivenAsArgs[[1]], optionsGivenAsArgs[-1],
+                  optLogFilePath, listOfFiles)
     
-    cat("Timestamp: ", paste(Sys.time()), '\n', file = optLogFilePath, append = T)
-    cat("HighPass", HighPass, "\n", file = optLogFilePath, append = T)
-    cat("LowPass", LowPass, "\n", file = optLogFilePath, append = T)
-    cat("StopBand", StopBand, "\n", file = optLogFilePath, append = T)
-    cat("Transition", Transition, "\n", file = optLogFilePath, append = T) 
-    cat("UseIIR", UseIIR, "\n", file = optLogFilePath, append = T)
-    cat("NumIIRsections: ", NumIIRsections, "\n", file = optLogFilePath, append = T)
-    
-    cat("ToFile: ", ToFile, "\n", file = optLogFilePath, append = T)
-    cat("ExplicitExt: ", ExplicitExt, "\n", file = optLogFilePath, append = T)
-    
-    cat(" => on files:\n\t", file = optLogFilePath, append = T)
-    cat(paste(listOfFiles, collapse="\n\t"), file = optLogFilePath, append = T) 
-  
+#     cat("\n##################################\n", file = optLogFilePath, append = T)
+#     cat("##################################\n", file = optLogFilePath, append = T)
+#     cat("####### affilter performed #######\n", file = optLogFilePath, append = T)
+#     
+#     cat("Timestamp: ", paste(Sys.time()), '\n', file = optLogFilePath, append = T)
+#     cat("HighPass", HighPass, "\n", file = optLogFilePath, append = T)
+#     cat("LowPass", LowPass, "\n", file = optLogFilePath, append = T)
+#     cat("StopBand", StopBand, "\n", file = optLogFilePath, append = T)
+#     cat("Transition", Transition, "\n", file = optLogFilePath, append = T) 
+#     cat("UseIIR", UseIIR, "\n", file = optLogFilePath, append = T)
+#     cat("NumIIRsections: ", NumIIRsections, "\n", file = optLogFilePath, append = T)
+#     
+#     cat("ToFile: ", ToFile, "\n", file = optLogFilePath, append = T)
+#     cat("ExplicitExt: ", ExplicitExt, "\n", file = optLogFilePath, append = T)
+#     
+#     cat(" => on files:\n\t", file = optLogFilePath, append = T)
+#     cat(paste(listOfFiles, collapse="\n\t"), file = optLogFilePath, append = T)
   }
   
   #############################
