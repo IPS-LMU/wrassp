@@ -23,3 +23,7 @@ Thumbs.db
 # Emacs Backups #
 ################
 *~
+
+# Sublime Stuff #
+#################
+*.sublime*
