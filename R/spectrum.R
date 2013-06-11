@@ -21,7 +21,9 @@
 ##' @param optLogFilePath path to option log file
 ##' @param BeginTime = <time>: set begin of analysis interval to <time> seconds
 ##' (default: begin of data)
-##' @param CenterTime = <time>: set single-frame analysis with the analysis window centred at <time> seconds; overrules BeginTime, EndTime and WindowShift options
+##' @param CenterTime = <time>: set single-frame analysis with the analysis
+##' window centred at <time> seconds; overrules BeginTime, EndTime and
+##' WindowShift options
 ##' @param EndTime = <time>: set end of analysis interval to <time> seconds
 ##' (default: end of data)
 ##' @param Resolution = <freq>: set FFT length to the smallest value which
@@ -48,12 +50,14 @@
 ##' rate in kHz + 3)
 ##' @param Preemphasis = <val>: set pre-emphasis factor to <val> (default:
 ##' -0.95)
-##' @param Deemphasize omit de-emphasis (default: undo spectral tilt due to pre-emphasis used in LP analysis)
+##' @param Deemphasize omit de-emphasis (default: undo spectral tilt due to
+##' pre-emphasis used in LP analysis)
 ##' @param NumCeps = <num>: set number of cepstral coeffcients used to <num>
 ##' (default: sampling rate in kHz + 1; minimum: 2)
 ##' @param ToFile write results to file (default extension depends on )
 ##' @param ExplicitExt set if you wish to overwride the default extension
-##' @param forceToLog option to override the package default. Option should be left alone by normal user
+##' @param forceToLog option to override the package default. Option should be
+##' left alone by normal user
 ##' @return nrOfProcessedFiles or if only one file to process return
 ##' AsspDataObj of that file
 ##' @author Raphael Winkelmann
@@ -70,7 +74,7 @@
                        NumCeps = 0, ToFile = TRUE,
                        ExplicitExt = NULL, forceToLog = TRUE){
   
-  ###########################
+  ## ########################
   ## a few parameter checks and expand paths
   
   if (is.null(listOfFiles)) {
@@ -95,13 +99,13 @@
     stop("SpectrumType of type '", SpectrumType, "' is not supported!")
   }
 
-  ###########################
-  # remove file:// and expand listOfFiles (SIC)
+  ## ########################
+  ## remove file:// and expand listOfFiles (SIC)
   
   listOfFiles = gsub("^file://","", listOfFiles)
   listOfFiles = path.expand(listOfFiles)
   
-  ##########################
+  ## #######################
   ## perform analysis
 
   if(length(listOfFiles)==1){
@@ -112,28 +116,31 @@
   }	
   
   externalRes = invisible(.External("performAssp", listOfFiles, 
-                                    fname = "spectrum", BeginTime = BeginTime, 
-                                    CenterTime = CenterTime, EndTime = EndTime, 
-                                    SpectrumType = SpectrumType, Resolution = Resolution, 
-                                    FftLength = as.integer(FftLength), WindowSize = WindowSize, 
-                                    WindowShift = WindowShift, Window = Window, 
-                                    Bandwidth = Bandwidth, EffectiveLength = EffectiveLength, 
-                                    Order = as.integer(Order), Preemphasis = Preemphasis, 
-                                    Deemphasize = Deemphasize, NumCeps = as.integer(NumCeps), 
-                                    ToFile = ToFile, ExplicitExt = ExplicitExt, 
-                                    ProgressBar = pb, PACKAGE = "wrassp"))
+    fname = "spectrum", BeginTime = BeginTime, 
+    CenterTime = CenterTime, EndTime = EndTime, 
+    SpectrumType = SpectrumType,
+    Resolution = Resolution, 
+    FftLength = as.integer(FftLength), WindowSize = WindowSize, 
+    WindowShift = WindowShift, Window = Window, 
+    Bandwidth = Bandwidth, EffectiveLength = EffectiveLength, 
+    Order = as.integer(Order), Preemphasis = Preemphasis, 
+    Deemphasize = Deemphasize, NumCeps = as.integer(NumCeps), 
+    ToFile = ToFile, ExplicitExt = ExplicitExt, 
+    ProgressBar = pb, PACKAGE = "wrassp"))
 
 
-  ###########################
+  ## #########################
   ## write options to options log file
   if (forceToLog){
     
-    cat("\n##################################\n", file = optLogFilePath, append = T)
-    cat("##################################\n", file = optLogFilePath, append = T)
-    cat("##### dftSpectrum performed ######\n", file = optLogFilePath, append = T)
-
-    cat("Timestamp: ", paste(Sys.time()), '\n', file = optLogFilePath, append = T)
-
+    cat("\n##################################\n", file = optLogFilePath,
+        append = T)
+    cat("##################################\n", file = optLogFilePath,
+        append = T)
+    cat("##### dftSpectrum performed ######\n", file = optLogFilePath,
+        append = T)
+    cat("Timestamp: ", paste(Sys.time()), '\n', file = optLogFilePath,
+        append = T)
     cat("BeginTime: ", BeginTime, '\n', file = optLogFilePath, append = T)
     cat("CenterTime: ", CenterTime, '\n', file = optLogFilePath, append = T)
     cat("EndTime: ", EndTime, '\n', file = optLogFilePath, append = T)
@@ -144,12 +151,13 @@
     cat("WindowShift: ", WindowShift, '\n', file = optLogFilePath, append = T)
     cat("Window: ", Window, '\n', file = optLogFilePath, append = T)
     cat("Bandwidth: ", Bandwidth, '\n', file = optLogFilePath, append = T)
-    cat("EffectiveLength: ", EffectiveLength, '\n', file = optLogFilePath, append = T)
+    cat("EffectiveLength: ", EffectiveLength, '\n', file = optLogFilePath,
+        append = T)
     cat("Order: ", Order, '\n', file = optLogFilePath, append = T)
     cat("Preemphasis: ", Preemphasis, '\n', file = optLogFilePath, append = T)
     cat("Deemphasize: ", Deemphasize, '\n', file = optLogFilePath, append = T)
     cat("NumCeps: ", NumCeps, '\n', file = optLogFilePath, append = T)
-  
+    
 
     cat("ToFile: ", ToFile, "\n", file = optLogFilePath, append = T)
     cat("ExplicitExt: ", ExplicitExt, "\n", file = optLogFilePath, append = T)
@@ -158,7 +166,7 @@
     cat(paste(listOfFiles, collapse="\n\t"), file = optLogFilePath, append = T)
   }
   
-  ############################
+  ## #########################
   ## return dataObj if length only one file
   
   if(!(length(listOfFiles)==1)){
