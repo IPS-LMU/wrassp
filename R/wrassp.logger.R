@@ -14,17 +14,20 @@
 wrassp.logger <- function(fName, fOpts,
                           optLogFilePath, listOfFiles){
   
-  cat("\n##################################\n", file = optLogFilePath, append = T)
-  cat("##################################\n", file = optLogFilePath, append = T)
-  cat(paste("########", fName, "performed ########\n"), file = optLogFilePath, append = T)
+  fid = file(optLogFilePath)
   
-  cat("Timestamp: ", paste(Sys.time()), '\n', file = optLogFilePath, append = T)
+  cat("\n##################################\n", file = fid, append = T)
+  cat("##################################\n", file = fid, append = T)
+  cat(paste("########", fName, "performed ########\n"), file = fid, append = T)
+  
+  cat("Timestamp: ", paste(Sys.time()), '\n', file = fid, append = T)
   for (opt in names(fOpts)){
     if(opt != "listOfFiles" && opt != "optLogFilePath"){
-      cat(paste(opt, ":", fOpts[opt][[1]], "\n"), file = optLogFilePath, append = T)      
+      cat(paste(opt, ":", fOpts[opt][[1]], "\n"), file = fid, append = T)      
     }
   }
-  cat(" => on files:\n\t", file = optLogFilePath, append = T)
-  cat(paste(listOfFiles, collapse="\n\t"), file = optLogFilePath, append = T)
+  cat(" => on files:\n\t", file = fid, append = T)
+  cat(paste(listOfFiles, collapse="\n\t"), file = fid, append = T)
 
+  close(fid)
 }
