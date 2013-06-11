@@ -1,0 +1,34 @@
+\name{wrassp.logger}
+\alias{wrassp.logger}
+\title{wrassp.logger}
+\usage{
+  wrassp.logger(fName, fOpts, optLogFilePath, listOfFiles)
+}
+\arguments{
+  \item{fName}{the name of the function calling the logger}
+
+  \item{fOpts}{are the function options given by the user
+  aquired by match.call}
+
+  \item{optLogFilePath}{path to option log file}
+
+  \item{listOfFiles}{vector of file paths that the spf
+  calling the logger processed}
+}
+\description{
+  Designated logger for the wrassp signal processing
+  functions
+}
+\details{
+  Function logs the call to a signal processing function
+  (spf) of wrassp. It is called by default if the
+  forceToLog option of the spf is not set to false. I tries
+  to format the output in an easily readable fashion.
+}
+\author{
+  Raphael Winkelmann
+}
+\seealso{
+  \code{\link{match.call}}}
+}
+
