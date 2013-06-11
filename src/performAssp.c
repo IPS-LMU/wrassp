@@ -937,13 +937,13 @@ performAssp (SEXP args)
       name = strdup (CHAR (STRING_ELT (inputs, i)));
       inPtr = asspFOpen (strdup (name), AFO_READ, (DOBJ *) NULL);
       if (inPtr == NULL)
-	error ("%s", getAsspMsg (asspMsgNum));
+	 error ("%s (%s)", getAsspMsg (asspMsgNum), strdup(name));
 
       outPtr = (anaFunc->compProc) (inPtr, opt, (DOBJ *) NULL);
       if (outPtr == NULL)
 	{
 	  asspFClose (inPtr, AFC_FREE);
-	  error ("%s", getAsspMsg (asspMsgNum));
+	  error ("%s (%s)", getAsspMsg (asspMsgNum), strdup(name));
 	}
 
       /* input data object no longer needed */
@@ -982,12 +982,12 @@ performAssp (SEXP args)
 	  if (outPtr == NULL)
 	    {
 	      asspFClose (outPtr, AFC_FREE);
-	      error ("%s", getAsspMsg (asspMsgNum));
+	      error ("%s (%s)", getAsspMsg (asspMsgNum), strdup(outName));
 	    }
 	  if (asspFFlush (outPtr, 0) == -1)
 	    {
 	      asspFClose (outPtr, AFC_FREE);
-	      error ("%s", getAsspMsg (asspMsgNum));
+	      error ("%s (%s)", getAsspMsg (asspMsgNum), strdup(outName));
 	    }
 	  asspFClose (outPtr, AFC_FREE);
 	}
