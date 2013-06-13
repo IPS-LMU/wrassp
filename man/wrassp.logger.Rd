@@ -29,6 +29,6 @@
   Raphael Winkelmann
 }
 \seealso{
-  \code{\link{match.call}}}
+  \code{\link{match.call}}
 }
 
