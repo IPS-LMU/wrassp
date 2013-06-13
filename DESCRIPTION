@@ -37,3 +37,4 @@ Collate:
     'zcrana.R'
     'dataobject.R'
     'wrassp.logger.R'
+    'dftSpectrum.R'
