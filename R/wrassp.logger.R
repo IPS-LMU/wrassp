@@ -10,7 +10,7 @@
 ##' @param optLogFilePath path to option log file 
 ##' @param listOfFiles vector of file paths that the spf calling the logger processed
 ##' @author Raphael Winkelmann
-##' @seealso \code{\link{match.call}}}
+##' @seealso \code{\link{match.call}}
 wrassp.logger <- function(fName, fOpts,
                           optLogFilePath, listOfFiles){
   
