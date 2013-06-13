@@ -686,7 +686,7 @@ performAssp (SEXP args)
 	  opt->voiRMS = REAL (el)[0];
 	  break;
 	case WO_VOIZCR:
-	  opt->voiZCR == REAL (el)[0];
+	  opt->voiZCR = REAL (el)[0];
 	  break;
 	case WO_HPCUTOFF:	/* filter parameters */
 	  opt->hpCutOff = REAL (el)[0];
