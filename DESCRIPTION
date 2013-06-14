@@ -38,3 +38,6 @@ Collate:
     'dataobject.R'
     'wrassp.logger.R'
     'dftSpectrum.R'
+    'cepstrum.R'
+    'cssSpectrum.R'
+    'lpsSpectrum.R'

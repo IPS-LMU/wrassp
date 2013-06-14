@@ -27,7 +27,7 @@
 ##' @param EndTime = <time>: set end of analysis interval to <time> seconds
 ##' (default: end of data)
 ##' @param Resolution = <freq>: set FFT length to the smallest value which
-##' results in a frequency resolution of <freq> Hz or better (default: 40.0)
+##' results in a freqequency resolution of <freq> Hz or better (default: 40.0)
 ##' @param FftLength = <num>: set FFT length to <num> points (overrules default
 ##' and 'Resolution' option)
 ##' @param WindowSize = <dur>: set analysis window size to <dur> ms (overrules
@@ -111,7 +111,7 @@
   if(length(listOfFiles)==1){
     pb <- NULL
   }else{
-    cat('\n  INFO: applying dftSpectrum to', length(listOfFiles), 'files\n')
+    cat('\n  INFO: applying spectrum to', length(listOfFiles), 'files\n')
     pb <- txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
   }	
   

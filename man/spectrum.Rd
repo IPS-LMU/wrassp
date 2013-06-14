@@ -28,8 +28,8 @@
   <time> seconds (default: end of data)}
 
   \item{Resolution}{= <freq>: set FFT length to the
-  smallest value which results in a frequency resolution of
-  <freq> Hz or better (default: 40.0)}
+  smallest value which results in a freqequency resolution
+  of <freq> Hz or better (default: 40.0)}
 
   \item{FftLength}{= <num>: set FFT length to <num> points
   (overrules default and 'Resolution' option)}

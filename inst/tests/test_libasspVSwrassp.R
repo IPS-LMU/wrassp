@@ -12,25 +12,36 @@ test_that("wrassp does the same thing as libassp", {
   
   fL = list.files(path2wavs, "wav", full.names=T)
   
-  funcList = c("acfana", "afdiff",
-               "affilter", "f0_ksv",
-               "f0_mhs", "forest",
-               "rfcana", "rmsana",
-               "spectrum", "zcrana")
+  funcList = list(rep("acfana", 2), 
+                  rep("afdiff", 2),
+                  rep("affilter", 2),
+                  rep("f0_ksv", 2),
+                  rep("f0_mhs", 2),
+                  rep("forest", 2),               
+                  rep("rfcana", 2), 
+                  rep("rmsana", 2),
+                  c("spectrum -t=DFT", "dftSpectrum"),
+                  c("spectrum -t=CEP", "cepstrum"),
+                  c("spectrum -t=CSS", "cssSpectrum"),
+                  c("spectrum -t=LPS", "lpsSpectrum"),
+                  rep("zcrana", 2))
   
   
-  
-  for(funcName in funcList){
+    
+  for(i in 1:length(funcList)){
+    CURR <- funcList[[i]]
+    cmdName  <- CURR[1]
+    funcName <- CURR[2]
     print(funcName)
     if(funcName=="affilter" || funcName=="zcr"){ #SIC because of filter options
       next;
     }
     curFun = match.fun(funcName)
     curFun(fL, optLogFilePath=logFile, ExplicitExt=wrasspExt)
+    odParm = paste("-ox=", libasspExt," -od=", path.expand(path2wavs), sep="")
     
    for (file in fL){
-     odParm = paste("-ox=", libasspExt," -od=", path.expand(path2wavs), sep="")
-     libCmd = paste(funcName, odParm, file)
+     libCmd = paste(cmdName, odParm, file)
     
      system(libCmd)
     
