@@ -23,7 +23,10 @@ wrassp is a wrapper to Michel Scheffer's [libassp](http://libassp.sourceforge.ne
 + `forest()` = Formant estimation
 + `rfcana()` = Linear Prediction analysis
 + `rmsana()` = Analysis of short-term Root Mean Square amplitude
-+ `spectrum()` = Short-term spectral analysis (see docs for types)
++ `dftSpectrum()` = Short-term DFT spectral analysis
++ `lpsSpectrum()` = Linear Predictive smoothed version of `dftSpectrum()`
++ `cssSpectrum()` = Cepstral smoothed version of `dftSpectrum()`
++ `cepstrum()` = Short-term cepstral analysis
 + `zcrana()` = Analysis of the averages of the short-term positive and negative zero-crossing rates
 
 (see the respective R documentation for more details on all of these functions)
