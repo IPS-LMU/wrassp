@@ -31,8 +31,9 @@
   \item{ExplicitExt}{set if you wish to overwride the
   default extension}
 
-  \item{forceToLog}{option to override the package default.
-  Option should be left alone by normal user}
+  \item{forceToLog}{is set by the global package variable
+  useWrasspLogger. This is set to FALSE by default and
+  should be set to TRUE is logging is desired.}
 }
 \value{
   nrOfProcessedFiles or if only one file to process return

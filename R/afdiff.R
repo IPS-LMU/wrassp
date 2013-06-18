@@ -19,7 +19,8 @@
 ##' @param Channel = <num>: for multi-channel input files: extract and differentiate channel <num> (1 <= <num> <= 8  default: channel 1)
 ##' @param ToFile write results to file (default extension is .d+(extensionsOfAudioFile))
 ##' @param ExplicitExt set if you wish to overwride the default extension 
-##' @param forceToLog option to override the package default. Option should be left alone by normal user
+##' @param forceToLog is set by the global package variable useWrasspLogger. This is set
+##' to FALSE by default and should be set to TRUE is logging is desired.
 ##' @return nrOfProcessedFiles or if only one file to process return AsspDataObj of that file
 ##' @author Raphael Winkelmann
 ##' @useDynLib wrassp

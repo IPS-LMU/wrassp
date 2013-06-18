@@ -20,7 +20,8 @@
 ##' @param Window = <type>: set analysis window function to <type> (default: HAMMING)
 ##' @param ToFile write results to file (default extension is .rms)
 ##' @param ExplicitExt set if you wish to overwride the default extension
-##' @param forceToLog option to override the package default. Option should be left alone by normal user
+##' @param forceToLog is set by the global package variable useWrasspLogger. This is set
+##' to FALSE by default and should be set to TRUE is logging is desired.
 ##' @return nrOfProcessedFiles or if only one file to process return AsspDataObj of that file
 ##' @author Raphael Winkelmann
 ##' @useDynLib wrassp
