@@ -76,23 +76,7 @@
 	  optionsGivenAsArgs = as.list(match.call(expand.dots = TRUE))
 	  wrassp.logger(optionsGivenAsArgs[[1]], optionsGivenAsArgs[-1],
 	                optLogFilePath, listOfFiles)
-    
-# 	  cat("\n##################################\n", file = optLogFilePath, append = T)
-# 	  cat("##################################\n", file = optLogFilePath, append = T)
-# 	  cat("######## afdiff performed ########\n", file = optLogFilePath, append = T)
-# 	  
-# 	  cat("Timestamp: ", paste(Sys.time()), '\n', file = optLogFilePath, append = T)
-# 	  
-# 	  cat("ComputeBackwardDifference: ", ComputeBackwardDifference, '\n', file = optLogFilePath, append = T)
-# 	  cat("Channel: ", Channel, '\n', file = optLogFilePath, append = T)
-# 	  cat("ToFile: ", ToFile, '\n', file = optLogFilePath, append = T)
-# 	  cat("ExplicitExt: ", ExplicitExt, '\n', file = optLogFilePath, append = T)
-# 	  cat("ToFile: ", ToFile, "\n", file = optLogFilePath, append = T)
-# 	  cat("ExplicitExt: ", ExplicitExt, "\n", file = optLogFilePath, append = T)
-# 	  
-# 	  cat(" => on files:\n\t", file = optLogFilePath, append = T)
-# 	  cat(paste(listOfFiles, collapse="\n\t"), file = optLogFilePath, append = T)
-	      
+    	      
 	}
   #############################
   # return dataObj if length only one file
