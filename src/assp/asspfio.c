@@ -238,6 +238,8 @@ int asspFClose(DOBJ *dop, int action)
 #ifndef WRASSP
     if(dop->fp != stdout && dop->fp != stderr && dop->fp != stdin)
       fclose(dop->fp);
+#else
+      fclose(dop->fp);
 #endif
     dop->fp = NULL;
   }
