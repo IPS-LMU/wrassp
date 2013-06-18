@@ -6,7 +6,7 @@
     BeginTime = 0, CenterTime = FALSE, EndTime = 0,
     Resolution = 40, FftLength = 0, WindowShift = 5,
     Window = "BLACKMAN", ToFile = TRUE, ExplicitExt = NULL,
-    forceToLog = TRUE)
+    forceToLog = useWrasspLogger)
 }
 \arguments{
   \item{listOfFiles}{vector of file paths to be processed

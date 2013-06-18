@@ -31,7 +31,7 @@
                      WindowSize = 20.0, EffectiveLength = TRUE, 
                      Linear = FALSE, Window = 'HAMMING', 
                      ToFile = TRUE, ExplicitExt = NULL,
-                     forceToLog = TRUE){
+                     forceToLog = useWrasspLogger){
 
 
 	###########################
@@ -81,7 +81,8 @@
                                     ProgressBar = pb, PACKAGE = "wrassp"))
 	
   ############################
-	# write options to options log file
+  # write options to options log file
+  print(externalRes)
   
 	if (forceToLog){
 	  optionsGivenAsArgs = as.list(match.call(expand.dots = TRUE))

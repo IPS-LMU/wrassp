@@ -7,7 +7,7 @@
     WindowShift = 5, WindowSize = 20,
     EffectiveLength = TRUE, Window = "BLACKMAN", Order = 0,
     Preemphasis = -0.95, LpType = "RFC", ToFile = TRUE,
-    ExplicitExt = NULL, forceToLog = TRUE)
+    ExplicitExt = NULL, forceToLog = useWrasspLogger)
 }
 \arguments{
   \item{listOfFiles}{vector of file paths to be processed

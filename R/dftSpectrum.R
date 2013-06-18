@@ -50,7 +50,7 @@
                        WindowShift = 5.0, Window = 'BLACKMAN',
                        Bandwidth = 0.0, ## DFT specific
                        ToFile = TRUE,
-                       ExplicitExt = NULL, forceToLog = TRUE) {
+                       ExplicitExt = NULL, forceToLog = useWrasspLogger) {
   ## ########################
   ## a few parameter checks and expand paths
   

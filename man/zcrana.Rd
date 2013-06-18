@@ -5,7 +5,7 @@
   zcrana(listOfFiles = NULL, optLogFilePath = NULL,
     BeginTime = 0, CenterTime = FALSE, EndTime = 0,
     WindowShift = 5, WindowSize = 25, ToFile = TRUE,
-    ExplicitExt = NULL, forceToLog = TRUE)
+    ExplicitExt = NULL, forceToLog = useWrasspLogger)
 }
 \arguments{
   \item{listOfFiles}{vector of file paths to be processed

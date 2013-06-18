@@ -40,7 +40,7 @@
                                   MinAC1 = 0.25, MinRMS = 18.0, 
                                   MaxZCR = 3000.0, MinProb = 0.52, 
                                   PlainSpectrum = FALSE, ToFile = TRUE, 
-                                  ExplicitExt = NULL, forceToLog = TRUE){
+                                  ExplicitExt = NULL, forceToLog = useWrasspLogger){
   
   ###########################
   # a few parameter checks and expand paths

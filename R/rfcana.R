@@ -41,7 +41,7 @@
                      Window = 'BLACKMAN', Order = 0, 
                      Preemphasis = -0.95, LpType = 'RFC', 
                      ToFile = TRUE, ExplicitExt = NULL,
-                     forceToLog = TRUE){
+                     forceToLog = useWrasspLogger){
 	
 	
 	###########################

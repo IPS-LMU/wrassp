@@ -9,7 +9,7 @@
     SpectrumType = "DFT", EffectiveLength = FALSE,
     Order = 0, Preemphasis = -0.95, Deemphasize = FALSE,
     NumCeps = 0, ToFile = TRUE, ExplicitExt = NULL,
-    forceToLog = TRUE)
+    forceToLog = useWrasspLogger)
 }
 \arguments{
   \item{listOfFiles}{vector of file paths to be processed

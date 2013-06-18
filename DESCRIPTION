@@ -41,3 +41,4 @@ Collate:
     'cepstrum.R'
     'cssSpectrum.R'
     'lpsSpectrum.R'
+    'packageVars.R'

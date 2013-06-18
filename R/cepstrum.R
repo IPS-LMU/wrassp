@@ -42,7 +42,7 @@
                        FftLength = 0,
                        WindowShift = 5.0, Window = 'BLACKMAN',
                        ToFile = TRUE, 
-                       ExplicitExt = NULL, forceToLog = TRUE){
+                       ExplicitExt = NULL, forceToLog = useWrasspLogger){
   
   ## ########################
   ## a few parameter checks and expand paths

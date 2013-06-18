@@ -39,7 +39,7 @@
                        StopBand = 96, Transition = 250, 
                        UseIIR = FALSE, NumIIRsections = 4, 
                        ToFile = TRUE, ExplicitExt = NULL,
-                       forceToLog = TRUE){
+                       forceToLog = useWrasspLogger){
 
   ###########################
   ### a few parameter checks and expand paths
