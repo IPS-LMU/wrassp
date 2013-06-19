@@ -16,7 +16,7 @@ test_that("all signal processing functions run without errors on audio files", {
     
     #clean up newly created files
     for (ex in wrasspOutputInfos[[func]]$ext){
-      system(paste("rm ", path2wavs, "*", ext, sep=""))
+      system(paste("rm ", path2wavs, "*", ex, sep=""))
     }
 
   }
