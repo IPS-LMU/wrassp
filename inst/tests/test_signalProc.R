@@ -8,10 +8,17 @@ test_that("all signal processing functions run without errors on audio files", {
   
   fL = list.files(path2wavs, "wav", full.names=T)
   
-  inMemObj = read.AsspDataObj(fL[1])
-  newPath = paste(fL[1], ".rmMe", sep="")
-  write.AsspDataObj(inMemObj, newPath)
+  for (func in names(wrasspOutputInfos)){
+    funcFormals = formals(func)
+    funcFormals$listOfFiles = fL
+    res = do.call(func,as.list(funcFormals))
+    expect_that(res, equals(NULL))
+    
+    #clean up newly created files
+    for (ex in wrasspOutputInfos[[func]]$ext){
+      system(paste("rm ", path2wavs, "*", ext, sep=""))
+    }
+
+  }
   
-  diffCmd = paste("diff", fL[1], newPath)
-  expect_that(system(diffCmd),equals(0))
 })
