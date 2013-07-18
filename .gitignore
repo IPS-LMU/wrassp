@@ -33,3 +33,4 @@ Thumbs.db
 .Rproj.user
 *.Rproj
 .Rbuildignore
+.Rhistory
