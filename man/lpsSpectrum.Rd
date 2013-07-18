@@ -82,4 +82,9 @@
 
   Lasse Bombien
 }
+\seealso{
+  \code{\link{dftSpectrum}}, \code{\link{cssSpectrum}},
+  \code{\link{cepstrum}}; all derived from libassp's
+  spectrum function.
+}
 

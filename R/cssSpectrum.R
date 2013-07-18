@@ -20,6 +20,10 @@
 ##' results in a freqequency resolution of <freq> Hz or better (default: 40.0)
 ##' @param FftLength = <num>: set FFT length to <num> points (overrules default
 ##' and 'Resolution' option)
+##' @param WindowShift = <dur>: set analysis window shift to <dur> ms
+##' (default: 5.0)
+##' @param Window = <type>: set analysis window function to <type> (default:
+##' BLACKMAN)
 ##' @param NumCeps = <num>: set number of cepstral coeffcients used to <num>
 ##' (default: sampling rate in kHz + 1; minimum: 2)
 ##' @param ToFile write results to file (default extension depends on )
@@ -30,6 +34,7 @@
 ##' AsspDataObj of that file
 ##' @author Raphael Winkelmann
 ##' @author Lasse Bombien
+##' @seealso \code{\link{dftSpectrum}}, \code{\link{lpsSpectrum}}, \code{\link{cepstrum}}; all derived from libassp's spectrum function.
 ##' @useDynLib wrassp
 ##' @export
 'cssSpectrum' <- function(listOfFiles = NULL, optLogFilePath = NULL,

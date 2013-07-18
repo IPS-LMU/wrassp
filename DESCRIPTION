@@ -33,7 +33,6 @@ Collate:
     'forest.R'
     'rfcana.R'
     'rmsana.R'
-    'spectrum.R'
     'zcrana.R'
     'dataobject.R'
     'wrassp.logger.R'

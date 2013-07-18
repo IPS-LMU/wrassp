@@ -31,6 +31,12 @@
   \item{FftLength}{= <num>: set FFT length to <num> points
   (overrules default and 'Resolution' option)}
 
+  \item{WindowShift}{= <dur>: set analysis window shift to
+  <dur> ms (default: 5.0)}
+
+  \item{Window}{= <type>: set analysis window function to
+  <type> (default: BLACKMAN)}
+
   \item{NumCeps}{= <num>: set number of cepstral
   coeffcients used to <num> (default: sampling rate in kHz
   + 1; minimum: 2)}
@@ -64,5 +70,10 @@
   Raphael Winkelmann
 
   Lasse Bombien
+}
+\seealso{
+  \code{\link{dftSpectrum}}, \code{\link{lpsSpectrum}},
+  \code{\link{cepstrum}}; all derived from libassp's
+  spectrum function
 }
 

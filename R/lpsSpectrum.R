@@ -40,6 +40,7 @@
 ##' AsspDataObj of that file
 ##' @author Raphael Winkelmann
 ##' @author Lasse Bombien
+##' @seealso \code{\link{dftSpectrum}}, \code{\link{cssSpectrum}}, \code{\link{cepstrum}}; all derived from libassp's spectrum function.
 ##' @useDynLib wrassp
 ##' @export
 'lpsSpectrum' <- function(listOfFiles = NULL, optLogFilePath = NULL,
