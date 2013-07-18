@@ -78,7 +78,7 @@
 }
 \seealso{
   \code{\link{cssSpectrum}}, \code{\link{lpsSpectrum}},
-  \code{\link{cepstrum}} all derived from libassp's
-  spectrum function
+  \code{\link{cepstrum}}; all derived from libassp's
+  spectrum function.
 }
 

@@ -74,6 +74,6 @@
 \seealso{
   \code{\link{dftSpectrum}}, \code{\link{lpsSpectrum}},
   \code{\link{cepstrum}}; all derived from libassp's
-  spectrum function
+  spectrum function.
 }
 

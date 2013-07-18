@@ -1,11 +1,11 @@
-##' f0_mhs function adapted from libassp
+##' mhsF0 function adapted from libassp
 ##'
 ##' Pitch analysis of the speech signal in <listOfFile> using
 ##' Michel's/Modified Harmonic Sieve algorithm.
 ##' Analysis results will be written to a file with the
 ##' base name of the input file and extension '.pit'.
 ##' Default output is in SSFF binary format (track 'pitch').
-##' @title f0_mhs
+##' @title mhsF0
 ##' @param listOfFiles vector of file paths to be processed by function
 ##' @param optLogFilePath path to option log file
 ##' @param BeginTime = <time>: set begin of analysis interval to <time> seconds (default = 0: begin of file) 
@@ -30,10 +30,11 @@
 ##' to FALSE by default and should be set to TRUE is logging is desired.
 ##' @return nrOfProcessedFiles or if only one file to process return AsspDataObj of that file
 ##' @author Raphael Winkelmann
-##' @aliases mhspitch
+##' @aliases mhspitch f0_mhs
+##' @seealso \code{\link{ksvF0}} for an tracking the fundamental frequency
 ##' @useDynLib wrassp
 ##' @export
-'f0_mhs' <- 'mhspitch' <-function(listOfFiles = NULL, optLogFilePath = NULL,
+'mhsF0' <- 'mhspitch' <- 'f0_mhs' <-function(listOfFiles = NULL, optLogFilePath = NULL,
                                   BeginTime = 0.0, CenterTime = FALSE, 
                                   EndTime = 0.0, WindowShift = 5.0, 
                                   Gender = 'u', MaxF = 600.0, 

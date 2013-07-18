@@ -1,4 +1,4 @@
-##' f0_ksv function adapted from libassp
+##' ksvF0 function adapted from libassp
 ##'
 ##' F0 analysis of the signal in <listOfFile> using the 
 ##' K. Schaefer-Vincent periodicity detection algortithm.
@@ -9,7 +9,7 @@
 ##' which the F0 data are based, may be stored in a label
 ##' file. The name of this file will consist of the base
 ##' name of the F0 file and the extension '.prd'.
-##' @title f0_ksv
+##' @title ksvF0
 ##' @param listOfFiles vector of file paths to be processed by function 
 ##' @param optLogFilePath path to option log file
 ##' @param BeginTime = <time>: set begin of analysis interval to <time> seconds (default = 0: begin of data)
@@ -29,10 +29,11 @@
 ##' to FALSE by default and should be set to TRUE is logging is desired.
 ##' @return nrOfProcessedFiles or if only one file to process return AsspDataObj of that file
 ##' @author Raphael Winkelmann
-##' @aliases f0ana
+##' @aliases f0ana f0_ksv
+##' @seealso \code{\link{mhsF0}} for an alternative pitch tracker
 ##' @useDynLib wrassp
 ##' @export
-'f0_ksv' <- 'f0ana' <- function(listOfFiles = NULL, optLogFilePath = NULL, 
+'ksvF0' <- 'f0ana' <- 'f0_ksv' <- function(listOfFiles = NULL, optLogFilePath = NULL, 
                                 BeginTime = 0.0, EndTime = 0.0, 
                                 WindowShift = 5.0, Gender = 'u',
                                 MaxF = 600, MinF = 50, 
