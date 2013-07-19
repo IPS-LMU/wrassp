@@ -1,0 +1,53 @@
+\name{AsspFileFormat}
+\alias{AsspFileFormat}
+\alias{AsspFileFormat<-}
+\title{Get and set AsspFileFormat}
+\usage{
+  AsspFileFormat(x)
+
+  AsspFileFormat(x) <- value
+}
+\arguments{
+  \item{x}{an object of class AsspDataObj}
+
+  \item{value}{an integer or a string indicating the new
+  file format}
+}
+\value{
+  for \code{AsspFileFormat} the code name of the object's
+  currently set file format
+
+  for \code{AsspFileFormat<-}, the updated object
+}
+\description{
+  Function to get or set the file format of an AsspDataObj.
+}
+\details{
+  \code{libassp} handles a number of file formats common in
+  speech research. This function enables the user to
+  determine the file format of an object read from file and
+  to set it for subsequent writing. This allows for file
+  format conversion to some degree. Note, that many
+  conversions are not reasonable/possible: conversions are
+  therefore discouraged unless the user knows what they are
+  doing. Format specifiers can be found in
+  \code{\link{AsspFileFormats}} and exist in two forms: a
+  code name and a code number. Both are suitable for
+  setting the format.
+}
+\examples{
+\dontrun{
+obj  <- read.AsspDataObj('/path/to/file.wav')
+AsspFileFormat(obj)
+AsspFileFormat(obj) <- 'SSFF' ## or
+AsspFileFormat(obj) <- 20
+}
+}
+\author{
+  Lasse Bombien
+}
+\seealso{
+  \code{\link{AsspFileFormats}},
+  \code{\link{AsspDataFormat}}
+}
+

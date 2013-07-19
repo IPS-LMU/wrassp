@@ -36,7 +36,7 @@
     else {
         cat(paste("Assp Data Object of file ", temp, ".\n", sep=""))
     }
-
+    cat(sprintf("Format: %s (%s)\n", AsspFileFormat(x), AsspDataFormat(x)))
     cat(paste(as.integer(attr(x, 'end_record') -
                          attr(x, 'start_record') + 1),
               "records at", attr(x, 'samplerate'), "Hz.\n"))
@@ -60,6 +60,8 @@
 ##' @export
 "write.AsspDataObj" <- function (dobj, file=attr(dobj, 'filePath'))
   {
+    if (is.null(file))
+      stop('File path not set internally. Please specify!')
     file <- path.expand(file)
     .Call("writeDObj", dobj, file, PACKAGE="wrassp")
   }
@@ -165,4 +167,116 @@ addTrack <- function (dobj, trackname, data, format = 'INT16',
 
   return(dobj)
 }
-    
+
+
+##' Function to get or set the file format of an AsspDataObj.
+##' 
+##' \code{libassp} handles a number of file formats common in speech research. 
+##' This function enables the user to determine the file format of an object 
+##' read from file and to set it for subsequent writing. This allows for file 
+##' format conversion to some degree. Note, that many conversions are not 
+##' reasonable/possible: conversions are therefore discouraged unless the user 
+##' knows what they are doing. Format specifiers can be found in
+##' \code{\link{AsspFileFormats}} and exist in two forms: a code name and a
+##' code number. Both are suitable for setting the format.
+##' @title Get and set AsspFileFormat
+##' @param x an object of class AsspDataObj
+##' @return for \code{AsspFileFormat} the code name of the object's 
+##'   currently set file format
+##' @author Lasse Bombien
+##' @seealso \code{\link{AsspFileFormats}}, \code{\link{AsspDataFormat}}
+##' @examples
+##' \dontrun{
+##' obj  <- read.AsspDataObj('/path/to/file.wav')
+##' AsspFileFormat(obj)
+##' AsspFileFormat(obj) <- 'SSFF' ## or
+##' AsspFileFormat(obj) <- 20
+##' }
+##' @useDynLib wrassp
+##' @export
+AsspFileFormat <- function(x) {
+  ## file format is in the first element (of two) in the fileInfo attribute
+  xx <- x
+  if (!is.AsspDataObj(xx))
+    stop('Argument must be an object of class AsspDataObj')
+  curFormat <- attr(xx, 'fileInfo')[1]
+  ind <- match(curFormat, AsspFileFormats)
+  if (is.na(ind))
+    stop('Invalid file format. This AsspDataObj has been messed with!')
+  return(names(AsspFileFormats)[ind])
+}
+
+##' @rdname AsspFileFormat
+##' @param value an integer or a string indicating the new file format
+##' @usage AsspFileFormat(x)  <- value
+##' @return for \code{AsspFileFormat<-}, the updated object
+##' @export
+"AsspFileFormat<-" <- function(x, value) {
+  value <- value[1]
+  if (!is.AsspDataObj(x))
+    stop('Argument must be an object of class AsspDataObj')
+  fi  <- attr(x, 'fileInfo')
+  if (is.numeric(value)) {
+    ind <- match(value, AsspFileFormats)
+  } else if (is.character(value)) {
+    ind <- match(value, names(AsspFileFormats))
+  } else {
+    stop ('format must be an integer or a string.')
+  }
+  if (is.na(ind))
+    stop('format does not specify a valid file format.')
+  fi[1]  <- AsspFileFormats[ind]
+  attr(x, 'fileInfo')  <- as.integer(fi)
+  x
+}
+
+##' Function to get or set the data format of an AsspDataObj.
+##'
+##' \code{libassp} can store data in binary and ASCII format. 
+##' This function enables the user to determine the data format of an object 
+##' read from file and to set it for subsequent writing.
+##' Valid values are 
+##' \code{'ascii'} (or \code{1}) for ASCII format or \code{'binary'} (or \code{2}) for binary IO.
+##' Use is discouraged unless the user knows what they are doing.
+##' @title Get/set data format of an AsspDataObj
+##' @param x an object of class AsspDataObj
+##' @return a string representing the current data format
+##' @useDynLib wrassp
+##' @seealso \code{\link{AsspFileFormat}}
+##' @export
+##' @author Lasse Bombien
+AsspDataFormat <- function(x) {
+  f <- attr(x, 'fileInfo')[2]
+  if (f==1) 
+    return('ascii')
+  else if (f==2)
+    return('binary')
+  else
+    stop('Invalid data format. This AsspDataObj has been messed with!')
+}
+
+##' @rdname AsspDataFormat
+##' @param value an integer or a string indicating the new data format
+##' @usage AsspDataFormat(x)  <- value
+##' @return for \code{AsspDataFormat<-}, the updated object
+##' @export
+##' 
+"AsspDataFormat<-" <- function(x, value) {
+  value <- value[1]
+  fi <- attr(x, 'fileInfo')
+  if (is.numeric(value)) {
+    if (value %in% c(1,2))
+      fi[2] <- value
+    else
+      stop('Invalid data format specified')
+  } else if (is.character(value)) {
+    formats <- c('ascii', 'binary')
+    ind <- charmatch(tolower(value), formats)
+    if (is.na(ind))
+      stop('Invalid data format specified')
+    fi[2] <- ind
+  } else 
+    stop('New value must be an integer or a string.')
+  attr(x, 'fileInfo') <- as.integer(fi)
+  x
+}

@@ -203,7 +203,7 @@ dobj2AsspDataObj (DOBJ * data)
    PROTECT (finfo = allocVector (INTSXP, 2));
    INTEGER (finfo)[0] = (int) data->fileFormat;
    INTEGER (finfo)[1] = (int) data->fileData;
-   setAttrib (ans, install ("file_info"), finfo);
+   setAttrib (ans, install ("fileInfo"), finfo);
 
    UNPROTECT (11);
    return ans;
@@ -488,12 +488,12 @@ DOBJ* sexp2dobj(SEXP rdobj)
    if (!isNull (attr))
       dop->startRecord = INTEGER (attr)[0];
 
-   attr = getAttrib(rdobj, install ("file_info"));
+   attr = getAttrib(rdobj, install ("fileInfo"));
    if (LENGTH (attr) != 2)
    {
       dop->fileFormat = FF_SSFF;
       dop->fileData = FDF_BIN;
-      warning ("Incomplete 'file_info' attribute. Writing to binary" 
+      warning ("Incomplete 'fileInfo' attribute. Writing to binary" 
 	       "SSFF format (dafault).");
    }
    dop->fileFormat = (fform_e) INTEGER (attr)[0];

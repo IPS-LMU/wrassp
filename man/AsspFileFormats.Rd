@@ -1,0 +1,53 @@
+\docType{data}
+\name{AsspFileFormats}
+\alias{AsspFileFormats}
+\title{list of possibly useful file formats for AsspDataObj corresponding to the
+first element of the fileInfo attribute}
+\format{\tabular{rll}{
+Code Name \tab code number \tab description\cr
+RAW     \tab  1\tab headerless or unsupported format \cr
+ASP_A   \tab  2\tab ASP with ASCII data \cr
+ASP_B   \tab  3\tab ASP with binary data \cr
+XASSP   \tab  4\tab xassp ASCII \cr
+IPDS_M  \tab  5\tab labels in IPdS `MIX' format \cr
+IPDS_S  \tab  6\tab labels in IPdS `SAMPA' format \cr
+AIFF    \tab  7\tab Apple Audio Interchange File Format \cr
+AIFC    \tab  8\tab AIFF extended for compressed data \cr
+CSL     \tab  9\tab Kay Elemetrics Computerized Speech Lab \cr
+CSRE    \tab 10\tab Computerized Speech Research Environment \cr
+ESPS    \tab 11\tab Entropic Signal Processing System \cr
+ILS     \tab 12\tab \cr
+KTH     \tab 13\tab Kungliga Tekniska Hoegskolan Stockholm \cr
+SWELL   \tab 13\tab commercial version of KTH \cr
+SNACK   \tab 13\tab as Tcl extension \cr
+SFS     \tab 14\tab University College London Speech Filing System \cr
+SND     \tab 15\tab NeXT version of `SND' format \cr
+AU      \tab 15\tab Sun version of `SND' format \cr
+NIST    \tab 16\tab National Institute of Standards and Technology \cr
+SPHERE  \tab 16\tab SPeech HEader REsources \cr
+PRAAT_S \tab 17\tab UvA praat 'short' text file \cr
+PRAAT_L \tab 18\tab UvA praat 'long' text file \cr
+PRAAT_B \tab 19\tab UvA praat binary file \cr
+SSFF    \tab 20\tab Simple Signal File Format \cr
+WAVE    \tab 21\tab IBM/Microsoft RIFF-WAVE \cr
+WAVE_X  \tab 22\tab RIFF-WAVE extended format (Revision 3) \cr
+XLABEL  \tab 24\tab ESPS xlabel \cr
+YORK    \tab 25\tab University of York (Klatt'80 parameters) \cr
+UWM     \tab 26\tab University of Wisconsin at Madison (microbeam data) )\cr
+}}
+\usage{
+  AsspFileFormats
+}
+\description{
+  list of possibly useful file formats for AsspDataObj
+  corresponding to the first element of the fileInfo
+  attribute
+}
+\author{
+  Lasse Bombien
+}
+\seealso{
+  \code{\link{AsspFileFormat}}
+}
+\keyword{datasets}
+

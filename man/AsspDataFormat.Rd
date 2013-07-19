@@ -1,0 +1,39 @@
+\name{AsspDataFormat}
+\alias{AsspDataFormat}
+\alias{AsspDataFormat<-}
+\title{Get/set data format of an AsspDataObj}
+\usage{
+  AsspDataFormat(x)
+
+  AsspDataFormat(x) <- value
+}
+\arguments{
+  \item{x}{an object of class AsspDataObj}
+
+  \item{value}{an integer or a string indicating the new
+  data format}
+}
+\value{
+  a string representing the current data format
+
+  for \code{AsspDataFormat<-}, the updated object
+}
+\description{
+  Function to get or set the data format of an AsspDataObj.
+}
+\details{
+  \code{libassp} can store data in binary and ASCII format.
+  This function enables the user to determine the data
+  format of an object read from file and to set it for
+  subsequent writing. Valid values are \code{'ascii'} (or
+  \code{1}) for ASCII format or \code{'binary'} (or
+  \code{2}) for binary IO. Use is discouraged unless the
+  user knows what they are doing.
+}
+\author{
+  Lasse Bombien
+}
+\seealso{
+  \code{\link{AsspFileFormat}}
+}
+
