@@ -39,7 +39,7 @@
     cat(sprintf("Format: %s (%s)\n", AsspFileFormat(x), AsspDataFormat(x)))
     cat(paste(as.integer(attr(x, 'end_record') -
                          attr(x, 'start_record') + 1),
-              "records at", attr(x, 'samplerate'), "Hz.\n"))
+              "records at", attr(x, 'sampleRate'), "Hz.\n"))
     cat(paste("Number of tracks:", length(names(x)), "\n"))
     for (track in names(x)) {
         cat('\t', track)
@@ -105,7 +105,7 @@ delTrack <- function (dobj, trackname)
     ## remove track
     dobj[[trackname]] <- NULL
     ## remove
-    attr(dobj, 'trackformats') <- attr(dobj, 'trackformats')[-w]
+    attr(dobj, 'trackFormats') <- attr(dobj, 'trackFormats')[-w]
     
     return (dobj)
   }
@@ -161,9 +161,9 @@ addTrack <- function (dobj, trackname, data, format = 'INT16',
 
   dobj[[trackname]] <- data
   if (any(w))
-    attr(dobj, 'trackformats')[w] <- format
+    attr(dobj, 'trackFormats')[w] <- format
   else
-    append(attr(dobj, 'trackformats'), format)
+    append(attr(dobj, 'trackFormats'), format)
 
   return(dobj)
 }

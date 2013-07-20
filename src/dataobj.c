@@ -131,7 +131,7 @@ SEXP
 dobj2AsspDataObj (DOBJ * data)
 {
    SEXP ans, /* dPtr, */ class, rate, tracks, startTime, origRate, filePath,
-      startRec, endRec, trackformats, finfo;
+      startRec, endRec, trackFormats, finfo;
    DDESC *desc = NULL;
    int i, n;
 
@@ -146,11 +146,11 @@ dobj2AsspDataObj (DOBJ * data)
    PROTECT (ans = allocVector (VECSXP, n));
    // create list of tracks and formats
    PROTECT (tracks = allocVector (STRSXP, n));
-   PROTECT (trackformats = allocVector (STRSXP, n));
+   PROTECT (trackFormats = allocVector (STRSXP, n));
    for (i = 0, desc = &(data->ddl); desc != NULL; desc = desc->next, i++)
    {
       SET_STRING_ELT (tracks, i, mkChar (desc->ident));
-      SET_STRING_ELT (trackformats, i, 
+      SET_STRING_ELT (trackFormats, i, 
 		      mkChar (asspDF2ssffString(desc->format))); 
       // fill tracks with data
       // Rprintf ("Loading track %s.\n", desc->ident);
@@ -158,7 +158,7 @@ dobj2AsspDataObj (DOBJ * data)
    }
    // set the names
    setAttrib (ans, R_NamesSymbol, tracks);
-   setAttrib (ans, install ("trackformats"), trackformats);
+   setAttrib (ans, install ("trackFormats"), trackFormats);
 
    /* PROTECT (dPtr = R_MakeExternalPtr (data, install ("DOBJ"), */
    /* 				      install ("something"))); */
@@ -166,7 +166,7 @@ dobj2AsspDataObj (DOBJ * data)
    /* setAttrib (ans, install ("data pointer"), dPtr); */
    PROTECT (rate = allocVector (REALSXP, 1));
    REAL (rate)[0] = data->dataRate;
-   setAttrib (ans, install ("samplerate"), rate);
+   setAttrib (ans, install ("sampleRate"), rate);
    if (data->filePath == NULL || strlen(data->filePath) == 0)
       protect (filePath = R_NilValue);
    else
@@ -187,14 +187,14 @@ dobj2AsspDataObj (DOBJ * data)
    setAttrib (ans, install ("origFreq"), origRate);
    PROTECT (startTime = allocVector (REALSXP, 1));
    REAL (startTime)[0] = data->Start_Time + (data->bufStartRec / data->dataRate);
-   setAttrib (ans, install ("start_time"), startTime);
+   setAttrib (ans, install ("startTime"), startTime);
 
    PROTECT (startRec = allocVector (INTSXP, 1));
    INTEGER (startRec)[0] = (int) (data->bufStartRec + 1);
-   setAttrib (ans, install ("start_record"), startRec);
+   setAttrib (ans, install ("startRecord"), startRec);
    PROTECT (endRec = allocVector (INTSXP, 1));
    INTEGER (endRec)[0] = (int) (data->bufStartRec + data->bufNumRecs);
-   setAttrib (ans, install ("end_record"), endRec);
+   setAttrib (ans, install ("endRecord"), endRec);
 
    PROTECT (class = allocVector (STRSXP, 1));
    SET_STRING_ELT (class, 0, mkChar (WRASSP_CLASS));
@@ -468,11 +468,11 @@ DOBJ* sexp2dobj(SEXP rdobj)
    }
    
    // assign attributes
-   attr = getAttrib (rdobj, install ("samplerate"));
+   attr = getAttrib (rdobj, install ("sampleRate"));
    if (isNull (attr))
    {
       freeDObj (dop);
-      error("Invalid argument: no 'samplerate' attribute.");
+      error("Invalid argument: no 'sampleRate' attribute.");
    }
    dop->dataRate = REAL (attr)[0];
 
@@ -480,11 +480,11 @@ DOBJ* sexp2dobj(SEXP rdobj)
    if (!isNull (attr))
       dop->sampFreq = REAL (attr)[0];
 
-   attr = getAttrib (rdobj, install ("start_time"));
+   attr = getAttrib (rdobj, install ("startTime"));
    if (!isNull (attr))
       dop->Start_Time = REAL (attr)[0];
 
-   attr = getAttrib (rdobj, install ("start_record"));
+   attr = getAttrib (rdobj, install ("startRecord"));
    if (!isNull (attr))
       dop->startRecord = INTEGER (attr)[0];
 
@@ -511,7 +511,7 @@ DOBJ* sexp2dobj(SEXP rdobj)
       error ("There are no data tracks!");
    }
 
-   if (isNull (formats = getAttrib (rdobj, install ("trackformats"))) ||
+   if (isNull (formats = getAttrib (rdobj, install ("trackFormats"))) ||
        TYPEOF (tracks) != STRSXP)
    {
       freeDObj (dop);
