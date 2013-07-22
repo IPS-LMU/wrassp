@@ -1,0 +1,24 @@
+\name{tracks.AsspDataObj}
+\alias{tracks.AsspDataObj}
+\title{tracks.AsspDataObj}
+\usage{
+  tracks.AsspDataObj(x)
+}
+\arguments{
+  \item{x}{an object of class AsspDataObj}
+}
+\value{
+  a character vector containing the names of the tracks
+}
+\description{
+  List the tracks of an AsspDataObj
+}
+\details{
+  AsspDataObj contain tracks (at least one). This function
+  lists the names of these tracks. This function is
+  equvalent to calling \code{names(x)}.
+}
+\author{
+  Lasse Bombien
+}
+

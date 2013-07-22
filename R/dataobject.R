@@ -26,8 +26,9 @@
 ##' @method print AsspDataObj
 ##' @seealso \code{\link{read.AsspDataObj}}
 ##' @useDynLib wrassp
+##' @aliases summary.AsspDataObj
 ##' @export
-"print.AsspDataObj" <- function(x, ...)
+"print.AsspDataObj" <- summary.AsspDataObj<- function(x, ...)
 {
     temp <- attr(x, "filePath")
     if (is.null(temp)) {
@@ -37,15 +38,16 @@
         cat(paste("Assp Data Object of file ", temp, ".\n", sep=""))
     }
     cat(sprintf("Format: %s (%s)\n", AsspFileFormat(x), AsspDataFormat(x)))
-    cat(paste(as.integer(attr(x, 'end_record') -
-                         attr(x, 'start_record') + 1),
-              "records at", attr(x, 'sampleRate'), "Hz.\n"))
+    cat(paste(as.integer(numRecs.AsspDataObj(x)),
+              "records at", attr(x, 'sampleRate'), "Hz\n"))
+    cat(sprintf("Duration: %f ms\n", dur.AsspDataObj(x)))
     cat(paste("Number of tracks:", length(names(x)), "\n"))
     for (track in names(x)) {
         cat('\t', track)
         cat(paste(" (", ncol(x[[track]]), " fields)\n", sep=''))
     }
 }
+
 
 ##' Writes an object of class AsspDataObj to a file given the meta information
 ##' contained in the object.
@@ -168,6 +170,19 @@ addTrack <- function (dobj, trackname, data, format = 'INT16',
   return(dobj)
 }
 
+##' List the tracks of an AsspDataObj
+##'
+##' AsspDataObj contain tracks (at least one). This function lists the names
+##' of these tracks. This function is equvalent to calling \code{names(x)}.
+##' @title tracks.AsspDataObj
+##' @param x an object of class AsspDataObj
+##' @return a character vector containing the names of the tracks
+##' @author Lasse Bombien
+##' @export
+##' @useDynLib wrassp
+tracks.AsspDataObj <- function(x) {
+  names(x)
+}
 
 ##' Function to get or set the file format of an AsspDataObj.
 ##' 
@@ -279,4 +294,33 @@ AsspDataFormat <- function(x) {
     stop('New value must be an integer or a string.')
   attr(x, 'fileInfo') <- as.integer(fi)
   x
+}
+
+##' Timing information on AsspDataObj
+##'
+##' Some utility function to retrieve duration, number of records, sample rate and so on.
+##' @title Timing information on AsspDataObj
+##' @param x an object of class AsspDataObj
+##' @return dur: the duration of the AsspDataObj in ms
+##' @author Lasse Bombien
+##' @export
+##' @useDynLib wrassp
+dur.AsspDataObj <- function(x) {
+  if (!is.AsspDataObj(x))
+    stop('Argument must be of class AsspDataObj.')
+  numRecs.AsspDataObj(x) / attr(x, 'sampleRate')
+}
+
+##' @rdname dur.AsspDataObj
+##' @return numRecs: the number of records stored in the AsspDataObj
+##' @export
+numRecs.AsspDataObj <- function(x) {
+  attr(x, 'endRecord') -attr(x, 'startRecord') + 1
+}
+
+##' @rdname dur.AsspDataObj
+##' @return rate: the data/sample rate of the AsspDataObj in Hz
+##' @export
+rate.AsspDataObj <- function(x) {
+  attr(x, 'sampleRate')
 }

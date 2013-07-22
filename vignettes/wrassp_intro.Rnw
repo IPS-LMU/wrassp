@@ -1,0 +1,96 @@
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{Introduction to wrassp} 
+\documentclass[11pt]{article}
+\title{An introduction to the \texttt{wraspp} package}
+\author{Lasse Bombien \and Raphael Winkelmann}
+\usepackage{csquotes}
+\usepackage{listings}
+\usepackage{geometry}
+\usepackage[mono=false]{libertine}
+\begin{document}
+
+<<setup,include=FALSE>>=
+library(knitr)
+wid <- 5
+opts_chunk$set(concordance=TRUE, size='footnotesize', dev='tikz',fig.width=wid,fig.height=.5*wid,out.width='\\textwidth',out.height='.5\\textwidth')
+thm = knit_theme$get("print")
+knit_theme$set(thm)
+@
+
+
+\maketitle
+
+This document is meant to be an introduction to the \verb|wrassp|
+package. \verb|wrassp| is a wrapper to Michel Scheffer's libassp
+(Advanced Speech Signal Processor). The libassp library aims at
+providing functionality for handling speech signal files in most
+common audio formats and for performing analyses common in phonetic
+science/speech science. This includes the calculation of formants,
+fundamental frequency, root mean square, auto correlation, a variety
+of spectral analyses, zero crossing rate, filtering etc. This wrapper
+library for R exposes a large subset of the signal processing
+functions to R in a (hopefully) user friendly manner.  
+
+Let's get started by locating some example material distributed with
+the package.
+
+<<chunk1>>=
+## load the package
+library(wrassp)
+
+## some audio files come along with the package
+wavpath <- system.file('extdata', package='wrassp')
+wavfiles <- list.files(wavpath, pattern=glob2rx('*.wav'), full.names=TRUE)
+
+## now we have some files to play with
+@ 
+
+One of the aims of \verb|wrassp| is to provide mechanisms to handle
+speech related files such as sound files and parametric data
+files. \verb|wrassp| therefore comes with a class called
+\verb|AsspDataObj| which does just that. 
+
+<<chunk2>>=
+## load an audio file, e.g. the first one in the list above
+au <- read.AsspDataObj(wavfiles[1])
+class(au)
+print(au)
+@ 
+
+\verb|au| is an object of the named class and, using \verb|print|, we can get some information on the object, such as it's sampling rate, its duration and what kind of data are stored in what form. Since the file we loaded is audio only, the object contains exactly one track. And since it's a mono file, the track only has one field. We will later encounter different types of data with more than one track and more fields.
+
+There are more ways to extract attributes from the object, such as duration, sampling rate and the number of records:
+
+<<chunk3>>=
+## duration
+dur.AsspDataObj(au)
+## sampling rate
+rate.AsspDataObj(au)
+## number of records/samples
+numRecs.AsspDataObj(au)
+@
+
+An important property of \verb|AsspDataObj| is of course that it
+contains data tracks, or at least one data track. As mentioned above,
+the currently loaded object contains a single mono audio
+track. Accessing the data is easy: \verb|AsspDataObj| stores data in
+simple matrices, one matrix for each track. Broadly speaking,
+\verb|AsspDataObj| is nothing but a list of at least one matrices. All
+of them have the same number of rows (number of records) but each can
+have a different number of columns (number of fields). Each track has
+a name and we can access the track using that name.
+
+<<chunk4>>=
+tracks.AsspDataObj(au)
+##or
+names(au)
+head(au$audio)
+## and we can of course also plot this way (only every tenth element)
+plot(au$audio[c(TRUE, rep(FALSE,9))], ty='l', ylab='Audio')
+@ 
+
+
+
+
+
+\end{document}

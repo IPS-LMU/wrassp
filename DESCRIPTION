@@ -14,7 +14,7 @@ Description: wrassp is a wrapper to Michel Scheffer's libassp (Advanced Speech
     includes the calculation of formants, fundamental frequency, root mean
     square, auto correlation, a variety of spectral analyses, zero crossing
     rate, filtering etc. This wrapper library for R exposes a large subset of
-    the signal processing functions to R in a (hopefully) user friendly manor.
+    the signal processing functions to R in a (hopefully) user friendly manner.
 License: GPL (>= 2)
 Packaged: 2013-06-06 15:09:08 UTC; raphael
 Author: Lasse Bombien [aut, cre],
@@ -22,6 +22,9 @@ Author: Lasse Bombien [aut, cre],
     Michel Scheffers [ctb]
 Maintainer: Lasse Bombien <lasse@phonetik.uni-muenchen.de>, Raphael
     Winkelmann <raphael@phonetik.uni-muenchen.de>
+VignetteBuilder: knitr
+Suggests:
+    knitr
 Collate:
     'acfana.R'
     'afdiff.R'

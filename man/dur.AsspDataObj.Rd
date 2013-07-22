@@ -1,0 +1,33 @@
+\name{dur.AsspDataObj}
+\alias{dur.AsspDataObj}
+\alias{numRecs.AsspDataObj}
+\alias{rate.AsspDataObj}
+\title{Timing information on AsspDataObj}
+\usage{
+  dur.AsspDataObj(x)
+
+  numRecs.AsspDataObj(x)
+
+  rate.AsspDataObj(x)
+}
+\arguments{
+  \item{x}{an object of class AsspDataObj}
+}
+\value{
+  dur: the duration of the AsspDataObj in ms
+
+  numRecs: the number of records stored in the AsspDataObj
+
+  rate: the data/sample rate of the AsspDataObj in Hz
+}
+\description{
+  Timing information on AsspDataObj
+}
+\details{
+  Some utility function to retrieve duration, number of
+  records, sample rate and so on.
+}
+\author{
+  Lasse Bombien
+}
+

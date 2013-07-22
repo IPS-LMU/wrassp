@@ -1,5 +1,6 @@
 \name{print.AsspDataObj}
 \alias{print.AsspDataObj}
+\alias{summary.AsspDataObj}
 \title{print a summary of an AsspDataObj}
 \usage{
   \method{print}{AsspDataObj} (x, ...)
