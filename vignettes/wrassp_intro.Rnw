@@ -13,8 +13,6 @@
 library(knitr)
 wid <- 5
 opts_chunk$set(concordance=TRUE, size='footnotesize', dev='tikz',fig.width=wid,fig.height=.5*wid,out.width='\\textwidth',out.height='.5\\textwidth')
-thm = knit_theme$get("print")
-knit_theme$set(thm)
 @
 
 
@@ -80,7 +78,7 @@ of them have the same number of rows (number of records) but each can
 have a different number of columns (number of fields). Each track has
 a name and we can access the track using that name.
 
-<<chunk4>>=
+<<chunk4, fig.cap='A simple way of plotting data'>>=
 tracks.AsspDataObj(au)
 ##or
 names(au)
