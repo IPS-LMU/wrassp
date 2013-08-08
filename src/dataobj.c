@@ -186,7 +186,9 @@ dobj2AsspDataObj (DOBJ * data)
    }
    setAttrib (ans, install ("origFreq"), origRate);
    PROTECT (startTime = allocVector (REALSXP, 1));
-   REAL (startTime)[0] = data->Start_Time + (data->bufStartRec / data->dataRate);
+   /* REAL (startTime)[0] = data->Start_Time +  */
+   /*     (data->bufStartRec / data->dataRate); */
+   REAL (startTime)[0] = data->Start_Time;
    setAttrib (ans, install ("startTime"), startTime);
 
    PROTECT (startRec = allocVector (INTSXP, 1));
