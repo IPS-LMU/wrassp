@@ -46,6 +46,19 @@
         cat('\t', track)
         cat(paste(" (", ncol(x[[track]]), " fields)\n", sep=''))
     }
+    genVars <- attr(x, 'genericVars')
+    if (!is.null(genVars)) {
+        cat("\nGeneric variables:\n")
+        for (var in names(genVars)) {
+            cat(sprintf("  %s:", var))
+            if (genVars[[var]]$Type %in% c("CHAR", "BYTE")) {
+                cat(sprintf("\t%s\n", genVars[[var]]$Value))
+            } else {
+                cat(sprintf("\t%f\n", genVars[[var]]$Value))
+            }
+            cat(sprintf("    (%s)\n", genVars[[var]]$Type))
+        }
+    }
 }
 
 
@@ -153,7 +166,7 @@ addTrack <- function (dobj, trackname, data, format = 'INT16',
     stop(paste('Track', trackname,
                 'exists and will not be deleted',
                 '("deleteExisting" argument)'))
-  if (length(tracks) == 1 & any(w)){
+  if (length(tracks) == 1 & any(w)) {
       ## this is fine: the only track will be replaced
   } else if (length(tracks) > 0) {
     if (nrow(data) != nrow(dobj[[1]]))
@@ -315,7 +328,7 @@ dur.AsspDataObj <- function(x) {
 ##' @return numRecs: the number of records stored in the AsspDataObj
 ##' @export
 numRecs.AsspDataObj <- function(x) {
-  attr(x, 'endRecord') -attr(x, 'startRecord') + 1
+  attr(x, 'endRecord') - attr(x, 'startRecord') + 1
 }
 
 ##' @rdname dur.AsspDataObj

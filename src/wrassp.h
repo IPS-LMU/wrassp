@@ -12,6 +12,7 @@ SEXP getDObj2 (SEXP fname);
 SEXP dobj2AsspDataObj (DOBJ * data);
 SEXP getDObjTracks (SEXP dobj);
 SEXP getDObjTrackData (DOBJ * data, DDESC * desc);
+SEXP getGenericVars(DOBJ *dop);
 // static void DObjFinalizer (SEXP dPtr);
 
 SEXP performAssp (SEXP args);

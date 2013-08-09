@@ -96,6 +96,19 @@ LOCAL float    getF32(void **ptr, int SWAP);
 LOCAL void    *putF32(float val, void **ptr, int SWAP);
 
 /*
+ * Sizes and names used by SSFF to store generic variables
+ */
+SSFFST SSFF_TYPES[] = {
+  {SSFF_CHAR, "CHAR", 1},
+  {SSFF_BYTE, "BYTE", 1},
+  {SSFF_SHORT, "SHORT", 2},
+  {SSFF_LONG, "LONG", 4},
+  {SSFF_FLOAT, "FLOAT", 4},
+  {SSFF_DOUBLE, "DOUBLE", 8},
+  {SSFF_UNDEF, NULL, 0}
+};
+
+/*
  * keyword <-> data type tables
  * Note: different keywords may be associated with the same data type 
  * but not the other way around. When different keywords exist for the 
@@ -2552,11 +2565,13 @@ LOCAL int putNISThdr(DOBJ *dop)
 ***********************************************************************/
 LOCAL int getSSFFhdr(DOBJ *dop)
 {
-  char   buf[ONEkBYTE], *field[MAX_HDR_FIELDS], *rest;
-  int    n, FIRST;
+  char   buf[ONEkBYTE], bak[ONEkBYTE], *field[MAX_HDR_FIELDS], *rest;
+  int    n, FIRST, FIRSTMETA;
   long   fileSize;
   KDTAB *entry;
   DDESC *dd;
+  SSFFST *ssff_type;
+  TSSFF_Generic *genVar;
 
   fileSize = getFileSize(dop);
   if(fileSize <= 0)
@@ -2565,6 +2580,7 @@ LOCAL int getSSFFhdr(DOBJ *dop)
  * verify format
  */
   n = fgetl(buf, sizeof(buf), dop->fp, NULL);
+  strncpy(bak, buf, strlen(buf));
   if(n <= 0 || strcmp(buf, SSFF_MAGIC) != 0) {
     asspMsgNum = AEF_ERR_FORM;
     sprintf(applMessage, "(not SSFF) in file %s", dop->filePath);
@@ -2585,8 +2601,10 @@ LOCAL int getSSFFhdr(DOBJ *dop)
   dd = &(dop->ddl);
   dd->format = DF_ERROR;
   FIRST = TRUE;       /* first data descriptor needs not be allocated */
+  FIRSTMETA = TRUE; /* first meta variable needs not be allocated */
   while(fgetl(buf, sizeof(buf), dop->fp, NULL) > 0) {
-    if(strcmp(buf, SSFF_EOH_STR) == 0) {     /* end of header reached */
+    strncpy(bak, buf, strlen(buf)); /* retain a copy of the line because strparse will alter it */
+  	if(strcmp(buf, SSFF_EOH_STR) == 0) {     /* end of header reached */
       dop->headerSize = ftell(dop->fp);    /* data follow immediately */
       break;
     }
@@ -2689,6 +2707,33 @@ LOCAL int getSSFFhdr(DOBJ *dop)
 	  return(-1);
 	}
 	dop->sampFreq = strtod(field[2], &rest);
+      } else if (n > 2) {
+      	/* this is probably a generic variable 
+      	 * if so than field[1] must be a valid SSFF size/type thingy as defined above 
+      	 * in SSFF_TYPES
+      	 */
+      	for (ssff_type = SSFF_TYPES; ssff_type->type != SSFF_UNDEF; ssff_type = ssff_type++) {
+      		if (strncmp(field[1], ssff_type->ident, strlen(ssff_type->ident)) == 0)
+      			break;
+      	}
+      	if (ssff_type->type == SSFF_UNDEF) {
+      		/* unable to find type, this is not a generic variable
+      		   just ignore silently */
+      	} else {
+      		/* this is a generic variable */
+      		if (!FIRSTMETA) {
+      			genVar = addTSSFF_Generic(dop);
+      			if (genVar == NULL)
+      				return(-1);
+      		} else {
+      			genVar = &(dop->meta);
+      		}
+      		FIRSTMETA = FALSE;
+      		genVar->type = ssff_type->type;
+      		genVar->ident = strdup(field[0]);
+      		rest = bak + (field[2] - buf);
+      		genVar->data = strdup(rest);
+      	}
       }
     } /* else ignore item */
   }
@@ -2730,6 +2775,8 @@ LOCAL int putSSFFhdr(DOBJ *dop)
   double frameRate;
   KDTAB *entry;
   DDESC *dd=&(dop->ddl);
+  TSSFF_Generic *genVar;
+  SSFFST *ssff_types;
 
 /*
  * set format-dependent items
@@ -2820,6 +2867,28 @@ LOCAL int putSSFFhdr(DOBJ *dop)
     sprintf(cPtr, "%s DOUBLE %.*f", SSFF_REF_RATE, nd, dop->sampFreq);
     strcat(header, dop->eol);
   }
+  /* 
+   * NEW !!! 
+   * insert generic variables
+   */
+  genVar = &(dop->meta);
+  for (; genVar != NULL; genVar=genVar->next) {
+  	for (ssff_types = SSFF_TYPES; ssff_types->type!= SSFF_UNDEF; ssff_types++) {
+  		if (ssff_types->type == genVar->type)
+  			break;
+  	}
+  	if (ssff_types->type == SSFF_UNDEF) {
+  		/* bad type */
+  		setAsspMsg(AED_ERR_TYPE, "Badly defined generic variable.");
+  		return(-1);
+  	} else {
+  		cPtr = &header[strlen(header)];
+  		sprintf(cPtr, "%s %s %s", genVar->ident, ssff_types->ident, genVar->data);
+  		strcat(header, dop->eol);
+  	}
+
+  } 
+
   strcat(header, SSFF_EOH_STR);
   strcat(header, dop->eol);
   dop->headerSize = (long)(numBytes=strlen(header));

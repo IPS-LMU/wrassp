@@ -221,6 +221,42 @@ typedef enum dataCoding {
 } dcode_e;
 
 /*
+ * SSFF generic variables 
+ */
+#define NAME_SIZE 256
+#define DATA_SIZE 1024
+typedef enum SSFF_TYPE_ENUM
+{
+  SSFF_CHAR,
+  SSFF_BYTE,
+  SSFF_SHORT,
+  SSFF_LONG,
+  SSFF_FLOAT,
+  SSFF_DOUBLE,
+  SSFF_UNDEF
+} SSFF_TYPE_ENUM_e;
+
+typedef struct SSFF_TYPES_S {
+  SSFF_TYPE_ENUM_e type;
+  const char       *ident;
+  size_t           bytesize;
+} SSFFST;
+
+ASSP_EXTERN SSFFST SSFF_TYPES[];
+
+typedef struct SSFF_Generic TSSFF_Generic;
+struct SSFF_Generic
+{
+  TSSFF_Generic *next;
+  
+  SSFF_TYPE_ENUM_e type;           /* data is held in string form,
+                         and converted by the user program */
+  /* the data */
+  char *ident;
+  char *data;
+};
+
+/*
  * data/parameter descriptor structure
  */
 typedef struct dataDescriptor {
@@ -279,6 +315,7 @@ typedef struct dataObject {
   char    sepChars[4]; /* block separator(s) for ASCII data */
   char    eol[4];      /* end-of-line character(s) in header and/or data */
   DDESC   ddl;         /* data/parameter descriptor list */
+  TSSFF_Generic meta;   /* store list of generic variables here */
   void   *generic;     /* pointer to generic data (ALLOCATED) */
   DOfreeFunc doFreeGeneric; /* pointer to freeing function */
   void   *dataBuffer;  /* pointer to (part of) the data (ALLOCATED) */
@@ -305,6 +342,7 @@ ASSP_EXTERN DOBJ  *allocDObj(void);
 ASSP_EXTERN DOBJ  *freeDObj(DOBJ *dop);
 ASSP_EXTERN void   clearDObj(DOBJ *dop);
 ASSP_EXTERN void   freeDDList(DOBJ *dop);
+ASSP_EXTERN void   freeMeta(DOBJ *dop);
 ASSP_EXTERN void   initDObj(DOBJ *dop);
 ASSP_EXTERN int    copyDObj(DOBJ *dst, DOBJ *src);
 ASSP_EXTERN DDESC *addDDesc(DOBJ *dop);
@@ -313,6 +351,12 @@ ASSP_EXTERN DDESC *clearDDesc(DDESC *ddp);
 ASSP_EXTERN void   initDDesc(DDESC *ddp);
 ASSP_EXTERN int    copyDDesc(DDESC *dst, DDESC *src);
 ASSP_EXTERN DDESC *findDDesc(DOBJ *dop, dtype_e type, char *ident);
+ASSP_EXTERN TSSFF_Generic *addTSSFF_Generic(DOBJ *dop);
+ASSP_EXTERN TSSFF_Generic *freeTSSFF_Generic(TSSFF_Generic *genVar);
+ASSP_EXTERN TSSFF_Generic *clearTSSFF_Generic(TSSFF_Generic *genVar);
+ASSP_EXTERN void   initTSSFF_Generic(TSSFF_Generic *genVar);
+ASSP_EXTERN int    copyTSSFF_Generic(TSSFF_Generic *dst, TSSFF_Generic *src);
+ASSP_EXTERN TSSFF_Generic *findTSSFF_Generic(DOBJ *dop, char *ident);
 ASSP_EXTERN int    setRecordSize(DOBJ *dop);
 ASSP_EXTERN int    checkRates(DOBJ *dop);
 ASSP_EXTERN int    setStart_Time(DOBJ *dop);

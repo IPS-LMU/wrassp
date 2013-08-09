@@ -98,6 +98,7 @@ void clearDObj(DOBJ *dop)
 {
   if(dop != NULL) {
     freeDDList(dop);
+    freeMeta(dop);
     freeGeneric(dop);
     freeDataBuf(dop);
     initDObj(dop);                              /* now zero all items */
@@ -121,6 +122,26 @@ void freeDDList(DOBJ *dop)
     dd = clearDDesc(&(dop->ddl));/* can't use freeDDesc() while fixed */
     while(dd != NULL)  /* other descriptors in the list are allocated */
       dd = freeDDesc(dd);
+  }
+  return;
+}
+
+/*DOC
+
+Frees all memory allocated for the generic variable list of the data 
+object pointed to by "dop" and re-initializes the first (fixed) 
+variable.
+
+DOC*/
+
+void freeMeta(DOBJ *dop)
+{
+  TSSFF_Generic *genVar;
+
+  if(dop != NULL) {
+    genVar = clearTSSFF_Generic(&(dop->meta));/* can't use freeTSSFF_Generic() while fixed */
+    while(genVar != NULL)  /* other variables in the list are allocated */
+      genVar = freeTSSFF_Generic(genVar);
   }
   return;
 }
@@ -158,6 +179,7 @@ void initDObj(DOBJ *dop)
     dop->sepChars[0] = EOS;
     dop->eol[0] = EOS;
     initDDesc(&(dop->ddl));
+    initTSSFF_Generic(&(dop->meta));
     dop->generic = NULL;
     dop->doFreeGeneric = NULL;
     dop->dataBuffer = NULL;
@@ -189,6 +211,7 @@ DOC*/
 int copyDObj(DOBJ *dst, DOBJ *src)
 {
   DDESC *dd, *next;
+  TSSFF_Generic *genVar, *nextG;
 
   if(src == NULL || dst == NULL) {
     setAsspMsg(AEB_BAD_ARGS, "copyDObj");
@@ -227,6 +250,24 @@ int copyDObj(DOBJ *dst, DOBJ *src)
     }
     next = next->next;
   }
+
+  if(copyTSSFF_Generic(&(dst->meta), &(src->meta)) < 0) {
+    clearDObj(dst);
+    return(-1);
+  }
+  nextG = (src->meta).next;
+  while(next != NULL) {
+    genVar = addTSSFF_Generic(dst);
+    if(genVar == NULL) {
+      clearDObj(dst);
+      return(-1);
+    }
+    if(copyTSSFF_Generic(genVar, nextG) < 0) {
+      clearDObj(dst);
+      return(-1);
+    }
+    nextG = nextG->next;
+  }
   return(0);
 }
 
@@ -249,7 +290,7 @@ DDESC *addDDesc(DOBJ *dop)
       initDDesc(new);                          /* initialize elements */
       last = &(dop->ddl);                /* can't be NULL while fixed */
       while(last->next != NULL)        /* search last element in list */
-	last = last->next;
+  last = last->next;
       last->next = new;                   /* append the new structure */
     }
     else
@@ -387,24 +428,171 @@ DDESC *findDDesc(DOBJ *dop, dtype_e type, char *ident)
       checkID = TRUE;
     for(dd = &(dop->ddl); dd != NULL; dd = dd->next) {
       if(type > DT_UNDEF) {
-	if(dd->type == type) {
-	  if(checkID) {
-	    if(dd->ident != NULL && strcmp(dd->ident, ident) == 0)
-	      break; /* FOUND ! */
-	  }
-	  else
-	    break; /* FOUND ! */
-	}
+  if(dd->type == type) {
+    if(checkID) {
+      if(dd->ident != NULL && strcmp(dd->ident, ident) == 0)
+        break; /* FOUND ! */
+    }
+    else
+      break; /* FOUND ! */
+  }
       }
       else if(checkID) {
-	if(dd->ident != NULL && strcmp(dd->ident, ident) == 0)
-	  break; /* FOUND ! */
+  if(dd->ident != NULL && strcmp(dd->ident, ident) == 0)
+    break; /* FOUND ! */
       }
       else /* ERROR */
-	return(NULL);
+  return(NULL);
     }
   }
   return(dd);
+}
+
+//////// FROM NOW ON REPLACE DDESC WITH SSFFST
+/*DOC
+
+Adds (appends) a data descriptor to the list in the data object pointed 
+to by "dop". The descriptor will be initialized with zeros.
+The function returns a pointer to the new descriptor or NULL if there 
+is insufficient memory available.
+
+DOC*/
+
+TSSFF_Generic *addTSSFF_Generic(DOBJ *dop)
+{
+  TSSFF_Generic *last, *new=NULL;
+
+  if(dop != NULL) {
+    new = (TSSFF_Generic *)malloc(sizeof(TSSFF_Generic));
+    if(new != NULL) {
+      initTSSFF_Generic(new);                          /* initialize elements */
+      last = &(dop->meta);                /* can't be NULL while fixed */
+      while(last->next != NULL)        /* search last element in list */
+	last = last->next;
+      last->next = new;                   /* append the new structure */
+    }
+    else
+      setAsspMsg(AEG_ERR_MEM, NULL);
+  }
+  return(new);
+}
+
+/*DOC
+
+Frees memory allocated for the elements of the generic variable pointed 
+to by "genVar" and for the structure itself.
+Returns a pointer to the next element in the descriptor list.
+
+DOC*/
+
+TSSFF_Generic *freeTSSFF_Generic(TSSFF_Generic *genVar)
+{
+  TSSFF_Generic *next=NULL;
+
+  if(genVar != NULL) {
+    next = clearTSSFF_Generic(genVar);
+    free((void *)genVar);
+  }
+  return(next);
+}
+
+/*DOC
+
+Frees memory allocated for the elements of the data descriptor pointed 
+to by "genVar" and re-initializes it.
+Returns a pointer to the next element in the descriptor list.
+
+Note:
+ - This function does NOT free the memory allocated for the data 
+   descriptor structure itself; use freeTSSFF_Generic() for this.
+
+DOC*/
+
+TSSFF_Generic *clearTSSFF_Generic(TSSFF_Generic *genVar)
+{
+  TSSFF_Generic *next=NULL;
+
+  if(genVar != NULL) {
+    if(genVar->ident != NULL)
+      free((void *)(genVar->ident));
+    if(genVar->data != NULL)
+      free((void*)(genVar->data));
+    next = genVar->next;
+    initTSSFF_Generic(genVar);
+  }
+  return(next);
+}
+
+/*DOC
+
+Sets items in data descriptor structure to defined (empty) values.
+
+DOC*/
+
+void initTSSFF_Generic(TSSFF_Generic *genVar)
+{
+  if(genVar != NULL) {
+    genVar->ident = NULL;
+    genVar->data = NULL;
+    genVar->type = SSFF_UNDEF;
+    genVar->next = NULL;
+  }
+  return;
+}
+
+/*DOC
+
+Copies items in the data descriptor structure pointed to by "src" to 
+the one pointed to by "dst". The item 'next' in "dst" will be set to 
+NULL. Returns -1 upon error, otherwise 0.
+
+Note:
+ - This function assumes that the descriptor structure "dst" does not 
+   contain valid data.
+
+DOC*/
+
+int copyTSSFF_Generic(TSSFF_Generic *dst, TSSFF_Generic *src)
+{
+  if(src == NULL || dst == NULL) {
+    setAsspMsg(AEB_BAD_ARGS, "copyTSSFF_Generic");
+    return(-1);
+  }
+  if(src->ident != NULL)
+    dst->ident = strdup(src->ident);
+  else
+    dst->ident = NULL;
+  if (src->data != NULL)
+    dst->data = strdup(src->data);
+  else
+    dst->data = NULL;
+  dst->type = src->type;
+  dst->next = NULL;
+  return(0);
+}
+
+/*DOC
+
+Determines whether the data object pointed to by "dop" contains a data 
+descriptor whose type code matches "type" and/or identification string 
+matches "ident". If this is the case, the function will return a pointer 
+to this descriptor, otherwise, and upon error, it will return NULL.
+If both "type" and "ident" are specified, both items must match.
+
+DOC*/
+
+TSSFF_Generic *findTSSFF_Generic(DOBJ *dop, char *ident)
+{
+  TSSFF_Generic *genVar=NULL;
+
+  if(dop != NULL) {
+    genVar = &(dop->meta);
+    for (; genVar != NULL; genVar=genVar->next) {
+      if (strcmp(genVar->ident, ident))
+        break; // found. If it doesn't break here, genVar can only be NULL
+    }
+  }
+  return(genVar);
 }
 
 /*DOC
