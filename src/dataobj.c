@@ -35,7 +35,7 @@ SEXP
 getDObj2 (SEXP args)
 {
 
- SEXP el;
+ SEXP el, ans;
  DOBJ *data = NULL;
  long numRecs;
  int i;
@@ -115,7 +115,9 @@ if ((numRecs = asspFFill (data)) < 0)
   error (getAsspMsg (asspMsgNum));
 }
 asspFClose (data, AFC_KEEP);
-return dobj2AsspDataObj (data);
+ans = dobj2AsspDataObj (data);
+asspFClose(data, AFC_FREE);
+return ans;
 }
 
 
