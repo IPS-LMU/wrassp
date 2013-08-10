@@ -2873,6 +2873,8 @@ LOCAL int putSSFFhdr(DOBJ *dop)
    */
   genVar = &(dop->meta);
   for (; genVar != NULL; genVar=genVar->next) {
+    if (genVar->ident == NULL)
+      break; /* fixed var is empty */
   	for (ssff_types = SSFF_TYPES; ssff_types->type!= SSFF_UNDEF; ssff_types++) {
   		if (ssff_types->type == genVar->type)
   			break;
