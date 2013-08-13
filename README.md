@@ -11,7 +11,9 @@ wrassp is a wrapper to Michel Scheffer's [libassp](http://libassp.sourceforge.ne
 
 * load the library: `library("wrassp")`
 
-* calculate formants from audio file: `res=forest("path/to/audio.wav", ToFile=FALSE)`
+* get path to an audio file: `path2wav <- list.files(system.file("extdata", package = "wrassp"), pattern = glob2rx("*.wav"), full.names = TRUE)[1]`
+
+* calculate formants from audio file: `res=forest(path2wav, ToFile=FALSE)`
 
 * plot the first 100 F1 values over time: `plot(res$fm[0:99,1],type='l')`
 
