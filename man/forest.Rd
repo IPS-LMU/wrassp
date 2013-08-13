@@ -69,8 +69,8 @@
   useWrasspLogger. This is set to FALSE by default and
   should be set to TRUE is logging is desired.}
 
-  \item{Header}{set if you wish to send a http header along
-  with the curl request if URIs need to be handled}
+  \item{Header}{= optional header string to use in RCurl
+  call for URIs}
 }
 \value{
   nrOfProcessedFiles or if only one file to process return

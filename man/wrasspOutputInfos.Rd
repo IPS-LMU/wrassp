@@ -11,8 +11,8 @@ for each signal processing function in wrassp}
  $ cepstrum   :List of 3
  $ cssSpectrum:List of 3
  $ dftSpectrum:List of 3
- $ f0_ksv     :List of 3
- $ f0_mhs     :List of 3
+ $ ksvF0      :List of 3
+ $ mhsF0      :List of 3
  $ forest     :List of 3
  $ lpsSpectrum:List of 3
  $ rfcana     :List of 3
