@@ -1,3 +1,4 @@
+import(RCurl)
 export("AsspDataFormat<-")
 export("AsspFileFormat<-")
 export(acfana)

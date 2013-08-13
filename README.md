@@ -4,6 +4,8 @@ wrassp is a wrapper to Michel Scheffer's [libassp](http://libassp.sourceforge.ne
 
 
 ## Quick start
+
+* relies on the RCurl package to handle URIs. Make sure it is installed before you proceed.
  
 * Download then install the package with: `install.packages("path/to/wrassp", repos = NULL, type="source")`
 

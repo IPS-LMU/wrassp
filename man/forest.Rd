@@ -8,7 +8,8 @@
     NominalF1 = 500, Gender = "m", Estimate = FALSE,
     Order = 0, IncrOrder = 0, NumFormants = 4,
     Window = "BLACKMAN", Preemphasis = -0.8, ToFile = TRUE,
-    ExplicitExt = NULL, forceToLog = useWrasspLogger)
+    ExplicitExt = NULL, forceToLog = useWrasspLogger,
+    Header = NULL)
 }
 \arguments{
   \item{listOfFiles}{vector of file paths to be processed
@@ -67,6 +68,9 @@
   \item{forceToLog}{is set by the global package variable
   useWrasspLogger. This is set to FALSE by default and
   should be set to TRUE is logging is desired.}
+
+  \item{Header}{set if you wish to send a http header along
+  with the curl request if URIs need to be handled}
 }
 \value{
   nrOfProcessedFiles or if only one file to process return

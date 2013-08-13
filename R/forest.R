@@ -34,6 +34,7 @@
 ##' @param ExplicitExt set if you wish to overwride the default extension
 ##' @param forceToLog is set by the global package variable useWrasspLogger. This is set
 ##' to FALSE by default and should be set to TRUE is logging is desired.
+##' @param Header = optional header string to use in RCurl call for URIs
 ##' @return nrOfProcessedFiles or if only one file to process return AsspDataObj of that file
 ##' @author Raphael Winkelmann
 ##' @useDynLib wrassp
@@ -46,7 +47,8 @@
                      Order = 0, IncrOrder = 0, 
                      NumFormants = 4, Window = 'BLACKMAN', 
                      Preemphasis = -0.8, ToFile = TRUE, 
-                     ExplicitExt = NULL, forceToLog = useWrasspLogger){
+                     ExplicitExt = NULL, forceToLog = useWrasspLogger,
+                     Header = NULL){
 	
 	###########################
 	# a few parameter checks and expand paths
@@ -75,6 +77,12 @@
 	listOfFiles = gsub("^file://","", listOfFiles)
 	listOfFiles = path.expand(listOfFiles)
 	
+	# handle URIs by downloading URI content to local temporary files
+
+	files <- downloadTempURIFiles(listOfFiles, Header)
+	listOfFiles <- files$listOfFiles
+	tmpFiles <- files$tmpFiles
+
 	###########################
 	#perform analysis
 	
@@ -83,9 +91,8 @@
 	}else{
     cat('\n  INFO: applying forest to', length(listOfFiles), 'files\n')
     pb <- txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
-	}	
-	
-	
+	}
+
 	externalRes = invisible(.External("performAssp", listOfFiles, 
                                     fname = "forest", BeginTime =  BeginTime, 
                                     EndTime = EndTime, WindowShift = WindowShift, 
@@ -97,7 +104,13 @@
                                     ToFile = ToFile, ExplicitExt = ExplicitExt, 
                                     ProgressBar = pb, PACKAGE = "wrassp"))
 	
-  ############################
+	# delete temporary files created
+
+	if(length(tmpFiles)>0) {
+		deleteTempFiles(tmpFiles)	
+	}
+	
+	############################
 	# write options to options log file
   
 	if (forceToLog){

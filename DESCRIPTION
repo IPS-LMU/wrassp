@@ -25,7 +25,9 @@ Maintainer: Lasse Bombien <lasse@phonetik.uni-muenchen.de>, Raphael
 VignetteBuilder: knitr
 Suggests:
     knitr
+Depends: RCurl
 Collate:
+    'fileHelper.R'
     'acfana.R'
     'afdiff.R'
     'affilter.R'
