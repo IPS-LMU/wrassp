@@ -15,8 +15,8 @@
   files
 }
 \description{
-  checks for and URIs in the list of files and downloads a
+  checks for any URIs in the list of files and downloads a
   temporary local file for each so they can be used in the
-  functions of the assp library
+  functions of the libassp library
 }
 

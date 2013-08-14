@@ -1,5 +1,5 @@
-##' checks for and URIs in the list of files and downloads a temporary local file for
-##' each so they can be used in the functions of the assp library
+##' checks for any URIs in the list of files and downloads a temporary local file for
+##' each so they can be used in the functions of the libassp library
 ##' @title downloadTempURIFiles
 ##' @param listOfFiles: list of input files
 ##' @param header: header to be used in the curl call to obtain URI content
@@ -33,10 +33,11 @@
 }
 
 
-##' creates non-existing filename for given URI
+##' creates non-existing filename for given URI, by using basename of URI
+##' and appending a number if already exists to ensure uniqueness 
 ##' @title createUniqueFilename
-##' @param URI
-##' @returns filename
+##' @param URI: URI to create filename for
+##' @return filename
 'createUniqueFilename' <- function(uri) {
 	file <- basename(uri)
 	if(regexpr("\\.[^\\.]*$", file) != -1) {
@@ -46,6 +47,7 @@
 	}
 	file <- filename
 	count <- 2
+	# append/increase number until filename is unique to working directory
 	while(file.exists(paste(filename, ".fms", sep=""))) {
 		filename <- paste(file, "(", toString(count), ")", sep="")
 		count <- count + 1
