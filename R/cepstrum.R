@@ -102,7 +102,8 @@
                                     FftLength = as.integer(FftLength),
                                     WindowShift = WindowShift, Window = Window, 
                                     ToFile = ToFile, ExplicitExt = ExplicitExt, 
-                                    ProgressBar = pb, PACKAGE = "wrassp"))
+                                    ProgressBar = pb, OutputDirectory = OutputDirectory,
+                                    PACKAGE = "wrassp"))
   
   
   ## #########################

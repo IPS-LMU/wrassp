@@ -8,8 +8,8 @@
     NominalF1 = 500, Gender = "m", Estimate = FALSE,
     Order = 0, IncrOrder = 0, NumFormants = 4,
     Window = "BLACKMAN", Preemphasis = -0.8, ToFile = TRUE,
-    ExplicitExt = NULL, forceToLog = useWrasspLogger,
-    Header = NULL)
+    ExplicitExt = NULL, OutputDirectory = NULL,
+    forceToLog = useWrasspLogger, Header = NULL)
 }
 \arguments{
   \item{listOfFiles}{vector of file paths to be processed
@@ -64,6 +64,10 @@
 
   \item{ExplicitExt}{set if you wish to overwride the
   default extension}
+
+  \item{OutputDirectory}{directory in which output files
+  are stored. Defaults to NULL, i.e. the directory of the
+  input files}
 
   \item{forceToLog}{is set by the global package variable
   useWrasspLogger. This is set to FALSE by default and

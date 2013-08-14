@@ -102,7 +102,8 @@
                                     WindowShift = WindowShift, Window = Window, 
                                     NumCeps = as.integer(NumCeps), 
                                     ToFile = ToFile, ExplicitExt = ExplicitExt, 
-                                    ProgressBar = pb, PACKAGE = "wrassp"))
+                                    ProgressBar = pb, OutputDirectory = OutputDirectory,
+                                    PACKAGE = "wrassp"))
   
   
   ## #########################

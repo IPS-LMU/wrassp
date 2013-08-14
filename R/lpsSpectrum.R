@@ -113,7 +113,8 @@
                                     Order = as.integer(Order), Preemphasis = Preemphasis, 
                                     Deemphasize = Deemphasize, 
                                     ToFile = ToFile, ExplicitExt = ExplicitExt, 
-                                    ProgressBar = pb, PACKAGE = "wrassp"))
+                                    ProgressBar = pb, OutputDirectory = OutputDirectory,
+                                    PACKAGE = "wrassp"))
   
   
   ## #########################

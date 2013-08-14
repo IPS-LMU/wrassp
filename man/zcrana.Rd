@@ -5,7 +5,8 @@
   zcrana(listOfFiles = NULL, optLogFilePath = NULL,
     BeginTime = 0, CenterTime = FALSE, EndTime = 0,
     WindowShift = 5, WindowSize = 25, ToFile = TRUE,
-    ExplicitExt = NULL, forceToLog = useWrasspLogger)
+    ExplicitExt = NULL, OutputDirectory = NULL,
+    forceToLog = useWrasspLogger)
 }
 \arguments{
   \item{listOfFiles}{vector of file paths to be processed
@@ -34,6 +35,10 @@
 
   \item{ExplicitExt}{set if you wish to overwride the
   default extension}
+
+  \item{OutputDirectory}{directory in which output files
+  are stored. Defaults to NULL, i.e. the directory of the
+  input files}
 
   \item{forceToLog}{is set by the global package variable
   useWrasspLogger. This is set to FALSE by default and

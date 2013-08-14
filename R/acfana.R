@@ -91,8 +91,7 @@
                                     AnalysisOrder = as.integer(AnalysisOrder), EnergyNormalization = EnergyNormalization, 
                                     LengthNormalization = LengthNormalization, ToFile = ToFile, 
                                     ExplicitExt = ExplicitExt, ProgressBar = pb,
-                                    OutputDirectory = OutputDirectory,
-                                    PACKAGE = "wrassp"))
+                                    OutputDirectory = OutputDirectory, PACKAGE = "wrassp"))
   
   ############################
   # write options to options log file

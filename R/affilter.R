@@ -92,7 +92,8 @@
                                     LowPass = LowPass, StopBand = StopBand, Transition = Transition, 
                                     UseIIR = UseIIR, NumIIRsections = as.integer(NumIIRsections),
                                     ToFile = ToFile, ExplicitExt = ExplicitExt, 
-                                    ProgressBar = pb, PACKAGE = "wrassp"))
+                                    ProgressBar = pb, OutputDirectory = OutputDirectory,
+                                    PACKAGE = "wrassp"))
   
   ############################
   # write options to options log file

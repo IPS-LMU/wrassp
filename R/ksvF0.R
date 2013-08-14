@@ -93,7 +93,7 @@
                                     MinF = MinF, MinAmp = MinAmp, 
                                     MaxZCR = MaxZCR, ExplicitExt = ExplicitExt, 
                                     ToFile = ToFile, ProgressBar = pb, 
-                                    PACKAGE = "wrassp"))
+                                    OutputDirectory = OutputDirectory, PACKAGE = "wrassp"))
   
   ############################
   # write options to options log file

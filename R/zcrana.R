@@ -78,7 +78,7 @@
                                     EndTime = EndTime, WindowShift = WindowShift, 
                                     WindowSize = WindowSize, 
                                     ToFile = ToFile, ExplicitExt = ExplicitExt, 
-                                    ProgressBar = pb))
+                                    OutputDirectory = OutputDirectory, ProgressBar = pb))
   
   
   ############################

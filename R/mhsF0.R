@@ -99,7 +99,8 @@
                                     MinRMS = MinRMS, MaxZCR = MaxZCR, 
                                     MinProb = MinProb, PlainSpectrum = PlainSpectrum, 
                                     ToFile = ToFile, ExplicitExt = ExplicitExt, 
-                                    ProgressBar = pb, PACKAGE = "wrassp"))
+                                    ProgressBar = pb, OutputDirectory = OutputDirectory,
+                                    PACKAGE = "wrassp"))
   
   ############################
   # write options to options log file

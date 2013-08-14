@@ -108,7 +108,8 @@
                                     WindowShift = WindowShift, Window = Window, 
                                     Bandwidth = Bandwidth, 
                                     ToFile = ToFile, ExplicitExt = ExplicitExt, 
-                                    ProgressBar = pb, PACKAGE = "wrassp"))
+                                    ProgressBar = pb, OutputDirectory = OutputDirectory,
+                                    PACKAGE = "wrassp"))
   
   
   ## #########################

@@ -107,7 +107,8 @@
                                     Order = as.integer(Order), 
                                     Preemphasis = Preemphasis, LpType = LpType, 
                                     ToFile = ToFile, ExplicitExt = ExplicitExt, 
-                                    ProgressBar = pb, PACKAGE = "wrassp"))
+                                    ProgressBar = pb, OutputDirectory = OutputDirectory,
+                                    PACKAGE = "wrassp"))
   
   ############################
   # write options to options log file
