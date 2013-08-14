@@ -80,7 +80,7 @@
                                     fname = "afdiff", ComputeBackwardDifference = ComputeBackwardDifference, 
                                     Channel = as.integer(Channel), ToFile = ToFile, 
                                     ExplicitExt = ExplicitExt, ProgressBar=pb, 
-                                    PACKAGE = "wrassp"))
+                                    OutputDirectory = OutputDirectory, PACKAGE = "wrassp"))
   
   
   ############################
