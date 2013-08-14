@@ -56,6 +56,8 @@ W_OPT acfanaOptions[] = {
    ,
    {"ToFile", WO_TOFILE}
    ,
+   {"OutputDirectory", WO_OUTPUTDIR}
+   ,
    {"ProgressBar", WO_PBAR}
    ,
    {NULL, WO_NONE}
@@ -71,6 +73,8 @@ W_OPT afdiffOptions[] = {
    {"ExplicitExt", WO_OUTPUTEXT}
    ,				//DON'T FORGET EXTENSION!!!
    {"ToFile", WO_TOFILE}
+   ,
+   {"OutputDirectory", WO_OUTPUTDIR}
    ,
    {"ProgressBar", WO_PBAR}
    ,
@@ -95,6 +99,8 @@ W_OPT affilterOptions[] = {
    {"ProgressBar", WO_PBAR}
    ,
    {"ToFile", WO_TOFILE}
+   ,
+   {"OutputDirectory", WO_OUTPUTDIR}
    ,
    /* {"-channel"}, */
    /* {"-noDither"}, */
@@ -124,7 +130,10 @@ W_OPT f0_ksvOptions[] = {
    {"ExplicitExt", WO_OUTPUTEXT}
    ,				//DON'T FORGET EXTENSION!!!
    {"ToFile", WO_TOFILE}
-   , {NULL, WO_NONE}
+   , 
+   {"OutputDirectory", WO_OUTPUTDIR}
+   ,
+{NULL, WO_NONE}
 };
 
 W_OPT f0_mhsOptions[] = {
@@ -159,7 +168,10 @@ W_OPT f0_mhsOptions[] = {
    {"ExplicitExt", WO_OUTPUTEXT}
    ,				//DON'T FORGET EXTENSION!!!
    {"ToFile", WO_TOFILE}
-   , {NULL, WO_NONE}
+   , 
+   {"OutputDirectory", WO_OUTPUTDIR}
+   ,
+   {NULL, WO_NONE}
 };
 
 /**
@@ -199,7 +211,10 @@ W_OPT forestOptions[] = {
    {"ProgressBar", WO_PBAR}
    ,
    {"ToFile", WO_TOFILE}
-   , {NULL, WO_NONE}
+   , 
+   {"OutputDirectory", WO_OUTPUTDIR}
+   ,
+  {NULL, WO_NONE}
 };
 
 
@@ -229,7 +244,10 @@ W_OPT rfcanaOptions[] = {
    {"ProgressBar", WO_PBAR}
    ,
    {"ToFile", WO_TOFILE}
-   , {NULL, WO_NONE}
+   , 
+   {"OutputDirectory", WO_OUTPUTDIR}
+   ,
+   {NULL, WO_NONE}
 };
 
 W_OPT rmsanaOptions[] = {
@@ -254,7 +272,10 @@ W_OPT rmsanaOptions[] = {
    {"ProgressBar", WO_PBAR}
    ,
    {"ToFile", WO_TOFILE}
-   , {NULL, WO_NONE}
+   , 
+   {"OutputDirectory", WO_OUTPUTDIR}
+   ,
+   {NULL, WO_NONE}
 };
 
 W_OPT spectrumOptions[] = {
@@ -297,7 +318,10 @@ W_OPT spectrumOptions[] = {
    {"ProgressBar", WO_PBAR}
    ,
    {"ToFile", WO_TOFILE}
-   , {NULL, WO_NONE}
+   , 
+   {"OutputDirectory", WO_OUTPUTDIR}
+   ,
+   {NULL, WO_NONE}
 };
 
 W_OPT zcranaOptions[] = {
@@ -318,6 +342,8 @@ W_OPT zcranaOptions[] = {
    {"ProgressBar", WO_PBAR}
    ,
    {"ToFile", WO_TOFILE}
+   ,
+   {"OutputDirectory", WO_OUTPUTDIR}
    ,
    {NULL, WO_NONE}
 };
@@ -381,7 +407,7 @@ performAssp (SEXP args)
    LP_TYPE *lPtr = NULL;
    SPECT_TYPE *sPtr = NULL;
    DOBJ *inPtr, *outPtr;
-   char *dPath, *bPath, *oExt, outName[PATH_MAX + 1];
+   char *dPath, *bPath, *oExt, outName[PATH_MAX + 1], *outDir = NULL;
 
    args = CDR (args);		// skip function name
 
@@ -904,6 +930,15 @@ performAssp (SEXP args)
       case WO_TOFILE:
 	 toFile = INTEGER (el)[0] != 0;
 	 break;
+    case WO_OUTPUTDIR:
+      if (el == R_NilValue) {
+         outDir = NULL;
+         break;
+      }
+      outDir = strdup(CHAR(STRING_ELT(el, 0)));
+      if (outDir[strlen(outDir)-1] != DIR_SEP_CHR)
+         outDir = strcat(outDir, DIR_SEP_STR);
+      break;
       case WO_PBAR:
 	 pBar = el;
 	 break;
@@ -991,9 +1026,12 @@ performAssp (SEXP args)
 	 /* parse the input path to get directory (dPath),
 	    base file name (bPath) and original extension (oExt) */
 	 parsepath ((char *)name, &dPath, &bPath, &oExt);
-	 /* outName is the same except for extension */
+	 /* outName is the same except for extension unless outDir is set */
 	 strcpy (outName, "");
-	 strcat (outName, dPath);
+    if (outDir == NULL)
+   	 strcat (outName, dPath);
+    else
+       strcat(outName, outDir);
 	 strcat (outName, bPath);
 	 /* Extension may have to be set for afdiff but only if extension is 
 	    not set explicitely */

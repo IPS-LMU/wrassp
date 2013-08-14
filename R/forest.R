@@ -32,6 +32,8 @@
 ##' @param Preemphasis = <val>: set pre-emphasis factor to <val> (-1 <= val <= 0) (default: dependent on sample rate and nominal F1)
 ##' @param ToFile write results to file (default extension is .fms)
 ##' @param ExplicitExt set if you wish to overwride the default extension
+##' @param OutputDirectory directory in which output files are stored. Defaults to NULL, i.e. 
+##' the directory of the input files
 ##' @param forceToLog is set by the global package variable useWrasspLogger. This is set
 ##' to FALSE by default and should be set to TRUE is logging is desired.
 ##' @param Header = optional header string to use in RCurl call for URIs
@@ -47,8 +49,8 @@
                      Order = 0, IncrOrder = 0, 
                      NumFormants = 4, Window = 'BLACKMAN', 
                      Preemphasis = -0.8, ToFile = TRUE, 
-                     ExplicitExt = NULL, forceToLog = useWrasspLogger,
-                     Header = NULL){
+                     ExplicitExt = NULL,  OutputDirectory = NULL, 
+                     forceToLog = useWrasspLogger, Header = NULL){
 	
 	###########################
 	# a few parameter checks and expand paths
@@ -71,6 +73,14 @@
 		stop("WindowFunction of type '", Window,"' is not supported!")
 	}
 
+	if (!is.null(OutputDirectory)) {
+	  finfo  <- file.info(OutputDirectory)
+	  if (is.na(finfo$isdir))
+	    if (!dir.create(OutputDirectory, recursive=TRUE))
+	      error('Unable to create output directory.')
+	  else if (!finfo$isdir)
+	    error(paste(OutputDirectory, 'exists but is not a directory.'))
+	}
 	###########################
 	# remove file:// and expand listOfFiles (SIC)
 	
@@ -102,7 +112,8 @@
                                     IncrOrder = as.integer(IncrOrder), NumFormants = as.integer(NumFormants), 
                                     Window = Window, Preemphasis = Preemphasis, 
                                     ToFile = ToFile, ExplicitExt = ExplicitExt, 
-                                    ProgressBar = pb, PACKAGE = "wrassp"))
+                                    ProgressBar = pb, OutputDirectory = OutputDirectory,
+	                                  PACKAGE = "wrassp"))
 	
 	# delete temporary files created
 
