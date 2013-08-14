@@ -22,8 +22,8 @@ wrassp is a wrapper to Michel Scheffer's [libassp](http://libassp.sourceforge.ne
 + `acfana()` = Analysis of short-term autocorrelation function
 + `afdiff()` = Computes the first difference of the signal
 + `affilter()` = Filters the audio signal (see docs for types)
-+ `f0_ksv()` = F0 analysis of the signal
-+ `f0_mhs()` = Pitch analysis of the speech signal using Michel's/Modified Harmonic Sieve algorithm
++ `ksvF0()` = F0 analysis of the signal
++ `mhsF0()` = Pitch analysis of the speech signal using Michel's/Modified Harmonic Sieve algorithm
 + `forest()` = Formant estimation
 + `rfcana()` = Linear Prediction analysis
 + `rmsana()` = Analysis of short-term Root Mean Square amplitude

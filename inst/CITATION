@@ -9,6 +9,6 @@ citEntry(entry="Manual",
          year = year,
          note = vers,
          textVersion =
-         paste("Lasse Bombien, Raphael Winkelmann and Michel Scheffers",
+         paste("Lasse Bombien, Raphael Winkelmann and Michel Scheffers (",
                year,"). wrassp: an R wrapper to the ASSP Library ",
                vers, ".", sep=""))
