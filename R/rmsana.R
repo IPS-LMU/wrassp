@@ -20,6 +20,8 @@
 ##' @param Window = <type>: set analysis window function to <type> (default: HAMMING)
 ##' @param ToFile write results to file (default extension is .rms)
 ##' @param ExplicitExt set if you wish to overwride the default extension
+##' @param OutputDirectory directory in which output files are stored. Defaults to NULL, i.e.
+##' the directory of the input files
 ##' @param forceToLog is set by the global package variable useWrasspLogger. This is set
 ##' to FALSE by default and should be set to TRUE is logging is desired.
 ##' @return nrOfProcessedFiles or if only one file to process return AsspDataObj of that file
@@ -32,7 +34,7 @@
                      WindowSize = 20.0, EffectiveLength = TRUE, 
                      Linear = FALSE, Window = 'HAMMING', 
                      ToFile = TRUE, ExplicitExt = NULL,
-                     forceToLog = useWrasspLogger){
+                     OutputDirectory = NULL, forceToLog = useWrasspLogger){
 
 
 	###########################
@@ -56,6 +58,16 @@
 		stop("WindowFunction of type '", Window,"' is not supported!")
 	}
 
+	if (!is.null(OutputDirectory)) {
+	  OutputDirectory = path.expand(OutputDirectory)
+	  finfo  <- file.info(OutputDirectory)
+	  if (is.na(finfo$isdir))
+	    if (!dir.create(OutputDirectory, recursive=TRUE))
+	      error('Unable to create output directory.')
+	  else if (!finfo$isdir)
+	    error(paste(OutputDirectory, 'exists but is not a directory.'))
+	}
+  
 	###########################
 	# remove file:// and expand listOfFiles (SIC)
 	

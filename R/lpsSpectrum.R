@@ -34,6 +34,8 @@
 ##' pre-emphasis used in LP analysis, i.e. TRUE)
 ##' @param ToFile write results to file (default extension depends on )
 ##' @param ExplicitExt set if you wish to overwride the default extension
+##' @param OutputDirectory directory in which output files are stored. Defaults to NULL, i.e.
+##' the directory of the input files
 ##' @param forceToLog is set by the global package variable useWrasspLogger. This is set
 ##' to FALSE by default and should be set to TRUE is logging is desired.
 ##' @return nrOfProcessedFiles or if only one file to process return
@@ -44,14 +46,14 @@
 ##' @useDynLib wrassp
 ##' @export
 'lpsSpectrum' <- function(listOfFiles = NULL, optLogFilePath = NULL,
-                       BeginTime = 0.0, CenterTime = FALSE,
-                       EndTime = 0.0, Resolution = 40.0,
-                       FftLength = 0, WindowSize = 20.0,
-                       WindowShift = 5.0, Window = 'BLACKMAN',
-                       Order = 0,
-                       Preemphasis = -0.95, Deemphasize = TRUE,
-                       ToFile = TRUE,
-                       ExplicitExt = NULL, forceToLog = useWrasspLogger){
+                          BeginTime = 0.0, CenterTime = FALSE,
+                          EndTime = 0.0, Resolution = 40.0,
+                          FftLength = 0, WindowSize = 20.0,
+                          WindowShift = 5.0, Window = 'BLACKMAN',
+                          Order = 0, Preemphasis = -0.95, 
+                          Deemphasize = TRUE, ToFile = TRUE,
+                          ExplicitExt = NULL, OutputDirectory = NULL,
+                          forceToLog = useWrasspLogger){
   
   ## ########################
   ## a few parameter checks and expand paths
@@ -61,7 +63,7 @@
                "paths (min length = 1) pointing to valid file(s) to perform",
                "the given analysis function."))
   }
-
+  
   if (is.null(optLogFilePath) && forceToLog){
     stop("optLogFilePath is NULL! -> not logging!")
   }else{
@@ -73,7 +75,17 @@
   if(!isAsspWindowType(Window)){
     stop("WindowFunction of type '", Window,"' is not supported!")
   }
-
+  
+  if (!is.null(OutputDirectory)) {
+    OutputDirectory = path.expand(OutputDirectory)
+    finfo  <- file.info(OutputDirectory)
+    if (is.na(finfo$isdir))
+      if (!dir.create(OutputDirectory, recursive=TRUE))
+        error('Unable to create output directory.')
+    else if (!finfo$isdir)
+      error(paste(OutputDirectory, 'exists but is not a directory.'))
+  }
+  
   ## ########################
   ## remove file:// and expand listOfFiles (SIC)
   
@@ -82,7 +94,7 @@
   
   ## #######################
   ## perform analysis
-
+  
   if(length(listOfFiles)==1){
     pb <- NULL
   }else{
@@ -91,19 +103,19 @@
   }	
   
   externalRes = invisible(.External("performAssp", listOfFiles, 
-    fname = "spectrum", BeginTime = BeginTime, 
-    CenterTime = CenterTime, EndTime = EndTime, 
-    SpectrumType = 'LPS',
-    Resolution = Resolution, 
-    FftLength = as.integer(FftLength), WindowSize = WindowSize, 
-    WindowShift = WindowShift, Window = Window, 
-    EffectiveLength = TRUE, 
-    Order = as.integer(Order), Preemphasis = Preemphasis, 
-    Deemphasize = Deemphasize, 
-    ToFile = ToFile, ExplicitExt = ExplicitExt, 
-    ProgressBar = pb, PACKAGE = "wrassp"))
-
-
+                                    fname = "spectrum", BeginTime = BeginTime, 
+                                    CenterTime = CenterTime, EndTime = EndTime, 
+                                    SpectrumType = 'LPS',
+                                    Resolution = Resolution, 
+                                    FftLength = as.integer(FftLength), WindowSize = WindowSize, 
+                                    WindowShift = WindowShift, Window = Window, 
+                                    EffectiveLength = TRUE, 
+                                    Order = as.integer(Order), Preemphasis = Preemphasis, 
+                                    Deemphasize = Deemphasize, 
+                                    ToFile = ToFile, ExplicitExt = ExplicitExt, 
+                                    ProgressBar = pb, PACKAGE = "wrassp"))
+  
+  
   ## #########################
   ## write options to options log file
   if (forceToLog){

@@ -36,16 +36,16 @@
                      EnergyNormalization = FALSE, LengthNormalization = FALSE, 
                      ToFile = TRUE, ExplicitExt = NULL, OutputDirectory = NULL,
                      forceToLog = useWrasspLogger){
-
-	###########################
-	# a few parameter checks and expand paths
-	
-	if (is.null(listOfFiles)) {
-		stop(paste("listOfFiles is NULL! It has to be a string or vector of file",
-		           "paths (min length = 1) pointing to valid file(s) to perform",
-		           "the given analysis function."))
-	}
-
+  
+  ###########################
+  # a few parameter checks and expand paths
+  
+  if (is.null(listOfFiles)) {
+    stop(paste("listOfFiles is NULL! It has to be a string or vector of file",
+               "paths (min length = 1) pointing to valid file(s) to perform",
+               "the given analysis function."))
+  }
+  
   if (is.null(optLogFilePath) && forceToLog){
     stop("optLogFilePath is NULL! -> not logging!")
   }else{
@@ -53,12 +53,13 @@
       optLogFilePath = path.expand(optLogFilePath)  
     }
   }
-        
-	if(!isAsspWindowType(Window)){
-		stop("WindowFunction of type '", Window,"' is not supported!")
-	}
+  
+  if(!isAsspWindowType(Window)){
+    stop("WindowFunction of type '", Window,"' is not supported!")
+  }
   
   if (!is.null(OutputDirectory)) {
+    OutputDirectory = path.expand(OutputDirectory)
     finfo  <- file.info(OutputDirectory)
     if (is.na(finfo$isdir))
       if (!dir.create(OutputDirectory, recursive=TRUE))
@@ -69,20 +70,20 @@
   ###########################
   # remove file:// and expand listOfFiles (SIC)
   
-	listOfFiles = gsub("^file://","", listOfFiles)
-	listOfFiles = path.expand(listOfFiles)
+  listOfFiles = gsub("^file://","", listOfFiles)
+  listOfFiles = path.expand(listOfFiles)
   
-	###########################
-	# perform analysis
-
-	if(length(listOfFiles)==1){
+  ###########################
+  # perform analysis
+  
+  if(length(listOfFiles)==1){
     pb <- NULL
-	}else{
+  }else{
     cat('\n  INFO: applying acfana to', length(listOfFiles), 'files\n')
     pb <- txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
-	}
-
-	externalRes = invisible(.External("performAssp", listOfFiles, 
+  }
+  
+  externalRes = invisible(.External("performAssp", listOfFiles, 
                                     fname = "acfana", BeginTime = BeginTime, 
                                     CenterTime = CenterTime, EndTime = EndTime, 
                                     WindowShift = WindowShift, WindowSize = WindowSize, 
@@ -92,25 +93,25 @@
                                     ExplicitExt = ExplicitExt, ProgressBar = pb,
                                     OutputDirectory = OutputDirectory,
                                     PACKAGE = "wrassp"))
-
-	############################
-	# write options to options log file
-
-
-	if (forceToLog){
-	  optionsGivenAsArgs = as.list(match.call(expand.dots = TRUE))
-	  wrassp.logger(optionsGivenAsArgs[[1]], optionsGivenAsArgs[-1],
-	                optLogFilePath, listOfFiles)
-	  	  
-	}
-        
+  
+  ############################
+  # write options to options log file
+  
+  
+  if (forceToLog){
+    optionsGivenAsArgs = as.list(match.call(expand.dots = TRUE))
+    wrassp.logger(optionsGivenAsArgs[[1]], optionsGivenAsArgs[-1],
+                  optLogFilePath, listOfFiles)
+    
+  }
+  
   #############################
   # return dataObj if length only one file
-        
-	if(!(length(listOfFiles)==1)){
+  
+  if(!(length(listOfFiles)==1)){
     close(pb)
   }else{
     return(externalRes)
   }
-
+  
 }

@@ -29,6 +29,8 @@
 ##' @param NumIIRsections = <num>: set the number of 2nd order sections to <num> (default: 4) where each section adds 12dB/oct to the slope of the filter 
 ##' @param ToFile write results to file (for default extension see details section))
 ##' @param ExplicitExt set if you wish to overwride the default extension
+##' @param OutputDirectory directory in which output files are stored. Defaults to NULL, i.e. 
+##' the directory of the input files
 ##' @param forceToLog is set by the global package variable useWrasspLogger. This is set
 ##' to FALSE by default and should be set to TRUE is logging is desired.
 ##' @return nrOfProcessedFiles or if only one file to process return AsspDataObj of that file
@@ -40,17 +42,17 @@
                        StopBand = 96, Transition = 250, 
                        UseIIR = FALSE, NumIIRsections = 4, 
                        ToFile = TRUE, ExplicitExt = NULL,
-                       forceToLog = useWrasspLogger){
-
+                       OutputDirectory = NULL, forceToLog = useWrasspLogger){
+  
   ###########################
   ### a few parameter checks and expand paths
-
+  
   if (is.null(listOfFiles)) {
     stop(paste("listOfFiles is NULL! It has to be a string or vector of file",
                "paths (min length = 1) pointing to valid file(s) to perform",
                "the given analysis function."))
   }
-     
+  
   if (is.null(optLogFilePath) && forceToLog){
     stop("optLogFilePath is NULL! -> not logging!")
   }else{
@@ -59,30 +61,39 @@
     }
   }
   
+  if (!is.null(OutputDirectory)) {
+    OutputDirectory = path.expand(OutputDirectory)
+    finfo  <- file.info(OutputDirectory)
+    if (is.na(finfo$isdir))
+      if (!dir.create(OutputDirectory, recursive=TRUE))
+        error('Unable to create output directory.')
+    else if (!finfo$isdir)
+      error(paste(OutputDirectory, 'exists but is not a directory.'))
+  }
   ###########################
   # remove file:// and expand listOfFiles (SIC)
   
   listOfFiles = gsub("^file://","", listOfFiles)
   listOfFiles = path.expand(listOfFiles)
-
+  
   ###########################
   ### perform analysis
-    
+  
   if(length(listOfFiles)==1){
     pb <- NULL
   }else{
     cat('\n  INFO: applying affilter to', length(listOfFiles), 'files\n')
-
+    
     pb <- txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
   }
-    
+  
   externalRes = invisible(.External("performAssp", listOfFiles, 
                                     fname = "affilter", HighPass = HighPass, 
                                     LowPass = LowPass, StopBand = StopBand, Transition = Transition, 
                                     UseIIR = UseIIR, NumIIRsections = as.integer(NumIIRsections),
                                     ToFile = ToFile, ExplicitExt = ExplicitExt, 
                                     ProgressBar = pb, PACKAGE = "wrassp"))
-
+  
   ############################
   # write options to options log file
   
@@ -95,7 +106,7 @@
   
   #############################
   # return dataObj if length only one file
-        
+  
   if(!(length(listOfFiles)==1)){
     close(pb)
   }else{

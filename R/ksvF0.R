@@ -25,6 +25,8 @@
 ##' @param MaxZCR maximum zero crossing rate in Hz (for voicing detection)
 ##' @param ToFile write results to file (default extension is .f0)
 ##' @param ExplicitExt set if you wish to overwride the default extension
+##' @param OutputDirectory directory in which output files are stored. Defaults to NULL, i.e.
+##' the directory of the input files
 ##' @param forceToLog is set by the global package variable useWrasspLogger. This is set
 ##' to FALSE by default and should be set to TRUE is logging is desired.
 ##' @return nrOfProcessedFiles or if only one file to process return AsspDataObj of that file
@@ -34,12 +36,12 @@
 ##' @useDynLib wrassp
 ##' @export
 'ksvF0' <- 'f0ana' <- 'f0_ksv' <- function(listOfFiles = NULL, optLogFilePath = NULL, 
-                                BeginTime = 0.0, EndTime = 0.0, 
-                                WindowShift = 5.0, Gender = 'u',
-                                MaxF = 600, MinF = 50, 
-                                MinAmp = 50, MaxZCR = 3000.0, 
-                                ToFile = TRUE, ExplicitExt = NULL,
-                                forceToLog = useWrasspLogger){
+                                           BeginTime = 0.0, EndTime = 0.0, 
+                                           WindowShift = 5.0, Gender = 'u',
+                                           MaxF = 600, MinF = 50, 
+                                           MinAmp = 50, MaxZCR = 3000.0, 
+                                           ToFile = TRUE, ExplicitExt = NULL,
+                                           OutputDirectory = NULL, forceToLog = useWrasspLogger){
   
   ###########################
   # a few parameter checks and expand paths
@@ -57,7 +59,17 @@
       optLogFilePath = path.expand(optLogFilePath)  
     }
   }
-
+  
+  if (!is.null(OutputDirectory)) {
+    OutputDirectory = path.expand(OutputDirectory)
+    finfo  <- file.info(OutputDirectory)
+    if (is.na(finfo$isdir))
+      if (!dir.create(OutputDirectory, recursive=TRUE))
+        error('Unable to create output directory.')
+    else if (!finfo$isdir)
+      error(paste(OutputDirectory, 'exists but is not a directory.'))
+  }
+  
   ###########################
   # remove file:// and expand listOfFiles (SIC)
   
@@ -89,7 +101,7 @@
     optionsGivenAsArgs = as.list(match.call(expand.dots = TRUE))
     wrassp.logger(optionsGivenAsArgs[[1]], optionsGivenAsArgs[-1],
                   optLogFilePath, listOfFiles)
-      
+    
   }
   #############################
   # return dataObj if length only one file

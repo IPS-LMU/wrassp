@@ -29,6 +29,8 @@
 ##' "RFC": reflection coefficients (default)
 ##' @param ToFile  write results to file (default extension dependent on LpType .arf/.lar/.lpc/.rfc)
 ##' @param ExplicitExt set if you wish to overwride the default extension
+##' @param OutputDirectory directory in which output files are stored. Defaults to NULL, i.e.
+##' the directory of the input files
 ##' @param forceToLog is set by the global package variable useWrasspLogger. This is set
 ##' to FALSE by default and should be set to TRUE is logging is desired.
 ##' @return nrOfProcessedFiles or if only one file to process return AsspDataObj of that file
@@ -42,53 +44,62 @@
                      Window = 'BLACKMAN', Order = 0, 
                      Preemphasis = -0.95, LpType = 'RFC', 
                      ToFile = TRUE, ExplicitExt = NULL,
-                     forceToLog = useWrasspLogger){
-	
-	
-	###########################
-	# a few parameter checks and expand files
-	
-	if (is.null(listOfFiles)) {
-		stop(paste("listOfFiles is NULL! It has to be a string or vector of file",
-		           "paths (min length = 1) pointing to valid file(s) to perform",
-		           "the given analysis function."))
-	}
-
-	if (is.null(optLogFilePath) && forceToLog){
-	  stop("optLogFilePath is NULL! -> not logging!")
-	}else{
-	  if(forceToLog){
-	    optLogFilePath = path.expand(optLogFilePath)  
-	  }
-	}
-	
-	if(!isAsspWindowType(Window)){
-		stop("WindowFunction of type '", Window,"' is not supported!")
-	}
-	
-	if(!isAsspLpType(LpType)){
-		stop("LpType of type '", LpType,"' is not supported!")
-	}
-        
-	###########################
-	# remove file:// and expand listOfFiles (SIC)
-	
-	listOfFiles = gsub("^file://","", listOfFiles)
-	listOfFiles = path.expand(listOfFiles)
+                     OutputDirectory = NULL, forceToLog = useWrasspLogger){
   
-	
-	###########################
-	# perform analysis
-
-	if(length(listOfFiles)==1){
+  
+  ###########################
+  # a few parameter checks and expand files
+  
+  if (is.null(listOfFiles)) {
+    stop(paste("listOfFiles is NULL! It has to be a string or vector of file",
+               "paths (min length = 1) pointing to valid file(s) to perform",
+               "the given analysis function."))
+  }
+  
+  if (is.null(optLogFilePath) && forceToLog){
+    stop("optLogFilePath is NULL! -> not logging!")
+  }else{
+    if(forceToLog){
+      optLogFilePath = path.expand(optLogFilePath)  
+    }
+  }
+  
+  if(!isAsspWindowType(Window)){
+    stop("WindowFunction of type '", Window,"' is not supported!")
+  }
+  
+  if(!isAsspLpType(LpType)){
+    stop("LpType of type '", LpType,"' is not supported!")
+  }
+  
+  if (!is.null(OutputDirectory)) {
+    OutputDirectory = path.expand(OutputDirectory)
+    finfo  <- file.info(OutputDirectory)
+    if (is.na(finfo$isdir))
+      if (!dir.create(OutputDirectory, recursive=TRUE))
+        error('Unable to create output directory.')
+    else if (!finfo$isdir)
+      error(paste(OutputDirectory, 'exists but is not a directory.'))
+  }
+  ###########################
+  # remove file:// and expand listOfFiles (SIC)
+  
+  listOfFiles = gsub("^file://","", listOfFiles)
+  listOfFiles = path.expand(listOfFiles)
+  
+  
+  ###########################
+  # perform analysis
+  
+  if(length(listOfFiles)==1){
     pb <- NULL
-	}else{
+  }else{
     cat('\n  INFO: applying rfcana to', length(listOfFiles), 'files\n')
     pb <- txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
-	}
-	
-	
-	externalRes = invisible(.External("performAssp", listOfFiles, 
+  }
+  
+  
+  externalRes = invisible(.External("performAssp", listOfFiles, 
                                     fname = "rfcana", BeginTime = BeginTime, 
                                     CenterTime = CenterTime, EndTime = EndTime, 
                                     WindowShift = WindowShift, WindowSize = WindowSize, 
@@ -97,21 +108,21 @@
                                     Preemphasis = Preemphasis, LpType = LpType, 
                                     ToFile = ToFile, ExplicitExt = ExplicitExt, 
                                     ProgressBar = pb, PACKAGE = "wrassp"))
-
+  
   ############################
   # write options to options log file
   
-	if (forceToLog){
-	  optionsGivenAsArgs = as.list(match.call(expand.dots = TRUE))
-	  wrassp.logger(optionsGivenAsArgs[[1]], optionsGivenAsArgs[-1],
-	                optLogFilePath, listOfFiles)
-             
+  if (forceToLog){
+    optionsGivenAsArgs = as.list(match.call(expand.dots = TRUE))
+    wrassp.logger(optionsGivenAsArgs[[1]], optionsGivenAsArgs[-1],
+                  optLogFilePath, listOfFiles)
+    
   }
-        
+  
   #############################
   # return dataObj if length only one file
-        
-	if(!(length(listOfFiles)==1)){
+  
+  if(!(length(listOfFiles)==1)){
     close(pb)
   }else{
     return(externalRes)
