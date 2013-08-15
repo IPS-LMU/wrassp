@@ -638,6 +638,7 @@ sexp2dobj(SEXP rdobj)
             case SSFF_UNDEF:
                 break;
             }
+            free((void *) format);
         }
     }
     // 
@@ -739,6 +740,7 @@ sexp2dobj(SEXP rdobj)
 
         desc->coding = DC_LIN;
         desc->numFields = (size_t) INTEGER(attr)[1];
+        free((void *) format);
     }
     setRecordSize(dop);
     dop->frameDur = -1;

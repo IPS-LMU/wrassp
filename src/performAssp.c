@@ -1084,9 +1084,9 @@ performAssp(SEXP args)
                  utilsPackage);
         }
     }
-
+    free((void *) outDir);
     if (toFile) {
-        // in toFile mode, the number of successfu analyses is returned
+        // in toFile mode, the number of successful analyses is returned
         PROTECT(res = allocVector(INTSXP, 1));
         INTEGER(res)[0] = i;
     }
