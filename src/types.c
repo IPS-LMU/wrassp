@@ -3,6 +3,10 @@
 #include <spectra.h>            // lp types, spect types
 
 
+/*
+ * This function makes the names of window functions as defined in ASSP
+ * available to R 
+ */
 SEXP
 AsspWindowTypes()
 {
@@ -27,7 +31,10 @@ AsspWindowTypes()
     return wlist;
 }
 
-
+/*
+ * This function makes the names of the types of linear prediction used in 
+ * ASSP available to R 
+ */
 SEXP
 AsspLpTypes()
 {
@@ -52,6 +59,10 @@ AsspLpTypes()
     return (result);
 }
 
+/*
+ * This function makes the names of the types of spectral analysis used in 
+ * ASSP available to R 
+ */
 SEXP
 AsspSpectTypes()
 {
@@ -75,108 +86,3 @@ AsspSpectTypes()
     UNPROTECT(1);
     return (result);
 }
-
-
-/*
- * int winfuncs_Info() 
- */
-/*
- * { 
- */
-/*
- * // code mostly taken from listWFs() in libassp's winfuncs.c 
- */
-/*
- * Tcl_Obj *all = Tcl_NewListObj(0, NULL); 
- */
-/*
- * Tcl_Obj *wInfo; 
- */
-/*
- * WFLIST *wPtr; 
- */
-/*
- * WFDATA *specs; 
- */
-
-/*
- * for (wPtr = wfShortList; wPtr->code != NULL; wPtr++) { 
- */
-/*
- * specs = wfSpecs(wPtr->type); //get the specs 
- */
-/*
- * if (specs != NULL) { 
- */
-/*
- * wInfo = Tcl_NewListObj(0, NULL); 
- */
-/*
- * if (Tcl_ListObjAppendElement(interp, wInfo, 
- */
-/*
- * Tcl_NewStringObj(wPtr->code, -1))) 
- */
-/*
- * return TCL_ERROR; 
- */
-/*
- * if (Tcl_ListObjAppendElement(interp, wInfo, 
- */
-/*
- * Tcl_NewStringObj(wPtr->desc, -1))) 
- */
-/*
- * return TCL_ERROR; 
- */
-/*
- * if (Tcl_ListObjAppendElement(interp, wInfo, 
- */
-/*
- * Tcl_NewDoubleObj(1.0 / 
- */
-/*
- * specs->enbw))) 
- */
-/*
- * return TCL_ERROR; 
- */
-/*
- * if (Tcl_ListObjAppendElement(interp, wInfo, 
- */
-/*
- * Tcl_NewDoubleObj(specs->hsll))) 
- */
-/*
- * return TCL_ERROR; 
- */
-/*
- * if (Tcl_ListObjAppendElement(interp, wInfo, 
- */
-/*
- * Tcl_NewDoubleObj(specs->roff))) 
- */
-/*
- * return TCL_ERROR; 
- */
-/*
- * if (Tcl_ListObjAppendElement(interp, all, wInfo) != TCL_OK) 
- */
-/*
- * return TCL_ERROR; 
- */
-/*
- * } 
- */
-/*
- * } 
- */
-/*
- * Tcl_SetObjResult(interp, all); 
- */
-/*
- * return TCL_OK; 
- */
-/*
- * } 
- */

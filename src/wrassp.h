@@ -7,29 +7,18 @@
 #include <asspana.h>
 
 
-SEXP            getDObj(SEXP fname);
-SEXP            getDObj2(SEXP fname);
-SEXP            dobj2AsspDataObj(DOBJ * data);
-SEXP            getDObjTracks(SEXP dobj);
-SEXP            getDObjTrackData(DOBJ * data, DDESC * desc);
-SEXP            getGenericVars(DOBJ * dop);
-// static void DObjFinalizer (SEXP dPtr);
+#define WRASSP_CLASS "AsspDataObj"
 
-SEXP            performAssp(SEXP args);
-SEXP            showArgs(SEXP args);
 
-SEXP            AsspWindowList();
 /*
- * Option handling 
+ * An enumerator over all ASSP functions implemented in wrassp 
  */
-
-
 typedef enum AsspFuncs {
     AF_NONE,
     AF_ACFANA,
     AF_AFDIFF,
     AF_AFFILTER,
-    AF_KSV_PITCH,               // f0ana
+    AF_KSV_PITCH,               /* f0ana */
     AF_FOREST,
     AF_MHS_PITCH,
     AF_RFCANA,
@@ -38,11 +27,21 @@ typedef enum AsspFuncs {
     AF_ZCRANA
 } AsspFunc_e;
 
+/*
+ * Enable function pointers for setting the analysis defaults 
+ */
 typedef int     (setDefProc) (AOPTS * opt);
+
+/*
+ * Enable function pointers for using the analyses 
+ */
 typedef DOBJ   *(computeProc) (DOBJ * smpDOp, AOPTS * aoPtr, DOBJ * lpDOp);
 
 
 
+/*
+ * An enumerator over possible options to be implemented in ASSP functions  
+ */
 typedef enum wrassp_option_number {
     WO_NONE = -1,
     WO_OPTIONS,                 /* for bit flags (upper byte reserved) */
@@ -86,19 +85,15 @@ typedef enum wrassp_option_number {
     WO_TYPE,                    /* hold-all */
     WO_FORMAT,
     WO_WINFUNC,
+
     /*
      * These are not in libassp, only in tclassp 
      */
-    WO_MSEFFLEN,
-    /*
-     * plain power spectrum in mhs pitch 
-     */
-    WO_MHS_OPT_POWER,
-    /*
-     * normation for acfana 
-     */
+    WO_MSEFFLEN,                /* plain power spectrum in mhs pitch */
+    WO_MHS_OPT_POWER,           /* normation for acfana */
     WO_ENERGYNORM,
     WO_LENGTHNORM,
+
     /*
      * options specific to afdiff 
      */
@@ -106,16 +101,19 @@ typedef enum wrassp_option_number {
                                  * forward) */
     WO_DIFF_OPT_CENTRAL,        /* compute central/interpolated/3-point
                                  * difference */
+
     /*
      * options specific to rmsana 
      */
     WO_RMS_OPT_LINEAR,          /* linear RMS amplitude */
+
     /*
      * options specific to spectrum 
      */
     WO_LPS_OPT_DEEMPH,          /* omit de-emphasis */
+
     /*
-     * general tclassp options 
+     * general wrassp options 
      */
     WO_OUTPUTDIR,
     WO_OUTPUTEXT,
@@ -123,11 +121,18 @@ typedef enum wrassp_option_number {
     WO_PBAR                     /* R Textual Progress Bar */
 } ASSP_OPT_NUM;
 
+/*
+ * Enable mapping from R strings to option enumerator 
+ */
 typedef struct wrassp_option {
     char           *name;       /* name of option as used in R */
     ASSP_OPT_NUM    optNum;
 } W_OPT;
 
+/*
+ * This structure is a descriptor for an assp analysis function as used in 
+ * R 
+ */
 typedef struct anaopt_function_list {
     char           *fName;      /* symbolic (known) name of the function */
     setDefProc     *setFunc;    /* name of the function to set default
@@ -141,6 +146,9 @@ typedef struct anaopt_function_list {
     AsspFunc_e      funcNum;    /* number of function */
 } A_F_LIST;
 
+/*
+ * enumerator for the vast number of genders assp tries to account for 
+ */
 typedef enum wrassp_gender_type {
     TG_NONE = -1,
     TG_FEMALE,
@@ -148,12 +156,19 @@ typedef enum wrassp_gender_type {
     TG_UNKNOWN,
 } W_GENDER_TYPE;
 
+/*
+ * Enable mapping between gender specifiers passed from R to the
+ * corresponding enumerator and the character used in ASSP 
+ */
 typedef struct wrassp_gender {
     char           *ident;
     W_GENDER_TYPE   num;
     char            code;
 } W_GENDER;
 
+/*
+ * Each analysis function has an array of legal/available wrassp_options 
+ */
 extern W_OPT    acfanaOptions[];
 extern W_OPT    afdiffOptions[];
 extern W_OPT    affilterOptions[];
@@ -165,8 +180,21 @@ extern W_OPT    rfcanaOptions[];
 extern W_OPT    spectrumOptions[];
 extern W_OPT    zcranaOptions[];
 
-#define WRASSP_CLASS "AsspDataObj"
 
+/*
+ * Function prototypes 
+ */
+SEXP            getDObj(SEXP fname);
+SEXP            getDObj2(SEXP fname);
+SEXP            dobj2AsspDataObj(DOBJ * data);
+SEXP            getDObjTracks(SEXP dobj);
+SEXP            getDObjTrackData(DOBJ * data, DDESC * desc);
+SEXP            getGenericVars(DOBJ * dop);
+
+SEXP            performAssp(SEXP args);
+SEXP            showArgs(SEXP args);
+
+SEXP            AsspWindowList();
 char           *asspDF2ssffString(int df);
 SEXP            writeDObj(SEXP, SEXP);
 int             addTrackData(DOBJ * dop, DDESC * ddl, SEXP rdobj);
@@ -174,4 +202,6 @@ DOBJ           *computeFilter(DOBJ * inpDOp, AOPTS * anaopts,
                               DOBJ * outDOp);
 DOBJ           *computeF0(DOBJ * inpDOp, AOPTS * anaOpts, DOBJ * outDOp);
 DOBJ           *sexp2dobj(SEXP rdobj);
+
+
 #endif                          // _WRASSP

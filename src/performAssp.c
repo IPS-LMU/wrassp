@@ -12,8 +12,12 @@
 #include <filter.h>
 #include <ksv.h>
 #include <ctype.h>              /* tolower() */
-
 #include <R_ext/PrtUtil.h>
+
+/*
+ * This list is used to map gender option values from R to the appropriate 
+ * value for assp 
+ */
 W_GENDER        gender[] = {
     {"female", TG_FEMALE, 'f'}
     ,
@@ -21,7 +25,7 @@ W_GENDER        gender[] = {
      * {"FEMALE", TG_FEMALE, 'f'} 
      */
     /*
-     * , 
+     * ,
      */
     {"male", TG_MALE, 'm'}
     ,
@@ -29,7 +33,7 @@ W_GENDER        gender[] = {
      * {"MALE", TG_MALE, 'm'} 
      */
     /*
-     * , 
+     * ,
      */
     {"unknown", TG_UNKNOWN, 'u'}
     ,
@@ -37,12 +41,20 @@ W_GENDER        gender[] = {
      * {"UNKNOWN", TG_UNKNOWN, 'u'} 
      */
     /*
-     * , 
+     * ,
      */
     {NULL, TG_NONE, '0'}
 };
 
+/*
+ * OPTION LISTS: Each analysis function uses only a subset of all possible 
+ * assp option. A list of legal/supported options is provided here for
+ * each of the analysis functions in wrassp. 
+ */
 
+/*
+ * ACFANA option list
+ */
 W_OPT           acfanaOptions[] = {
     {"BeginTime", WO_BEGINTIME}
     ,
@@ -57,7 +69,7 @@ W_OPT           acfanaOptions[] = {
     {"EffectiveLength", WO_MSEFFLEN}
     ,
     {"ExplicitExt", WO_OUTPUTEXT}
-    ,                           // DON'T FORGET EXTENSION!!!
+    ,                           /* DON'T FORGET EXTENSION!!! */
     {"Window", WO_WINFUNC}
     ,
     {"AnalysisOrder", WO_ORDER}
@@ -75,6 +87,9 @@ W_OPT           acfanaOptions[] = {
     {NULL, WO_NONE}
 };
 
+/*
+ * AFDIFF option list 
+ */
 W_OPT           afdiffOptions[] = {
     {"ComputeBackwardDifference", WO_DIFF_OPT_BACKWARD}
     ,
@@ -83,7 +98,7 @@ W_OPT           afdiffOptions[] = {
     {"Channel", WO_CHANNEL}
     ,
     {"ExplicitExt", WO_OUTPUTEXT}
-    ,                           // DON'T FORGET EXTENSION!!!
+    ,                           /* DON'T FORGET EXTENSION!!! */
     {"ToFile", WO_TOFILE}
     ,
     {"OutputDirectory", WO_OUTPUTDIR}
@@ -93,6 +108,9 @@ W_OPT           afdiffOptions[] = {
     {NULL, WO_NONE}
 };
 
+/*
+ * AFFILTER option list 
+ */
 W_OPT           affilterOptions[] = {
     {"HighPass", WO_HPCUTOFF}
     ,
@@ -107,7 +125,7 @@ W_OPT           affilterOptions[] = {
     {"NumIIRsections", WO_NUMIIRSECS}
     ,
     {"ExplicitExt", WO_OUTPUTEXT}
-    ,                           // DON'T FORGET EXTENSION!!!
+    ,                           /* DON'T FORGET EXTENSION!!! */
     {"ProgressBar", WO_PBAR}
     ,
     {"ToFile", WO_TOFILE}
@@ -115,17 +133,29 @@ W_OPT           affilterOptions[] = {
     {"OutputDirectory", WO_OUTPUTDIR}
     ,
     /*
-     * {"-channel"}, 
+     * {"-channel"}
      */
     /*
-     * {"-noDither"}, 
+     * , 
      */
     /*
-     * {"-gain"}, 
+     * {"-noDither"}
+     */
+    /*
+     * , 
+     */
+    /*
+     * {"-gain"}
+     */
+    /*
+     * , 
      */
     {NULL, WO_NONE}
 };
 
+/*
+ * F0_KSV (aka ksvF0, f0ana) option list 
+ */
 W_OPT           f0_ksvOptions[] = {
     {"BeginTime", WO_BEGINTIME}
     ,
@@ -146,7 +176,7 @@ W_OPT           f0_ksvOptions[] = {
     {"ProgressBar", WO_PBAR}
     ,
     {"ExplicitExt", WO_OUTPUTEXT}
-    ,                           // DON'T FORGET EXTENSION!!!
+    ,                           /* DON'T FORGET EXTENSION!!! */
     {"ToFile", WO_TOFILE}
     ,
     {"OutputDirectory", WO_OUTPUTDIR}
@@ -154,6 +184,9 @@ W_OPT           f0_ksvOptions[] = {
     {NULL, WO_NONE}
 };
 
+/*
+ * MHSF0 (aka f0_mhs, mhspitch) option list 
+ */
 W_OPT           f0_mhsOptions[] = {
     {"BeginTime", WO_BEGINTIME}
     ,
@@ -184,7 +217,7 @@ W_OPT           f0_mhsOptions[] = {
     {"PlainSpectrum", WO_MHS_OPT_POWER}
     ,
     {"ExplicitExt", WO_OUTPUTEXT}
-    ,                           // DON'T FORGET EXTENSION!!!
+    ,                           /* DON'T FORGET EXTENSION!!! */
     {"ToFile", WO_TOFILE}
     ,
     {"OutputDirectory", WO_OUTPUTDIR}
@@ -192,9 +225,8 @@ W_OPT           f0_mhsOptions[] = {
     {NULL, WO_NONE}
 };
 
-/**
- * Options array for forest (formant estimation)
- *
+/*
+ * FOREST option list
  */
 W_OPT           forestOptions[] = {
     {"BeginTime", WO_BEGINTIME}
@@ -219,15 +251,12 @@ W_OPT           forestOptions[] = {
     ,
     {"NumFormants", WO_NUMFORMANTS}
     ,
-    /*
-     * {}, 
-     */
     {"Window", WO_WINFUNC}
     ,
     {"Preemphasis", WO_PREEMPH}
     ,
     {"ExplicitExt", WO_OUTPUTEXT}
-    ,                           // DON'T FORGET EXTENSION!!!
+    ,                           /* DON'T FORGET EXTENSION!!! */
     {"ProgressBar", WO_PBAR}
     ,
     {"ToFile", WO_TOFILE}
@@ -237,7 +266,9 @@ W_OPT           forestOptions[] = {
     {NULL, WO_NONE}
 };
 
-
+/*
+ * RFCANA option list 
+ */
 W_OPT           rfcanaOptions[] = {
     {"BeginTime", WO_BEGINTIME}
     ,
@@ -252,7 +283,7 @@ W_OPT           rfcanaOptions[] = {
     {"EffectiveLength", WO_MSEFFLEN}
     ,
     {"ExplicitExt", WO_OUTPUTEXT}
-    ,                           // DON'T FORGET EXTENSION!!!
+    ,                           /* DON'T FORGET EXTENSION!!! */
     {"Window", WO_WINFUNC}
     ,
     {"Order", WO_ORDER}
@@ -270,6 +301,9 @@ W_OPT           rfcanaOptions[] = {
     {NULL, WO_NONE}
 };
 
+/*
+ * RMSANA OPTION LIST
+ */
 W_OPT           rmsanaOptions[] = {
     {"BeginTime", WO_BEGINTIME}
     ,
@@ -286,7 +320,7 @@ W_OPT           rmsanaOptions[] = {
     {"Linear", WO_RMS_OPT_LINEAR}
     ,
     {"ExplicitExt", WO_OUTPUTEXT}
-    ,                           // DON'T FORGET EXTENSION!!!
+    ,                           /* DON'T FORGET EXTENSION!!! */
     {"Window", WO_WINFUNC}
     ,
     {"ProgressBar", WO_PBAR}
@@ -298,6 +332,10 @@ W_OPT           rmsanaOptions[] = {
     {NULL, WO_NONE}
 };
 
+/*
+ * SPECTRUM (implemented as dftSpectrum, cssSpectrum, lpsSpectrum in R)
+ * option list 
+ */
 W_OPT           spectrumOptions[] = {
     {"BeginTime", WO_BEGINTIME}
     ,
@@ -317,11 +355,13 @@ W_OPT           spectrumOptions[] = {
     ,
     {"Window", WO_WINFUNC}
     ,
+
     /*
      * DFT spectrum 
      */
     {"Bandwidth", WO_BANDWIDTH}
     ,
+
     /*
      * LP smoothed spectrum 
      */
@@ -333,16 +373,18 @@ W_OPT           spectrumOptions[] = {
     ,
     {"Deemphasize", WO_LPS_OPT_DEEMPH}
     ,
+
     /*
      * Cepstrally smoothed spectrum 
      */
     {"NumCeps", WO_ORDER}
     ,
+
     /*
      * general stuff 
      */
     {"ExplicitExt", WO_OUTPUTEXT}
-    ,                           // DON'T FORGET EXTENSION!!!
+    ,                           /* DON'T FORGET EXTENSION!!! */
     {"ProgressBar", WO_PBAR}
     ,
     {"ToFile", WO_TOFILE}
@@ -352,6 +394,9 @@ W_OPT           spectrumOptions[] = {
     {NULL, WO_NONE}
 };
 
+/*
+ * ZCRANA option list
+ */
 W_OPT           zcranaOptions[] = {
     {"BeginTime", WO_BEGINTIME}
     ,
@@ -364,7 +409,7 @@ W_OPT           zcranaOptions[] = {
     {"WindowSize", WO_MSSIZE}
     ,
     {"ExplicitExt", WO_OUTPUTEXT}
-    ,                           // DON'T FORGET EXTENSION!!!
+    ,                           /* DON'T FORGET EXTENSION!!! */
     /*
      * {"Window", WO_WINFUNC} 
      */
@@ -380,10 +425,17 @@ W_OPT           zcranaOptions[] = {
     {NULL, WO_NONE}
 };
 
+/*
+ * The following is a list of function descriptors: The descriptor
+ * includes for each analysis function the name, a pointer to a function
+ * that generates default setting, a pointer to a function that performs
+ * the analysis a list of the legal/supported options, major and minor
+ * assp version of the analysis routine, a default suffix and an
+ * enumerator 
+ */
 A_F_LIST        funclist[] = {
     {"acfana", setACFdefaults, computeACF, acfanaOptions, ACF_MAJOR,
-     ACF_MINOR,
-     ACF_DEF_SUFFIX, AF_ACFANA}
+     ACF_MINOR, ACF_DEF_SUFFIX, AF_ACFANA}
     ,
     {"afdiff", setDiffDefaults, diffSignal, afdiffOptions, DIFF_MAJOR,
      DIFF_MINOR, "AUTO", AF_AFDIFF}
@@ -423,6 +475,11 @@ A_F_LIST        funclist[] = {
     {NULL, NULL, NULL, 0, 0, AF_NONE}
 };
 
+/*
+ * This function performs an analysis routine. The intput to this function 
+ * is an SEXP object containing a list of input files, the name of the
+ * function and the analysis options. 
+ */
 SEXP
 performAssp(SEXP args)
 {
@@ -430,7 +487,7 @@ performAssp(SEXP args)
                     inputs,
                     res,
                     pBar = R_NilValue,
-        utilsPackage,
+        utilsPackage,           /* to update the prograssbar */
         newVal;
     const char     *name;
     AOPTS           OPTS;
@@ -455,16 +512,17 @@ performAssp(SEXP args)
                     outName[PATH_MAX + 1],
                    *outDir = NULL;
 
-    args = CDR(args);           // skip function name
+    args = CDR(args);           /* skip function name */
 
     /*
-     * First Element is file name or vector of file names 
+     * First element is input file name or vector of input file names 
      */
     inputs = CAR(args);
     args = CDR(args);
 
     /*
-     * Second element must be assp function name 
+     * Second element must be assp function name
+     * check for validity and pick the right fucntion descriptor 
      */
     name = isNull(TAG(args)) ? "" : CHAR(PRINTNAME(TAG(args)));
     if (strcmp(name, "fname") != 0)
@@ -478,11 +536,17 @@ performAssp(SEXP args)
     }
     if (anaFunc->funcNum == AF_NONE)
         error("Invalid analysis function in performAssp.c");
+
+    /*
+     * generate the default settings for the analysis function
+     */
     if ((anaFunc->setFunc) (opt) == -1)
         error("%d\t$%s\n", asspMsgNum, getAsspMsg(asspMsgNum));
 
     args = CDR(args);
-
+    /*
+     * the rest is options; each of them is checked against the option list of the analysis function
+     */
 
 
     for (int i = 0; args != R_NilValue; i++, args = CDR(args)) {
@@ -521,7 +585,9 @@ performAssp(SEXP args)
                     opt->options &= ~AOPT_USE_ENBW;
                     break;
                 default:
-                    // do nothing
+                    /*
+                     * do nothing
+                     */
                     break;
                 }
             } else {
@@ -556,7 +622,9 @@ performAssp(SEXP args)
                 opt->options &= ~AOPT_USE_ENBW;
                 break;
             default:
-                // do nothing
+                /*
+                 * do nothing
+                 */
                 break;
             }
             break;
@@ -643,7 +711,6 @@ performAssp(SEXP args)
                     opt->increment = 0;
                 }
             }
-            // return TCL_OK;
             break;
         case WO_INCREMENT:
             opt->increment = INTEGER(el)[0];
@@ -678,7 +745,9 @@ performAssp(SEXP args)
                 opt->gender = 'u';
                 break;
             default:
-                // do nothing
+                /*
+                 * do nothing
+                 */
                 break;
             }
             break;
@@ -690,7 +759,9 @@ performAssp(SEXP args)
                 opt->gender = 'u';
                 break;
             default:
-                // do nothing
+                /*
+                 * do nothing
+                 */
                 break;
             }
             break;
@@ -712,7 +783,9 @@ performAssp(SEXP args)
                 }
                 break;
             default:
-                // do nothing
+                /*
+                 * do nothing
+                 */
                 break;
             }
             break;
@@ -843,7 +916,9 @@ performAssp(SEXP args)
                       CHAR(STRING_ELT(el, 0)));
             strncpy(opt->winFunc, wPtr->code, strlen(wPtr->code));
             break;
-            // /* These are not in libassp but in wrassp*/
+            /*
+             * These are not in libassp but in wrassp
+             */
         case WO_ENERGYNORM:
             if (INTEGER(el)[0])
                 opt->options |= ACF_OPT_NORM;
@@ -956,11 +1031,15 @@ performAssp(SEXP args)
      * weird to get here but we can safely use the default. 
      */
     if (strcmp(ext, "") == 0) {
-        // could be explicitely set to ""
+        /*
+         * could be explicitely set to ""
+         */
         if (!expExt) {
             switch (anaFunc->funcNum) {
             case AF_AFDIFF:
-                // needs to be handled on a per file basis
+                /*
+                 * needs to be handled on a per file basis
+                 */
                 break;
             case AF_SPECTRUM:
                 sPtr = spectType;
@@ -979,7 +1058,9 @@ performAssp(SEXP args)
             }
         }
     }
-    // do analysis
+    /*
+     * do analysis
+     */
 
     /*
      * hook into the progressbar if present 
@@ -1004,11 +1085,18 @@ performAssp(SEXP args)
      * iterate over input files 
      */
     for (i = 0; i < length(inputs); i++) {
+        /*
+         * get inpput name and open
+         */
         name = strdup(CHAR(STRING_ELT(inputs, i)));
         inPtr = asspFOpen(strdup(name), AFO_READ, (DOBJ *) NULL);
         if (inPtr == NULL)
             error("%s (%s)", getAsspMsg(asspMsgNum), strdup(name));
 
+        /*
+         * run the function (as pointed to in the descriptor) to generate
+         * the output object 
+         */
         outPtr = (anaFunc->compProc) (inPtr, opt, (DOBJ *) NULL);
         if (outPtr == NULL) {
             asspFClose(inPtr, AFC_FREE);
@@ -1059,6 +1147,11 @@ performAssp(SEXP args)
                 }
             }
             strcat(outName, ext);
+
+            /*
+             * out put name is complete, use it to open the file for the
+             * output object, then write and close and free 
+             */
             outPtr = asspFOpen(outName, AFO_WRITE, outPtr);
             if (outPtr == NULL) {
                 asspFClose(outPtr, AFC_FREE);
@@ -1076,7 +1169,9 @@ performAssp(SEXP args)
 
         free((char *) name);
 
-        // if a progress bar was passed over, increment its value
+        /*
+         * if a progress bar was passed over, increment its value
+         */
         if (pBar != R_NilValue) {
             INTEGER(newVal)[0] = i + 1;
             eval(lang4
@@ -1086,15 +1181,21 @@ performAssp(SEXP args)
     }
     free((void *) outDir);
     if (toFile) {
-        // in toFile mode, the number of successful analyses is returned
+        /*
+         * in toFile mode, the number of successful analyses is returned
+         */
         PROTECT(res = allocVector(INTSXP, 1));
         INTEGER(res)[0] = i;
     }
-    // for the progress bar, to SEXPs were protected
+    /*
+     * for the progress bar, to SEXPs were protected
+     */
     if (pBar != R_NilValue)
         UNPROTECT(2);
 
-    // in toFile mode, the return value was protected
+    /*
+     * in toFile mode, the return value was protected
+     */
     if (toFile)
         UNPROTECT(1);
     return res;
@@ -1103,6 +1204,10 @@ performAssp(SEXP args)
 
 /*
  * Wrapper functions for filtering and for ksv f0 analysis 
+ *
+ * all other analyses come with a 'computeXYZ' functions with identical 
+ * signatures but for various reasons these two do not. These function provide
+ * wrappers.
  */
 DOBJ           *
 computeFilter(DOBJ * inpDOp, AOPTS * anaOpts, DOBJ * outDOp)

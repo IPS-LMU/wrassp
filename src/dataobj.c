@@ -1,5 +1,5 @@
 #include "wrassp.h"
-#include <math.h>               // ceil, floor
+#include <math.h>               /* ceil, floor */
 #include <dataobj.h>
 #include <asspfio.h>
 #include <asspmess.h>
@@ -7,19 +7,27 @@
 
 #include <R_ext/PrtUtil.h>
 
+/*
+ * This was the original reading function that did not allow for
+ * preselecting time. Should be save to remove now. 
+ */
 SEXP
 getDObj(SEXP fname)
 {
     SEXP            res;
     DOBJ           *data = NULL;
     long            numRecs;
-    // read the data
+    /*
+     * read the data
+     */
     data =
         asspFOpen(strdup(CHAR(STRING_ELT(fname, 0))), AFO_READ,
                   (DOBJ *) NULL);
     if (data == NULL)
         error(getAsspMsg(asspMsgNum));
-    // error(CHAR(STRING_ELT(fname,0)));
+    /*
+     * error(CHAR(STRING_ELT(fname,0)));
+     */
     allocDataBuf(data, data->numRecords);
     data->bufStartRec = data->startRecord;
     if ((numRecs = asspFFill(data)) < 0)
@@ -31,6 +39,11 @@ getDObj(SEXP fname)
 }
 
 
+/*
+ * This function loads a DOBJ from a file and return its contents as a
+ * SEXP. Arguments include the name of the input file, start and end point 
+ * for reading and whether these points are sample values (and not times) 
+ */
 SEXP
 getDObj2(SEXP args)
 {
@@ -46,8 +59,10 @@ getDObj2(SEXP args)
         end = 0;
     int             isSample = 0;
 
-    // parse args
-    args = CDR(args);           // skip name of function
+    /*
+     * parse args
+     */
+    args = CDR(args);           /* skip name of function */
     el = CAR(args);
     fName = strdup(CHAR(STRING_ELT(el, 0)));
 
@@ -73,11 +88,15 @@ getDObj2(SEXP args)
     if (end < begin && end > 0)
         error("End before begin. That's not clever, dude!");
 
-    // open the file
+    /*
+     * open the file
+     */
     data = asspFOpen(fName, AFO_READ, (DOBJ *) NULL);
     if (data == NULL)
         error("%s (%s)", getAsspMsg(asspMsgNum), fName);
-    // figure out timing
+    /*
+     * figure out timing
+     */
     if (isSample) {
         if (end == 0)
             end = data->startRecord + data->numRecords - 1;
@@ -96,7 +115,9 @@ getDObj2(SEXP args)
     }
 
     numRecs = (long) (end - begin) + 1;
-    // read the data
+    /*
+     * read the data
+     */
     allocDataBuf(data, numRecs);
     data->bufStartRec = (long) begin;
     if ((numRecs = asspFFill(data)) < 0) {
@@ -109,7 +130,12 @@ getDObj2(SEXP args)
     return ans;
 }
 
-
+/*
+ * Originally, we retained the DOBJ and stored a pointer to it in the
+ * SEXP. For that reason, garbage collection was an issue and this
+ * function was used to clean up the data object when the SEXP was
+ * deleted. No longer needed, should be save to remove. 
+ */
 static void
 DObjFinalizer(SEXP dPtr)
 {
@@ -118,6 +144,11 @@ DObjFinalizer(SEXP dPtr)
     R_ClearExternalPtr(dPtr);   /* not really needed */
 }
 
+/*
+ * This function turns a DOBJ and places the contents in a SEXP of class
+ * AsspDataObject. (Hopefully) all information is retained in order to
+ * safely rewrite without data loss. 
+ */
 SEXP
 dobj2AsspDataObj(DOBJ * data)
 {
@@ -138,41 +169,50 @@ dobj2AsspDataObj(DOBJ * data)
     int             i,
                     n;
 
-    // count tracks
+    /*
+     * count tracks
+     */
     for (n = 0, desc = &(data->ddl); desc != NULL; desc = desc->next) {
         n++;
-        // Rprintf("Cur n=%d\n", n);
+        /*
+         * Rprintf("Cur n=%d\n", n);
+         */
     }
 
-    // create result, a list with a matrix for each track
+    /*
+     * create result, a list with a matrix for each track
+     */
     PROTECT(ans = allocVector(VECSXP, n));
-    // create list of tracks and formats
+    /*
+     * create list of tracks and formats
+     */
     PROTECT(tracks = allocVector(STRSXP, n));
     PROTECT(trackFormats = allocVector(STRSXP, n));
     for (i = 0, desc = &(data->ddl); desc != NULL; desc = desc->next, i++) {
         SET_STRING_ELT(tracks, i, mkChar(desc->ident));
         SET_STRING_ELT(trackFormats, i,
                        mkChar(asspDF2ssffString(desc->format)));
-        // fill tracks with data
-        // Rprintf ("Loading track %s.\n", desc->ident);
+        /*
+         * fill tracks with data
+         */
+        /*
+         * Rprintf ("Loading track %s.\n", desc->ident);
+         */
         SET_VECTOR_ELT(ans, i, getDObjTrackData(data, desc));
     }
-    // set the names
+    /*
+     * set the names
+     */
     setAttrib(ans, R_NamesSymbol, tracks);
     setAttrib(ans, install("trackFormats"), trackFormats);
 
     /*
      * PROTECT (dPtr = R_MakeExternalPtr (data, install ("DOBJ"), 
-     */
-    /*
      * install ("something"))); 
-     */
-    /*
      * R_RegisterCFinalizerEx (dPtr, DObjFinalizer, TRUE); 
-     */
-    /*
      * setAttrib (ans, install ("data pointer"), dPtr); 
      */
+
     PROTECT(rate = allocVector(REALSXP, 1));
     REAL(rate)[0] = data->dataRate;
     setAttrib(ans, install("sampleRate"), rate);
@@ -193,8 +233,6 @@ dobj2AsspDataObj(DOBJ * data)
     PROTECT(startTime = allocVector(REALSXP, 1));
     /*
      * REAL (startTime)[0] = data->Start_Time + 
-     */
-    /*
      * (data->bufStartRec / data->dataRate); 
      */
     REAL(startTime)[0] = data->Start_Time;
@@ -225,6 +263,10 @@ dobj2AsspDataObj(DOBJ * data)
 
 }
 
+/*
+ * This function parses generic variables from a DOBJ (SFFF only) and
+ * returns them in a useful format for R 
+ */
 SEXP
 getGenericVars(DOBJ * dop)
 {
@@ -295,6 +337,10 @@ getGenericVars(DOBJ * dop)
     return (ans);
 }
 
+/*
+ * This function generates a string vector of track names from the data
+ * descriptors in a DOBJ and returns it. 
+ */
 SEXP
 getDObjTracks(SEXP dobj)
 {
@@ -305,12 +351,18 @@ getDObjTracks(SEXP dobj)
     DDESC          *desc;
     int             i = 0,
         n = 0;
-    // count tracks
+    /*
+     * count tracks
+     */
     for (desc = &(data->ddl); desc != NULL; desc = desc->next) {
         n++;
     }
-    // Rprintf("Number of descs = %i.", n);
-    // create result
+    /*
+     * Rprintf("Number of descs = %i.", n);
+     */
+    /*
+     * create result
+     */
     PROTECT(ans = allocVector(STRSXP, n));
     for (desc = &(data->ddl); desc != NULL; desc = desc->next) {
         SET_STRING_ELT(ans, i, mkChar(desc->ident));
@@ -326,6 +378,10 @@ getDObjTracks(SEXP dobj)
     return (ans);
 }
 
+/*
+ * This function extracts data corresponding to one data descriptor in a
+ * DOBJ and returns it as an R Matrix 
+ */
 SEXP
 getDObjTrackData(DOBJ * data, DDESC * desc)
 {
@@ -336,7 +392,9 @@ getDObjTrackData(DOBJ * data, DDESC * desc)
                     m,
                     n;
     tempBuffer = malloc((size_t) data->recordSize);
-    // various pointers for variuos data sizes
+    /*
+     * various pointers for variuos data sizes
+     */
     uint8_t        *u8Ptr;
     int8_t         *i8Ptr;
     uint16_t       *u16Ptr;
@@ -350,7 +408,7 @@ getDObjTrackData(DOBJ * data, DDESC * desc)
     int            *Ians;
     uint8_t        *bPtr;
     bPtr = (uint8_t *) tempBuffer;
-    i = 0;                      // initial index in buffer
+    i = 0;                      /* initial index in buffer */
 
     switch (desc->format) {
     case DF_UINT8:
@@ -467,7 +525,7 @@ getDObjTrackData(DOBJ * data, DDESC * desc)
 }
 
 /*
- * switch trough assp data formats and return corresponding ssff string 
+ * switch trough assp data formats and return corresponding string 
  */
 char           *
 asspDF2ssffString(int df)
@@ -523,6 +581,10 @@ asspDF2ssffString(int df)
     }
 }
 
+/*
+ * This function is the inverse of dobj2AsspDataObj. It takes a SEXP of
+ * class AsspDataObj and turns it into a DOBJ 
+ */
 DOBJ           *
 sexp2dobj(SEXP rdobj)
 {
@@ -543,7 +605,9 @@ sexp2dobj(SEXP rdobj)
     KDTAB          *entry;
     char           *format;
 
-    // check for right class
+    /*
+     * check for right class
+     */
     attr = getAttrib(rdobj, R_ClassSymbol);
     for (i = 0; i < LENGTH(attr); i++) {
         if (strcmp(CHAR(STRING_ELT(attr, i)), WRASSP_CLASS) == 0) {
@@ -551,17 +615,20 @@ sexp2dobj(SEXP rdobj)
             break;
         }
     }
-    if (!myBool)                // classname does not match
-    {
+    if (!myBool) {              /* classname does not match */
         error("Argument must be of class %s", WRASSP_CLASS);
     }
-    // create DObj
+    /*
+     * create DObj
+     */
     dop = allocDObj();
     desc = &(dop->ddl);
     if (dop == NULL) {
         error(getAsspMsg(asspMsgNum));
     }
-    // assign attributes
+    /*
+     * assign attributes
+     */
     attr = getAttrib(rdobj, install("sampleRate"));
     if (isNull(attr)) {
         freeDObj(dop);
@@ -599,7 +666,9 @@ sexp2dobj(SEXP rdobj)
     if (!isNull(attr)) {
         for (i = 0; i < LENGTH(attr); i++) {
             var = VECTOR_ELT(attr, i);
-            // determine ssff type
+            /*
+             * determine ssff type
+             */
             for (ssff_types = SSFF_TYPES; ssff_types->type != SSFF_UNDEF;
                  ssff_types++) {
                 format = strdup(CHAR(STRING_ELT(VECTOR_ELT(var, 1), 0)));
@@ -641,10 +710,10 @@ sexp2dobj(SEXP rdobj)
             free((void *) format);
         }
     }
-    // 
-    // prepare ddescs
-    // 
-    // check tracks and formats and are there enough data parts
+    /*
+     * prepare ddescs
+     * check tracks and formats and are there enough data parts?
+     */
     FIRST = 1;
     if (isNull(tracks = getAttrib(rdobj, R_NamesSymbol)) ||
         LENGTH(tracks) == 0 || TYPEOF(tracks) != STRSXP) {
@@ -663,10 +732,14 @@ sexp2dobj(SEXP rdobj)
     }
 
     for (i = 0; i < LENGTH(tracks); i++) {
-        // get dimensions
+        /*
+         * get dimensions
+         */
         track = VECTOR_ELT(rdobj, i);
         attr = getAttrib(track, R_DimSymbol);
-        // if there is more than one track, add descriptor
+        /*
+         * if there is more than one track, add descriptor
+         */
         if (FIRST) {
             dop->numRecords = INTEGER(attr)[0];
             FIRST = 0;
@@ -764,7 +837,10 @@ sexp2dobj(SEXP rdobj)
 }
 
 
-
+/*
+ * This function takes a SEXP of class AsspDataFormat, turns it into a
+ * DOBJ and writes it to file. The DOBJ is deleted after wards. 
+ */
 SEXP
 writeDObj(SEXP data, SEXP fname)
 {
@@ -781,7 +857,11 @@ writeDObj(SEXP data, SEXP fname)
 
 
 
-
+/*
+ * this function takes trackdata in the form of an R Matrix (rdobj) and
+ * adds its contents to a DOBJ in correspondence with a given data
+ * descriptor. 
+ */
 int
 addTrackData(DOBJ * dop, DDESC * ddl, SEXP rdobj)
 {
@@ -790,7 +870,9 @@ addTrackData(DOBJ * dop, DDESC * ddl, SEXP rdobj)
                     m,
                     n,
                     unp = 0;
-    // various pointers for variuos data sizes
+    /*
+     * various pointers for variuos data sizes
+     */
     uint8_t        *u8Ptr;
     int8_t         *i8Ptr;
     uint16_t       *u16Ptr;
@@ -813,7 +895,7 @@ addTrackData(DOBJ * dop, DDESC * ddl, SEXP rdobj)
         error("Bad data type, must be INTEGER or REAL.");
     numPtr = REAL(numMat);
 
-    i = 0;                      // initial index in buffer
+    i = 0;                      /* initial index in buffer */
 
     for (m = 0; m < dop->numRecords; m++) {
         bufPtr = dop->dataBuffer + m * dop->recordSize;
