@@ -1,5 +1,6 @@
 ##' checks for any URIs in the list of files and downloads a temporary local file for
-##' each so they can be used in the functions of the libassp library
+##' each so they can be used in the functions of the libassp library.
+##' Adds in the HCS vLab api key to the header if stored in local config file
 ##' @title downloadTempURIFiles
 ##' @param listOfFiles: list of input files
 ##' @param header: header to be used in the curl call to obtain URI content
@@ -9,11 +10,15 @@
 	for(i in 1:length(listOfFiles)) {
 		if(substr(listOfFiles[i], 1, 7) == "http://") {
 			tmpFilename <- createUniqueFilename(listOfFiles[i])
-			if (is.null(header)) {
-				bFile <- getBinaryURL(listOfFiles[i])
+			if (is.null(header) || nchar(header) == 0) {
+				header = paste("X-API-KEY: ", getHCSVLABKey(), sep="")
 			} else {
-				bFile <- getBinaryURL(listOfFiles[i], httpheader=header)
+				# add hcsvlab api key if header doesn't already contain key
+				if(length(grep("X-API-KEY", header)) == 0) {
+					header = c(header, paste("X-API-KEY: ", getHCSVLABKey(), sep=""))
+				}
 			}
+			bFile <- getBinaryURL(listOfFiles[i], httpheader=header)
 			writeBin(bFile, tmpFilename)
 			listOfFiles[i] <- tmpFilename
 			tmp <- c(tmp, tmpFilename)
@@ -53,4 +58,18 @@
 		count <- count + 1
 	}
 	filename
+}
+
+
+##' Gets HCS vLab API key from local config file if it exists
+##' @title getHCSVLABKey
+'getHCSVLABKey' <- function() {
+	key <- ""
+	if(file.exists(file.path(Sys.getenv("HOME"), "hcsvlab.config"))) {
+		key <- scan(file=file.path(Sys.getenv("HOME"), "hcsvlab.config"), what="character", quiet=TRUE)
+	}
+	if(file.exists(file.path(Sys.getenv("USERPROFILE"), "hcsvlab.config"))) {
+		key <- scan(file=file.path(Sys.getenv("USERPROFILE"), "hcsvlab.config"), what="character", quiet=TRUE)
+	}
+	key
 }

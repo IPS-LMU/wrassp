@@ -17,6 +17,7 @@
 \description{
   checks for any URIs in the list of files and downloads a
   temporary local file for each so they can be used in the
-  functions of the libassp library
+  functions of the libassp library. Adds in the HCS vLab 
+  api key to the header if stored in local config file
 }
 
