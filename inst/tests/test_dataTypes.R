@@ -1,6 +1,10 @@
-context("type testing")
+##' testthat tests to check if correct types are returned by wrassp
+##'
+##' @author Raphael Winkelmann
 
-test_that("wrassp returns correct types", {
+context("type variable testing")
+
+test_that("wrassp returns correct windows types", {
   # window types
   wrasspWins = AsspWindowTypes()
   WTs = c("RECTANGLE", "PARABOLA", "COS", "HANN", 
@@ -9,13 +13,19 @@ test_that("wrassp returns correct types", {
     "KAISER2_0", "KAISER3_0", "KAISER4_0")
   
   expect_that(wrasspWins, equals(WTs))
-  
-  # window types
+
+})
+
+test_that("wrassp returns correct LP types", {
+  # LP types
   wrasspLps = AsspLpTypes()
   LPTs = c("ARF", "LAR", "LPC", "RFC")
   
   expect_that(wrasspLps, equals(LPTs))
-  
+
+})
+
+test_that("wrassp returns correct spect types", {
   # spect types
   wrasspSpectTypes = AsspSpectTypes()
   spectTs = c("DFT", "LPS", "CSS", "CEP")

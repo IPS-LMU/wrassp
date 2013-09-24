@@ -34,3 +34,4 @@ Thumbs.db
 *.Rproj
 .Rbuildignore
 .Rhistory
+.Rapp.history
