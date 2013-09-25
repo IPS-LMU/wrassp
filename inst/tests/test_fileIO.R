@@ -1,23 +1,38 @@
+##' testthat test to see if writing to then reading from disc
+##' changes anything 
+##'
+##' @author Raphael Winkelmann
 context("test fileIO")
 
-# variable that has to be set manually before testing: 
-# path2wavs = path to a folder containing wav files
-# 
 test_that("read things that are written to disc are the same as origs", {
-  expect_true(exists('path2wavs'))
+
+  altDir = tempdir()
   
-  funcList = c("acfana", "afdiff",
-               "affilter", "f0_ksv",
-               "f0_mhs", "forest",
-               "rfcana", "rmsana",
-               "spectrum", "zcrana")
+  wavFiles <- list.files(system.file("extdata", package = "wrassp"), pattern = glob2rx("*.wav"), full.names = TRUE)
   
-  fL = list.files(path2wavs, "wav", full.names=T)
-  
-  inMemObj = read.AsspDataObj(fL[1])
-  newPath = paste(fL[1], ".rmMe", sep="")
-  write.AsspDataObj(inMemObj, newPath)
-  
-  diffCmd = paste("diff", fL[1], newPath)
-  expect_that(system(diffCmd),equals(0))
+  for (func in names(wrasspOutputInfos)){
+    for(wavFile in wavFiles){
+      funcFormals = formals(func)
+      funcFormals$listOfFiles = wavFile
+      funcFormals$OutputDirectory = altDir
+      funcFormals$ExplicitExt = "testthat"
+      res = do.call(func,as.list(funcFormals))
+      path2new = paste(altDir, basename(wavFile), sep="/")
+      sp=unlist(strsplit(path2new, ".", fixed = T))
+      sp[length(sp)] = funcFormals$ExplicitExt
+      fromFile = read.AsspDataObj(paste(sp, collapse="."))
+      funcFormals$ToFile = FALSE
+      inMem = do.call(func,as.list(funcFormals))
+      # test attributes if they are the same 
+      for (at in names(attributes(fromFile))){
+        if(at != "filePath"){
+          expect_that(length(attr(fromFile, at)), equals(sum(attr(fromFile, at)==attr(inMem, at))))
+        }
+      }
+      # test if data is the same
+      expect_that(sum(unlist(inMem[attr(inMem,"names")]) == unlist(fromFile[attr(fromFile,"names")]))
+, equals(length(unlist(inMem[attr(inMem,"names")]))))
+    }
+  }
+
 })
