@@ -1,2 +1,2 @@
 library(testthat)
-test_check(wrassp)
+# test_check(wrassp)
