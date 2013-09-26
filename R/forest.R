@@ -13,7 +13,7 @@
 ##' Formant estimates will be written to a file with the
 ##' base name of the input file and extension '.fms'.
 ##' Default output is in SSFF binary format (tracks 'fm'
-##' and ''bw)
+##' and 'bw')
 ##' @title forest
 ##' @param listOfFiles vector of file paths to be processed by function
 ##' @param optLogFilePath path to option log file
@@ -78,9 +78,9 @@
 	  finfo  <- file.info(OutputDirectory)
 	  if (is.na(finfo$isdir))
 	    if (!dir.create(OutputDirectory, recursive=TRUE))
-	      error('Unable to create output directory.')
+	      stop('Unable to create output directory.')
 	  else if (!finfo$isdir)
-	    error(paste(OutputDirectory, 'exists but is not a directory.'))
+	    stop(paste(OutputDirectory, 'exists but is not a directory.'))
 	}
 	###########################
 	# remove file:// and expand listOfFiles (SIC)

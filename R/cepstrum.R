@@ -73,9 +73,9 @@
     finfo  <- file.info(OutputDirectory)
     if (is.na(finfo$isdir))
       if (!dir.create(OutputDirectory, recursive=TRUE))
-        error('Unable to create output directory.')
+        stop('Unable to create output directory.')
     else if (!finfo$isdir)
-      error(paste(OutputDirectory, 'exists but is not a directory.'))
+      stop(paste(OutputDirectory, 'exists but is not a directory.'))
   }
   
   ## ########################
