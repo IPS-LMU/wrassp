@@ -1,41 +1,43 @@
+##' testthat test to see if generated logfile stays the same
+##'
+##' @author Raphael Winkelmann
+
 context("test logging capabilities")
 
-test_that("wrong parameters combi for logging causes error", {
+test_that("logging file content is the same as hard coded string", {
   
-#   funcList = c("acfana", "afdiff",
-#                    "affilter", "f0_ksv",
-#                    "f0_mhs", "forest",
-#                    "rfcana", "rmsana",
-#                    "spectrum", "zcrana")
+  str = "BeginTime : 0 \nCenterTime : FALSE \nEndTime : 0 \nWindowShift : 5 \nWindowSize : 20 \nEffectiveLength : TRUE \nWindow : BLACKMAN \nAnalysisOrder : 0 \nEnergyNormalization : FALSE \nLengthNormalization : FALSE \nToFile : FALSE \nExplicitExt :  \nOutputDirectory :  \nforceToLog : TRUE \n => on files:"
   
-#   for(f in funcList){
-#     curFun = match.fun(f)
-#     expect_error(curFun("~/someFile.doesNotExist"), "optLogFilePath is NULL! -> not logging!")
-#     expect_error(curFun("~/someFile.doesNotExist",forceToLog=F), "Can't open file")
-#   }
-# })
+  altDir = tempdir()
+  path2log = paste(altDir, "/wrasspTESTTHATlog.txt", sep="")
+  
+  if(file.exists(path2log)){
+    unlink(path2log)
+  }
 
-# variable that has to be set manually before testing: 
-# path2wavs = path to a folder containing wav files
-# 
-test_that("logging output is created", {
-  # expect_true(exists('path2wavs'))
-  
-  # fL = list.files(path2wavs, "wav", full.names=T)
-  # acfana(fL[1], paste(path2wavs, "log.tmp", sep=""), ExplicitExt=".rmMe")
-  
-  # expContentHead = paste("\n##################################\n", 
-  #                    "##################################\n", 
-  #                    "######## acfana performed ########\n", sep="") 
-  
-  # logContent=suppressWarnings(readLines(paste(path2wavs, "log.tmp",sep="")))
-  
-  # logContent = paste(logContent,collapse="\n")
-  
-  # expect_match(logContent, expContentHead)
-  
-  # #clean up newly created files
-  # system(paste("rm ", path2wavs, "log.tmp", sep=""))
-  # system(paste("rm ", path2wavs, "*.rmMe", sep=""))
-  
+  wavFiles <- list.files(system.file("extdata", package = "wrassp"), pattern = glob2rx("*.wav"), full.names = TRUE)
+
+  for (func in names(wrasspOutputInfos)){
+    for(wavFile in wavFiles[1]){
+      funcFormals = formals(func)
+      funcFormals$listOfFiles = wavFile
+      funcFormals$ToFile = FALSE
+      funcFormals$forceToLog = TRUE
+      funcFormals$optLogFilePath = path2log
+      res = do.call(func,as.list(funcFormals))
+    }
+  }
+  lines = suppressWarnings(readLines(path2log))
+  logFileStr = paste(lines[6:20],collapse="\n")
+
+  expect_that(logFileStr, equals(str))
+
+  expect_that(grep("######## zcrana performed ########", lines), equals(233))
+
+  blackGrep = grep("Window : BLACKMAN ", lines)== c(12,  61,  78,  96, 160, 181, 202)
+
+  expect_that(sum(blackGrep), equals(7))
+
+  unlink(path2log)
+
 })
