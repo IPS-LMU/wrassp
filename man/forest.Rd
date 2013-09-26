@@ -96,7 +96,7 @@
   options). Formant estimates will be written to a file
   with the base name of the input file and extension
   '.fms'. Default output is in SSFF binary format (tracks
-  'fm' and ''bw)
+  'fm' and 'bw')
 }
 \author{
   Raphael Winkelmann
