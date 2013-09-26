@@ -2,10 +2,10 @@
 \alias{createUniqueFilename}
 \title{createUniqueFilename}
 \usage{
-  createUniqueFilename(uri)
+  createUniqueFilename(URI)
 }
 \arguments{
-  \item{URI:}{URI to create filename for}
+  \item{URI}{URI to create filename for}
 }
 \value{
   filename
