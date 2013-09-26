@@ -26,7 +26,8 @@ VignetteBuilder: knitr
 Suggests:
     knitr
 Depends:
-    RCurl
+    RCurl,
+    testthat
 Collate:
     'fileHelper.R'
     'acfana.R'
