@@ -27,7 +27,7 @@ Suggests:
     knitr
 Depends:
     RCurl,
-    testthat
+    testthat(>= 0.7.1.99)
 Collate:
     'fileHelper.R'
     'acfana.R'
