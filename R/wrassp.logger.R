@@ -14,7 +14,7 @@
 wrassp.logger <- function(fName, fOpts,
                           optLogFilePath, listOfFiles){
   
-  fid = file(optLogFilePath)
+  fid = file(optLogFilePath, open="a")
 
   cat("\n##################################\n", file = fid, append = T)
   cat("##################################\n", file = fid, append = T)
