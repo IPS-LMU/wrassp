@@ -5,8 +5,12 @@
 ##' @author Raphael Winkelmann
 context("test signal processing functions")
 
+###################################
+# acfana
 test_that("acfana doesn't brake due to varying parameters", {
- 
+
+  nrOfRandomCalls = 10
+
   wavFiles <- list.files(system.file("extdata", package = "wrassp"), pattern = glob2rx("*.wav"), full.names = TRUE)
 
   posValsBeginTime = list(0) #list(0, 0.0001, 0.1)
@@ -20,7 +24,7 @@ test_that("acfana doesn't brake due to varying parameters", {
   posValsEnergyNormalization = list(FALSE) #list(TRUE, FALSE)
   posValsLengthNormalization = list(FALSE) #list(TRUE, FALSE)
 
-  for(i in 1:10){
+  for(i in 1:nrOfRandomCalls){
     params = list(listOfFiles=sample(wavFiles, 1)[[1]], optLogFilePath=NULL, 
                   BeginTime=sample(posValsBeginTime, 1)[[1]], CenterTime=sample(posValsCenterTime, 1)[[1]],
                   EndTime=sample(posValsEndTime, 1)[[1]], WindowShift=sample(posValsWindowShift, 1)[[1]], 
@@ -36,9 +40,27 @@ test_that("acfana doesn't brake due to varying parameters", {
 
 })
 
+##################################
+# afdiff
 test_that("afdiff doesn't brake due to varying parameters", {
-  # TODO
-  
+
+  nrOfRandomCalls = 10
+
+  wavFiles <- list.files(system.file("extdata", package = "wrassp"), pattern = glob2rx("*.wav"), full.names = TRUE)
+
+  posValsComputeBackwardDifference = list(FALSE) #list(TRUE, FALSE)
+  posValsComputeCentralDifference = list(FALSE) #list(TRUE, FALSE)
+  posValsChannel = list(1)
+
+  for(i in 1:nrOfRandomCalls){
+    params = list(listOfFiles=sample(wavFiles, 1)[[1]], optLogFilePath=NULL, 
+                  ComputeBackwardDifferenc=sample(posValsComputeBackwardDifference,1)[[1]], ComputeCentralDifference=sample(posValsComputeCentralDifference,1)[[1]],
+                  Channel=sample(posValsChannel,1)[[1]], ToFile=FALSE, 
+                  forceToLog=useWrasspLogger)
+    # print(params)
+    res = do.call(afdiff,as.list(params))
+  }
+
 })
 
 test_that("affilter doesn't brake due to varying parameters", {
