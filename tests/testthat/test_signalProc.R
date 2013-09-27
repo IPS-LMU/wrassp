@@ -6,8 +6,34 @@
 context("test signal processing functions")
 
 test_that("acfana doesn't brake due to varying parameters", {
-  # TODO
-  
+ 
+  wavFiles <- list.files(system.file("extdata", package = "wrassp"), pattern = glob2rx("*.wav"), full.names = TRUE)
+
+  posValsBeginTime = list(0)
+  posValsCenterTime = list(FALSE)
+  posValsEndTime = list(0)
+  posValsWindowShift = list(5)
+  posValsWindowSize = list(20)
+  posValsEffectiveLength = list(TRUE)
+  posValsWindow = as.list(AsspWindowTypes())
+  posValsAnalysisOrder = list(0)
+  posValsEnergyNormalization = list(FALSE)
+  posValsLengthNormalization = list(FALSE)
+
+  for(i in 1:10){
+    params = list(listOfFiles=sample(wavFiles, 1)[[1]], optLogFilePath=NULL, 
+                  BeginTime=sample(posValsBeginTime, 1)[[1]], CenterTime=sample(posValsCenterTime, 1)[[1]],
+                  EndTime=sample(posValsEndTime, 1)[[1]], WindowShift=sample(posValsWindowShift, 1)[[1]], 
+                  WindowSize=sample(posValsWindowSize, 1)[[1]], EffectiveLength=sample(posValsEffectiveLength, 1)[[1]], 
+                  Window=sample(posValsWindow, 1)[[1]], AnalysisOrder=sample(posValsAnalysisOrder, 1)[[1]], 
+                  EnergyNormalization=sample(posValsEnergyNormalization, 1)[[1]], LengthNormalization=sample(posValsLengthNormalization, 1)[[1]], 
+                  ToFile=FALSE, forceToLog=useWrasspLogger)
+    # print(params)
+    res = do.call(acfana,as.list(params))
+
+    expect_that(class(res), equals("AsspDataObj"))
+  }
+
 })
 
 test_that("afdiff doesn't brake due to varying parameters", {
