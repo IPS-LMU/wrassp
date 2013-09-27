@@ -35,4 +35,11 @@ test_that("read things that are written to disc are the same as origs", {
     }
   }
 
+  # clean up
+  files <- list.files(altDir, "testthat$", full.names=T)
+
+  for (file in files){
+    unlink(file)
+  }
+
 })
