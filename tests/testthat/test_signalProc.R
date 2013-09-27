@@ -7,19 +7,19 @@ context("test signal processing functions")
 
 ###################################
 # acfana
-test_that("acfana doesn't brake due to varying parameters", {
+test_that("acfana doesn't break due to varying parameters", {
 
   nrOfRandomCalls = 10
 
   wavFiles <- list.files(system.file("extdata", package = "wrassp"), pattern = glob2rx("*.wav"), full.names = TRUE)
 
-  posValsBeginTime = list(0) #list(0, 0.0001, 0.1)
-  posValsCenterTime = list(FALSE) #list(TRUE, FALSE)
-  posValsEndTime = list(0) #list(0, 0.1001, 0.2, 1, 1.2)
+  posValsBeginTime = list(0, 0.0001, 0.1, 0.5)
+  posValsCenterTime = list(TRUE, FALSE)
+  posValsEndTime = list(0, 0.7, 0.700001, 1, 1.2)
   posValsWindowShift = list(5) #list(1, 5, 10, 7)
   posValsWindowSize = list(20) #???
   posValsEffectiveLength = list(TRUE) #list(TRUE, FALSE)
-  posValsWindow = as.list(AsspWindowTypes())
+  posValsWindow = list("BLACKMAN")#as.list(AsspWindowTypes())
   posValsAnalysisOrder = list(0) #???
   posValsEnergyNormalization = list(FALSE) #list(TRUE, FALSE)
   posValsLengthNormalization = list(FALSE) #list(TRUE, FALSE)
@@ -43,7 +43,7 @@ test_that("acfana doesn't brake due to varying parameters", {
 
 ##################################
 # afdiff
-test_that("afdiff doesn't brake due to varying parameters", {
+test_that("afdiff doesn't break due to varying parameters", {
 
   nrOfRandomCalls = 10
 
@@ -68,7 +68,7 @@ test_that("afdiff doesn't brake due to varying parameters", {
 
 ##################################
 # affilter
-test_that("affilter doesn't brake due to varying parameters", {
+test_that("affilter doesn't break due to varying parameters", {
 
   nrOfRandomCalls = 10
 
@@ -97,15 +97,15 @@ test_that("affilter doesn't brake due to varying parameters", {
 
 ##################################
 # cepstrum
-test_that("cepstrum doesn't brake due to varying parameters", {
+test_that("cepstrum doesn't break due to varying parameters", {
 
   nrOfRandomCalls = 10
 
   wavFiles <- list.files(system.file("extdata", package = "wrassp"), pattern = glob2rx("*.wav"), full.names = TRUE)
 
-  posValsBeginTime=list(0)
-  posValsCenterTime=list(FALSE)
-  posValsEndTime=list(0)
+  posValsBeginTime=list(0, 0.0001, 0.1, 0.5)
+  posValsCenterTime=list(TRUE, FALSE)
+  posValsEndTime=list(0, 0.7, 0.700001, 1, 1.2)
   posValsResolution=list(40)
   posValsFftLength=list(0)
   posValsWindowShift=list(5)
@@ -130,15 +130,15 @@ test_that("cepstrum doesn't brake due to varying parameters", {
 
 ##################################
 # cssSpectrum
-test_that("cssSpectrum doesn't brake due to varying parameters", {
+test_that("cssSpectrum doesn't break due to varying parameters", {
 
   nrOfRandomCalls = 10
 
   wavFiles <- list.files(system.file("extdata", package = "wrassp"), pattern = glob2rx("*.wav"), full.names = TRUE)
 
-  posValsBeginTime=list(0)
-  posValsCenterTime=list(FALSE)
-  posValsEndTime=list(0)
+  posValsBeginTime=list(0, 0.0001, 0.1, 0.5)
+  posValsCenterTime=list(TRUE, FALSE)
+  posValsEndTime=list(0, 0.7, 0.700001, 1, 1.2)
   posValsResolution=list(40)
   posValsFftLength=list(0)
   posValsWindowShift=list(5)
@@ -161,15 +161,15 @@ test_that("cssSpectrum doesn't brake due to varying parameters", {
 
 ##################################
 # dftSpectrum
-test_that("dftSpectrum doesn't brake due to varying parameters", {
+test_that("dftSpectrum doesn't break due to varying parameters", {
 
   nrOfRandomCalls = 10
 
   wavFiles <- list.files(system.file("extdata", package = "wrassp"), pattern = glob2rx("*.wav"), full.names = TRUE)
 
-  posValsBeginTime=list(0)
-  posValsCenterTime=list(FALSE)
-  posValsEndTime=list(0)
+  posValsBeginTime=list(0, 0.0001, 0.1, 0.5)
+  posValsCenterTime=list(TRUE, FALSE)
+  posValsEndTime=list(0, 0.7, 0.700001, 1, 1.2)
   posValsResolution=list(40)
   posValsFftLength=list(0)
   posValsWindowShift=list(5)
@@ -194,14 +194,14 @@ test_that("dftSpectrum doesn't brake due to varying parameters", {
 
 ##################################
 # forest
-test_that("forest doesn't brake due to varying parameters", {
+test_that("forest doesn't break due to varying parameters", {
 
   nrOfRandomCalls = 10
 
   wavFiles <- list.files(system.file("extdata", package = "wrassp"), pattern = glob2rx("*.wav"), full.names = TRUE)
 
-  posValsBeginTime=list(0)
-  posValsEndTime=list(0)
+  posValsBeginTime=list(0, 0.0001, 0.1, 0.5)
+  posValsEndTime=list(0, 0.7, 0.700001, 1, 1.2)
   posValsWindowShift=list(5)
   posValsWindowSize=list(20)
   posValsEffectiveLength=list(TRUE)
@@ -235,14 +235,14 @@ test_that("forest doesn't brake due to varying parameters", {
 
 ##################################
 # ksvF0
-test_that("ksvF0 doesn't brake due to varying parameters", {
+test_that("ksvF0 doesn't break due to varying parameters", {
   
   nrOfRandomCalls = 10
 
   wavFiles <- list.files(system.file("extdata", package = "wrassp"), pattern = glob2rx("*.wav"), full.names = TRUE)
 
-  posValsBeginTime=list(0)
-  posValsEndTime=list(0)
+  posValsBeginTime=list(0, 0.0001, 0.1, 0.5)
+  posValsEndTime=list(0, 0.7, 0.700001, 1, 1.2)
   posValsWindowShift=list(5)
   posValsGender=list("u")
   posValsMaxF=list(600)
@@ -267,15 +267,15 @@ test_that("ksvF0 doesn't brake due to varying parameters", {
 
 ##################################
 # lpsSpectrum
-test_that("lpsSpectrum doesn't brake due to varying parameters", {
+test_that("lpsSpectrum doesn't break due to varying parameters", {
   
   nrOfRandomCalls = 10
 
   wavFiles <- list.files(system.file("extdata", package = "wrassp"), pattern = glob2rx("*.wav"), full.names = TRUE)
   
-  posValsBeginTime=list(0)
-  posValsCenterTime=list(FALSE)
-  posValsEndTime=list(0)
+  posValsBeginTime=list(0, 0.0001, 0.1, 0.5)
+  posValsCenterTime=list(TRUE, FALSE)
+  posValsEndTime=list(0, 0.7, 0.700001, 1, 1.2)
   posValsResolution=list(40)
   posValsFftLength=list(0)
   posValsWindowSize=list(20)
@@ -304,15 +304,15 @@ test_that("lpsSpectrum doesn't brake due to varying parameters", {
 
 ##################################
 # mhsF0
-test_that("mhsF0 doesn't brake due to varying parameters", {
+test_that("mhsF0 doesn't break due to varying parameters", {
   
   nrOfRandomCalls = 10
 
   wavFiles <- list.files(system.file("extdata", package = "wrassp"), pattern = glob2rx("*.wav"), full.names = TRUE)
 
-  posValsBeginTime=list(0)
-  posValsCenterTime=list(FALSE)
-  posValsEndTime=list(0)
+  posValsBeginTime=list(0, 0.0001, 0.1, 0.5)
+  posValsCenterTime=list(FALSE) #list(FALSE)
+  posValsEndTime=list(0, 0.7, 0.700001, 1, 1.2)
   posValsWindowShift=list(5)
   posValsGender=list("u")
   posValsMaxF=list(600)
@@ -345,15 +345,15 @@ test_that("mhsF0 doesn't brake due to varying parameters", {
 
 ##################################
 # rfcana
-test_that("rfcana doesn't brake due to varying parameters", {
+test_that("rfcana doesn't break due to varying parameters", {
   
   nrOfRandomCalls = 10
 
   wavFiles <- list.files(system.file("extdata", package = "wrassp"), pattern = glob2rx("*.wav"), full.names = TRUE)
 
-  posValsBeginTime=list(0)
-  posValsCenterTime=list(FALSE)
-  posValsEndTime=list(0)
+  posValsBeginTime=list(0, 0.0001, 0.1, 0.5)
+  posValsCenterTime=list(TRUE, FALSE)
+  posValsEndTime=list(0, 0.7, 0.700001, 1, 1.2)
   posValsWindowShift=list(5)
   posValsWindowSize=list(20)
   posValsEffectiveLength=list(TRUE)
@@ -380,15 +380,15 @@ test_that("rfcana doesn't brake due to varying parameters", {
 
 #######################################
 # rmsana
-test_that("rmsana doesn't brake due to varying parameters", {
+test_that("rmsana doesn't break due to varying parameters", {
     
   nrOfRandomCalls = 10
 
   wavFiles <- list.files(system.file("extdata", package = "wrassp"), pattern = glob2rx("*.wav"), full.names = TRUE)
 
-  posValsBeginTime=list(0)
-  posValsCenterTime=list(FALSE)
-  posValsEndTime=list(0)
+  posValsBeginTime=list(0, 0.0001, 0.1, 0.5)
+  posValsCenterTime=list(TRUE, FALSE)
+  posValsEndTime=list(0, 0.7, 0.700001, 1, 1.2)
   posValsWindowShift=list(5)
   posValsWindowSize=list(20)
   posValsEffectiveLength=list(TRUE)
@@ -412,15 +412,15 @@ test_that("rmsana doesn't brake due to varying parameters", {
 
 ##################################
 # zcrana
-test_that("zcrana doesn't brake due to varying parameters", {
+test_that("zcrana doesn't break due to varying parameters", {
 
   nrOfRandomCalls = 10
 
   wavFiles <- list.files(system.file("extdata", package = "wrassp"), pattern = glob2rx("*.wav"), full.names = TRUE)
 
-  posValsBeginTime=list(0)
-  posValsCenterTime=list(FALSE)
-  posValsEndTime=list(0)
+  posValsBeginTime=list(0, 0.0001, 0.1, 0.5)
+  posValsCenterTime=list(TRUE, FALSE)
+  posValsEndTime=list(0, 0.7, 0.700001, 1, 1.2)
   posValsWindowShift=list(5)
   posValsWindowSize=list(25)
 
