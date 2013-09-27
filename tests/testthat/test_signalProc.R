@@ -9,16 +9,16 @@ test_that("acfana doesn't brake due to varying parameters", {
  
   wavFiles <- list.files(system.file("extdata", package = "wrassp"), pattern = glob2rx("*.wav"), full.names = TRUE)
 
-  posValsBeginTime = list(0)
-  posValsCenterTime = list(FALSE)
-  posValsEndTime = list(0)
-  posValsWindowShift = list(5)
-  posValsWindowSize = list(20)
-  posValsEffectiveLength = list(TRUE)
+  posValsBeginTime = list(0) #list(0, 0.0001, 0.1)
+  posValsCenterTime = list(FALSE) #list(TRUE, FALSE)
+  posValsEndTime = list(0) #list(0, 0.1001, 0.2, 1, 1.2)
+  posValsWindowShift = list(5) #list(1, 5, 10, 7)
+  posValsWindowSize = list(20) #???
+  posValsEffectiveLength = list(TRUE) #list(TRUE, FALSE)
   posValsWindow = as.list(AsspWindowTypes())
-  posValsAnalysisOrder = list(0)
-  posValsEnergyNormalization = list(FALSE)
-  posValsLengthNormalization = list(FALSE)
+  posValsAnalysisOrder = list(0) #???
+  posValsEnergyNormalization = list(FALSE) #list(TRUE, FALSE)
+  posValsLengthNormalization = list(FALSE) #list(TRUE, FALSE)
 
   for(i in 1:10){
     params = list(listOfFiles=sample(wavFiles, 1)[[1]], optLogFilePath=NULL, 
