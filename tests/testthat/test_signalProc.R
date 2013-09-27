@@ -31,6 +31,7 @@ test_that("acfana doesn't brake due to varying parameters", {
                   WindowSize=sample(posValsWindowSize, 1)[[1]], EffectiveLength=sample(posValsEffectiveLength, 1)[[1]], 
                   Window=sample(posValsWindow, 1)[[1]], AnalysisOrder=sample(posValsAnalysisOrder, 1)[[1]], 
                   EnergyNormalization=sample(posValsEnergyNormalization, 1)[[1]], LengthNormalization=sample(posValsLengthNormalization, 1)[[1]], 
+                  ExplicitExt=NULL, OutputDirectory=NULL,
                   ToFile=FALSE, forceToLog=useWrasspLogger)
     # print(params)
     res = do.call(acfana,as.list(params))
@@ -55,65 +56,383 @@ test_that("afdiff doesn't brake due to varying parameters", {
   for(i in 1:nrOfRandomCalls){
     params = list(listOfFiles=sample(wavFiles, 1)[[1]], optLogFilePath=NULL, 
                   ComputeBackwardDifferenc=sample(posValsComputeBackwardDifference,1)[[1]], ComputeCentralDifference=sample(posValsComputeCentralDifference,1)[[1]],
-                  Channel=sample(posValsChannel,1)[[1]], ToFile=FALSE, 
+                  Channel=sample(posValsChannel,1)[[1]], ToFile=FALSE,
+                  ExplicitExt=NULL, OutputDirectory=NULL,
                   forceToLog=useWrasspLogger)
     # print(params)
     res = do.call(afdiff,as.list(params))
+    expect_that(class(res), equals("AsspDataObj"))
   }
 
 })
 
+##################################
+# affilter
 test_that("affilter doesn't brake due to varying parameters", {
-  # TODO
+
+  nrOfRandomCalls = 10
+
+  wavFiles <- list.files(system.file("extdata", package = "wrassp"), pattern = glob2rx("*.wav"), full.names = TRUE)
+
+  posValsHighPass=list(4000)
+  posValsLowPass=list(0)
+  posValsStopBand=list(96)
+  posValsTransition=list(250)
+  posValsUseIIR=list(FALSE)
+  posValsNumIIRsections=list(4)
+
+  for(i in 1:nrOfRandomCalls){
+    params = list(listOfFiles=sample(wavFiles, 1)[[1]], optLogFilePath=NULL,
+                  HighPass=sample(posValsHighPass,1)[[1]], LowPass=sample(posValsLowPass,1)[[1]], 
+                  StopBand=sample(posValsStopBand,1)[[1]], Transition=sample(posValsTransition,1)[[1]], 
+                  UseIIR=sample(posValsUseIIR,1)[[1]], NumIIRsections=sample(posValsNumIIRsections,1)[[1]],
+                  ToFile=FALSE, ExplicitExt=NULL,
+                  OutputDirectory=NULL, forceToLog=useWrasspLogger)
   
+    # print(params)
+    res = do.call(affilter, as.list(params))
+    expect_that(class(res), equals("AsspDataObj"))
+  }
 })
 
+##################################
+# cepstrum
 test_that("cepstrum doesn't brake due to varying parameters", {
-  # TODO
-  
+
+  nrOfRandomCalls = 10
+
+  wavFiles <- list.files(system.file("extdata", package = "wrassp"), pattern = glob2rx("*.wav"), full.names = TRUE)
+
+  posValsBeginTime=list(0)
+  posValsCenterTime=list(FALSE)
+  posValsEndTime=list(0)
+  posValsResolution=list(40)
+  posValsFftLength=list(0)
+  posValsWindowShift=list(5)
+  posValsWindow=list("BLACKMAN")#as.list(AsspWindowTypes())
+
+  for(i in 1:nrOfRandomCalls){
+    params = list(listOfFiles=sample(wavFiles, 1)[[1]], optLogFilePath=NULL, 
+                  BeginTime=sample(posValsBeginTime,1)[[1]], CenterTime=sample(posValsCenterTime,1)[[1]],
+                  EndTime=sample(posValsEndTime,1)[[1]], Resolution=sample(posValsResolution,1)[[1]],
+                  FftLength=sample(posValsFftLength,1)[[1]], WindowShift=sample(posValsWindowShift,1)[[1]],
+                  Window=sample(posValsWindow,1)[[1]], ToFile=FALSE,
+                  ExplicitExt=NULL, OutputDirectory=NULL,
+                  forceToLog=useWrasspLogger)
+    
+    # print(params)
+    res = do.call(cepstrum, as.list(params))
+    expect_that(class(res), equals("AsspDataObj"))
+  }
+
+
 })
 
+##################################
+# cssSpectrum
 test_that("cssSpectrum doesn't brake due to varying parameters", {
-  # TODO
-  
+
+  nrOfRandomCalls = 10
+
+  wavFiles <- list.files(system.file("extdata", package = "wrassp"), pattern = glob2rx("*.wav"), full.names = TRUE)
+
+  posValsBeginTime=list(0)
+  posValsCenterTime=list(FALSE)
+  posValsEndTime=list(0)
+  posValsResolution=list(40)
+  posValsFftLength=list(0)
+  posValsWindowShift=list(5)
+  posValsWindow=list("BLACKMAN") #as.list(AsspWindowTypes())
+  posValsNumCeps=list(0)
+
+  for (i in 1:nrOfRandomCalls) {
+    params = list(listOfFiles=sample(wavFiles, 1)[[1]], optLogFilePath=NULL, 
+                  BeginTime=sample(posValsBeginTime,1)[[1]], CenterTime=sample(posValsCenterTime,1)[[1]], 
+                  EndTime=sample(posValsEndTime,1)[[1]], Resolution=sample(posValsResolution,1)[[1]], 
+                  FftLength=sample(posValsFftLength,1)[[1]], WindowShift=sample(posValsWindowShift,1)[[1]], 
+                  Window=sample(posValsWindow,1)[[1]], NumCeps=sample(posValsNumCeps,1)[[1]], 
+                  ToFile=FALSE, ExplicitExt=NULL, 
+                  OutputDirectory=NULL, forceToLog=useWrasspLogger)
+        # print(params)
+    res = do.call(cssSpectrum, as.list(params))
+    expect_that(class(res), equals("AsspDataObj"))
+  }
 })
 
+##################################
+# dftSpectrum
 test_that("dftSpectrum doesn't brake due to varying parameters", {
-  # TODO
+
+  nrOfRandomCalls = 10
+
+  wavFiles <- list.files(system.file("extdata", package = "wrassp"), pattern = glob2rx("*.wav"), full.names = TRUE)
+
+  posValsBeginTime=list(0)
+  posValsCenterTime=list(FALSE)
+  posValsEndTime=list(0)
+  posValsResolution=list(40)
+  posValsFftLength=list(0)
+  posValsWindowShift=list(5)
+  posValsWindow=list("BLACKMAN") #as.list(AsspWindowTypes())
+  posValsBandwidth=list(0)
+
+  for (i in 1:nrOfRandomCalls) {
+    params = list(listOfFiles=sample(wavFiles, 1)[[1]], optLogFilePath=NULL, 
+                  BeginTime=posValsBeginTime[[1]], CenterTime=posValsCenterTime[[1]], 
+                  EndTime=posValsEndTime[[1]], Resolution=posValsResolution[[1]], 
+                  FftLength=posValsFftLength[[1]], WindowShift=posValsWindowShift[[1]], 
+                  Window=posValsWindow[[1]], Bandwidth=posValsBandwidth[[1]], 
+                  ToFile=FALSE, ExplicitExt=NULL, 
+                  OutputDirectory=NULL, forceToLog=useWrasspLogger)
   
+    # print(params)
+    res = do.call(dftSpectrum, as.list(params))
+    expect_that(class(res), equals("AsspDataObj"))
+
+  }  
 })
 
+##################################
+# forest
 test_that("forest doesn't brake due to varying parameters", {
-  # TODO
+
+  nrOfRandomCalls = 10
+
+  wavFiles <- list.files(system.file("extdata", package = "wrassp"), pattern = glob2rx("*.wav"), full.names = TRUE)
+
+  posValsBeginTime=list(0)
+  posValsEndTime=list(0)
+  posValsWindowShift=list(5)
+  posValsWindowSize=list(20)
+  posValsEffectiveLength=list(TRUE)
+  posValsNominalF1=list(500)
+  posValsGender=list("m")
+  posValsEstimate=list(FALSE)
+  posValsOrder=list(0)
+  posValsIncrOrder=list(0)
+  posValsNumFormants=list(4)
+  posValsWindow=list("BLACKMAN")#as.list(AsspWindowTypes())
+  posValsPreemphasis=list(-0.8)
+  posValsHeader=list(NULL)
   
+  for (i in 1:nrOfRandomCalls) {
+    params = list(listOfFiles=sample(wavFiles, 1)[[1]], optLogFilePath=NULL, 
+                  BeginTime=sample(posValsBeginTime,1)[[1]], EndTime=sample(posValsEndTime,1)[[1]], 
+                  WindowShift=sample(posValsWindowShift,1)[[1]], WindowSize=sample(posValsWindowSize,1)[[1]], 
+                  EffectiveLength=sample(posValsEffectiveLength,1)[[1]], NominalF1=sample(posValsNominalF1,1)[[1]], 
+                  Gender=sample(posValsGender,1)[[1]], Estimate=sample(posValsEstimate,1)[[1]], 
+                  Order=sample(posValsOrder,1)[[1]], IncrOrder=sample(posValsIncrOrder,1)[[1]], 
+                  NumFormants=sample(posValsNumFormants,1)[[1]], Window=sample(posValsWindow,1)[[1]], 
+                  Preemphasis=sample(posValsPreemphasis,1)[[1]], ToFile=FALSE, 
+                  ExplicitExt=NULL, OutputDirectory=NULL, 
+                  forceToLog=useWrasspLogger, Header=sample(posValsHeader,1)[[1]])
+
+    # print(params)
+    res = do.call(forest, as.list(params))
+    expect_that(class(res), equals("AsspDataObj"))
+  }
 })
 
+##################################
+# ksvF0
 test_that("ksvF0 doesn't brake due to varying parameters", {
-  # TODO
   
+  nrOfRandomCalls = 10
+
+  wavFiles <- list.files(system.file("extdata", package = "wrassp"), pattern = glob2rx("*.wav"), full.names = TRUE)
+
+  posValsBeginTime=list(0)
+  posValsEndTime=list(0)
+  posValsWindowShift=list(5)
+  posValsGender=list("u")
+  posValsMaxF=list(600)
+  posValsMinF=list(50)
+  posValsMinAmp=list(50)
+  posValsMaxZCR=list(3000)
+
+  for (i in 1:nrOfRandomCalls) {
+    params = list(listOfFiles=sample(wavFiles, 1)[[1]], optLogFilePath=NULL, 
+                  BeginTime=sample(posValsBeginTime,1)[[1]], EndTime=sample(posValsEndTime,1)[[1]], 
+                  WindowShift=sample(posValsWindowShift,1)[[1]], Gender=sample(posValsGender,1)[[1]], 
+                  MaxF=sample(posValsMaxF,1)[[1]], MinF=sample(posValsMinF,1)[[1]], 
+                  MinAmp=sample(posValsMinAmp,1)[[1]], MaxZCR=sample(posValsMaxZCR,1)[[1]], 
+                  ToFile=FALSE, ExplicitExt=NULL, 
+                  OutputDirectory=NULL, forceToLog=useWrasspLogger)
+
+        # print(params)
+    res = do.call(ksvF0, as.list(params))
+    expect_that(class(res), equals("AsspDataObj"))
+  }
 })
 
+##################################
+# lpsSpectrum
 test_that("lpsSpectrum doesn't brake due to varying parameters", {
-  # TODO
   
+  nrOfRandomCalls = 10
+
+  wavFiles <- list.files(system.file("extdata", package = "wrassp"), pattern = glob2rx("*.wav"), full.names = TRUE)
+  
+  posValsBeginTime=list(0)
+  posValsCenterTime=list(FALSE)
+  posValsEndTime=list(0)
+  posValsResolution=list(40)
+  posValsFftLength=list(0)
+  posValsWindowSize=list(20)
+  posValsWindowShift=list(5)
+  posValsWindow=list("BLACKMAN") #as.list(AsspWindowTypes())
+  posValsOrder=list(0)
+  posValsPreemphasis=list(-0.95)
+  posValsDeemphasize=list(TRUE)
+
+  for (i in 1:nrOfRandomCalls) {
+    params = list(listOfFiles=sample(wavFiles, 1)[[1]], optLogFilePath=NULL, 
+                  BeginTime=sample(posValsBeginTime,1)[[1]], CenterTime=sample(posValsCenterTime,1)[[1]], 
+                  EndTime=sample(posValsEndTime,1)[[1]], Resolution=sample(posValsResolution,1)[[1]], 
+                  FftLength=sample(posValsFftLength,1)[[1]], WindowSize=sample(posValsWindowSize,1)[[1]], 
+                  WindowShift=sample(posValsWindowShift,1)[[1]], Window=sample(posValsWindow,1)[[1]], 
+                  Order=sample(posValsOrder,1)[[1]], Preemphasis=sample(posValsPreemphasis,1)[[1]], 
+                  Deemphasize=sample(posValsDeemphasize,1)[[1]], ToFile=FALSE, 
+                  ExplicitExt=NULL, OutputDirectory=NULL, 
+                  forceToLog=useWrasspLogger)
+    
+    # print(params)
+    res = do.call(lpsSpectrum, as.list(params))
+    expect_that(class(res), equals("AsspDataObj"))
+  }
 })
 
+##################################
+# mhsF0
 test_that("mhsF0 doesn't brake due to varying parameters", {
-  # TODO
   
+  nrOfRandomCalls = 10
+
+  wavFiles <- list.files(system.file("extdata", package = "wrassp"), pattern = glob2rx("*.wav"), full.names = TRUE)
+
+  posValsBeginTime=list(0)
+  posValsCenterTime=list(FALSE)
+  posValsEndTime=list(0)
+  posValsWindowShift=list(5)
+  posValsGender=list("u")
+  posValsMaxF=list(600)
+  posValsMinF=list(50)
+  posValsMinAmp=list(50)
+  posValsMinAC1=list(0.25)
+  posValsMinRMS=list(18)
+  posValsMaxZCR=list(3000)
+  posValsMinProb=list(0.52)
+  posValsPlainSpectrum=list(FALSE)
+
+  for (i in 1:nrOfRandomCalls) {
+    params = list(listOfFiles=sample(wavFiles, 1)[[1]], optLogFilePath=NULL, 
+                  BeginTime=sample(posValsBeginTime,1)[[1]], CenterTime=sample(posValsCenterTime,1)[[1]], 
+                  EndTime=sample(posValsEndTime,1)[[1]], WindowShift=sample(posValsWindowShift,1)[[1]], 
+                  Gender=sample(posValsGender,1)[[1]], MaxF=sample(posValsMaxF,1)[[1]], 
+                  MinF=sample(posValsMinF,1)[[1]], MinAmp=sample(posValsMinAmp,1)[[1]], 
+                  MinAC1=sample(posValsMinAC1,1)[[1]], MinRMS=sample(posValsMinRMS,1)[[1]], 
+                  MaxZCR=sample(posValsMaxZCR,1)[[1]], MinProb=sample(posValsMinProb,1)[[1]], 
+                  PlainSpectrum=sample(posValsPlainSpectrum,1)[[1]], ToFile=FALSE, 
+                  ExplicitExt=NULL, OutputDirectory=NULL, 
+                  forceToLog=useWrasspLogger)
+
+    # print(params)
+    res = do.call(mhsF0, as.list(params))
+    expect_that(class(res), equals("AsspDataObj"))
+
+  }
 })
 
+##################################
+# rfcana
 test_that("rfcana doesn't brake due to varying parameters", {
-  # TODO
   
+  nrOfRandomCalls = 10
+
+  wavFiles <- list.files(system.file("extdata", package = "wrassp"), pattern = glob2rx("*.wav"), full.names = TRUE)
+
+  posValsBeginTime=list(0)
+  posValsCenterTime=list(FALSE)
+  posValsEndTime=list(0)
+  posValsWindowShift=list(5)
+  posValsWindowSize=list(20)
+  posValsEffectiveLength=list(TRUE)
+  posValsWindow=list("BLACKMAN")
+  posValsOrder=list(0)
+  posValsPreemphasis=list(-0.95)
+  posValsLpType=list("RFC")
+
+  for (i in 1:nrOfRandomCalls) {
+    params = list(listOfFiles=sample(wavFiles, 1)[[1]], optLogFilePath=NULL, 
+                  BeginTime=sample(posValsBeginTime,1)[[1]], CenterTime=sample(posValsCenterTime,1)[[1]], 
+                  EndTime=sample(posValsEndTime,1)[[1]], WindowShift=sample(posValsWindowShift,1)[[1]], 
+                  WindowSize=sample(posValsWindowSize,1)[[1]], EffectiveLength=sample(posValsEffectiveLength,1)[[1]], 
+                  Window=sample(posValsWindow,1)[[1]], Order=sample(posValsOrder,1)[[1]], 
+                  Preemphasis=sample(posValsPreemphasis,1)[[1]], LpType=sample(posValsLpType,1)[[1]], 
+                  ToFile=FALSE, ExplicitExt=NULL, 
+                  OutputDirectory=NULL, forceToLog=useWrasspLogger)
+        # print(params)
+    res = do.call(rfcana, as.list(params))
+    expect_that(class(res), equals("AsspDataObj"))
+
+  }
 })
 
+#######################################
+# rmsana
 test_that("rmsana doesn't brake due to varying parameters", {
-  # TODO
-  
+    
+  nrOfRandomCalls = 10
+
+  wavFiles <- list.files(system.file("extdata", package = "wrassp"), pattern = glob2rx("*.wav"), full.names = TRUE)
+
+  posValsBeginTime=list(0)
+  posValsCenterTime=list(FALSE)
+  posValsEndTime=list(0)
+  posValsWindowShift=list(5)
+  posValsWindowSize=list(20)
+  posValsEffectiveLength=list(TRUE)
+  posValsLinear=list(FALSE)
+  posValsWindow=list("HAMMING")
+
+  for (i in 1:nrOfRandomCalls) {
+    params = list(listOfFiles=sample(wavFiles, 1)[[1]], optLogFilePath=NULL, 
+                  BeginTime=sample(posValsBeginTime,1)[[1]], CenterTime=sample(posValsCenterTime,1)[[1]], 
+                  EndTime=sample(posValsEndTime,1)[[1]], WindowShift=sample(posValsWindowShift,1)[[1]], 
+                  WindowSize=sample(posValsWindowSize,1)[[1]], EffectiveLength=sample(posValsEffectiveLength,1)[[1]], 
+                  Linear=sample(posValsLinear,1)[[1]], Window=sample(posValsWindow,1)[[1]], 
+                  ToFile=FALSE, ExplicitExt=NULL, 
+                  OutputDirectory=NULL, forceToLog=useWrasspLogger)
+            # print(params)
+    res = do.call(rmsana, as.list(params))
+    expect_that(class(res), equals("AsspDataObj"))
+
+  }
 })
 
+##################################
+# zcrana
 test_that("zcrana doesn't brake due to varying parameters", {
-  # TODO
-  
+
+  nrOfRandomCalls = 10
+
+  wavFiles <- list.files(system.file("extdata", package = "wrassp"), pattern = glob2rx("*.wav"), full.names = TRUE)
+
+  posValsBeginTime=list(0)
+  posValsCenterTime=list(FALSE)
+  posValsEndTime=list(0)
+  posValsWindowShift=list(5)
+  posValsWindowSize=list(25)
+
+  for (i in 1:nrOfRandomCalls) {
+    params = list(listOfFiles=sample(wavFiles, 1)[[1]], optLogFilePath=NULL, 
+                  BeginTime=sample(posValsBeginTime,1)[[1]], CenterTime=sample(posValsCenterTime,1)[[1]], 
+                  EndTime=sample(posValsEndTime,1)[[1]], WindowShift=sample(posValsWindowShift,1)[[1]], 
+                  WindowSize=sample(posValsWindowSize,1)[[1]], ToFile=FALSE, 
+                  ExplicitExt=NULL, OutputDirectory=NULL, 
+                  forceToLog=useWrasspLogger)
+                # print(params)
+    res = do.call(zcrana, as.list(params))
+    expect_that(class(res), equals("AsspDataObj"))
+  }
 })
