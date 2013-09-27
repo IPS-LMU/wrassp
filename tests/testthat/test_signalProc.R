@@ -314,7 +314,7 @@ test_that("mhsF0 doesn't break due to varying parameters", {
   posValsCenterTime=list(FALSE) #list(FALSE)
   posValsEndTime=list(0, 0.7, 0.700001, 1, 1.2)
   posValsWindowShift=list(5)
-  posValsGender=list("u")
+  posValsGender=list("f","m","u")
   posValsMaxF=list(600)
   posValsMinF=list(50)
   posValsMinAmp=list(50)
