@@ -87,12 +87,9 @@
 	
 	listOfFiles = gsub("^file://","", listOfFiles)
 	listOfFiles = path.expand(listOfFiles)
-	
-	# handle URIs by downloading URI content to local temporary files
 
-	files <- downloadTempURIFiles(listOfFiles, Header)
-	listOfFiles <- files$listOfFiles
-	tmpFiles <- files$tmpFiles
+	# Prepare analysis by downloading any URIs to the cache	
+	listOfFiles <- prepareFiles(listOfFiles, Header)
 
 	###########################
 	#perform analysis
@@ -115,12 +112,6 @@
                                     ToFile = ToFile, ExplicitExt = ExplicitExt, 
                                     ProgressBar = pb, OutputDirectory = OutputDirectory,
 	                                  PACKAGE = "wrassp"))
-	
-	# delete temporary files created
-
-	if(length(tmpFiles)>0) {
-		deleteTempFiles(tmpFiles)	
-	}
 	
 	############################
 	# write options to options log file

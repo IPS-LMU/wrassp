@@ -45,7 +45,8 @@
                           FftLength = 0, WindowShift = 5.0, 
                           Window = 'BLACKMAN', NumCeps = 0, 
                           ToFile = TRUE, ExplicitExt = NULL, 
-                          OutputDirectory = NULL, forceToLog = useWrasspLogger){
+                          OutputDirectory = NULL, forceToLog = useWrasspLogger,
+                          Header = NULL){
   
   ## ########################
   ## a few parameter checks and expand paths
@@ -82,6 +83,9 @@
   
   listOfFiles = gsub("^file://","", listOfFiles)
   listOfFiles = path.expand(listOfFiles)
+
+  # Prepare analysis by downloading any URIs to the cache 
+  listOfFiles <- prepareFiles(listOfFiles, Header)
   
   ## #######################
   ## perform analysis

@@ -27,7 +27,9 @@ Suggests:
     knitr
 Depends:
     RCurl,
-    testthat(>= 0.7.1.99)
+    testthat(>= 0.7.1.99),
+    digest,
+    tools
 Collate:
     'fileHelper.R'
     'acfana.R'

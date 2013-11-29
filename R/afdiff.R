@@ -31,7 +31,7 @@
                      ComputeBackwardDifference = FALSE, ComputeCentralDifference = FALSE, 
                      Channel = 1, ToFile = TRUE, 
                      ExplicitExt=NULL, OutputDirectory = NULL,
-                     forceToLog = useWrasspLogger){
+                     forceToLog = useWrasspLogger, Header = NULL){
   
   ###########################
   # a few parameter checks and expand paths
@@ -65,6 +65,9 @@
   
   listOfFiles = gsub("^file://","", listOfFiles)
   listOfFiles = path.expand(listOfFiles)
+
+  # Prepare analysis by downloading any URIs to the cache 
+  listOfFiles <- prepareFiles(listOfFiles, Header)
   
   ###########################
   # perform analysis

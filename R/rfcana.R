@@ -44,7 +44,8 @@
                      Window = 'BLACKMAN', Order = 0, 
                      Preemphasis = -0.95, LpType = 'RFC', 
                      ToFile = TRUE, ExplicitExt = NULL,
-                     OutputDirectory = NULL, forceToLog = useWrasspLogger){
+                     OutputDirectory = NULL, forceToLog = useWrasspLogger,
+                     Header = NULL){
   
   
   ###########################
@@ -87,6 +88,8 @@
   listOfFiles = gsub("^file://","", listOfFiles)
   listOfFiles = path.expand(listOfFiles)
   
+  # Prepare analysis by downloading any URIs to the cache 
+  listOfFiles <- prepareFiles(listOfFiles, Header)
   
   ###########################
   # perform analysis
