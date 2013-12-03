@@ -68,12 +68,13 @@
 ##' Gets HCS vLab API key from local config file if it exists
 ##' @title getHCSVLABKey
 'getHCSVLABKey' <- function() {
-	apiKey <- ""
+	apikey <- ""
 	home <- getHomeDirectory()
 	if(file.exists(file.path(home, "hcsvlab.config"))) {
 		source(file.path(home, "hcsvlab.config"))
+		return(apiKey)
 	}
-	apiKey
+	apikey
 }
 
 
@@ -83,10 +84,10 @@
 	home <- getHomeDirectory()
 	if(file.exists(file.path(home, "hcsvlab.config"))) {
 		source(file.path(home, "hcsvlab.config"))
-		if(file.exists(cacheDir)) {
+	}
+	if(!is.null(cacheDir) && file.exists(cacheDir)) {
 			cacheDir
 		}
-	}
 	else {
 		if(!file.exists(file.path(home, "wrassp_cache"))) {
 			dir.create(file.path(home, "wrassp_cache"))
