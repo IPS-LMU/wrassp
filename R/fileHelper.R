@@ -83,9 +83,9 @@
 	home <- getHomeDirectory()
 	if(file.exists(file.path(home, "hcsvlab.config"))) {
 		source(file.path(home, "hcsvlab.config"))
-	}
-	if(file.exists(cacheDir)) {
-		cacheDir
+		if(file.exists(cacheDir)) {
+			cacheDir
+		}
 	}
 	else {
 		if(!file.exists(file.path(home, "wrassp_cache"))) {
