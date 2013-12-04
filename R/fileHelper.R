@@ -51,6 +51,9 @@
 'viewCache' <- function() {
 	directory <- getCacheDirectory()
 	cache <- file.path(directory, "cache_contents")
+	if(!file.exists(cache)) {
+		file.create(cache)
+	}
 	file.show(cache)
 }
 
@@ -65,14 +68,36 @@
 }
 
 
+##' Removes requested file from the cache if it exists
+##' @title removeItemFromCache
+'removeItemFromCache' <- function(filename) {
+	directory <- getCacheDirectory()
+	if(file.exists(file.path(directory, filename))) {
+		file.remove(file.path(directory, filename))
+		con  <- file(file.path(directory, "cache_contents"), open = "r")
+		files <- c()
+		while (length(oneLine <- readLines(con, n = 1, warn = FALSE)) > 0) {
+			if(length(grep(filename, oneLine)) == 0) {
+				files <- c(files, oneLine)
+			}
+		}
+		close(con)
+		write(files, file=file.path(directory, "cache_contents"), sep="\n")
+	}
+	else {
+		stop("File not found in cache")
+	}
+}
+
+
 ##' Gets HCS vLab API key from local config file if it exists
 ##' @title getHCSVLABKey
 'getHCSVLABKey' <- function() {
 	apikey <- ""
 	home <- getHomeDirectory()
 	if(file.exists(file.path(home, "hcsvlab.config"))) {
-		source(file.path(home, "hcsvlab.config"))
-		return(apiKey)
+		config <- fromJSON(file = file.path(home, "hcsvlab.config"))
+		return(config$apiKey)
 	}
 	apikey
 }
@@ -83,29 +108,33 @@
 'getCacheDirectory' <- function() {
 	home <- getHomeDirectory()
 	if(file.exists(file.path(home, "hcsvlab.config"))) {
-		source(file.path(home, "hcsvlab.config"))
+		config <- fromJSON(file = file.path(home, "hcsvlab.config"))
+		cacheDir <- config$cacheDir
 	}
 	if(!is.null(cacheDir) && file.exists(cacheDir)) {
 			cacheDir
-		}
+	}
+	else if(!is.null(cacheDir) && !file.exists(cacheDir) && cacheDir != "/path/to/directory") {
+		dir.create(cacheDir)
+	}
 	else {
 		if(!file.exists(file.path(home, "wrassp_cache"))) {
 			dir.create(file.path(home, "wrassp_cache"))
 		}
 		file.path(home, "wrassp_cache")
 	}
-}
+}	
 
 
 ##' Gets home directory for machine. Depending on OS this could be found 
 ##' in HOME or USERPROFILE environment variables
 ##' @title getHomeDirectory
 'getHomeDirectory' <- function() {
-	if(file.exists(Sys.getenv("HOME"))) {
-		Sys.getenv("HOME")
-	}
-	else if(file.exists(Sys.getenv("USERPROFILE"))) {
+	if(file.exists(Sys.getenv("USERPROFILE"))) {
 		Sys.getenv("USERPROFILE")
+	}
+	else if(file.exists(Sys.getenv("HOME"))) {
+		Sys.getenv("HOME")
 	}
 	else {
 		stop("Make sure your $HOME environment variable is set")
