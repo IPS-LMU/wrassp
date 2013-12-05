@@ -114,8 +114,9 @@
 	if(!is.null(cacheDir) && file.exists(cacheDir)) {
 			cacheDir
 	}
-	else if(!is.null(cacheDir) && !file.exists(cacheDir) && cacheDir != "/path/to/directory") {
+	else if(!is.null(cacheDir) && !file.exists(cacheDir) && cacheDir != "/full/path/to/directory") {
 		dir.create(cacheDir)
+		cacheDir
 	}
 	else {
 		if(!file.exists(file.path(home, "wrassp_cache"))) {
