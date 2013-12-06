@@ -107,6 +107,7 @@
 ##' @title getCacheDirectory
 'getCacheDirectory' <- function() {
 	home <- getHomeDirectory()
+	cacheDir <- NULL
 	if(file.exists(file.path(home, "hcsvlab.config"))) {
 		config <- fromJSON(file = file.path(home, "hcsvlab.config"))
 		cacheDir <- config$cacheDir
