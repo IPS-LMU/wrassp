@@ -107,24 +107,28 @@
 ##' @title getCacheDirectory
 'getCacheDirectory' <- function() {
 	home <- getHomeDirectory()
+	current_dir <- getwd()
+	setwd(home)
 	cacheDir <- NULL
 	if(file.exists(file.path(home, "hcsvlab.config"))) {
 		config <- fromJSON(file = file.path(home, "hcsvlab.config"))
 		cacheDir <- config$cacheDir
 	}
 	if(!is.null(cacheDir) && file.exists(cacheDir)) {
-			cacheDir
+			cacheDir <- normalizePath(cacheDir)
 	}
-	else if(!is.null(cacheDir) && !file.exists(cacheDir) && cacheDir != "/full/path/to/directory") {
+	else if(!is.null(cacheDir) && !file.exists(cacheDir)) {
 		dir.create(cacheDir)
-		cacheDir
+		cacheDir <- normalizePath(cacheDir)
 	}
 	else {
 		if(!file.exists(file.path(home, "wrassp_cache"))) {
 			dir.create(file.path(home, "wrassp_cache"))
 		}
-		file.path(home, "wrassp_cache")
+		cacheDir <- file.path(home, "wrassp_cache")
 	}
+	setwd(current_dir)
+	return(cacheDir)
 }	
 
 
@@ -132,10 +136,7 @@
 ##' in HOME or USERPROFILE environment variables
 ##' @title getHomeDirectory
 'getHomeDirectory' <- function() {
-	if(file.exists(Sys.getenv("USERPROFILE"))) {
-		Sys.getenv("USERPROFILE")
-	}
-	else if(file.exists(Sys.getenv("HOME"))) {
+	if(file.exists(Sys.getenv("HOME"))) {
 		Sys.getenv("HOME")
 	}
 	else {
