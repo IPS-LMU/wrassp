@@ -118,6 +118,10 @@
 			cacheDir <- normalizePath(cacheDir)
 	}
 	else if(!is.null(cacheDir) && !file.exists(cacheDir)) {
+		# R in Windows strangely can't handle directory paths with trailing slashes
+		if(substr(cacheDir, nchar(cacheDir), nchar(cacheDir)+1) == "/") {
+			cacheDir <- substr(cacheDir, 1, nchar(cacheDir)-1)
+		}
 		dir.create(cacheDir)
 		cacheDir <- normalizePath(cacheDir)
 	}
