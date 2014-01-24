@@ -5,7 +5,7 @@ wrassp is a wrapper to Michel Scheffer's [libassp](http://libassp.sourceforge.ne
 
 ## Quick start
 
-* relies on the RCurl package to handle URIs. Make sure it is installed before you proceed.
+* relies on the [RCurl](http://cran.r-project.org/web/packages/RCurl/index.html), [testthat](http://cran.r-project.org/web/packages/testthat/), [digest](http://cran.r-project.org/web/packages/digest/) and [rjson](http://cran.r-project.org/web/packages/rjson/index.html) packages. Make sure these are installed before you proceed. Dependencies are usually handled by CRAN. To install these dependencies manually: `install.packages(c('RCurl','testthat','digest', 'rjson'))`.
  
 * Download then install the package with: `install.packages("path/to/wrassp", repos = NULL, type="source")`
 
