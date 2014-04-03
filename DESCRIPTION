@@ -29,7 +29,7 @@ Depends:
     RCurl,
     testthat(>= 0.7.1.99),
     digest,
-    rjson,
+    jsonlite,
     tools
 Collate:
     'fileHelper.R'
