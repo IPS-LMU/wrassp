@@ -12,7 +12,7 @@
 'prepareFiles' <- function(listOfFiles = NULL, header = NULL) {
 	directory <- getCacheDirectory()
 	for(i in 1:length(listOfFiles)) {
-		if(substr(listOfFiles[i], 1, 7) == "http://") {
+		if(substr(listOfFiles[i], 1, 4) == "http") {
 			tmpFilename <- paste(digest(listOfFiles[i], "md5"), ".", file_ext(listOfFiles[i]), sep="")
 			if(file.exists(file.path(directory, tmpFilename))) {
 				listOfFiles[i] <- file.path(directory, tmpFilename)
@@ -26,7 +26,7 @@
 					header <- c(header, paste("X-API-KEY: ", getHCSVLABKey(), sep=""))
 				}
 			}
-			bFile <- getBinaryURL(listOfFiles[i], httpheader=header)
+			bFile <- getBinaryURL(listOfFiles[i], httpheader=header, .opts = list(ssl.verifypeer = FALSE))
 			writeCacheListing(listOfFiles[i], tmpFilename)
 			writeBin(bFile, file.path(directory, tmpFilename))
 			listOfFiles[i] <- file.path(directory, tmpFilename)
@@ -96,7 +96,7 @@
 	apikey <- ""
 	home <- getHomeDirectory()
 	if(file.exists(file.path(home, "hcsvlab.config"))) {
-		config <- fromJSON(file = file.path(home, "hcsvlab.config"))
+		config <- rjson::fromJSON(file = file.path(home, "hcsvlab.config"))
 		return(config$apiKey)
 	}
 	apikey
@@ -111,7 +111,7 @@
 	setwd(home)
 	cacheDir <- NULL
 	if(file.exists(file.path(home, "hcsvlab.config"))) {
-		config <- fromJSON(file = file.path(home, "hcsvlab.config"))
+		config <- rjson::fromJSON(file = file.path(home, "hcsvlab.config"))
 		cacheDir <- config$cacheDir
 	}
 	if(!is.null(cacheDir) && file.exists(cacheDir)) {
