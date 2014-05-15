@@ -95,8 +95,9 @@
 'getHCSVLABKey' <- function() {
 	apikey <- ""
 	home <- getHomeDirectory()
-	if(file.exists(file.path(home, "hcsvlab.config"))) {
-		config <- rjson::fromJSON(file = file.path(home, "hcsvlab.config"))
+
+	if(file.exists(file.path(home, "alveo.config"))) {
+		config <- rjson::fromJSON(file = file.path(home, "alveo.config"))
 		return(config$apiKey)
 	}
 	apikey
@@ -110,8 +111,9 @@
 	current_dir <- getwd()
 	setwd(home)
 	cacheDir <- NULL
-	if(file.exists(file.path(home, "hcsvlab.config"))) {
-		config <- rjson::fromJSON(file = file.path(home, "hcsvlab.config"))
+
+	if(file.exists(file.path(home, "alveo.config"))) {
+		config <- rjson::fromJSON(file = file.path(home, "alveo.config"))
 		cacheDir <- config$cacheDir
 	}
 	if(!is.null(cacheDir) && file.exists(cacheDir)) {
