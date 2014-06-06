@@ -45,7 +45,7 @@
                                              MaxZCR = 3000.0, MinProb = 0.52, 
                                              PlainSpectrum = FALSE, ToFile = TRUE, 
                                              ExplicitExt = NULL,  OutputDirectory = NULL,
-                                             forceToLog = useWrasspLogger, Header = NULL){
+                                             forceToLog = useWrasspLogger){
   
   ###########################
   # a few parameter checks and expand paths
@@ -75,13 +75,8 @@
   }
   
   ###########################
-  # remove file:// and expand listOfFiles (SIC)
-  
-  listOfFiles = gsub("^file://","", listOfFiles)
-  listOfFiles = path.expand(listOfFiles)
-
-  # Prepare analysis by downloading any URIs to the cache 
-  listOfFiles <- prepareFiles(listOfFiles, Header)
+  # Pre-process file list
+  listOfFiles <- prepareFiles(listOfFiles)
   
   ###########################
   # perform analysis

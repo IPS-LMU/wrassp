@@ -32,9 +32,9 @@ test_that("logging file content is the same as hard coded string", {
 
   expect_that(logFileStr, equals(str))
 
-  expect_that(grep("######## zcrana performed ########", lines), equals(233))
+  expect_that(grep("######## zcrana performed ########", lines), equals(232))
 
-  blackGrep = grep("Window : BLACKMAN ", lines)== c(12,  61,  78,  96, 160, 181, 202)
+  blackGrep = grep("Window : BLACKMAN ", lines)== c(12,  61,  78,  96, 160, 180, 201)
 
   expect_that(sum(blackGrep), equals(7))
 

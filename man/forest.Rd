@@ -9,7 +9,7 @@
     Order = 0, IncrOrder = 0, NumFormants = 4,
     Window = "BLACKMAN", Preemphasis = -0.8, ToFile = TRUE,
     ExplicitExt = NULL, OutputDirectory = NULL,
-    forceToLog = useWrasspLogger, Header = NULL)
+    forceToLog = useWrasspLogger)
 }
 \arguments{
   \item{listOfFiles}{vector of file paths to be processed
@@ -73,8 +73,6 @@
   useWrasspLogger. This is set to FALSE by default and
   should be set to TRUE is logging is desired.}
 
-  \item{Header}{= optional header string to use in RCurl
-  call for URIs}
 }
 \value{
   nrOfProcessedFiles or if only one file to process return

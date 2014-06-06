@@ -28,7 +28,7 @@
                      EndTime = 0.0, WindowShift = 5.0, 
                      WindowSize = 25.0, ToFile = TRUE, 
                      ExplicitExt = NULL, OutputDirectory = NULL,
-                     forceToLog = useWrasspLogger, Header = NULL){
+                     forceToLog = useWrasspLogger){
   
   ###########################
   # a few parameter checks and expand paths
@@ -57,13 +57,8 @@
       stop(paste(OutputDirectory, 'exists but is not a directory.'))
   }
   ###########################
-  # remove file:// and expand listOfFiles (SIC)
-  
-  listOfFiles = gsub("^file://","", listOfFiles)
-  listOfFiles = path.expand(listOfFiles)
-
-  # Prepare analysis by downloading any URIs to the cache 
-  listOfFiles <- prepareFiles(listOfFiles, Header)
+  # Pre-process file list
+  listOfFiles <- prepareFiles(listOfFiles)
   
   ###########################
   # perform analysis

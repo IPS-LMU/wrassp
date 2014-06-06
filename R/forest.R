@@ -36,7 +36,6 @@
 ##' the directory of the input files
 ##' @param forceToLog is set by the global package variable useWrasspLogger. This is set
 ##' to FALSE by default and should be set to TRUE is logging is desired.
-##' @param Header = optional header string to use in RCurl call for URIs
 ##' @return nrOfProcessedFiles or if only one file to process return AsspDataObj of that file
 ##' @author Raphael Winkelmann
 ##' @useDynLib wrassp
@@ -50,7 +49,7 @@
                      NumFormants = 4, Window = 'BLACKMAN', 
                      Preemphasis = -0.8, ToFile = TRUE, 
                      ExplicitExt = NULL,  OutputDirectory = NULL, 
-                     forceToLog = useWrasspLogger, Header = NULL){
+                     forceToLog = useWrasspLogger){
 	
 	###########################
 	# a few parameter checks and expand paths
@@ -83,13 +82,8 @@
 	    stop(paste(OutputDirectory, 'exists but is not a directory.'))
 	}
 	###########################
-	# remove file:// and expand listOfFiles (SIC)
-	
-	listOfFiles = gsub("^file://","", listOfFiles)
-	listOfFiles = path.expand(listOfFiles)
-
-	# Prepare analysis by downloading any URIs to the cache	
-	listOfFiles <- prepareFiles(listOfFiles, Header)
+	# Pre-process file list
+	listOfFiles <- prepareFiles(listOfFiles)
 
 	###########################
 	#perform analysis

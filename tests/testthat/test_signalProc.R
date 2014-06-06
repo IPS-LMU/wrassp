@@ -213,7 +213,6 @@ test_that("forest doesn't break due to varying parameters", {
   posValsNumFormants=list(4)
   posValsWindow=list("BLACKMAN")#as.list(AsspWindowTypes())
   posValsPreemphasis=list(-0.8)
-  posValsHeader=list(NULL)
   
   for (i in 1:nrOfRandomCalls) {
     params = list(listOfFiles=sample(wavFiles, 1)[[1]], optLogFilePath=NULL, 
@@ -225,7 +224,7 @@ test_that("forest doesn't break due to varying parameters", {
                   NumFormants=sample(posValsNumFormants,1)[[1]], Window=sample(posValsWindow,1)[[1]], 
                   Preemphasis=sample(posValsPreemphasis,1)[[1]], ToFile=FALSE, 
                   ExplicitExt=NULL, OutputDirectory=NULL, 
-                  forceToLog=useWrasspLogger, Header=sample(posValsHeader,1)[[1]])
+                  forceToLog=useWrasspLogger)
 
     # print(params)
     res = do.call(forest, as.list(params))
