@@ -1,7 +1,7 @@
-##' Takes any files that are URIs and downloads them to a local cache
+##' Normalise a list of filenames so that they can be passed to a signal processing function
 ##' 
-##' @param listOfFiles The list of files to look at and download to cache if a URI
-##' @return A list of files
+##' @param listOfFiles The list of file names to process
+##' @return A normalised list of filenames
 ##' @author Matt Hillman
 ##' @examples
 ##' 
@@ -9,11 +9,10 @@
 ##' #   listOfFiles <- prepareFiles(listOfFiles)
 ##' 
 ##' 
-'prepareFiles' <- function(listOfFiles = NULL) {
+'prepareFiles' <- function(listOfFiles) {
     
 	listOfFiles = gsub("^file://","", listOfFiles)
 	listOfFiles = path.expand(listOfFiles)
     
 	return(listOfFiles)
 }
-
