@@ -2,6 +2,7 @@
 ###################
 *.o
 *.so
+*.dll
 
 # Packages #
 ############
@@ -32,6 +33,5 @@ Thumbs.db
 #############
 .Rproj.user
 *.Rproj
-.Rbuildignore
 .Rhistory
 .Rapp.history
