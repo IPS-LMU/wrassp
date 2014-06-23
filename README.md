@@ -5,22 +5,37 @@ wrassp is a wrapper to Michel Scheffer's [libassp](http://libassp.sourceforge.ne
 
 ## Quick start
 
-* relies on the [RCurl](http://cran.r-project.org/web/packages/RCurl/index.html), [testthat](http://cran.r-project.org/web/packages/testthat/), [digest](http://cran.r-project.org/web/packages/digest/) and [rjson](http://cran.r-project.org/web/packages/rjson/index.html) packages. Make sure these are installed before you proceed. Dependencies are usually handled by CRAN. To install these dependencies manually: `install.packages(c('RCurl','testthat','digest', 'rjson'))`.
+* as large parts of `wrassp` are written in `C` make sure your system fulfills the requirements for package development (see [here](http://www.rstudio.com/ide/docs/packages/prerequisites))
 
-* Make sure you have a compiler installed (as large parts or `wrassp` are written in `C`)
-	* linux users: should be fine (`gcc` usually present)
-	* mac users: install Xcode + command line tools
-	* windows users: a prebuilt package will be available in the future. No manual build support for now...
+* Download then install the package with: 
+```r
+install.packages("path/to/wrassp", repos = NULL, type="source")
+```
+or install the latest development version from GitHub with:
+```r
+library(devtools)
+install_github("wrassp", "IPS-LMU")
+```
 
-* Download then install the package with: `install.packages("path/to/wrassp", repos = NULL, type="source")`
+* load the library: 
+```r
+library("wrassp")
+```
 
-* load the library: `library("wrassp")`
+* get path to an audio file: 
+```r
+path2wav <- list.files(system.file("extdata", package = "wrassp"), pattern = glob2rx("*.wav"), full.names = TRUE)[1]
+```
 
-* get path to an audio file: `path2wav <- list.files(system.file("extdata", package = "wrassp"), pattern = glob2rx("*.wav"), full.names = TRUE)[1]`
+* calculate formants from audio file: 
+```r
+res=forest(path2wav, ToFile=FALSE)
+```
 
-* calculate formants from audio file: `res=forest(path2wav, ToFile=FALSE)`
-
-* plot the first 100 F1 values over time: `plot(res$fm[0:99,1],type='l')`
+* plot the first 100 F1 values over time: 
+```r
+plot(res$fm[0:99,1],type='l')
+```
 
 ## Available signal processing functions
 
