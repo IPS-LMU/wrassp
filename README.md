@@ -45,15 +45,15 @@ plot(res$fm[0:99,1],type='l')
 + `acfana()` = Analysis of short-term autocorrelation function
 + `afdiff()` = Computes the first difference of the signal
 + `affilter()` = Filters the audio signal (see docs for types)
-+ `ksvF0()` = F0 analysis of the signal
-+ `mhsF0()` = Pitch analysis of the speech signal using Michel's/Modified Harmonic Sieve algorithm
++ `cepstrum()` = Short-term cepstral analysis
++ `cssSpectrum()` = Cepstral smoothed version of `dftSpectrum()`
++ `dftSpectrum()` = Short-term DFT spectral analysis
 + `forest()` = Formant estimation
++ `ksvF0()` = F0 analysis of the signal
++ `lpsSpectrum()` = Linear Predictive smoothed version of `dftSpectrum()`
++ `mhsF0()` = Pitch analysis of the speech signal using Michel's/Modified Harmonic Sieve algorithm
 + `rfcana()` = Linear Prediction analysis
 + `rmsana()` = Analysis of short-term Root Mean Square amplitude
-+ `dftSpectrum()` = Short-term DFT spectral analysis
-+ `lpsSpectrum()` = Linear Predictive smoothed version of `dftSpectrum()`
-+ `cssSpectrum()` = Cepstral smoothed version of `dftSpectrum()`
-+ `cepstrum()` = Short-term cepstral analysis
 + `zcrana()` = Analysis of the averages of the short-term positive and negative zero-crossing rates
 
 (see the respective R documentation for more details on all of these functions)
