@@ -73,7 +73,7 @@
   }
   
   if (!is.null(OutputDirectory)) {
-    OutputDirectory = path.expand(OutputDirectory)
+    OutputDirectory = normalizePath(path.expand(OutputDirectory))
     finfo  <- file.info(OutputDirectory)
     if (is.na(finfo$isdir))
       if (!dir.create(OutputDirectory, recursive=TRUE))
