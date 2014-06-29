@@ -1,4 +1,10 @@
-# Compiled sourse #
+# Compiled source #
 ###################
 .*\.o
 .*\.so
+^.*\.Rproj$
+^\.Rproj\.user$
+
+# travis ci #
+#############
+.travis.yml

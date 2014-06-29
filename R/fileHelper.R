@@ -12,7 +12,7 @@
 'prepareFiles' <- function(listOfFiles) {
     
 	listOfFiles = gsub("^file://","", listOfFiles)
-	listOfFiles = path.expand(listOfFiles)
+	listOfFiles = normalizePath(path.expand(listOfFiles))
     
 	return(listOfFiles)
 }

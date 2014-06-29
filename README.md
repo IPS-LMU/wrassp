@@ -1,41 +1,59 @@
 # wrassp
 
-wrassp is a wrapper to Michel Scheffer's [libassp](http://libassp.sourceforge.net/) (Advanced Speech Signal Processor). The libassp library aims at providing functionality for handling speech signal files in most common audio formats and for performing analyses common in phonetic science/speech science. This includes the calculation of formants, fundamental frequency, root mean square, auto correlation, a variety of spectral analyses, zero crossing rate, filtering etc. This wrapper library for R exposes a large subset of the signal processing functions to R in a (hopefully) user friendly manner.
+[![Build Status](https://travis-ci.org/IPS-LMU/wrassp.png)](https://travis-ci.org/IPS-LMU/wrassp)
+
+`wrassp` is a wrapper to Michel Scheffer's [libassp](http://libassp.sourceforge.net/) (Advanced Speech Signal Processor). The libassp library aims at providing functionality for handling speech signal files in most common audio formats and for performing analyses common in phonetic science/speech science. This includes the calculation of formants, fundamental frequency, root mean square, auto correlation, a variety of spectral analyses, zero crossing rate, filtering etc. This wrapper library for R exposes a large subset of the signal processing functions to R in a (hopefully) user friendly manner.
 
 
 ## Quick start
 
-* relies on the [RCurl](http://cran.r-project.org/web/packages/RCurl/index.html), [testthat](http://cran.r-project.org/web/packages/testthat/), [digest](http://cran.r-project.org/web/packages/digest/) and [rjson](http://cran.r-project.org/web/packages/rjson/index.html) packages. Make sure these are installed before you proceed. Dependencies are usually handled by CRAN. To install these dependencies manually: `install.packages(c('RCurl','testthat','digest', 'rjson'))`.
+* as large parts of `wrassp` are written in `C` make sure your system fulfills the requirements for package development (see [here](http://www.rstudio.com/ide/docs/packages/prerequisites))
 
-* Make sure you have a compiler installed (as large parts or `wrassp` are written in `C`)
-	* linux users: should be fine (`gcc` usually present)
-	* mac users: install Xcode + command line tools
-	* windows users: a prebuilt package will be available in the future. No manual build support for now...
+* Download then install the package with: 
+```r
+install.packages("path/to/wrassp", repos = NULL, type="source")
+```
 
-* Download then install the package with: `install.packages("path/to/wrassp", repos = NULL, type="source")`
+* or install the latest development version from GitHub with:
+```r
+library(devtools)
+install_github("wrassp", "IPS-LMU")
+```
 
-* load the library: `library("wrassp")`
+* load the library: 
+```r
+library("wrassp")
+```
 
-* get path to an audio file: `path2wav <- list.files(system.file("extdata", package = "wrassp"), pattern = glob2rx("*.wav"), full.names = TRUE)[1]`
+* get path to an audio file: 
+```r
+path2wav <- list.files(system.file("extdata", package = "wrassp"), pattern = glob2rx("*.wav"), full.names = TRUE)[1]
+```
 
-* calculate formants from audio file: `res=forest(path2wav, ToFile=FALSE)`
+* calculate formants from audio file: 
+```r
+res=forest(path2wav, ToFile=FALSE)
+```
 
-* plot the first 100 F1 values over time: `plot(res$fm[0:99,1],type='l')`
+* plot the first 100 F1 values over time: 
+```r
+plot(res$fm[0:99,1],type='l')
+```
 
 ## Available signal processing functions
 
 + `acfana()` = Analysis of short-term autocorrelation function
 + `afdiff()` = Computes the first difference of the signal
 + `affilter()` = Filters the audio signal (see docs for types)
-+ `ksvF0()` = F0 analysis of the signal
-+ `mhsF0()` = Pitch analysis of the speech signal using Michel's/Modified Harmonic Sieve algorithm
++ `cepstrum()` = Short-term cepstral analysis
++ `cssSpectrum()` = Cepstral smoothed version of `dftSpectrum()`
++ `dftSpectrum()` = Short-term DFT spectral analysis
 + `forest()` = Formant estimation
++ `ksvF0()` = F0 analysis of the signal
++ `lpsSpectrum()` = Linear Predictive smoothed version of `dftSpectrum()`
++ `mhsF0()` = Pitch analysis of the speech signal using Michel's/Modified Harmonic Sieve algorithm
 + `rfcana()` = Linear Prediction analysis
 + `rmsana()` = Analysis of short-term Root Mean Square amplitude
-+ `dftSpectrum()` = Short-term DFT spectral analysis
-+ `lpsSpectrum()` = Linear Predictive smoothed version of `dftSpectrum()`
-+ `cssSpectrum()` = Cepstral smoothed version of `dftSpectrum()`
-+ `cepstrum()` = Short-term cepstral analysis
 + `zcrana()` = Analysis of the averages of the short-term positive and negative zero-crossing rates
 
 (see the respective R documentation for more details on all of these functions)

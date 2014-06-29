@@ -24,30 +24,7 @@ Maintainer: Lasse Bombien <lasse@phonetik.uni-muenchen.de>, Raphael
     Winkelmann <raphael@phonetik.uni-muenchen.de>
 VignetteBuilder: knitr
 Suggests:
+    testthat(>= 0.7.1.99),
     knitr
 Depends:
-    RCurl,
-    testthat(>= 0.7.1.99),
-    digest,
-    jsonlite,
     tools
-Collate:
-    'fileHelper.R'
-    'acfana.R'
-    'afdiff.R'
-    'affilter.R'
-    'asspChecks.R'
-    'AsspTypes.R'
-    'forest.R'
-    'rfcana.R'
-    'rmsana.R'
-    'zcrana.R'
-    'dataobject.R'
-    'wrassp.logger.R'
-    'dftSpectrum.R'
-    'cepstrum.R'
-    'cssSpectrum.R'
-    'lpsSpectrum.R'
-    'packageVars.R'
-    'ksvF0.R'
-    'mhsF0.R'
