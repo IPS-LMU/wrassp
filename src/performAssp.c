@@ -522,7 +522,7 @@ performAssp(SEXP args)
 
     /*
      * Second element must be assp function name
-     * check for validity and pick the right fucntion descriptor 
+     * check for validity and pick the right function descriptor 
      */
     name = isNull(TAG(args)) ? "" : CHAR(PRINTNAME(TAG(args)));
     if (strcmp(name, "fname") != 0)
