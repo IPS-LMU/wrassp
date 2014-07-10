@@ -51,7 +51,7 @@
 #include <asspdsp.h>  /* AF_.. FILTER FIR IIR2 FILTER_... randTPDF() */
 #include <asspfio.h>  /* asspFFill() asspFFlush() */
 
-#include <R.h>
+//#include <R.h>
 
 /* OS check for creating temporary file*/
 #ifdef __unix__         
