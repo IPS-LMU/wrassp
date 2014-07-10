@@ -51,6 +51,16 @@
 #include <asspdsp.h>  /* AF_.. FILTER FIR IIR2 FILTER_... randTPDF() */
 #include <asspfio.h>  /* asspFFill() asspFFlush() */
 
+#include <R.h>
+
+/* OS check for creating temporary file*/
+#ifdef __unix__         
+
+#elif defined(_WIN32) || defined(WIN32) || defined(_WIN64) || defined(WIN64) 
+  #define OS_Windows
+  #include <windows.h>
+#endif
+
 /*
  * local global variables and arrays
  */
@@ -890,7 +900,22 @@ LOCAL int createTempFiles(void)
   size_t fn;
 
   for(fn = 0; fn < numTempFiles; fn++) {
-    tempFP[fn] = tmpfile();
+
+    #ifdef OS_Windows
+      char lpTempPathBuffer[MAX_PATH];
+      char szTempFileName[MAX_PATH];
+      GetTempPath(MAX_PATH,lpTempPathBuffer);
+      GetTempFileName(lpTempPathBuffer, // directory for tmp files
+                              TEXT("wrassp"),     // temp file name prefix 
+                              0,                // create unique name 
+                              szTempFileName);  // buffer for name 
+      tempFP[fn] = fopen(szTempFileName, "w+b");
+      //Rprintf("This is the tmp dir:%s\n", lpTempPathBuffer);
+      //Rprintf("This is the tmp file:%s\n", szTempFileName);
+    #else
+      tempFP[fn] = tmpfile();
+    #endif
+    
     if(tempFP[fn] == NULL) {
       removeTempFiles();
       setAsspMsg(AEF_ERR_OPEN, "(createTempFiles)");
