@@ -9,7 +9,7 @@
 ##' frequencies (by-product of the SLA) and a formant
 ##' frequeny range table derived from the nominal F1
 ##' frequency. The latter may have to be increased by
-##' about 12% for female voices (see NominalF1 and Gender options).
+##' about 12\% for female voices (see NominalF1 and Gender options).
 ##' Formant estimates will be written to a file with the
 ##' base name of the input file and extension '.fms'.
 ##' Default output is in SSFF binary format (tracks 'fm'

@@ -42,7 +42,7 @@ be written to a file with the base name of the input file
 and an extension consisting of '.d', followed by the
 extension of the input file. The format of the output file
 will be the same as that of the input file.
-Differentiation can improve results an F0 analysis of e.g.
+Differentiation can improve results on F0 analysis of e.g.
 EGG signals because it removes a DC offset, attenuates
 very low frequency components - and in the case of central
 differentiation also very high ones - and enhances the
