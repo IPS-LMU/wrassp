@@ -40,6 +40,12 @@ res=forest(path2wav, ToFile=FALSE)
 plot(res$fm[0:99,1],type='l')
 ```
 
+* for more information see the `An introduction to the wraspp package` vignette: 
+```r
+vignette('wrassp_intro')
+```
+
+
 ## Available signal processing functions
 
 + `acfana()` = Analysis of short-term autocorrelation function
