@@ -77,6 +77,9 @@
   if(length(listOfFiles)==1){
     pb <- NULL
   }else{
+    if(ToFile==FALSE){
+      stop("length(listOfFiles) is > 1 and ToFile=FALSE! ToFile=FALSE only permitted for single files.")
+    }
     cat('\n  INFO: applying acfana to', length(listOfFiles), 'files\n')
     pb <- txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
   }
