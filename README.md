@@ -66,7 +66,7 @@ vignette('wrassp_intro')
 
 ## Available file handling functions
 
-+ `read.AsspDataObj()` which reads and existing SSFF file into a `AsspDataObj` which is its in-memory equivalent.
++ `read.AsspDataObj()` which reads an existing SSFF file into a `AsspDataObj` which is its in-memory equivalent.
 + `write.AsspDataObj()` which writes a `AsspDataObj` out to a SSFF file.
 
 ## Authors
