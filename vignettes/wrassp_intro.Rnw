@@ -8,6 +8,7 @@
 \usepackage{geometry}
 \usepackage[mono=false]{libertine}
 \begin{document}
+\SweaveOpts{concordance=TRUE}
 
 <<setup,include=FALSE>>=
 library(knitr)
