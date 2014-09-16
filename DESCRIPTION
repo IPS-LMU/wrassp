@@ -26,7 +26,6 @@ VignetteBuilder:
     knitr
 Suggests:
     testthat(>= 0.7.1.99),
-    knitr,
-    tikzDevice
+    knitr
 Depends:
     tools
