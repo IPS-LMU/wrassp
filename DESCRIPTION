@@ -25,6 +25,7 @@ Maintainer: Lasse Bombien <lasse@phonetik.uni-muenchen.de>, Raphael
 VignetteBuilder: knitr
 Suggests:
     testthat(>= 0.7.1.99),
-    knitr
+    knitr,
+    tikzDevice
 Depends:
     tools
