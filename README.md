@@ -5,20 +5,22 @@
 `wrassp` is a wrapper to Michel Scheffer's [libassp](http://libassp.sourceforge.net/) (Advanced Speech Signal Processor). The libassp library aims at providing functionality for handling speech signal files in most common audio formats and for performing analyses common in phonetic science/speech science. This includes the calculation of formants, fundamental frequency, root mean square, auto correlation, a variety of spectral analyses, zero crossing rate, filtering etc. This wrapper library for R exposes a large subset of the signal processing functions to R in a (hopefully) user friendly manner.
 
 
-## Quick start
+## Installation
 
 * as large parts of `wrassp` are written in `C` make sure your system fulfills the requirements for package development (see [here](http://www.rstudio.com/ide/docs/packages/prerequisites))
 
-* Download then install the package with: 
+* Download & extract the package from GitHub. Then install it with the following command:
 ```r
 install.packages("path/to/wrassp", repos = NULL, type="source")
 ```
 
-* or install the latest development version from GitHub with:
+* or install the latest development version from GitHub with (preferred method):
 ```r
 library(devtools)
 install_github("wrassp", "IPS-LMU")
 ```
+
+## Quick start
 
 * load the library: 
 ```r
