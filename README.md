@@ -84,4 +84,4 @@ vignette('wrassp_intro')
 
 **Affiliations**
 
-[INSTITUTE OF PHONETICS AND SPEECH PROCESSING](http://www.phonetik.uni-muenchen.de/)
+[INSTITUTE OF PHONETICS AND SPEECH PROCESSING](http://www.en.phonetik.uni-muenchen.de/)
