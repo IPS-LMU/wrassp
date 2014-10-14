@@ -1164,7 +1164,7 @@ performAssp(SEXP args)
             asspFClose(outPtr, AFC_FREE);
         } else {
             res = dobj2AsspDataObj(outPtr);
-            asspFClose(outPtr, AFC_KEEP);
+            asspFClose(outPtr, AFC_FREE);
         }
 
         free((char *) name);
