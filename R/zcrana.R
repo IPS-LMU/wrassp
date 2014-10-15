@@ -24,10 +24,10 @@
 ##' @useDynLib wrassp
 ##' @export
 'zcrana' <- function(listOfFiles = NULL, optLogFilePath = NULL, 
-                     BeginTime = 0.0, CenterTime = FALSE, 
-                     EndTime = 0.0, WindowShift = 5.0, 
-                     WindowSize = 25.0, ToFile = TRUE, 
-                     ExplicitExt = NULL, OutputDirectory = NULL,
+                     beginTime = 0.0, centerTime = FALSE, 
+                     endTime = 0.0, windowShift = 5.0, 
+                     windowSize = 25.0, toFile = TRUE, 
+                     explicitExt = NULL, outputDirectory = NULL,
                      forceToLog = useWrasspLogger){
   
   ###########################
@@ -47,14 +47,14 @@
     }
   }
   
-  if (!is.null(OutputDirectory)) {
-    OutputDirectory = normalizePath(path.expand(OutputDirectory))
-    finfo  <- file.info(OutputDirectory)
+  if (!is.null(outputDirectory)) {
+    outputDirectory = normalizePath(path.expand(outputDirectory))
+    finfo  <- file.info(outputDirectory)
     if (is.na(finfo$isdir))
-      if (!dir.create(OutputDirectory, recursive=TRUE))
+      if (!dir.create(outputDirectory, recursive=TRUE))
         stop('Unable to create output directory.')
     else if (!finfo$isdir)
-      stop(paste(OutputDirectory, 'exists but is not a directory.'))
+      stop(paste(outputDirectory, 'exists but is not a directory.'))
   }
   ###########################
   # Pre-process file list
@@ -66,8 +66,8 @@
   if(length(listOfFiles)==1){
     pb <- NULL
   }else{
-    if(ToFile==FALSE){
-      stop("length(listOfFiles) is > 1 and ToFile=FALSE! ToFile=FALSE only permitted for single files.")
+    if(toFile==FALSE){
+      stop("length(listOfFiles) is > 1 and toFile=FALSE! toFile=FALSE only permitted for single files.")
     }
     cat('\n  INFO: applying zcrana to', length(listOfFiles), 'files\n')
     pb <- txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
@@ -75,11 +75,11 @@
   
   externalRes = invisible(.External("performAssp", PACKAGE = "wrassp", 
                                     listOfFiles, fname = "zcrana", 
-                                    BeginTime = BeginTime, CenterTime = CenterTime, 
-                                    EndTime = EndTime, WindowShift = WindowShift, 
-                                    WindowSize = WindowSize, 
-                                    ToFile = ToFile, ExplicitExt = ExplicitExt, 
-                                    OutputDirectory = OutputDirectory, ProgressBar = pb))
+                                    beginTime = beginTime, centerTime = centerTime, 
+                                    endTime = endTime, windowShift = windowShift, 
+                                    windowSize = windowSize, 
+                                    toFile = toFile, explicitExt = explicitExt, 
+                                    outputDirectory = outputDirectory, progressBar = pb))
   
   
   ############################

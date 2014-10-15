@@ -11,24 +11,24 @@
 ##' @title cepstrum
 ##' @param listOfFiles vector of file paths to be processed by function 
 ##' @param optLogFilePath path to option log file
-##' @param BeginTime = <time>: set begin of analysis interval to <time> seconds
+##' @param beginTime = <time>: set begin of analysis interval to <time> seconds
 ##' (default: begin of data)
-##' @param CenterTime = <time>: set single-frame analysis with the analysis
+##' @param centerTime = <time>: set single-frame analysis with the analysis
 ##' window centred at <time> seconds; overrules BeginTime, EndTime and
 ##' WindowShift options
-##' @param EndTime = <time>: set end of analysis interval to <time> seconds
+##' @param endTime = <time>: set end of analysis interval to <time> seconds
 ##' (default: end of data)
-##' @param Resolution = <freq>: set FFT length to the smallest value which
+##' @param resolution = <freq>: set FFT length to the smallest value which
 ##' results in a frequency resolution of <freq> Hz or better (default: 40.0)
-##' @param FftLength = <num>: set FFT length to <num> points (overrules default
+##' @param fftLength = <num>: set FFT length to <num> points (overrules default
 ##' and 'Resolution' option)
-##' @param WindowShift = <dur>: set analysis window shift to <dur> ms
+##' @param windowShift = <dur>: set analysis window shift to <dur> ms
 ##' (default: 5.0)
-##' @param Window = <type>: set analysis window function to <type> (default:
+##' @param window = <type>: set analysis window function to <type> (default:
 ##' BLACKMAN)
-##' @param ToFile write results to file (default extension depends on )
-##' @param ExplicitExt set if you wish to overwride the default extension
-##' @param OutputDirectory directory in which output files are stored. Defaults to NULL, i.e.
+##' @param toFile write results to file (default extension depends on )
+##' @param explicitExt set if you wish to overwride the default extension
+##' @param outputDirectory directory in which output files are stored. Defaults to NULL, i.e.
 ##' the directory of the input files
 ##' @param forceToLog is set by the global package variable useWrasspLogger. This is set
 ##' to FALSE by default and should be set to TRUE is logging is desired.
@@ -40,11 +40,11 @@
 ##' @useDynLib wrassp
 ##' @export
 'cepstrum' <- function(listOfFiles = NULL, optLogFilePath = NULL,
-                       BeginTime = 0.0, CenterTime = FALSE,
-                       EndTime = 0.0, Resolution = 40.0,
-                       FftLength = 0, WindowShift = 5.0,
-                       Window = 'BLACKMAN', ToFile = TRUE,
-                       ExplicitExt = NULL, OutputDirectory = NULL,
+                       beginTime = 0.0, centerTime = FALSE,
+                       endTime = 0.0, resolution = 40.0,
+                       fftLength = 0, windowShift = 5.0,
+                       window = 'BLACKMAN', toFile = TRUE,
+                       explicitExt = NULL, outputDirectory = NULL,
                        forceToLog = useWrasspLogger){
   
   ## ########################
@@ -64,18 +64,18 @@
     }
   }
   
-  if(!isAsspWindowType(Window)){
-    stop("WindowFunction of type '", Window,"' is not supported!")
+  if(!isAsspWindowType(window)){
+    stop("WindowFunction of type '", window,"' is not supported!")
   }
   
-  if (!is.null(OutputDirectory)) {
-    OutputDirectory = normalizePath(path.expand(OutputDirectory))
-    finfo  <- file.info(OutputDirectory)
+  if (!is.null(outputDirectory)) {
+    outputDirectory = normalizePath(path.expand(outputDirectory))
+    finfo  <- file.info(outputDirectory)
     if (is.na(finfo$isdir))
-      if (!dir.create(OutputDirectory, recursive=TRUE))
+      if (!dir.create(outputDirectory, recursive=TRUE))
         stop('Unable to create output directory.')
     else if (!finfo$isdir)
-      stop(paste(OutputDirectory, 'exists but is not a directory.'))
+      stop(paste(outputDirectory, 'exists but is not a directory.'))
   }
   
   ###########################
@@ -88,22 +88,22 @@
   if(length(listOfFiles)==1){
     pb <- NULL
   }else{
-    if(ToFile==FALSE){
-      stop("length(listOfFiles) is > 1 and ToFile=FALSE! ToFile=FALSE only permitted for single files.")
+    if(toFile==FALSE){
+      stop("length(listOfFiles) is > 1 and toFile=FALSE! toFile=FALSE only permitted for single files.")
     }
     cat('\n  INFO: applying cepstrum to', length(listOfFiles), 'files\n')
     pb <- txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
   }	
   
   externalRes = invisible(.External("performAssp", listOfFiles, 
-                                    fname = "spectrum", BeginTime = BeginTime, 
-                                    CenterTime = CenterTime, EndTime = EndTime, 
-                                    SpectrumType = 'CEP',
-                                    Resolution = Resolution, 
-                                    FftLength = as.integer(FftLength),
-                                    WindowShift = WindowShift, Window = Window, 
-                                    ToFile = ToFile, ExplicitExt = ExplicitExt, 
-                                    ProgressBar = pb, OutputDirectory = OutputDirectory,
+                                    fname = "spectrum", beginTime = beginTime, 
+                                    centerTime = centerTime, endTime = endTime, 
+                                    spectrumType = 'CEP',
+                                    resolution = resolution, 
+                                    fftLength = as.integer(fftLength),
+                                    windowShift = windowShift, window = window, 
+                                    toFile = toFile, explicitExt = explicitExt, 
+                                    progressBar = pb, outputDirectory = outputDirectory,
                                     PACKAGE = "wrassp"))
   
   

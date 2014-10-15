@@ -113,11 +113,11 @@ test_that("cepstrum doesn't break due to varying parameters", {
 
   for(i in 1:nrOfRandomCalls){
     params = list(listOfFiles=sample(wavFiles, 1)[[1]], optLogFilePath=NULL, 
-                  BeginTime=sample(posValsBeginTime,1)[[1]], CenterTime=sample(posValsCenterTime,1)[[1]],
-                  EndTime=sample(posValsEndTime,1)[[1]], Resolution=sample(posValsResolution,1)[[1]],
-                  FftLength=sample(posValsFftLength,1)[[1]], WindowShift=sample(posValsWindowShift,1)[[1]],
-                  Window=sample(posValsWindow,1)[[1]], ToFile=FALSE,
-                  ExplicitExt=NULL, OutputDirectory=NULL,
+                  beginTime=sample(posValsBeginTime,1)[[1]], centerTime=sample(posValsCenterTime,1)[[1]],
+                  endTime=sample(posValsEndTime,1)[[1]], resolution=sample(posValsResolution,1)[[1]],
+                  fftLength=sample(posValsFftLength,1)[[1]], windowShift=sample(posValsWindowShift,1)[[1]],
+                  window=sample(posValsWindow,1)[[1]], toFile=FALSE,
+                  explicitExt=NULL, outputDirectory=NULL,
                   forceToLog=useWrasspLogger)
     
     # print(params)
@@ -147,12 +147,12 @@ test_that("cssSpectrum doesn't break due to varying parameters", {
 
   for (i in 1:nrOfRandomCalls) {
     params = list(listOfFiles=sample(wavFiles, 1)[[1]], optLogFilePath=NULL, 
-                  BeginTime=sample(posValsBeginTime,1)[[1]], CenterTime=sample(posValsCenterTime,1)[[1]], 
-                  EndTime=sample(posValsEndTime,1)[[1]], Resolution=sample(posValsResolution,1)[[1]], 
-                  FftLength=sample(posValsFftLength,1)[[1]], WindowShift=sample(posValsWindowShift,1)[[1]], 
-                  Window=sample(posValsWindow,1)[[1]], NumCeps=sample(posValsNumCeps,1)[[1]], 
-                  ToFile=FALSE, ExplicitExt=NULL, 
-                  OutputDirectory=NULL, forceToLog=useWrasspLogger)
+                  beginTime=sample(posValsBeginTime,1)[[1]], centerTime=sample(posValsCenterTime,1)[[1]], 
+                  endTime=sample(posValsEndTime,1)[[1]], resolution=sample(posValsResolution,1)[[1]], 
+                  fftLength=sample(posValsFftLength,1)[[1]], windowShift=sample(posValsWindowShift,1)[[1]], 
+                  window=sample(posValsWindow,1)[[1]], numCeps=sample(posValsNumCeps,1)[[1]], 
+                  toFile=FALSE, explicitExt=NULL, 
+                  outputDirectory=NULL, forceToLog=useWrasspLogger)
         # print(params)
     res = do.call(cssSpectrum, as.list(params))
     expect_that(class(res), equals("AsspDataObj"))
@@ -178,12 +178,12 @@ test_that("dftSpectrum doesn't break due to varying parameters", {
 
   for (i in 1:nrOfRandomCalls) {
     params = list(listOfFiles=sample(wavFiles, 1)[[1]], optLogFilePath=NULL, 
-                  BeginTime=posValsBeginTime[[1]], CenterTime=posValsCenterTime[[1]], 
-                  EndTime=posValsEndTime[[1]], Resolution=posValsResolution[[1]], 
-                  FftLength=posValsFftLength[[1]], WindowShift=posValsWindowShift[[1]], 
-                  Window=posValsWindow[[1]], Bandwidth=posValsBandwidth[[1]], 
-                  ToFile=FALSE, ExplicitExt=NULL, 
-                  OutputDirectory=NULL, forceToLog=useWrasspLogger)
+                  beginTime=posValsBeginTime[[1]], centerTime=posValsCenterTime[[1]], 
+                  endTime=posValsEndTime[[1]], resolution=posValsResolution[[1]], 
+                  fftLength=posValsFftLength[[1]], windowShift=posValsWindowShift[[1]], 
+                  window=posValsWindow[[1]], bandwidth=posValsBandwidth[[1]], 
+                  toFile=FALSE, explicitExt=NULL, 
+                  outputDirectory=NULL, forceToLog=useWrasspLogger)
   
     # print(params)
     res = do.call(dftSpectrum, as.list(params))
@@ -216,14 +216,14 @@ test_that("forest doesn't break due to varying parameters", {
   
   for (i in 1:nrOfRandomCalls) {
     params = list(listOfFiles=sample(wavFiles, 1)[[1]], optLogFilePath=NULL, 
-                  BeginTime=sample(posValsBeginTime,1)[[1]], EndTime=sample(posValsEndTime,1)[[1]], 
-                  WindowShift=sample(posValsWindowShift,1)[[1]], WindowSize=sample(posValsWindowSize,1)[[1]], 
-                  EffectiveLength=sample(posValsEffectiveLength,1)[[1]], NominalF1=sample(posValsNominalF1,1)[[1]], 
-                  Gender=sample(posValsGender,1)[[1]], Estimate=sample(posValsEstimate,1)[[1]], 
-                  Order=sample(posValsOrder,1)[[1]], IncrOrder=sample(posValsIncrOrder,1)[[1]], 
-                  NumFormants=sample(posValsNumFormants,1)[[1]], Window=sample(posValsWindow,1)[[1]], 
-                  Preemphasis=sample(posValsPreemphasis,1)[[1]], ToFile=FALSE, 
-                  ExplicitExt=NULL, OutputDirectory=NULL, 
+                  beginTime=sample(posValsBeginTime,1)[[1]], endTime=sample(posValsEndTime,1)[[1]], 
+                  windowShift=sample(posValsWindowShift,1)[[1]], windowSize=sample(posValsWindowSize,1)[[1]], 
+                  effectiveLength=sample(posValsEffectiveLength,1)[[1]], nominalF1=sample(posValsNominalF1,1)[[1]], 
+                  gender=sample(posValsGender,1)[[1]], estimate=sample(posValsEstimate,1)[[1]], 
+                  order=sample(posValsOrder,1)[[1]], incrOrder=sample(posValsIncrOrder,1)[[1]], 
+                  numFormants=sample(posValsNumFormants,1)[[1]], window=sample(posValsWindow,1)[[1]], 
+                  preemphasis=sample(posValsPreemphasis,1)[[1]], toFile=FALSE, 
+                  explicitExt=NULL, outputDirectory=NULL, 
                   forceToLog=useWrasspLogger)
 
     # print(params)
@@ -251,12 +251,12 @@ test_that("ksvF0 doesn't break due to varying parameters", {
 
   for (i in 1:nrOfRandomCalls) {
     params = list(listOfFiles=sample(wavFiles, 1)[[1]], optLogFilePath=NULL, 
-                  BeginTime=sample(posValsBeginTime,1)[[1]], EndTime=sample(posValsEndTime,1)[[1]], 
-                  WindowShift=sample(posValsWindowShift,1)[[1]], Gender=sample(posValsGender,1)[[1]], 
-                  MaxF=sample(posValsMaxF,1)[[1]], MinF=sample(posValsMinF,1)[[1]], 
-                  MinAmp=sample(posValsMinAmp,1)[[1]], MaxZCR=sample(posValsMaxZCR,1)[[1]], 
-                  ToFile=FALSE, ExplicitExt=NULL, 
-                  OutputDirectory=NULL, forceToLog=useWrasspLogger)
+                  beginTime=sample(posValsBeginTime,1)[[1]], endTime=sample(posValsEndTime,1)[[1]], 
+                  windowShift=sample(posValsWindowShift,1)[[1]], gender=sample(posValsGender,1)[[1]], 
+                  maxF=sample(posValsMaxF,1)[[1]], minF=sample(posValsMinF,1)[[1]], 
+                  minAmp=sample(posValsMinAmp,1)[[1]], maxZCR=sample(posValsMaxZCR,1)[[1]], 
+                  toFile=FALSE, explicitExt=NULL, 
+                  outputDirectory=NULL, forceToLog=useWrasspLogger)
 
         # print(params)
     res = do.call(ksvF0, as.list(params))
@@ -286,13 +286,13 @@ test_that("lpsSpectrum doesn't break due to varying parameters", {
 
   for (i in 1:nrOfRandomCalls) {
     params = list(listOfFiles=sample(wavFiles, 1)[[1]], optLogFilePath=NULL, 
-                  BeginTime=sample(posValsBeginTime,1)[[1]], CenterTime=sample(posValsCenterTime,1)[[1]], 
-                  EndTime=sample(posValsEndTime,1)[[1]], Resolution=sample(posValsResolution,1)[[1]], 
-                  FftLength=sample(posValsFftLength,1)[[1]], WindowSize=sample(posValsWindowSize,1)[[1]], 
-                  WindowShift=sample(posValsWindowShift,1)[[1]], Window=sample(posValsWindow,1)[[1]], 
-                  Order=sample(posValsOrder,1)[[1]], Preemphasis=sample(posValsPreemphasis,1)[[1]], 
-                  Deemphasize=sample(posValsDeemphasize,1)[[1]], ToFile=FALSE, 
-                  ExplicitExt=NULL, OutputDirectory=NULL, 
+                  beginTime=sample(posValsBeginTime,1)[[1]], centerTime=sample(posValsCenterTime,1)[[1]], 
+                  endTime=sample(posValsEndTime,1)[[1]], resolution=sample(posValsResolution,1)[[1]], 
+                  fftLength=sample(posValsFftLength,1)[[1]], windowSize=sample(posValsWindowSize,1)[[1]], 
+                  windowShift=sample(posValsWindowShift,1)[[1]], window=sample(posValsWindow,1)[[1]], 
+                  order=sample(posValsOrder,1)[[1]], preemphasis=sample(posValsPreemphasis,1)[[1]], 
+                  deemphasize=sample(posValsDeemphasize,1)[[1]], toFile=FALSE, 
+                  explicitExt=NULL, outputDirectory=NULL, 
                   forceToLog=useWrasspLogger)
     
     # print(params)
@@ -325,14 +325,14 @@ test_that("mhsF0 doesn't break due to varying parameters", {
 
   for (i in 1:nrOfRandomCalls) {
     params = list(listOfFiles=sample(wavFiles, 1)[[1]], optLogFilePath=NULL, 
-                  BeginTime=sample(posValsBeginTime,1)[[1]], CenterTime=sample(posValsCenterTime,1)[[1]], 
-                  EndTime=sample(posValsEndTime,1)[[1]], WindowShift=sample(posValsWindowShift,1)[[1]], 
-                  Gender=sample(posValsGender,1)[[1]], MaxF=sample(posValsMaxF,1)[[1]], 
-                  MinF=sample(posValsMinF,1)[[1]], MinAmp=sample(posValsMinAmp,1)[[1]], 
-                  MinAC1=sample(posValsMinAC1,1)[[1]], MinRMS=sample(posValsMinRMS,1)[[1]], 
-                  MaxZCR=sample(posValsMaxZCR,1)[[1]], MinProb=sample(posValsMinProb,1)[[1]], 
-                  PlainSpectrum=sample(posValsPlainSpectrum,1)[[1]], ToFile=FALSE, 
-                  ExplicitExt=NULL, OutputDirectory=NULL, 
+                  beginTime=sample(posValsBeginTime,1)[[1]], centerTime=sample(posValsCenterTime,1)[[1]], 
+                  endTime=sample(posValsEndTime,1)[[1]], windowShift=sample(posValsWindowShift,1)[[1]], 
+                  gender=sample(posValsGender,1)[[1]], maxF=sample(posValsMaxF,1)[[1]], 
+                  minF=sample(posValsMinF,1)[[1]], minAmp=sample(posValsMinAmp,1)[[1]], 
+                  minAC1=sample(posValsMinAC1,1)[[1]], minRMS=sample(posValsMinRMS,1)[[1]], 
+                  maxZCR=sample(posValsMaxZCR,1)[[1]], minProb=sample(posValsMinProb,1)[[1]], 
+                  plainSpectrum=sample(posValsPlainSpectrum,1)[[1]], toFile=FALSE, 
+                  explicitExt=NULL, outputDirectory=NULL, 
                   forceToLog=useWrasspLogger)
 
     # print(params)
@@ -363,13 +363,13 @@ test_that("rfcana doesn't break due to varying parameters", {
 
   for (i in 1:nrOfRandomCalls) {
     params = list(listOfFiles=sample(wavFiles, 1)[[1]], optLogFilePath=NULL, 
-                  BeginTime=sample(posValsBeginTime,1)[[1]], CenterTime=sample(posValsCenterTime,1)[[1]], 
-                  EndTime=sample(posValsEndTime,1)[[1]], WindowShift=sample(posValsWindowShift,1)[[1]], 
-                  WindowSize=sample(posValsWindowSize,1)[[1]], EffectiveLength=sample(posValsEffectiveLength,1)[[1]], 
-                  Window=sample(posValsWindow,1)[[1]], Order=sample(posValsOrder,1)[[1]], 
-                  Preemphasis=sample(posValsPreemphasis,1)[[1]], LpType=sample(posValsLpType,1)[[1]], 
-                  ToFile=FALSE, ExplicitExt=NULL, 
-                  OutputDirectory=NULL, forceToLog=useWrasspLogger)
+                  beginTime=sample(posValsBeginTime,1)[[1]], centerTime=sample(posValsCenterTime,1)[[1]], 
+                  endTime=sample(posValsEndTime,1)[[1]], windowShift=sample(posValsWindowShift,1)[[1]], 
+                  windowSize=sample(posValsWindowSize,1)[[1]], effectiveLength=sample(posValsEffectiveLength,1)[[1]], 
+                  window=sample(posValsWindow,1)[[1]], order=sample(posValsOrder,1)[[1]], 
+                  preemphasis=sample(posValsPreemphasis,1)[[1]], lpType=sample(posValsLpType,1)[[1]], 
+                  toFile=FALSE, explicitExt=NULL, 
+                  outputDirectory=NULL, forceToLog=useWrasspLogger)
         # print(params)
     res = do.call(rfcana, as.list(params))
     expect_that(class(res), equals("AsspDataObj"))
@@ -396,12 +396,12 @@ test_that("rmsana doesn't break due to varying parameters", {
 
   for (i in 1:nrOfRandomCalls) {
     params = list(listOfFiles=sample(wavFiles, 1)[[1]], optLogFilePath=NULL, 
-                  BeginTime=sample(posValsBeginTime,1)[[1]], CenterTime=sample(posValsCenterTime,1)[[1]], 
-                  EndTime=sample(posValsEndTime,1)[[1]], WindowShift=sample(posValsWindowShift,1)[[1]], 
-                  WindowSize=sample(posValsWindowSize,1)[[1]], EffectiveLength=sample(posValsEffectiveLength,1)[[1]], 
-                  Linear=sample(posValsLinear,1)[[1]], Window=sample(posValsWindow,1)[[1]], 
-                  ToFile=FALSE, ExplicitExt=NULL, 
-                  OutputDirectory=NULL, forceToLog=useWrasspLogger)
+                  beginTime=sample(posValsBeginTime,1)[[1]], centerTime=sample(posValsCenterTime,1)[[1]], 
+                  endTime=sample(posValsEndTime,1)[[1]], windowShift=sample(posValsWindowShift,1)[[1]], 
+                  windowSize=sample(posValsWindowSize,1)[[1]], effectiveLength=sample(posValsEffectiveLength,1)[[1]], 
+                  linear=sample(posValsLinear,1)[[1]], window=sample(posValsWindow,1)[[1]], 
+                  toFile=FALSE, explicitExt=NULL, 
+                  outputDirectory=NULL, forceToLog=useWrasspLogger)
             # print(params)
     res = do.call(rmsana, as.list(params))
     expect_that(class(res), equals("AsspDataObj"))
@@ -425,10 +425,10 @@ test_that("zcrana doesn't break due to varying parameters", {
 
   for (i in 1:nrOfRandomCalls) {
     params = list(listOfFiles=sample(wavFiles, 1)[[1]], optLogFilePath=NULL, 
-                  BeginTime=sample(posValsBeginTime,1)[[1]], CenterTime=sample(posValsCenterTime,1)[[1]], 
-                  EndTime=sample(posValsEndTime,1)[[1]], WindowShift=sample(posValsWindowShift,1)[[1]], 
-                  WindowSize=sample(posValsWindowSize,1)[[1]], ToFile=FALSE, 
-                  ExplicitExt=NULL, OutputDirectory=NULL, 
+                  beginTime=sample(posValsBeginTime,1)[[1]], centerTime=sample(posValsCenterTime,1)[[1]], 
+                  endTime=sample(posValsEndTime,1)[[1]], windowShift=sample(posValsWindowShift,1)[[1]], 
+                  windowSize=sample(posValsWindowSize,1)[[1]], toFile=FALSE, 
+                  explicitExt=NULL, outputDirectory=NULL, 
                   forceToLog=useWrasspLogger)
                 # print(params)
     res = do.call(zcrana, as.list(params))

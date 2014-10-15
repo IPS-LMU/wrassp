@@ -12,20 +12,20 @@
 ##' @title ksvF0
 ##' @param listOfFiles vector of file paths to be processed by function 
 ##' @param optLogFilePath path to option log file
-##' @param BeginTime = <time>: set begin of analysis interval to <time> seconds (default = 0: begin of data)
-##' @param EndTime set end of analysis interval to <time> seconds (default = 0: end of data)
-##' @param WindowShift = <dur>: set frame shift to <dur> ms (default: 5.0)
-##' @param Gender = <code>  set gender-specific F0 ranges; <code> may be:
+##' @param beginTime = <time>: set begin of analysis interval to <time> seconds (default = 0: begin of data)
+##' @param endTime set end of analysis interval to <time> seconds (default = 0: end of data)
+##' @param windowShift = <dur>: set frame shift to <dur> ms (default: 5.0)
+##' @param gender = <code>  set gender-specific F0 ranges; <code> may be:
 ##' "f[emale]" (80.0 - 640.0 Hz)
 ##' "m[ale]" (50.0 - 400.0 Hz)
 ##' "u[nknown]" (default; 50.0 - 600.0 Hz)
-##' @param MaxF = <freq>: set maximum F0 value to <freq> Hz (default: 500.0)
-##' @param MinF = <freq>: set minimum F0 value to <freq> Hz (default: 50.0)
-##' @param MinAmp = <amp>: set amplitude threshold for voiced samples to <amp> (default: 100)
-##' @param MaxZCR maximum zero crossing rate in Hz (for voicing detection)
-##' @param ToFile write results to file (default extension is .f0)
-##' @param ExplicitExt set if you wish to overwride the default extension
-##' @param OutputDirectory directory in which output files are stored. Defaults to NULL, i.e.
+##' @param maxF = <freq>: set maximum F0 value to <freq> Hz (default: 500.0)
+##' @param minF = <freq>: set minimum F0 value to <freq> Hz (default: 50.0)
+##' @param minAmp = <amp>: set amplitude threshold for voiced samples to <amp> (default: 100)
+##' @param maxZCR maximum zero crossing rate in Hz (for voicing detection)
+##' @param toFile write results to file (default extension is .f0)
+##' @param explicitExt set if you wish to overwride the default extension
+##' @param outputDirectory directory in which output files are stored. Defaults to NULL, i.e.
 ##' the directory of the input files
 ##' @param forceToLog is set by the global package variable useWrasspLogger. This is set
 ##' to FALSE by default and should be set to TRUE is logging is desired.
@@ -36,12 +36,12 @@
 ##' @useDynLib wrassp
 ##' @export
 'ksvF0' <- 'f0ana' <- 'f0_ksv' <- function(listOfFiles = NULL, optLogFilePath = NULL, 
-                                           BeginTime = 0.0, EndTime = 0.0, 
-                                           WindowShift = 5.0, Gender = 'u',
-                                           MaxF = 600, MinF = 50, 
-                                           MinAmp = 50, MaxZCR = 3000.0, 
-                                           ToFile = TRUE, ExplicitExt = NULL,
-                                           OutputDirectory = NULL, forceToLog = useWrasspLogger) {
+                                           beginTime = 0.0, endTime = 0.0, 
+                                           windowShift = 5.0, gender = 'u',
+                                           maxF = 600, minF = 50, 
+                                           minAmp = 50, maxZCR = 3000.0, 
+                                           toFile = TRUE, explicitExt = NULL,
+                                           outputDirectory = NULL, forceToLog = useWrasspLogger) {
   
   ###########################
   # a few parameter checks and expand paths
@@ -60,14 +60,14 @@
     }
   }
   
-  if (!is.null(OutputDirectory)) {
-    OutputDirectory = normalizePath(path.expand(OutputDirectory))
-    finfo  <- file.info(OutputDirectory)
+  if (!is.null(outputDirectory)) {
+    outputDirectory = normalizePath(path.expand(outputDirectory))
+    finfo  <- file.info(outputDirectory)
     if (is.na(finfo$isdir))
-      if (!dir.create(OutputDirectory, recursive=TRUE))
+      if (!dir.create(outputDirectory, recursive=TRUE))
         stop('Unable to create output directory.')
     else if (!finfo$isdir)
-      stop(paste(OutputDirectory, 'exists but is not a directory.'))
+      stop(paste(outputDirectory, 'exists but is not a directory.'))
   }
   
   ###########################
@@ -80,21 +80,21 @@
   if(length(listOfFiles)==1){
     pb <- NULL
   }else{
-    if(ToFile==FALSE){
-      stop("length(listOfFiles) is > 1 and ToFile=FALSE! ToFile=FALSE only permitted for single files.")
+    if(toFile==FALSE){
+      stop("length(listOfFiles) is > 1 and toFile=FALSE! toFile=FALSE only permitted for single files.")
     }
     cat('\n  INFO: applying f0ana to', length(listOfFiles), 'files\n')
     pb <- txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
   }	
   
   externalRes = invisible(.External("performAssp", listOfFiles, 
-                                    fname = "f0ana", BeginTime = BeginTime, 
-                                    EndTime = EndTime, WindowShift = WindowShift, 
-                                    Gender = Gender, MaxF = MaxF, 
-                                    MinF = MinF, MinAmp = MinAmp, 
-                                    MaxZCR = MaxZCR, ExplicitExt = ExplicitExt, 
-                                    ToFile = ToFile, ProgressBar = pb, 
-                                    OutputDirectory = OutputDirectory, PACKAGE = "wrassp"))
+                                    fname = "f0ana", beginTime = beginTime, 
+                                    endTime = endTime, windowShift = windowShift, 
+                                    gender = gender, maxF = maxF, 
+                                    minF = minF, minAmp = minAmp, 
+                                    maxZCR = maxZCR, explicitExt = explicitExt, 
+                                    toFile = toFile, progressBar = pb, 
+                                    outputDirectory = outputDirectory, PACKAGE = "wrassp"))
   
   ############################
   # write options to options log file

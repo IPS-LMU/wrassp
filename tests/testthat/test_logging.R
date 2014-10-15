@@ -6,7 +6,7 @@ context("test logging capabilities")
 
 test_that("logging file content is the same as hard coded string", {
   
-  str = "BeginTime : 0 \nCenterTime : FALSE \nEndTime : 0 \nWindowShift : 5 \nWindowSize : 20 \nEffectiveLength : TRUE \nWindow : BLACKMAN \nAnalysisOrder : 0 \nEnergyNormalization : FALSE \nLengthNormalization : FALSE \nToFile : FALSE \nExplicitExt :  \nOutputDirectory :  \nforceToLog : TRUE \n => on files:"
+  str = "beginTime : 0 \ncenterTime : FALSE \nendTime : 0 \nwindowShift : 5 \nwindowSize : 20 \neffectiveLength : TRUE \nwindow : BLACKMAN \nanalysisOrder : 0 \nenergyNormalization : FALSE \nlengthNormalization : FALSE \ntoFile : FALSE \nexplicitExt :  \noutputDirectory :  \nforceToLog : TRUE \n => on files:"
   
   altDir = tempdir()
   path2log = paste(altDir, "/wrasspTESTTHATlog.txt", sep="")
@@ -34,7 +34,7 @@ test_that("logging file content is the same as hard coded string", {
 
   expect_that(grep("######## zcrana performed ########", lines), equals(232))
 
-  blackGrep = grep("Window : BLACKMAN ", lines)== c(12,  61,  78,  96, 160, 180, 201)
+  blackGrep = grep("window : BLACKMAN ", lines)== c(12,  61,  78,  96, 160, 180, 201)
 
   expect_that(sum(blackGrep), equals(7))
 

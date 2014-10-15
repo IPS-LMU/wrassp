@@ -8,25 +8,25 @@
 ##' @title mhsF0
 ##' @param listOfFiles vector of file paths to be processed by function
 ##' @param optLogFilePath path to option log file
-##' @param BeginTime = <time>: set begin of analysis interval to <time> seconds (default = 0: begin of file) 
-##' @param CenterTime = <time>:  set single-frame analysis with the analysis window centred at <time> seconds; overrules BeginTime, EndTime and WindowShift options
-##' @param EndTime = <time>: set end of analysis interval to <time> seconds (default = 0: end of file)
-##' @param WindowShift = <dur>: set analysis window shift to <dur> ms (default: 5.0)
-##' @param Gender = <code>  set gender-specific pitch ranges; <code> may be:
+##' @param beginTime = <time>: set begin of analysis interval to <time> seconds (default = 0: begin of file) 
+##' @param centerTime = <time>:  set single-frame analysis with the analysis window centred at <time> seconds; overrules BeginTime, EndTime and WindowShift options
+##' @param endTime = <time>: set end of analysis interval to <time> seconds (default = 0: end of file)
+##' @param windowShift = <dur>: set analysis window shift to <dur> ms (default: 5.0)
+##' @param gender = <code>  set gender-specific pitch ranges; <code> may be:
 ##' "f[emale]" (80.0 - 600.0 Hz)
 ##' "m[ale]" (50.0 - 375.0 Hz)
 ##' "u[nknown]" (default; 50.0 - 600.0 Hz)
-##' @param MaxF = <freq>: set maximum pitch value to <freq> Hz (default: 500.0)
-##' @param MinF = <freq>:  set minimum pitch value to <freq> Hz (default: 50.0  minimum: 25.0)
-##' @param MinAmp = <amp>:  minimum signal amplitude (default: 50)
-##' @param MinAC1 = <freq>: minimum 1st correlation coefficient (default: 0.250)
-##' @param MinRMS = <num>:  minimum RMS amplitude in dB (default: 18.0)
-##' @param MaxZCR = <freq>: maximum zero crossing rate in Hz (default: 3000)
-##' @param MinProb = <num>: minimum quality value of F0 fit (default: 0.520)
-##' @param PlainSpectrum use plain rather than masked power spectrum
-##' @param ToFile write results to file (default extension is .pit)
-##' @param ExplicitExt set if you wish to overwride the default extension
-##' @param OutputDirectory directory in which output files are stored. Defaults to NULL, i.e.
+##' @param maxF = <freq>: set maximum pitch value to <freq> Hz (default: 500.0)
+##' @param minF = <freq>:  set minimum pitch value to <freq> Hz (default: 50.0  minimum: 25.0)
+##' @param minAmp = <amp>:  minimum signal amplitude (default: 50)
+##' @param minAC1 = <freq>: minimum 1st correlation coefficient (default: 0.250)
+##' @param minRMS = <num>:  minimum RMS amplitude in dB (default: 18.0)
+##' @param maxZCR = <freq>: maximum zero crossing rate in Hz (default: 3000)
+##' @param minProb = <num>: minimum quality value of F0 fit (default: 0.520)
+##' @param plainSpectrum use plain rather than masked power spectrum
+##' @param toFile write results to file (default extension is .pit)
+##' @param explicitExt set if you wish to overwride the default extension
+##' @param outputDirectory directory in which output files are stored. Defaults to NULL, i.e.
 ##' the directory of the input files
 ##' @param forceToLog is set by the global package variable useWrasspLogger. This is set
 ##' to FALSE by default and should be set to TRUE is logging is desired.
@@ -37,14 +37,14 @@
 ##' @useDynLib wrassp
 ##' @export
 'mhsF0' <- 'mhspitch' <- 'f0_mhs' <-function(listOfFiles = NULL, optLogFilePath = NULL,
-                                             BeginTime = 0.0, CenterTime = FALSE, 
-                                             EndTime = 0.0, WindowShift = 5.0, 
-                                             Gender = 'u', MaxF = 600.0, 
-                                             MinF = 50.0, MinAmp = 50.0, 
-                                             MinAC1 = 0.25, MinRMS = 18.0, 
-                                             MaxZCR = 3000.0, MinProb = 0.52, 
-                                             PlainSpectrum = FALSE, ToFile = TRUE, 
-                                             ExplicitExt = NULL,  OutputDirectory = NULL,
+                                             beginTime = 0.0, centerTime = FALSE, 
+                                             endTime = 0.0, windowShift = 5.0, 
+                                             gender = 'u', maxF = 600.0, 
+                                             minF = 50.0, minAmp = 50.0, 
+                                             minAC1 = 0.25, minRMS = 18.0, 
+                                             maxZCR = 3000.0, minProb = 0.52, 
+                                             plainSpectrum = FALSE, toFile = TRUE, 
+                                             explicitExt = NULL,  outputDirectory = NULL,
                                              forceToLog = useWrasspLogger){
   
   ###########################
@@ -64,14 +64,14 @@
     }
   }
   
-  if (!is.null(OutputDirectory)) {
-    OutputDirectory = normalizePath(path.expand(OutputDirectory))
-    finfo  <- file.info(OutputDirectory)
+  if (!is.null(outputDirectory)) {
+    OutputDirectory = normalizePath(path.expand(outputDirectory))
+    finfo  <- file.info(outputDirectory)
     if (is.na(finfo$isdir))
-      if (!dir.create(OutputDirectory, recursive=TRUE))
+      if (!dir.create(outputDirectory, recursive=TRUE))
         stop('Unable to create output directory.')
     else if (!finfo$isdir)
-      stop(paste(OutputDirectory, 'exists but is not a directory.'))
+      stop(paste(outputDirectory, 'exists but is not a directory.'))
   }
   
   ###########################
@@ -84,23 +84,23 @@
   if(length(listOfFiles)==1){
     pb <- NULL
   }else{
-    if(ToFile==FALSE){
-      stop("length(listOfFiles) is > 1 and ToFile=FALSE! ToFile=FALSE only permitted for single files.")
+    if(toFile==FALSE){
+      stop("length(listOfFiles) is > 1 and toFile=FALSE! toFile=FALSE only permitted for single files.")
     }
     cat('\n  INFO: applying mhspitch to', length(listOfFiles), 'files\n')
     pb <- txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
   }		
   
   externalRes = invisible(.External("performAssp", listOfFiles, 
-                                    fname = "mhspitch", BeginTime = BeginTime, 
-                                    CenterTime = CenterTime, EndTime = EndTime, 
-                                    WindowShift = WindowShift, Gender = Gender, 
-                                    MaxF = MaxF, MinF = MinF, 
-                                    MinAmp = MinAmp, MinAC1 = MinAC1, 
-                                    MinRMS = MinRMS, MaxZCR = MaxZCR, 
-                                    MinProb = MinProb, PlainSpectrum = PlainSpectrum, 
-                                    ToFile = ToFile, ExplicitExt = ExplicitExt, 
-                                    ProgressBar = pb, OutputDirectory = OutputDirectory,
+                                    fname = "mhspitch", beginTime = beginTime, 
+                                    centerTime = centerTime, endTime = endTime, 
+                                    windowShift = windowShift, gender = gender, 
+                                    maxF = maxF, minF = minF, 
+                                    minAmp = minAmp, minAC1 = minAC1, 
+                                    minRMS = minRMS, maxZCR = maxZCR, 
+                                    minProb = minProb, plainSpectrum = plainSpectrum, 
+                                    toFile = toFile, explicitExt = explicitExt, 
+                                    progressBar = pb, outputDirectory = outputDirectory,
                                     PACKAGE = "wrassp"))
   
   ############################

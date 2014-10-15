@@ -10,31 +10,31 @@
 ##' @title lpsSpectrum
 ##' @param listOfFiles vector of file paths to be processed by function 
 ##' @param optLogFilePath path to option log file
-##' @param BeginTime = <time>: set begin of analysis interval to <time> seconds
+##' @param beginTime = <time>: set begin of analysis interval to <time> seconds
 ##' (default: begin of data)
-##' @param CenterTime = <time>: set single-frame analysis with the analysis
+##' @param centerTime = <time>: set single-frame analysis with the analysis
 ##' window centred at <time> seconds; overrules BeginTime, EndTime and
 ##' WindowShift options
-##' @param EndTime = <time>: set end of analysis interval to <time> seconds
+##' @param endTime = <time>: set end of analysis interval to <time> seconds
 ##' (default: end of data)
-##' @param Resolution = <freq>: set FFT length to the smallest value which
+##' @param resolution = <freq>: set FFT length to the smallest value which
 ##' results in a freqequency resolution of <freq> Hz or better (default: 40.0)
-##' @param FftLength = <num>: set FFT length to <num> points (overrules default
+##' @param fftLength = <num>: set FFT length to <num> points (overrules default
 ##' and 'Resolution' option)
-##' @param WindowShift = <dur>: set analysis window shift to <dur> ms
+##' @param windowShift = <dur>: set analysis window shift to <dur> ms
 ##' (default: 5.0)
-##' @param Window = <type>: set analysis window function to <type> (default:
+##' @param window = <type>: set analysis window function to <type> (default:
 ##' BLACKMAN)
-##' @param WindowSize = <dur>: set effective analysis window size to <dur> ms 
-##' @param Order = <num>: set prediction order to <num> (default: sampling
+##' @param windowSize = <dur>: set effective analysis window size to <dur> ms 
+##' @param order = <num>: set prediction order to <num> (default: sampling
 ##' rate in kHz + 3)
-##' @param Preemphasis = <val>: set pre-emphasis factor to <val> (default:
+##' @param preemphasis = <val>: set pre-emphasis factor to <val> (default:
 ##' -0.95)
-##' @param Deemphasize (default: undo spectral tilt due to
+##' @param deemphasize (default: undo spectral tilt due to
 ##' pre-emphasis used in LP analysis, i.e. TRUE)
-##' @param ToFile write results to file (default extension depends on )
-##' @param ExplicitExt set if you wish to overwride the default extension
-##' @param OutputDirectory directory in which output files are stored. Defaults to NULL, i.e.
+##' @param toFile write results to file (default extension depends on )
+##' @param explicitExt set if you wish to overwride the default extension
+##' @param outputDirectory directory in which output files are stored. Defaults to NULL, i.e.
 ##' the directory of the input files
 ##' @param forceToLog is set by the global package variable useWrasspLogger. This is set
 ##' to FALSE by default and should be set to TRUE is logging is desired.
@@ -46,13 +46,13 @@
 ##' @useDynLib wrassp
 ##' @export
 'lpsSpectrum' <- function(listOfFiles = NULL, optLogFilePath = NULL,
-                          BeginTime = 0.0, CenterTime = FALSE,
-                          EndTime = 0.0, Resolution = 40.0,
-                          FftLength = 0, WindowSize = 20.0,
-                          WindowShift = 5.0, Window = 'BLACKMAN',
-                          Order = 0, Preemphasis = -0.95, 
-                          Deemphasize = TRUE, ToFile = TRUE,
-                          ExplicitExt = NULL, OutputDirectory = NULL,
+                          beginTime = 0.0, centerTime = FALSE,
+                          endTime = 0.0, resolution = 40.0,
+                          fftLength = 0, windowSize = 20.0,
+                          windowShift = 5.0, window = 'BLACKMAN',
+                          order = 0, preemphasis = -0.95, 
+                          deemphasize = TRUE, toFile = TRUE,
+                          explicitExt = NULL, outputDirectory = NULL,
                           forceToLog = useWrasspLogger){
   
   ## ########################
@@ -72,18 +72,18 @@
     }
   }
   
-  if(!isAsspWindowType(Window)){
-    stop("WindowFunction of type '", Window,"' is not supported!")
+  if(!isAsspWindowType(window)){
+    stop("WindowFunction of type '", window,"' is not supported!")
   }
   
-  if (!is.null(OutputDirectory)) {
-    OutputDirectory = normalizePath(path.expand(OutputDirectory))
-    finfo  <- file.info(OutputDirectory)
+  if (!is.null(outputDirectory)) {
+    outputDirectory = normalizePath(path.expand(outputDirectory))
+    finfo  <- file.info(outputDirectory)
     if (is.na(finfo$isdir))
-      if (!dir.create(OutputDirectory, recursive=TRUE))
+      if (!dir.create(outputDirectory, recursive=TRUE))
         stop('Unable to create output directory.')
     else if (!finfo$isdir)
-      stop(paste(OutputDirectory, 'exists but is not a directory.'))
+      stop(paste(outputDirectory, 'exists but is not a directory.'))
   }
   
   ###########################
@@ -96,25 +96,25 @@
   if(length(listOfFiles)==1){
     pb <- NULL
   }else{
-    if(ToFile==FALSE){
-      stop("length(listOfFiles) is > 1 and ToFile=FALSE! ToFile=FALSE only permitted for single files.")
+    if(toFile==FALSE){
+      stop("length(listOfFiles) is > 1 and toFile=FALSE! toFile=FALSE only permitted for single files.")
     }
     cat('\n  INFO: applying lpsSpectrum to', length(listOfFiles), 'files\n')
     pb <- txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
   }	
   
   externalRes = invisible(.External("performAssp", listOfFiles, 
-                                    fname = "spectrum", BeginTime = BeginTime, 
-                                    CenterTime = CenterTime, EndTime = EndTime, 
-                                    SpectrumType = 'LPS',
-                                    Resolution = Resolution, 
-                                    FftLength = as.integer(FftLength), WindowSize = WindowSize, 
-                                    WindowShift = WindowShift, Window = Window, 
-                                    EffectiveLength = TRUE, 
-                                    Order = as.integer(Order), Preemphasis = Preemphasis, 
-                                    Deemphasize = Deemphasize, 
-                                    ToFile = ToFile, ExplicitExt = ExplicitExt, 
-                                    ProgressBar = pb, OutputDirectory = OutputDirectory,
+                                    fname = "spectrum", beginTime = beginTime, 
+                                    centerTime = centerTime, endTime = endTime, 
+                                    spectrumType = 'LPS',
+                                    resolution = resolution, 
+                                    fftLength = as.integer(fftLength), windowSize = windowSize, 
+                                    windowShift = windowShift, window = window, 
+                                    effectiveLength = TRUE, 
+                                    order = as.integer(order), preemphasis = preemphasis, 
+                                    deemphasize = deemphasize, 
+                                    toFile = toFile, explicitExt = explicitExt, 
+                                    progressBar = pb, outputDirectory = outputDirectory,
                                     PACKAGE = "wrassp"))
   
   

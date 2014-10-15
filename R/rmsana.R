@@ -10,17 +10,17 @@
 ##' @title rmsana
 ##' @param listOfFiles vector of file paths to be processed by function
 ##' @param optLogFilePath path to option log file
-##' @param BeginTime = <time>:  set begin of analysis interval to <time> seconds (default = 0: begin of file)
-##' @param CenterTime = <time>: set single-frame analysis with the analysis window centred at <time> seconds; overrules BeginTime, EndTime and WindowShift options
-##' @param EndTime = <time>: set end of analysis interval to <time> seconds (default: end of file)
-##' @param WindowShift = <dur>: set analysis window shift to <dur> ms (default: 5.0)
-##' @param WindowSize = <dur>: set analysis window size to <dur> ms; overrules EffectiveLength option
-##' @param EffectiveLength make window size effective rather than exact
-##' @param Linear calculate linear RMS values (default: values in dB)
-##' @param Window = <type>: set analysis window function to <type> (default: HAMMING)
-##' @param ToFile write results to file (default extension is .rms)
-##' @param ExplicitExt set if you wish to overwride the default extension
-##' @param OutputDirectory directory in which output files are stored. Defaults to NULL, i.e.
+##' @param beginTime = <time>:  set begin of analysis interval to <time> seconds (default = 0: begin of file)
+##' @param centerTime = <time>: set single-frame analysis with the analysis window centred at <time> seconds; overrules BeginTime, EndTime and WindowShift options
+##' @param endTime = <time>: set end of analysis interval to <time> seconds (default: end of file)
+##' @param windowShift = <dur>: set analysis window shift to <dur> ms (default: 5.0)
+##' @param windowSize = <dur>: set analysis window size to <dur> ms; overrules EffectiveLength option
+##' @param effectiveLength make window size effective rather than exact
+##' @param linear calculate linear RMS values (default: values in dB)
+##' @param window = <type>: set analysis window function to <type> (default: HAMMING)
+##' @param toFile write results to file (default extension is .rms)
+##' @param explicitExt set if you wish to overwride the default extension
+##' @param outputDirectory directory in which output files are stored. Defaults to NULL, i.e.
 ##' the directory of the input files
 ##' @param forceToLog is set by the global package variable useWrasspLogger. This is set
 ##' to FALSE by default and should be set to TRUE is logging is desired.
@@ -29,12 +29,12 @@
 ##' @useDynLib wrassp
 ##' @export
 'rmsana' <- function(listOfFiles = NULL, optLogFilePath = NULL,
-                     BeginTime = 0.0, CenterTime = FALSE, 
-                     EndTime = 0.0, WindowShift = 5.0, 
-                     WindowSize = 20.0, EffectiveLength = TRUE, 
-                     Linear = FALSE, Window = 'HAMMING', 
-                     ToFile = TRUE, ExplicitExt = NULL,
-                     OutputDirectory = NULL, forceToLog = useWrasspLogger){
+                     beginTime = 0.0, centerTime = FALSE, 
+                     endTime = 0.0, windowShift = 5.0, 
+                     windowSize = 20.0, effectiveLength = TRUE, 
+                     linear = FALSE, window = 'HAMMING', 
+                     toFile = TRUE, explicitExt = NULL,
+                     outputDirectory = NULL, forceToLog = useWrasspLogger){
 
 
 	###########################
@@ -54,18 +54,18 @@
 	  }
 	}
 	
-	if(!isAsspWindowType(Window)){
-		stop("WindowFunction of type '", Window,"' is not supported!")
+	if(!isAsspWindowType(window)){
+		stop("WindowFunction of type '", window,"' is not supported!")
 	}
 
-	if (!is.null(OutputDirectory)) {
-	  OutputDirectory = normalizePath(path.expand(OutputDirectory))
-	  finfo  <- file.info(OutputDirectory)
+	if (!is.null(outputDirectory)) {
+	  outputDirectory = normalizePath(path.expand(outputDirectory))
+	  finfo  <- file.info(outputDirectory)
 	  if (is.na(finfo$isdir))
-	    if (!dir.create(OutputDirectory, recursive=TRUE))
+	    if (!dir.create(outputDirectory, recursive=TRUE))
 	      stop('Unable to create output directory.')
 	  else if (!finfo$isdir)
-	    stop(paste(OutputDirectory, 'exists but is not a directory.'))
+	    stop(paste(outputDirectory, 'exists but is not a directory.'))
 	}
   
     ###########################
@@ -78,21 +78,21 @@
 	if(length(listOfFiles)==1){
           pb <- NULL
 	}else{
-	  if(ToFile==FALSE){
-	    stop("length(listOfFiles) is > 1 and ToFile=FALSE! ToFile=FALSE only permitted for single files.")
+	  if(toFile==FALSE){
+	    stop("length(listOfFiles) is > 1 and toFile=FALSE! toFile=FALSE only permitted for single files.")
 	  }
     cat('\n  INFO: applying rmsana to', length(listOfFiles), 'files\n')
     pb <- txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
 	}	
 	
 	externalRes = invisible(.External("performAssp", listOfFiles, 
-                                    fname = "rmsana", BeginTime = BeginTime, 
-                                    CenterTime = CenterTime, EndTime = EndTime, 
-                                    WindowShift = WindowShift, WindowSize = WindowSize, 
-                                    EffectiveLength = EffectiveLength, Linear = Linear, 
-                                    Window = Window, ToFile = ToFile, 
-                                    ExplicitExt = ExplicitExt, 
-                                    ProgressBar = pb, OutputDirectory = OutputDirectory,
+                                    fname = "rmsana", beginTime = beginTime, 
+                                    centerTime = centerTime, endTime = endTime, 
+                                    windowShift = windowShift, windowSize = windowSize, 
+                                    effectiveLength = effectiveLength, linear = linear, 
+                                    window = window, toFile = toFile, 
+                                    explicitExt = explicitExt, 
+                                    progressBar = pb, outputDirectory = outputDirectory,
                                     PACKAGE = "wrassp"))
 	
   ############################
