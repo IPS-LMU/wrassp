@@ -17,7 +17,7 @@ install.packages("path/to/wrassp", repos = NULL, type="source")
 * or install the latest development version from GitHub (**preferred method**):
 ```r
 library(devtools)
-install_github("IPS-LMU/emuR")
+install_github("IPS-LMU/wrassp")
 ```
 
 ## Quick start
