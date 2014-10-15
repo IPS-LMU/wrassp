@@ -35,6 +35,7 @@
 ##' to FALSE by default and should be set to TRUE is logging is desired.
 ##' @return nrOfProcessedFiles or if only one file to process return AsspDataObj of that file
 ##' @author Raphael Winkelmann
+##' @author Lasse Bombien
 ##' @useDynLib wrassp
 ##' @export
 'affilter' <- function(listOfFiles = NULL, optLogFilePath = NULL, 

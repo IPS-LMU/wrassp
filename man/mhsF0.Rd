@@ -5,11 +5,11 @@
 \alias{mhspitch}
 \title{mhsF0}
 \usage{
-mhsF0(listOfFiles = NULL, optLogFilePath = NULL, BeginTime = 0,
-  CenterTime = FALSE, EndTime = 0, WindowShift = 5, Gender = "u",
-  MaxF = 600, MinF = 50, MinAmp = 50, MinAC1 = 0.25, MinRMS = 18,
-  MaxZCR = 3000, MinProb = 0.52, PlainSpectrum = FALSE, ToFile = TRUE,
-  ExplicitExt = NULL, OutputDirectory = NULL,
+mhsF0(listOfFiles = NULL, optLogFilePath = NULL, beginTime = 0,
+  centerTime = FALSE, endTime = 0, windowShift = 5, gender = "u",
+  maxF = 600, minF = 50, minAmp = 50, minAC1 = 0.25, minRMS = 18,
+  maxZCR = 3000, minProb = 0.52, plainSpectrum = FALSE, toFile = TRUE,
+  explicitExt = NULL, outputDirectory = NULL,
   forceToLog = useWrasspLogger)
 }
 \arguments{
@@ -17,40 +17,41 @@ mhsF0(listOfFiles = NULL, optLogFilePath = NULL, BeginTime = 0,
 
 \item{optLogFilePath}{path to option log file}
 
-\item{BeginTime}{= <time>: set begin of analysis interval to <time> seconds (default = 0: begin of file)}
+\item{beginTime}{= <time>: set begin of analysis interval to <time> seconds (default = 0: begin of file)}
 
-\item{CenterTime}{= <time>:  set single-frame analysis with the analysis window centred at <time> seconds; overrules BeginTime, EndTime and WindowShift options}
+\item{centerTime}{= <time>:  set single-frame analysis with the analysis
+window centred at <time> seconds; overrules beginTime, endTime and windowShift options}
 
-\item{EndTime}{= <time>: set end of analysis interval to <time> seconds (default = 0: end of file)}
+\item{endTime}{= <time>: set end of analysis interval to <time> seconds (default = 0: end of file)}
 
-\item{WindowShift}{= <dur>: set analysis window shift to <dur> ms (default: 5.0)}
+\item{windowShift}{= <dur>: set analysis window shift to <dur> ms (default: 5.0)}
 
-\item{Gender}{= <code>  set gender-specific pitch ranges; <code> may be:
+\item{gender}{= <code>  set gender-specific pitch ranges; <code> may be:
 "f[emale]" (80.0 - 600.0 Hz)
 "m[ale]" (50.0 - 375.0 Hz)
 "u[nknown]" (default; 50.0 - 600.0 Hz)}
 
-\item{MaxF}{= <freq>: set maximum pitch value to <freq> Hz (default: 500.0)}
+\item{maxF}{= <freq>: set maximum pitch value to <freq> Hz (default: 500.0)}
 
-\item{MinF}{= <freq>:  set minimum pitch value to <freq> Hz (default: 50.0  minimum: 25.0)}
+\item{minF}{= <freq>:  set minimum pitch value to <freq> Hz (default: 50.0  minimum: 25.0)}
 
-\item{MinAmp}{= <amp>:  minimum signal amplitude (default: 50)}
+\item{minAmp}{= <amp>:  minimum signal amplitude (default: 50)}
 
-\item{MinAC1}{= <freq>: minimum 1st correlation coefficient (default: 0.250)}
+\item{minAC1}{= <freq>: minimum 1st correlation coefficient (default: 0.250)}
 
-\item{MinRMS}{= <num>:  minimum RMS amplitude in dB (default: 18.0)}
+\item{minRMS}{= <num>:  minimum RMS amplitude in dB (default: 18.0)}
 
-\item{MaxZCR}{= <freq>: maximum zero crossing rate in Hz (default: 3000)}
+\item{maxZCR}{= <freq>: maximum zero crossing rate in Hz (default: 3000)}
 
-\item{MinProb}{= <num>: minimum quality value of F0 fit (default: 0.520)}
+\item{minProb}{= <num>: minimum quality value of F0 fit (default: 0.520)}
 
-\item{PlainSpectrum}{use plain rather than masked power spectrum}
+\item{plainSpectrum}{use plain rather than masked power spectrum}
 
-\item{ToFile}{write results to file (default extension is .pit)}
+\item{toFile}{write results to file (default extension is .pit)}
 
-\item{ExplicitExt}{set if you wish to overwride the default extension}
+\item{explicitExt}{set if you wish to overwride the default extension}
 
-\item{OutputDirectory}{directory in which output files are stored. Defaults to NULL, i.e.
+\item{outputDirectory}{directory in which output files are stored. Defaults to NULL, i.e.
 the directory of the input files}
 
 \item{forceToLog}{is set by the global package variable useWrasspLogger. This is set
@@ -71,6 +72,8 @@ Default output is in SSFF binary format (track 'pitch').
 }
 \author{
 Raphael Winkelmann
+
+Lasse Bombien
 }
 \seealso{
 \code{\link{ksvF0}} for an tracking the fundamental frequency

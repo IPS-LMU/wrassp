@@ -3,33 +3,33 @@
 \alias{affilter}
 \title{affilter}
 \usage{
-affilter(listOfFiles = NULL, optLogFilePath = NULL, HighPass = 4000,
-  LowPass = 0, StopBand = 96, Transition = 250, UseIIR = FALSE,
-  NumIIRsections = 4, ToFile = TRUE, ExplicitExt = NULL,
-  OutputDirectory = NULL, forceToLog = useWrasspLogger)
+affilter(listOfFiles = NULL, optLogFilePath = NULL, highPass = 4000,
+  lowPass = 0, stopBand = 96, transition = 250, useIIR = FALSE,
+  numIIRsections = 4, toFile = TRUE, explicitExt = NULL,
+  outputDirectory = NULL, forceToLog = useWrasspLogger)
 }
 \arguments{
 \item{listOfFiles}{vector of file paths to be processed by function}
 
 \item{optLogFilePath}{path to option log file}
 
-\item{HighPass}{= <num>: set the high-pass cut-off frequency to <num> Hz (default: 0, no high-pass filtering)}
+\item{highPass}{= <num>: set the high-pass cut-off frequency to <num> Hz (default: 0, no high-pass filtering)}
 
-\item{LowPass}{= <num>: set the low-pass cut-off frequency to <num> Hz (default: 0, no low-pass filtering)}
+\item{lowPass}{= <num>: set the low-pass cut-off frequency to <num> Hz (default: 0, no low-pass filtering)}
 
-\item{StopBand}{= <num>: set the stop-band attenuation to <num> dB (default: 93.0 dB, minimum: 21.0 dB)}
+\item{stopBand}{= <num>: set the stop-band attenuation to <num> dB (default: 93.0 dB, minimum: 21.0 dB)}
 
-\item{Transition}{= <num>: set the width of the transition band to <num> Hz (default: 250.0 Hz)}
+\item{transition}{= <num>: set the width of the transition band to <num> Hz (default: 250.0 Hz)}
 
-\item{UseIIR}{switch from the default FIR to IIR filter}
+\item{useIIR}{switch from the default FIR to IIR filter}
 
-\item{NumIIRsections}{= <num>: set the number of 2nd order sections to <num> (default: 4) where each section adds 12dB/oct to the slope of the filter}
+\item{numIIRsections}{= <num>: set the number of 2nd order sections to <num> (default: 4) where each section adds 12dB/oct to the slope of the filter}
 
-\item{ToFile}{write results to file (for default extension see details section))}
+\item{toFile}{write results to file (for default extension see details section))}
 
-\item{ExplicitExt}{set if you wish to overwride the default extension}
+\item{explicitExt}{set if you wish to overwride the default extension}
 
-\item{OutputDirectory}{directory in which output files are stored. Defaults to NULL, i.e.
+\item{outputDirectory}{directory in which output files are stored. Defaults to NULL, i.e.
 the directory of the input files}
 
 \item{forceToLog}{is set by the global package variable useWrasspLogger. This is set
@@ -63,5 +63,7 @@ the output file will be the same as that of the input file.
 }
 \author{
 Raphael Winkelmann
+
+Lasse Bombien
 }
 

@@ -3,9 +3,9 @@
 \alias{zcrana}
 \title{zcrana}
 \usage{
-zcrana(listOfFiles = NULL, optLogFilePath = NULL, BeginTime = 0,
-  CenterTime = FALSE, EndTime = 0, WindowShift = 5, WindowSize = 25,
-  ToFile = TRUE, ExplicitExt = NULL, OutputDirectory = NULL,
+zcrana(listOfFiles = NULL, optLogFilePath = NULL, beginTime = 0,
+  centerTime = FALSE, endTime = 0, windowShift = 5, windowSize = 25,
+  toFile = TRUE, explicitExt = NULL, outputDirectory = NULL,
   forceToLog = useWrasspLogger)
 }
 \arguments{
@@ -13,21 +13,22 @@ zcrana(listOfFiles = NULL, optLogFilePath = NULL, BeginTime = 0,
 
 \item{optLogFilePath}{path to option log file}
 
-\item{BeginTime}{= <time>: set begin of analysis interval to <time> seconds (default: begin of file)}
+\item{beginTime}{= <time>: set begin of analysis interval to <time> seconds (default: begin of file)}
 
-\item{CenterTime}{= <time>  set single-frame analysis with the analysis window centred at <time> seconds; overrules BeginTime, EndTime and WindowShift options}
+\item{centerTime}{= <time>  set single-frame analysis with the analysis window centred at <time> seconds;
+overrules beginTime, endTime and windowShift options}
 
-\item{EndTime}{= <time>: set end of analysis interval to <time> seconds (default: end of file)}
+\item{endTime}{= <time>: set end of analysis interval to <time> seconds (default: end of file)}
 
-\item{WindowShift}{= <dur>: set analysis window shift to <dur> ms (default: 5.0)}
+\item{windowShift}{= <dur>: set analysis window shift to <dur> ms (default: 5.0)}
 
-\item{WindowSize}{= <dur>:  set analysis window size to <dur> ms (default: 25.0)}
+\item{windowSize}{= <dur>:  set analysis window size to <dur> ms (default: 25.0)}
 
-\item{ToFile}{write results to file (default extension is .zcr)}
+\item{toFile}{write results to file (default extension is .zcr)}
 
-\item{ExplicitExt}{set if you wish to overwride the default extension}
+\item{explicitExt}{set if you wish to overwride the default extension}
 
-\item{OutputDirectory}{directory in which output files are stored. Defaults to NULL, i.e.
+\item{outputDirectory}{directory in which output files are stored. Defaults to NULL, i.e.
 the directory of the input files}
 
 \item{forceToLog}{is set by the global package variable useWrasspLogger. This is set
@@ -48,5 +49,7 @@ Default output is in SSFF binary format (track 'zcr').
 }
 \author{
 Raphael Winkelmann
+
+Lasse Bombien
 }
 

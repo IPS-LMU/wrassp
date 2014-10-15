@@ -60,5 +60,7 @@ Default output is in SSFF binary format (track 'acf').
 }
 \author{
 Raphael Winkelmann
+
+Lasse Bombien
 }
 

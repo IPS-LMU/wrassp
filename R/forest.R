@@ -23,13 +23,15 @@
 ##' @param windowSize  = <dur>: set analysis window size to <dur> ms (default: 30.0)
 ##' @param effectiveLength make window size effective rather than exact
 ##' @param nominalF1 = <freq>: set nominal F1 frequency to <freq> Hz (default: 500.0 Hz)
-##' @param gender = <code>: set gender specific parameters where <code> = f[emale], m[ale] or u[nknown] (when <code>=f: eff. window length = 12.5 ms nominal F1 = 560.0 Hz)
+##' @param gender = <code>: set gender specific parameters where 
+##' <code> = f[emale], m[ale] or u[nknown] (when <code>=f: eff. window length = 12.5 ms nominal F1 = 560.0 Hz)
 ##' @param estimate insert rough frequency estimates of missing formants (default: frequency set to zero)
 ##' @param order decrease default order by 2 (one resonance less)
 ##' @param incrOrder increase default order by 2 (one resonance more)
 ##' @param numFormants = <num>: set number of formants to <num> (default: 4;  maximum: 8 or half the LP order)
 ##' @param window = <type>: set analysis window function to <type> (default: BLACKMAN)
-##' @param preemphasis = <val>: set pre-emphasis factor to <val> (-1 <= val <= 0) (default: dependent on sample rate and nominal F1)
+##' @param preemphasis = <val>: set pre-emphasis factor to <val> (-1 <= val <= 0) 
+##' (default: dependent on sample rate and nominal F1)
 ##' @param toFile write results to file (default extension is .fms)
 ##' @param explicitExt set if you wish to overwride the default extension
 ##' @param outputDirectory directory in which output files are stored. Defaults to NULL, i.e. 
@@ -38,6 +40,7 @@
 ##' to FALSE by default and should be set to TRUE is logging is desired.
 ##' @return nrOfProcessedFiles or if only one file to process return AsspDataObj of that file
 ##' @author Raphael Winkelmann
+##' @author Lasse Bombien
 ##' @useDynLib wrassp
 ##' @export
 'forest' <- function(listOfFiles = NULL, optLogFilePath = NULL,

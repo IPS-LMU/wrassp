@@ -50,5 +50,7 @@ moment of glottal closure.
 }
 \author{
 Raphael Winkelmann
+
+Lasse Bombien
 }
 

@@ -14,10 +14,11 @@
 ##' @param listOfFiles vector of file paths to be processed by function 
 ##' @param optLogFilePath path to option log file
 ##' @param beginTime = <time>: set begin of analysis interval to <time> seconds (default = 0: begin of file)
-##' @param centerTime set single-frame analysis with the analysis window centred at <time> seconds; overrules BeginTime, EndTime and WindowShift options
+##' @param centerTime set single-frame analysis with the analysis window centred at <time> seconds; 
+##' overrules beginTime, endTime and windowShift options
 ##' @param endTime = <time>: set end of analysis interval to <time> seconds (default = 0: end of file)
 ##' @param windowShift = <dur>: set analysis window shift to <dur> ms (default: 5.0)
-##' @param windowSize = <dur>: set analysis window size to <dur> ms; overrules EffectiveLength option
+##' @param windowSize = <dur>: set analysis window size to <dur> ms; overrules effectiveLength option
 ##' @param effectiveLength make window size effective rather than exact
 ##' @param window = <type>: set analysis window function to <type> (default: BLACKMAN)
 ##' @param order = <num>: set prediction order to <num> (default: sample rate in kHz + 3)
@@ -27,7 +28,7 @@
 ##' "LAR": log area ratios
 ##' "LPC": linear prediction filter coefficients
 ##' "RFC": reflection coefficients (default)
-##' @param toFile  write results to file (default extension dependent on LpType .arf/.lar/.lpc/.rfc)
+##' @param toFile write results to file (default extension dependent on LpType .arf/.lar/.lpc/.rfc)
 ##' @param explicitExt set if you wish to overwride the default extension
 ##' @param outputDirectory directory in which output files are stored. Defaults to NULL, i.e.
 ##' the directory of the input files
@@ -35,6 +36,7 @@
 ##' to FALSE by default and should be set to TRUE is logging is desired.
 ##' @return nrOfProcessedFiles or if only one file to process return AsspDataObj of that file
 ##' @author Raphael Winkelmann
+##' @author Lasse Bombien
 ##' @useDynLib wrassp
 ##' @export
 'rfcana' <- function(listOfFiles = NULL, optLogFilePath = NULL, 

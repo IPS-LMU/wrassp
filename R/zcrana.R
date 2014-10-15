@@ -8,19 +8,21 @@
 ##' @title zcrana
 ##' @param listOfFiles vector of file paths to be processed by function 
 ##' @param optLogFilePath path to option log file
-##' @param BeginTime = <time>: set begin of analysis interval to <time> seconds (default: begin of file)
-##' @param CenterTime = <time>  set single-frame analysis with the analysis window centred at <time> seconds; overrules BeginTime, EndTime and WindowShift options
-##' @param EndTime = <time>: set end of analysis interval to <time> seconds (default: end of file)
-##' @param WindowShift = <dur>: set analysis window shift to <dur> ms (default: 5.0)
-##' @param WindowSize = <dur>:  set analysis window size to <dur> ms (default: 25.0)
-##' @param ToFile write results to file (default extension is .zcr)
-##' @param ExplicitExt set if you wish to overwride the default extension
-##' @param OutputDirectory directory in which output files are stored. Defaults to NULL, i.e.
+##' @param beginTime = <time>: set begin of analysis interval to <time> seconds (default: begin of file)
+##' @param centerTime = <time>  set single-frame analysis with the analysis window centred at <time> seconds; 
+##' overrules beginTime, endTime and windowShift options
+##' @param endTime = <time>: set end of analysis interval to <time> seconds (default: end of file)
+##' @param windowShift = <dur>: set analysis window shift to <dur> ms (default: 5.0)
+##' @param windowSize = <dur>:  set analysis window size to <dur> ms (default: 25.0)
+##' @param toFile write results to file (default extension is .zcr)
+##' @param explicitExt set if you wish to overwride the default extension
+##' @param outputDirectory directory in which output files are stored. Defaults to NULL, i.e.
 ##' the directory of the input files
 ##' @param forceToLog is set by the global package variable useWrasspLogger. This is set
 ##' to FALSE by default and should be set to TRUE is logging is desired.
 ##' @return nrOfProcessedFiles or if only one file to process return AsspDataObj of that file
 ##' @author Raphael Winkelmann
+##' @author Lasse Bombien
 ##' @useDynLib wrassp
 ##' @export
 'zcrana' <- function(listOfFiles = NULL, optLogFilePath = NULL, 

@@ -31,6 +31,7 @@
 ##' to FALSE by default and should be set to TRUE is logging is desired.
 ##' @return nrOfProcessedFiles or if only one file to process return AsspDataObj of that file
 ##' @author Raphael Winkelmann
+##' @author Lasse Bombien
 ##' @aliases f0ana f0_ksv
 ##' @seealso \code{\link{mhsF0}} for an alternative pitch tracker
 ##' @useDynLib wrassp

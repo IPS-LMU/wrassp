@@ -11,10 +11,11 @@
 ##' @param listOfFiles vector of file paths to be processed by function
 ##' @param optLogFilePath path to option log file
 ##' @param beginTime = <time>:  set begin of analysis interval to <time> seconds (default = 0: begin of file)
-##' @param centerTime = <time>: set single-frame analysis with the analysis window centred at <time> seconds; overrules BeginTime, EndTime and WindowShift options
+##' @param centerTime = <time>: set single-frame analysis with the analysis window centred at <time> seconds; 
+##' overrules beginTime, endTime and windowShift options
 ##' @param endTime = <time>: set end of analysis interval to <time> seconds (default: end of file)
 ##' @param windowShift = <dur>: set analysis window shift to <dur> ms (default: 5.0)
-##' @param windowSize = <dur>: set analysis window size to <dur> ms; overrules EffectiveLength option
+##' @param windowSize = <dur>: set analysis window size to <dur> ms; overrules effectiveLength option
 ##' @param effectiveLength make window size effective rather than exact
 ##' @param linear calculate linear RMS values (default: values in dB)
 ##' @param window = <type>: set analysis window function to <type> (default: HAMMING)
@@ -26,6 +27,7 @@
 ##' to FALSE by default and should be set to TRUE is logging is desired.
 ##' @return nrOfProcessedFiles or if only one file to process return AsspDataObj of that file
 ##' @author Raphael Winkelmann
+##' @author Lasse Bombien
 ##' @useDynLib wrassp
 ##' @export
 'rmsana' <- function(listOfFiles = NULL, optLogFilePath = NULL,

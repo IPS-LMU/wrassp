@@ -5,40 +5,40 @@
 \alias{ksvF0}
 \title{ksvF0}
 \usage{
-ksvF0(listOfFiles = NULL, optLogFilePath = NULL, BeginTime = 0,
-  EndTime = 0, WindowShift = 5, Gender = "u", MaxF = 600, MinF = 50,
-  MinAmp = 50, MaxZCR = 3000, ToFile = TRUE, ExplicitExt = NULL,
-  OutputDirectory = NULL, forceToLog = useWrasspLogger)
+ksvF0(listOfFiles = NULL, optLogFilePath = NULL, beginTime = 0,
+  endTime = 0, windowShift = 5, gender = "u", maxF = 600, minF = 50,
+  minAmp = 50, maxZCR = 3000, toFile = TRUE, explicitExt = NULL,
+  outputDirectory = NULL, forceToLog = useWrasspLogger)
 }
 \arguments{
 \item{listOfFiles}{vector of file paths to be processed by function}
 
 \item{optLogFilePath}{path to option log file}
 
-\item{BeginTime}{= <time>: set begin of analysis interval to <time> seconds (default = 0: begin of data)}
+\item{beginTime}{= <time>: set begin of analysis interval to <time> seconds (default = 0: begin of data)}
 
-\item{EndTime}{set end of analysis interval to <time> seconds (default = 0: end of data)}
+\item{endTime}{set end of analysis interval to <time> seconds (default = 0: end of data)}
 
-\item{WindowShift}{= <dur>: set frame shift to <dur> ms (default: 5.0)}
+\item{windowShift}{= <dur>: set frame shift to <dur> ms (default: 5.0)}
 
-\item{Gender}{= <code>  set gender-specific F0 ranges; <code> may be:
+\item{gender}{= <code>  set gender-specific F0 ranges; <code> may be:
 "f[emale]" (80.0 - 640.0 Hz)
 "m[ale]" (50.0 - 400.0 Hz)
 "u[nknown]" (default; 50.0 - 600.0 Hz)}
 
-\item{MaxF}{= <freq>: set maximum F0 value to <freq> Hz (default: 500.0)}
+\item{maxF}{= <freq>: set maximum F0 value to <freq> Hz (default: 500.0)}
 
-\item{MinF}{= <freq>: set minimum F0 value to <freq> Hz (default: 50.0)}
+\item{minF}{= <freq>: set minimum F0 value to <freq> Hz (default: 50.0)}
 
-\item{MinAmp}{= <amp>: set amplitude threshold for voiced samples to <amp> (default: 100)}
+\item{minAmp}{= <amp>: set amplitude threshold for voiced samples to <amp> (default: 100)}
 
-\item{MaxZCR}{maximum zero crossing rate in Hz (for voicing detection)}
+\item{maxZCR}{maximum zero crossing rate in Hz (for voicing detection)}
 
-\item{ToFile}{write results to file (default extension is .f0)}
+\item{toFile}{write results to file (default extension is .f0)}
 
-\item{ExplicitExt}{set if you wish to overwride the default extension}
+\item{explicitExt}{set if you wish to overwride the default extension}
 
-\item{OutputDirectory}{directory in which output files are stored. Defaults to NULL, i.e.
+\item{outputDirectory}{directory in which output files are stored. Defaults to NULL, i.e.
 the directory of the input files}
 
 \item{forceToLog}{is set by the global package variable useWrasspLogger. This is set
@@ -63,6 +63,8 @@ name of the F0 file and the extension '.prd'.
 }
 \author{
 Raphael Winkelmann
+
+Lasse Bombien
 }
 \seealso{
 \code{\link{mhsF0}} for an alternative pitch tracker

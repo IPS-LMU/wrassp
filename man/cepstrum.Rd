@@ -3,10 +3,10 @@
 \alias{cepstrum}
 \title{cepstrum}
 \usage{
-cepstrum(listOfFiles = NULL, optLogFilePath = NULL, BeginTime = 0,
-  CenterTime = FALSE, EndTime = 0, Resolution = 40, FftLength = 0,
-  WindowShift = 5, Window = "BLACKMAN", ToFile = TRUE,
-  ExplicitExt = NULL, OutputDirectory = NULL,
+cepstrum(listOfFiles = NULL, optLogFilePath = NULL, beginTime = 0,
+  centerTime = FALSE, endTime = 0, resolution = 40, fftLength = 0,
+  windowShift = 5, window = "BLACKMAN", toFile = TRUE,
+  explicitExt = NULL, outputDirectory = NULL,
   forceToLog = useWrasspLogger)
 }
 \arguments{
@@ -14,33 +14,33 @@ cepstrum(listOfFiles = NULL, optLogFilePath = NULL, BeginTime = 0,
 
 \item{optLogFilePath}{path to option log file}
 
-\item{BeginTime}{= <time>: set begin of analysis interval to <time> seconds
+\item{beginTime}{= <time>: set begin of analysis interval to <time> seconds
 (default: begin of data)}
 
-\item{CenterTime}{= <time>: set single-frame analysis with the analysis
-window centred at <time> seconds; overrules BeginTime, EndTime and
-WindowShift options}
+\item{centerTime}{= <time>: set single-frame analysis with the analysis
+window centred at <time> seconds; overrules beginTime, endTime and
+windowShift options}
 
-\item{EndTime}{= <time>: set end of analysis interval to <time> seconds
+\item{endTime}{= <time>: set end of analysis interval to <time> seconds
 (default: end of data)}
 
-\item{Resolution}{= <freq>: set FFT length to the smallest value which
+\item{resolution}{= <freq>: set FFT length to the smallest value which
 results in a frequency resolution of <freq> Hz or better (default: 40.0)}
 
-\item{FftLength}{= <num>: set FFT length to <num> points (overrules default
-and 'Resolution' option)}
+\item{fftLength}{= <num>: set FFT length to <num> points (overrules default
+and 'resolution' option)}
 
-\item{WindowShift}{= <dur>: set analysis window shift to <dur> ms
+\item{windowShift}{= <dur>: set analysis window shift to <dur> ms
 (default: 5.0)}
 
-\item{Window}{= <type>: set analysis window function to <type> (default:
+\item{window}{= <type>: set analysis window function to <type> (default:
 BLACKMAN)}
 
-\item{ToFile}{write results to file (default extension depends on )}
+\item{toFile}{write results to file (default extension depends on )}
 
-\item{ExplicitExt}{set if you wish to overwride the default extension}
+\item{explicitExt}{set if you wish to overwride the default extension}
 
-\item{OutputDirectory}{directory in which output files are stored. Defaults to NULL, i.e.
+\item{outputDirectory}{directory in which output files are stored. Defaults to NULL, i.e.
 the directory of the input files}
 
 \item{forceToLog}{is set by the global package variable useWrasspLogger. This is set
@@ -60,7 +60,7 @@ coefficients per output record will also equal the
 FFT length / 2 + 1 (i.e. be non-mirrored).
 Analysis results will be written to a file with the
 base name of the input file and as extension '.cep'.
-Default output is in SSFF format with the
+Default output is in SSFF format with
 'cep' as track name.
 }
 \author{

@@ -3,49 +3,51 @@
 \alias{forest}
 \title{forest}
 \usage{
-forest(listOfFiles = NULL, optLogFilePath = NULL, BeginTime = 0,
-  EndTime = 0, WindowShift = 5, WindowSize = 20, EffectiveLength = TRUE,
-  NominalF1 = 500, Gender = "m", Estimate = FALSE, Order = 0,
-  IncrOrder = 0, NumFormants = 4, Window = "BLACKMAN",
-  Preemphasis = -0.8, ToFile = TRUE, ExplicitExt = NULL,
-  OutputDirectory = NULL, forceToLog = useWrasspLogger)
+forest(listOfFiles = NULL, optLogFilePath = NULL, beginTime = 0,
+  endTime = 0, windowShift = 5, windowSize = 20, effectiveLength = TRUE,
+  nominalF1 = 500, gender = "m", estimate = FALSE, order = 0,
+  incrOrder = 0, numFormants = 4, window = "BLACKMAN",
+  preemphasis = -0.8, toFile = TRUE, explicitExt = NULL,
+  outputDirectory = NULL, forceToLog = useWrasspLogger)
 }
 \arguments{
 \item{listOfFiles}{vector of file paths to be processed by function}
 
 \item{optLogFilePath}{path to option log file}
 
-\item{BeginTime}{= <time>: set begin of analysis interval to <time> seconds (default = 0: begin of data)}
+\item{beginTime}{= <time>: set begin of analysis interval to <time> seconds (default = 0: begin of data)}
 
-\item{EndTime}{= <time>:  set end of analysis interval to <time> seconds (default = 0: end of data)}
+\item{endTime}{= <time>:  set end of analysis interval to <time> seconds (default = 0: end of data)}
 
-\item{WindowShift}{= <dur>: set analysis window shift to <dur> ms (default: 5.0)}
+\item{windowShift}{= <dur>: set analysis window shift to <dur> ms (default: 5.0)}
 
-\item{WindowSize}{= <dur>: set analysis window size to <dur> ms (default: 30.0)}
+\item{windowSize}{= <dur>: set analysis window size to <dur> ms (default: 30.0)}
 
-\item{EffectiveLength}{make window size effective rather than exact}
+\item{effectiveLength}{make window size effective rather than exact}
 
-\item{NominalF1}{= <freq>: set nominal F1 frequency to <freq> Hz (default: 500.0 Hz)}
+\item{nominalF1}{= <freq>: set nominal F1 frequency to <freq> Hz (default: 500.0 Hz)}
 
-\item{Gender}{= <code>: set gender specific parameters where <code> = f[emale], m[ale] or u[nknown] (when <code>=f: eff. window length = 12.5 ms nominal F1 = 560.0 Hz)}
+\item{gender}{= <code>: set gender specific parameters where
+<code> = f[emale], m[ale] or u[nknown] (when <code>=f: eff. window length = 12.5 ms nominal F1 = 560.0 Hz)}
 
-\item{Estimate}{insert rough frequency estimates of missing formants (default: frequency set to zero)}
+\item{estimate}{insert rough frequency estimates of missing formants (default: frequency set to zero)}
 
-\item{Order}{decrease default order by 2 (one resonance less)}
+\item{order}{decrease default order by 2 (one resonance less)}
 
-\item{IncrOrder}{increase default order by 2 (one resonance more)}
+\item{incrOrder}{increase default order by 2 (one resonance more)}
 
-\item{NumFormants}{= <num>: set number of formants to <num> (default: 4;  maximum: 8 or half the LP order)}
+\item{numFormants}{= <num>: set number of formants to <num> (default: 4;  maximum: 8 or half the LP order)}
 
-\item{Window}{= <type>: set analysis window function to <type> (default: BLACKMAN)}
+\item{window}{= <type>: set analysis window function to <type> (default: BLACKMAN)}
 
-\item{Preemphasis}{= <val>: set pre-emphasis factor to <val> (-1 <= val <= 0) (default: dependent on sample rate and nominal F1)}
+\item{preemphasis}{= <val>: set pre-emphasis factor to <val> (-1 <= val <= 0)
+(default: dependent on sample rate and nominal F1)}
 
-\item{ToFile}{write results to file (default extension is .fms)}
+\item{toFile}{write results to file (default extension is .fms)}
 
-\item{ExplicitExt}{set if you wish to overwride the default extension}
+\item{explicitExt}{set if you wish to overwride the default extension}
 
-\item{OutputDirectory}{directory in which output files are stored. Defaults to NULL, i.e.
+\item{outputDirectory}{directory in which output files are stored. Defaults to NULL, i.e.
 the directory of the input files}
 
 \item{forceToLog}{is set by the global package variable useWrasspLogger. This is set
@@ -75,5 +77,7 @@ and 'bw')
 }
 \author{
 Raphael Winkelmann
+
+Lasse Bombien
 }
 

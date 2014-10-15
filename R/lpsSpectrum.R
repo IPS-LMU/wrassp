@@ -13,14 +13,14 @@
 ##' @param beginTime = <time>: set begin of analysis interval to <time> seconds
 ##' (default: begin of data)
 ##' @param centerTime = <time>: set single-frame analysis with the analysis
-##' window centred at <time> seconds; overrules BeginTime, EndTime and
-##' WindowShift options
+##' window centred at <time> seconds; overrules beginTime, endTime and
+##' windowShift options
 ##' @param endTime = <time>: set end of analysis interval to <time> seconds
 ##' (default: end of data)
 ##' @param resolution = <freq>: set FFT length to the smallest value which
 ##' results in a freqequency resolution of <freq> Hz or better (default: 40.0)
 ##' @param fftLength = <num>: set FFT length to <num> points (overrules default
-##' and 'Resolution' option)
+##' and 'resolution' option)
 ##' @param windowShift = <dur>: set analysis window shift to <dur> ms
 ##' (default: 5.0)
 ##' @param window = <type>: set analysis window function to <type> (default:

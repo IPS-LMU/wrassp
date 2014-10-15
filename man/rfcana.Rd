@@ -3,11 +3,11 @@
 \alias{rfcana}
 \title{rfcana}
 \usage{
-rfcana(listOfFiles = NULL, optLogFilePath = NULL, BeginTime = 0,
-  CenterTime = FALSE, EndTime = 0, WindowShift = 5, WindowSize = 20,
-  EffectiveLength = TRUE, Window = "BLACKMAN", Order = 0,
-  Preemphasis = -0.95, LpType = "RFC", ToFile = TRUE,
-  ExplicitExt = NULL, OutputDirectory = NULL,
+rfcana(listOfFiles = NULL, optLogFilePath = NULL, beginTime = 0,
+  centerTime = FALSE, endTime = 0, windowShift = 5, windowSize = 20,
+  effectiveLength = TRUE, window = "BLACKMAN", order = 0,
+  preemphasis = -0.95, lpType = "RFC", toFile = TRUE,
+  explicitExt = NULL, outputDirectory = NULL,
   forceToLog = useWrasspLogger)
 }
 \arguments{
@@ -15,35 +15,36 @@ rfcana(listOfFiles = NULL, optLogFilePath = NULL, BeginTime = 0,
 
 \item{optLogFilePath}{path to option log file}
 
-\item{BeginTime}{= <time>: set begin of analysis interval to <time> seconds (default = 0: begin of file)}
+\item{beginTime}{= <time>: set begin of analysis interval to <time> seconds (default = 0: begin of file)}
 
-\item{CenterTime}{set single-frame analysis with the analysis window centred at <time> seconds; overrules BeginTime, EndTime and WindowShift options}
+\item{centerTime}{set single-frame analysis with the analysis window centred at <time> seconds;
+overrules beginTime, endTime and windowShift options}
 
-\item{EndTime}{= <time>: set end of analysis interval to <time> seconds (default = 0: end of file)}
+\item{endTime}{= <time>: set end of analysis interval to <time> seconds (default = 0: end of file)}
 
-\item{WindowShift}{= <dur>: set analysis window shift to <dur> ms (default: 5.0)}
+\item{windowShift}{= <dur>: set analysis window shift to <dur> ms (default: 5.0)}
 
-\item{WindowSize}{= <dur>: set analysis window size to <dur> ms; overrules EffectiveLength option}
+\item{windowSize}{= <dur>: set analysis window size to <dur> ms; overrules effectiveLength option}
 
-\item{EffectiveLength}{make window size effective rather than exact}
+\item{effectiveLength}{make window size effective rather than exact}
 
-\item{Window}{= <type>: set analysis window function to <type> (default: BLACKMAN)}
+\item{window}{= <type>: set analysis window function to <type> (default: BLACKMAN)}
 
-\item{Order}{= <num>: set prediction order to <num> (default: sample rate in kHz + 3)}
+\item{order}{= <num>: set prediction order to <num> (default: sample rate in kHz + 3)}
 
-\item{Preemphasis}{= <val>: set pre-emphasis factor to <val> (default: -0.95)}
+\item{preemphasis}{= <val>: set pre-emphasis factor to <val> (default: -0.95)}
 
-\item{LpType}{= <type>: calculate <type> LP parameters; <type> may be:
+\item{lpType}{= <type>: calculate <type> LP parameters; <type> may be:
 "ARF": area function
 "LAR": log area ratios
 "LPC": linear prediction filter coefficients
 "RFC": reflection coefficients (default)}
 
-\item{ToFile}{write results to file (default extension dependent on LpType .arf/.lar/.lpc/.rfc)}
+\item{toFile}{write results to file (default extension dependent on LpType .arf/.lar/.lpc/.rfc)}
 
-\item{ExplicitExt}{set if you wish to overwride the default extension}
+\item{explicitExt}{set if you wish to overwride the default extension}
 
-\item{OutputDirectory}{directory in which output files are stored. Defaults to NULL, i.e.
+\item{outputDirectory}{directory in which output files are stored. Defaults to NULL, i.e.
 the directory of the input files}
 
 \item{forceToLog}{is set by the global package variable useWrasspLogger. This is set
@@ -69,5 +70,7 @@ Default output is in SSFF binary format (tracks 'rms',
 }
 \author{
 Raphael Winkelmann
+
+Lasse Bombien
 }
 
