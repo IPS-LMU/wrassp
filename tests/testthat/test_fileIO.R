@@ -19,9 +19,9 @@ test_that("read things that are written to disc are the same as origs", {
       res = do.call(func,as.list(funcFormals))
       path2new = paste(altDir, basename(wavFile), sep="/")
       sp=unlist(strsplit(path2new, ".", fixed = T))
-      sp[length(sp)] = funcFormals$ExplicitExt
+      sp[length(sp)] = funcFormals$explicitExt
       fromFile = read.AsspDataObj(paste(sp, collapse="."))
-      funcFormals$ToFile = FALSE
+      funcFormals$toFile = FALSE
       inMem = do.call(func,as.list(funcFormals))
       # test attributes if they are the same 
       for (at in names(attributes(fromFile))){
