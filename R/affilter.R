@@ -21,15 +21,15 @@
 ##' @title affilter
 ##' @param listOfFiles vector of file paths to be processed by function
 ##' @param optLogFilePath path to option log file 
-##' @param HighPass = <num>: set the high-pass cut-off frequency to <num> Hz (default: 0, no high-pass filtering)
-##' @param LowPass = <num>: set the low-pass cut-off frequency to <num> Hz (default: 0, no low-pass filtering)
-##' @param StopBand = <num>: set the stop-band attenuation to <num> dB (default: 93.0 dB, minimum: 21.0 dB)
-##' @param Transition = <num>: set the width of the transition band to <num> Hz (default: 250.0 Hz)
-##' @param UseIIR switch from the default FIR to IIR filter 
-##' @param NumIIRsections = <num>: set the number of 2nd order sections to <num> (default: 4) where each section adds 12dB/oct to the slope of the filter 
-##' @param ToFile write results to file (for default extension see details section))
-##' @param ExplicitExt set if you wish to overwride the default extension
-##' @param OutputDirectory directory in which output files are stored. Defaults to NULL, i.e. 
+##' @param highPass = <num>: set the high-pass cut-off frequency to <num> Hz (default: 0, no high-pass filtering)
+##' @param lowPass = <num>: set the low-pass cut-off frequency to <num> Hz (default: 0, no low-pass filtering)
+##' @param stopBand = <num>: set the stop-band attenuation to <num> dB (default: 93.0 dB, minimum: 21.0 dB)
+##' @param transition = <num>: set the width of the transition band to <num> Hz (default: 250.0 Hz)
+##' @param useIIR switch from the default FIR to IIR filter 
+##' @param numIIRsections = <num>: set the number of 2nd order sections to <num> (default: 4) where each section adds 12dB/oct to the slope of the filter 
+##' @param toFile write results to file (for default extension see details section))
+##' @param explicitExt set if you wish to overwride the default extension
+##' @param outputDirectory directory in which output files are stored. Defaults to NULL, i.e. 
 ##' the directory of the input files
 ##' @param forceToLog is set by the global package variable useWrasspLogger. This is set
 ##' to FALSE by default and should be set to TRUE is logging is desired.
@@ -38,11 +38,11 @@
 ##' @useDynLib wrassp
 ##' @export
 'affilter' <- function(listOfFiles = NULL, optLogFilePath = NULL, 
-                       HighPass = 4000, LowPass = 0, 
-                       StopBand = 96, Transition = 250, 
-                       UseIIR = FALSE, NumIIRsections = 4, 
-                       ToFile = TRUE, ExplicitExt = NULL,
-                       OutputDirectory = NULL, forceToLog = useWrasspLogger){
+                       highPass = 4000, lowPass = 0, 
+                       stopBand = 96, transition = 250, 
+                       useIIR = FALSE, numIIRsections = 4, 
+                       toFile = TRUE, explicitExt = NULL,
+                       outputDirectory = NULL, forceToLog = useWrasspLogger){
   
   ###########################
   ### a few parameter checks and expand paths
@@ -61,14 +61,14 @@
     }
   }
   
-  if (!is.null(OutputDirectory)) {
-    OutputDirectory = normalizePath(path.expand(OutputDirectory))
-    finfo  <- file.info(OutputDirectory)
+  if (!is.null(outputDirectory)) {
+    outputDirectory = normalizePath(path.expand(outputDirectory))
+    finfo  <- file.info(outputDirectory)
     if (is.na(finfo$isdir))
-      if (!dir.create(OutputDirectory, recursive=TRUE))
+      if (!dir.create(outputDirectory, recursive=TRUE))
         stop('Unable to create output directory.')
     else if (!finfo$isdir)
-      stop(paste(OutputDirectory, 'exists but is not a directory.'))
+      stop(paste(outputDirectory, 'exists but is not a directory.'))
   }
   ###########################
   # Pre-process file list
@@ -80,7 +80,7 @@
   if(length(listOfFiles)==1){
     pb <- NULL
   }else{
-    if(ToFile==FALSE){
+    if(toFile==FALSE){
       stop("length(listOfFiles) is > 1 and ToFile=FALSE! ToFile=FALSE only permitted for single files.")
     }
     cat('\n  INFO: applying affilter to', length(listOfFiles), 'files\n')
@@ -88,11 +88,11 @@
   }
   
   externalRes = invisible(.External("performAssp", listOfFiles, 
-                                    fname = "affilter", HighPass = HighPass, 
-                                    LowPass = LowPass, StopBand = StopBand, Transition = Transition, 
-                                    UseIIR = UseIIR, NumIIRsections = as.integer(NumIIRsections),
-                                    ToFile = ToFile, ExplicitExt = ExplicitExt, 
-                                    ProgressBar = pb, OutputDirectory = OutputDirectory,
+                                    fname = "affilter", highPass = highPass, 
+                                    lowPass = lowPass, stopBand = stopBand, transition = transition, 
+                                    useIIR = useIIR, numIIRsections = as.integer(numIIRsections),
+                                    toFile = toFile, explicitExt = explicitExt, 
+                                    progressBar = pb, outputDirectory = outputDirectory,
                                     PACKAGE = "wrassp"))
   
   ############################

@@ -112,25 +112,25 @@ W_OPT           afdiffOptions[] = {
  * AFFILTER option list 
  */
 W_OPT           affilterOptions[] = {
-    {"HighPass", WO_HPCUTOFF}
+    {"highPass", WO_HPCUTOFF}
     ,
-    {"LowPass", WO_LPCUTOFF}
+    {"lowPass", WO_LPCUTOFF}
     ,
-    {"StopBand", WO_STOPDB}
+    {"stopBand", WO_STOPDB}
     ,
-    {"Transition", WO_TBWIDTH}
+    {"transition", WO_TBWIDTH}
     ,
-    {"UseIIR", WO_USEIIR}
+    {"useIIR", WO_USEIIR}
     ,
-    {"NumIIRsections", WO_NUMIIRSECS}
+    {"numIIRsections", WO_NUMIIRSECS}
     ,
-    {"ExplicitExt", WO_OUTPUTEXT}
+    {"explicitExt", WO_OUTPUTEXT}
     ,                           /* DON'T FORGET EXTENSION!!! */
-    {"ProgressBar", WO_PBAR}
+    {"progressBar", WO_PBAR}
     ,
-    {"ToFile", WO_TOFILE}
+    {"toFile", WO_TOFILE}
     ,
-    {"OutputDirectory", WO_OUTPUTDIR}
+    {"outputDirectory", WO_OUTPUTDIR}
     ,
     /*
      * {"-channel"}

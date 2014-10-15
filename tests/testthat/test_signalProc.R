@@ -83,11 +83,11 @@ test_that("affilter doesn't break due to varying parameters", {
 
   for(i in 1:nrOfRandomCalls){
     params = list(listOfFiles=sample(wavFiles, 1)[[1]], optLogFilePath=NULL,
-                  HighPass=sample(posValsHighPass,1)[[1]], LowPass=sample(posValsLowPass,1)[[1]], 
-                  StopBand=sample(posValsStopBand,1)[[1]], Transition=sample(posValsTransition,1)[[1]], 
-                  UseIIR=sample(posValsUseIIR,1)[[1]], NumIIRsections=sample(posValsNumIIRsections,1)[[1]],
-                  ToFile=FALSE, ExplicitExt=NULL,
-                  OutputDirectory=NULL, forceToLog=useWrasspLogger)
+                  highPass=sample(posValsHighPass,1)[[1]], lowPass=sample(posValsLowPass,1)[[1]], 
+                  stopBand=sample(posValsStopBand,1)[[1]], transition=sample(posValsTransition,1)[[1]], 
+                  useIIR=sample(posValsUseIIR,1)[[1]], numIIRsections=sample(posValsNumIIRsections,1)[[1]],
+                  toFile=FALSE, explicitExt=NULL,
+                  outputDirectory=NULL, forceToLog=useWrasspLogger)
   
     # print(params)
     res = do.call(affilter, as.list(params))
