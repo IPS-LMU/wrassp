@@ -5,7 +5,7 @@
 context("test fileIO")
 
 test_that("read things that are written to disc are the same as origs", {
-
+  
   altDir = tempdir()
   
   wavFiles <- list.files(system.file("extdata", package = "wrassp"), pattern = glob2rx("*.wav"), full.names = TRUE)
@@ -14,8 +14,8 @@ test_that("read things that are written to disc are the same as origs", {
     for(wavFile in wavFiles){
       funcFormals = formals(func)
       funcFormals$listOfFiles = wavFile
-      funcFormals$OutputDirectory = altDir
-      funcFormals$ExplicitExt = "testthat"
+      funcFormals$outputDirectory = altDir
+      funcFormals$explicitExt = "testthat"
       res = do.call(func,as.list(funcFormals))
       path2new = paste(altDir, basename(wavFile), sep="/")
       sp=unlist(strsplit(path2new, ".", fixed = T))
@@ -31,15 +31,15 @@ test_that("read things that are written to disc are the same as origs", {
       }
       # test if data is the same
       expect_that(sum(unlist(inMem[attr(inMem,"names")]) == unlist(fromFile[attr(fromFile,"names")]))
-, equals(length(unlist(inMem[attr(inMem,"names")]))))
+                  , equals(length(unlist(inMem[attr(inMem,"names")]))))
     }
   }
-
+  
   # clean up
   files <- list.files(altDir, "testthat$", full.names=T)
-
+  
   for (file in files){
     unlink(file)
   }
-
+  
 })

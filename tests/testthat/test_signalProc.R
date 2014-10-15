@@ -26,13 +26,13 @@ test_that("acfana doesn't break due to varying parameters", {
 
   for(i in 1:nrOfRandomCalls){
     params = list(listOfFiles=sample(wavFiles, 1)[[1]], optLogFilePath=NULL, 
-                  BeginTime=sample(posValsBeginTime, 1)[[1]], CenterTime=sample(posValsCenterTime, 1)[[1]],
-                  EndTime=sample(posValsEndTime, 1)[[1]], WindowShift=sample(posValsWindowShift, 1)[[1]], 
-                  WindowSize=sample(posValsWindowSize, 1)[[1]], EffectiveLength=sample(posValsEffectiveLength, 1)[[1]], 
-                  Window=sample(posValsWindow, 1)[[1]], AnalysisOrder=sample(posValsAnalysisOrder, 1)[[1]], 
-                  EnergyNormalization=sample(posValsEnergyNormalization, 1)[[1]], LengthNormalization=sample(posValsLengthNormalization, 1)[[1]], 
-                  ExplicitExt=NULL, OutputDirectory=NULL,
-                  ToFile=FALSE, forceToLog=useWrasspLogger)
+                  beginTime=sample(posValsBeginTime, 1)[[1]], centerTime=sample(posValsCenterTime, 1)[[1]],
+                  endTime=sample(posValsEndTime, 1)[[1]], windowShift=sample(posValsWindowShift, 1)[[1]], 
+                  windowSize=sample(posValsWindowSize, 1)[[1]], effectiveLength=sample(posValsEffectiveLength, 1)[[1]], 
+                  window=sample(posValsWindow, 1)[[1]], analysisOrder=sample(posValsAnalysisOrder, 1)[[1]], 
+                  energyNormalization=sample(posValsEnergyNormalization, 1)[[1]], lengthNormalization=sample(posValsLengthNormalization, 1)[[1]], 
+                  explicitExt=NULL, outputDirectory=NULL,
+                  toFile=FALSE, forceToLog=useWrasspLogger)
     # print(params)
     res = do.call(acfana,as.list(params))
 

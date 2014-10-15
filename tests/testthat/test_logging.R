@@ -21,7 +21,7 @@ test_that("logging file content is the same as hard coded string", {
     for(wavFile in wavFiles[1]){
       funcFormals = formals(func)
       funcFormals$listOfFiles = wavFile
-      funcFormals$ToFile = FALSE
+      funcFormals$toFile = FALSE
       funcFormals$forceToLog = TRUE
       funcFormals$optLogFilePath = path2log
       res = do.call(func,as.list(funcFormals))

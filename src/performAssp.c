@@ -56,33 +56,33 @@ W_GENDER        gender[] = {
  * ACFANA option list
  */
 W_OPT           acfanaOptions[] = {
-    {"BeginTime", WO_BEGINTIME}
+    {"beginTime", WO_BEGINTIME}
     ,
-    {"CenterTime", WO_CENTRETIME}
+    {"centerTime", WO_CENTRETIME}
     ,
-    {"EndTime", WO_ENDTIME}
+    {"endTime", WO_ENDTIME}
     ,
-    {"WindowShift", WO_MSSHIFT}
+    {"windowShift", WO_MSSHIFT}
     ,
-    {"WindowSize", WO_MSSIZE}
+    {"windowSize", WO_MSSIZE}
     ,
-    {"EffectiveLength", WO_MSEFFLEN}
+    {"effectiveLength", WO_MSEFFLEN}
     ,
-    {"ExplicitExt", WO_OUTPUTEXT}
+    {"explicitExt", WO_OUTPUTEXT}
     ,                           /* DON'T FORGET EXTENSION!!! */
-    {"Window", WO_WINFUNC}
+    {"window", WO_WINFUNC}
     ,
-    {"AnalysisOrder", WO_ORDER}
+    {"analysisOrder", WO_ORDER}
     ,
-    {"EnergyNormalization", WO_ENERGYNORM}
+    {"energyNormalization", WO_ENERGYNORM}
     ,
-    {"LengthNormalization", WO_LENGTHNORM}
+    {"lengthNormalization", WO_LENGTHNORM}
     ,
-    {"ToFile", WO_TOFILE}
+    {"toFile", WO_TOFILE}
     ,
-    {"OutputDirectory", WO_OUTPUTDIR}
+    {"outputDirectory", WO_OUTPUTDIR}
     ,
-    {"ProgressBar", WO_PBAR}
+    {"progressBar", WO_PBAR}
     ,
     {NULL, WO_NONE}
 };

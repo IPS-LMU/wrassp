@@ -3,11 +3,11 @@
 \alias{acfana}
 \title{acfana}
 \usage{
-acfana(listOfFiles = NULL, optLogFilePath = NULL, BeginTime = 0,
-  CenterTime = FALSE, EndTime = 0, WindowShift = 5, WindowSize = 20,
-  EffectiveLength = TRUE, Window = "BLACKMAN", AnalysisOrder = 0,
-  EnergyNormalization = FALSE, LengthNormalization = FALSE, ToFile = TRUE,
-  ExplicitExt = NULL, OutputDirectory = NULL,
+acfana(listOfFiles = NULL, optLogFilePath = NULL, beginTime = 0,
+  centerTime = FALSE, endTime = 0, windowShift = 5, windowSize = 20,
+  effectiveLength = TRUE, window = "BLACKMAN", analysisOrder = 0,
+  energyNormalization = FALSE, lengthNormalization = FALSE, toFile = TRUE,
+  explicitExt = NULL, outputDirectory = NULL,
   forceToLog = useWrasspLogger)
 }
 \arguments{
@@ -15,31 +15,31 @@ acfana(listOfFiles = NULL, optLogFilePath = NULL, BeginTime = 0,
 
 \item{optLogFilePath}{path to option log file}
 
-\item{BeginTime}{= <time>: set begin of analysis interval to <time> seconds (default: 0 = beginning of file)}
+\item{beginTime}{= <time>: set begin of analysis interval to <time> seconds (default: 0 = beginning of file)}
 
-\item{CenterTime}{= <time>: set single-frame analysis with the analysis window centred at <time> seconds; overrules BeginTime, EndTime and WindowShift options}
+\item{centerTime}{= <time>: set single-frame analysis with the analysis window centred at <time> seconds; overrules BeginTime, EndTime and WindowShift options}
 
-\item{EndTime}{= <time>: set end of analysis interval to <time> seconds (default: 0 = end of file)}
+\item{endTime}{= <time>: set end of analysis interval to <time> seconds (default: 0 = end of file)}
 
-\item{WindowShift}{= <dur>: set analysis window shift to <dur> ms (default: 5.0)}
+\item{windowShift}{= <dur>: set analysis window shift to <dur> ms (default: 5.0)}
 
-\item{WindowSize}{= <dur>: set analysis window size to <dur> ms; overrules EffectiveLength parameter}
+\item{windowSize}{= <dur>: set analysis window size to <dur> ms; overrules EffectiveLength parameter}
 
-\item{EffectiveLength}{make window size effective rather than exact}
+\item{effectiveLength}{make window size effective rather than exact}
 
-\item{Window}{= <type>: set analysis window function to <type> (default: BLACKMAN)}
+\item{window}{= <type>: set analysis window function to <type> (default: BLACKMAN)}
 
-\item{AnalysisOrder}{= <num>: set analysis order to <num> (default: 0 = sample rate in kHz + 3)}
+\item{analysisOrder}{= <num>: set analysis order to <num> (default: 0 = sample rate in kHz + 3)}
 
-\item{EnergyNormalization}{calculate energy-normalized autocorrelation}
+\item{energyNormalization}{calculate energy-normalized autocorrelation}
 
-\item{LengthNormalization}{calculate length-normalized autocorrelation}
+\item{lengthNormalization}{calculate length-normalized autocorrelation}
 
-\item{ToFile}{write results to file (default extension is .acf)}
+\item{toFile}{write results to file (default extension is .acf)}
 
-\item{ExplicitExt}{set if you wish to overwride the default extension}
+\item{explicitExt}{set if you wish to overwride the default extension}
 
-\item{OutputDirectory}{directory in which output files are stored. Defaults to NULL, i.e.
+\item{outputDirectory}{directory in which output files are stored. Defaults to NULL, i.e.
 the directory of the input files}
 
 \item{forceToLog}{is set by the global package variable useWrasspLogger. This is set
