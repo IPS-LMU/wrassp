@@ -55,9 +55,9 @@ test_that("afdiff doesn't break due to varying parameters", {
 
   for(i in 1:nrOfRandomCalls){
     params = list(listOfFiles=sample(wavFiles, 1)[[1]], optLogFilePath=NULL, 
-                  ComputeBackwardDifferenc=sample(posValsComputeBackwardDifference,1)[[1]], ComputeCentralDifference=sample(posValsComputeCentralDifference,1)[[1]],
-                  Channel=sample(posValsChannel,1)[[1]], ToFile=FALSE,
-                  ExplicitExt=NULL, OutputDirectory=NULL,
+                  computeBackwardDifferenc=sample(posValsComputeBackwardDifference,1)[[1]], computeCentralDifference=sample(posValsComputeCentralDifference,1)[[1]],
+                  channel=sample(posValsChannel,1)[[1]], toFile=FALSE,
+                  explicitExt=NULL, outputDirectory=NULL,
                   forceToLog=useWrasspLogger)
     # print(params)
     res = do.call(afdiff,as.list(params))

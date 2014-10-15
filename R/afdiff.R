@@ -14,12 +14,12 @@
 ##' @title afdiff
 ##' @param listOfFiles vector of file paths to be processed by function
 ##' @param optLogFilePath path to option log file
-##' @param ComputeBackwardDifference compute backward difference (s'[n] = s[n] - s[n-1]) (default: forward difference s'[n] = s[n+1] - s[n])
-##' @param ComputeCentralDifference compute central/interpolated/3-point difference
-##' @param Channel = <num>: for multi-channel input files: extract and differentiate channel <num> (1 <= <num> <= 8  default: channel 1)
-##' @param ToFile write results to file (default extension is .d+(extensionsOfAudioFile))
-##' @param ExplicitExt set if you wish to overwride the default extension 
-##' @param OutputDirectory directory in which output files are stored. Defaults to NULL, i.e. 
+##' @param computeBackwardDifference compute backward difference (s'[n] = s[n] - s[n-1]) (default: forward difference s'[n] = s[n+1] - s[n])
+##' @param computeCentralDifference compute central/interpolated/3-point difference
+##' @param channel = <num>: for multi-channel input files: extract and differentiate channel <num> (1 <= <num> <= 8  default: channel 1)
+##' @param toFile write results to file (default extension is .d+(extensionsOfAudioFile))
+##' @param explicitExt set if you wish to overwride the default extension 
+##' @param outputDirectory directory in which output files are stored. Defaults to NULL, i.e. 
 ##' the directory of the input files
 ##' @param forceToLog is set by the global package variable useWrasspLogger. This is set
 ##' to FALSE by default and should be set to TRUE is logging is desired.
@@ -28,9 +28,9 @@
 ##' @useDynLib wrassp
 ##' @export
 'afdiff' <- function(listOfFiles = NULL, optLogFilePath = NULL, 
-                     ComputeBackwardDifference = FALSE, ComputeCentralDifference = FALSE, 
-                     Channel = 1, ToFile = TRUE, 
-                     ExplicitExt=NULL, OutputDirectory = NULL,
+                     computeBackwardDifference = FALSE, computeCentralDifference = FALSE, 
+                     channel = 1, toFile = TRUE, 
+                     explicitExt=NULL, outputDirectory = NULL,
                      forceToLog = useWrasspLogger){
   
   ###########################
@@ -50,14 +50,14 @@
     }
   }
   
-  if (!is.null(OutputDirectory)) {
-    OutputDirectory = normalizePath(path.expand(OutputDirectory))
-    finfo  <- file.info(OutputDirectory)
+  if (!is.null(outputDirectory)) {
+    outputDirectory = normalizePath(path.expand(outputDirectory))
+    finfo  <- file.info(outputDirectory)
     if (is.na(finfo$isdir))
-      if (!dir.create(OutputDirectory, recursive=TRUE))
+      if (!dir.create(outputDirectory, recursive=TRUE))
         stop('Unable to create output directory.')
     else if (!finfo$isdir)
-      stop(paste(OutputDirectory, 'exists but is not a directory.'))
+      stop(paste(outputDirectory, 'exists but is not a directory.'))
   }
   
   ###########################
@@ -78,10 +78,10 @@
   }
   
   externalRes = invisible(.External("performAssp", listOfFiles, 
-                                    fname = "afdiff", ComputeBackwardDifference = ComputeBackwardDifference, 
-                                    Channel = as.integer(Channel), ToFile = ToFile, 
-                                    ExplicitExt = ExplicitExt, ProgressBar=pb, 
-                                    OutputDirectory = OutputDirectory, PACKAGE = "wrassp"))
+                                    fname = "afdiff", computeBackwardDifference = computeBackwardDifference, 
+                                    channel = as.integer(channel), toFile = toFile, 
+                                    explicitExt = explicitExt, progressBar=pb, 
+                                    outputDirectory = outputDirectory, PACKAGE = "wrassp"))
   
   
   ############################

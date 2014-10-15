@@ -91,19 +91,19 @@ W_OPT           acfanaOptions[] = {
  * AFDIFF option list 
  */
 W_OPT           afdiffOptions[] = {
-    {"ComputeBackwardDifference", WO_DIFF_OPT_BACKWARD}
+    {"computeBackwardDifference", WO_DIFF_OPT_BACKWARD}
     ,
-    {"ComputeCentralDifference", WO_DIFF_OPT_CENTRAL}
+    {"computeCentralDifference", WO_DIFF_OPT_CENTRAL}
     ,
-    {"Channel", WO_CHANNEL}
+    {"channel", WO_CHANNEL}
     ,
-    {"ExplicitExt", WO_OUTPUTEXT}
+    {"explicitExt", WO_OUTPUTEXT}
     ,                           /* DON'T FORGET EXTENSION!!! */
-    {"ToFile", WO_TOFILE}
+    {"toFile", WO_TOFILE}
     ,
-    {"OutputDirectory", WO_OUTPUTDIR}
+    {"outputDirectory", WO_OUTPUTDIR}
     ,
-    {"ProgressBar", WO_PBAR}
+    {"progressBar", WO_PBAR}
     ,
     {NULL, WO_NONE}
 };

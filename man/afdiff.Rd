@@ -4,26 +4,26 @@
 \title{afdiff}
 \usage{
 afdiff(listOfFiles = NULL, optLogFilePath = NULL,
-  ComputeBackwardDifference = FALSE, ComputeCentralDifference = FALSE,
-  Channel = 1, ToFile = TRUE, ExplicitExt = NULL,
-  OutputDirectory = NULL, forceToLog = useWrasspLogger)
+  computeBackwardDifference = FALSE, computeCentralDifference = FALSE,
+  channel = 1, toFile = TRUE, explicitExt = NULL,
+  outputDirectory = NULL, forceToLog = useWrasspLogger)
 }
 \arguments{
 \item{listOfFiles}{vector of file paths to be processed by function}
 
 \item{optLogFilePath}{path to option log file}
 
-\item{ComputeBackwardDifference}{compute backward difference (s'[n] = s[n] - s[n-1]) (default: forward difference s'[n] = s[n+1] - s[n])}
+\item{computeBackwardDifference}{compute backward difference (s'[n] = s[n] - s[n-1]) (default: forward difference s'[n] = s[n+1] - s[n])}
 
-\item{ComputeCentralDifference}{compute central/interpolated/3-point difference}
+\item{computeCentralDifference}{compute central/interpolated/3-point difference}
 
-\item{Channel}{= <num>: for multi-channel input files: extract and differentiate channel <num> (1 <= <num> <= 8  default: channel 1)}
+\item{channel}{= <num>: for multi-channel input files: extract and differentiate channel <num> (1 <= <num> <= 8  default: channel 1)}
 
-\item{ToFile}{write results to file (default extension is .d+(extensionsOfAudioFile))}
+\item{toFile}{write results to file (default extension is .d+(extensionsOfAudioFile))}
 
-\item{ExplicitExt}{set if you wish to overwride the default extension}
+\item{explicitExt}{set if you wish to overwride the default extension}
 
-\item{OutputDirectory}{directory in which output files are stored. Defaults to NULL, i.e.
+\item{outputDirectory}{directory in which output files are stored. Defaults to NULL, i.e.
 the directory of the input files}
 
 \item{forceToLog}{is set by the global package variable useWrasspLogger. This is set
