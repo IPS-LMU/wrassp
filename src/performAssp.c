@@ -157,29 +157,29 @@ W_OPT           affilterOptions[] = {
  * F0_KSV (aka ksvF0, f0ana) option list 
  */
 W_OPT           f0_ksvOptions[] = {
-    {"BeginTime", WO_BEGINTIME}
+    {"beginTime", WO_BEGINTIME}
     ,
-    {"EndTime", WO_ENDTIME}
+    {"endTime", WO_ENDTIME}
     ,
-    {"WindowShift", WO_MSSHIFT}
+    {"windowShift", WO_MSSHIFT}
     ,
-    {"Gender", WO_GENDER}
+    {"gender", WO_GENDER}
     ,
-    {"MaxF", WO_MAXF}
+    {"maxF", WO_MAXF}
     ,
-    {"MinF", WO_MINF}
+    {"minF", WO_MINF}
     ,
-    {"MinAmp", WO_VOIMAG}
+    {"minAmp", WO_VOIMAG}
     ,
-    {"MaxZCR", WO_VOIZCR}
+    {"maxZCR", WO_VOIZCR}
     ,
-    {"ProgressBar", WO_PBAR}
+    {"progressBar", WO_PBAR}
     ,
-    {"ExplicitExt", WO_OUTPUTEXT}
+    {"explicitExt", WO_OUTPUTEXT}
     ,                           /* DON'T FORGET EXTENSION!!! */
-    {"ToFile", WO_TOFILE}
+    {"toFile", WO_TOFILE}
     ,
-    {"OutputDirectory", WO_OUTPUTDIR}
+    {"outputDirectory", WO_OUTPUTDIR}
     ,
     {NULL, WO_NONE}
 };
@@ -188,39 +188,39 @@ W_OPT           f0_ksvOptions[] = {
  * MHSF0 (aka f0_mhs, mhspitch) option list 
  */
 W_OPT           f0_mhsOptions[] = {
-    {"BeginTime", WO_BEGINTIME}
+    {"beginTime", WO_BEGINTIME}
     ,
-    {"CenterTime", WO_CENTRETIME}
+    {"centerTime", WO_CENTRETIME}
     ,
-    {"EndTime", WO_ENDTIME}
+    {"endTime", WO_ENDTIME}
     ,
-    {"WindowShift", WO_MSSHIFT}
+    {"windowShift", WO_MSSHIFT}
     ,
-    {"Gender", WO_GENDER}
+    {"gender", WO_GENDER}
     ,
-    {"MaxF", WO_MAXF}
+    {"maxF", WO_MAXF}
     ,
-    {"MinF", WO_MINF}
+    {"minF", WO_MINF}
     ,
-    {"MinAmp", WO_VOIMAG}
+    {"minAmp", WO_VOIMAG}
     ,
-    {"MinAC1", WO_VOIAC1PP}
+    {"minAC1", WO_VOIAC1PP}
     ,
-    {"MinRMS", WO_VOIRMS}
+    {"minRMS", WO_VOIRMS}
     ,
-    {"MaxZCR", WO_VOIZCR}
+    {"maxZCR", WO_VOIZCR}
     ,
-    {"MinProb", WO_VOIPROB}
+    {"minProb", WO_VOIPROB}
     ,
-    {"ProgressBar", WO_PBAR}
+    {"progressBar", WO_PBAR}
     ,
-    {"PlainSpectrum", WO_MHS_OPT_POWER}
+    {"plainSpectrum", WO_MHS_OPT_POWER}
     ,
-    {"ExplicitExt", WO_OUTPUTEXT}
+    {"explicitExt", WO_OUTPUTEXT}
     ,                           /* DON'T FORGET EXTENSION!!! */
-    {"ToFile", WO_TOFILE}
+    {"toFile", WO_TOFILE}
     ,
-    {"OutputDirectory", WO_OUTPUTDIR}
+    {"outputDirectory", WO_OUTPUTDIR}
     ,
     {NULL, WO_NONE}
 };
@@ -229,39 +229,39 @@ W_OPT           f0_mhsOptions[] = {
  * FOREST option list
  */
 W_OPT           forestOptions[] = {
-    {"BeginTime", WO_BEGINTIME}
+    {"beginTime", WO_BEGINTIME}
     ,
-    {"EndTime", WO_ENDTIME}
+    {"endTime", WO_ENDTIME}
     ,
-    {"WindowShift", WO_MSSHIFT}
+    {"windowShift", WO_MSSHIFT}
     ,
-    {"WindowSize", WO_MSSIZE}
+    {"windowSize", WO_MSSIZE}
     ,
-    {"EffectiveLength", WO_MSEFFLEN}
+    {"effectiveLength", WO_MSEFFLEN}
     ,
-    {"NominalF1", WO_NOMF1}
+    {"nominalF1", WO_NOMF1}
     ,
-    {"Gender", WO_GENDER}
+    {"gender", WO_GENDER}
     ,
-    {"Estimate", WO_INS_EST}
+    {"estimate", WO_INS_EST}
     ,
-    {"Order", WO_ORDER}
+    {"order", WO_ORDER}
     ,
-    {"IncrOrder", WO_INCREMENT}
+    {"incrOrder", WO_INCREMENT}
     ,
-    {"NumFormants", WO_NUMFORMANTS}
+    {"numFormants", WO_NUMFORMANTS}
     ,
-    {"Window", WO_WINFUNC}
+    {"window", WO_WINFUNC}
     ,
-    {"Preemphasis", WO_PREEMPH}
+    {"preemphasis", WO_PREEMPH}
     ,
-    {"ExplicitExt", WO_OUTPUTEXT}
+    {"explicitExt", WO_OUTPUTEXT}
     ,                           /* DON'T FORGET EXTENSION!!! */
-    {"ProgressBar", WO_PBAR}
+    {"progressBar", WO_PBAR}
     ,
-    {"ToFile", WO_TOFILE}
+    {"toFile", WO_TOFILE}
     ,
-    {"OutputDirectory", WO_OUTPUTDIR}
+    {"outputDirectory", WO_OUTPUTDIR}
     ,
     {NULL, WO_NONE}
 };
@@ -270,33 +270,33 @@ W_OPT           forestOptions[] = {
  * RFCANA option list 
  */
 W_OPT           rfcanaOptions[] = {
-    {"BeginTime", WO_BEGINTIME}
+    {"beginTime", WO_BEGINTIME}
     ,
-    {"CenterTime", WO_CENTRETIME}
+    {"centerTime", WO_CENTRETIME}
     ,
-    {"EndTime", WO_ENDTIME}
+    {"endTime", WO_ENDTIME}
     ,
-    {"WindowShift", WO_MSSHIFT}
+    {"windowShift", WO_MSSHIFT}
     ,
-    {"WindowSize", WO_MSSIZE}
+    {"windowSize", WO_MSSIZE}
     ,
-    {"EffectiveLength", WO_MSEFFLEN}
+    {"effectiveLength", WO_MSEFFLEN}
     ,
-    {"ExplicitExt", WO_OUTPUTEXT}
+    {"explicitExt", WO_OUTPUTEXT}
     ,                           /* DON'T FORGET EXTENSION!!! */
-    {"Window", WO_WINFUNC}
+    {"window", WO_WINFUNC}
     ,
-    {"Order", WO_ORDER}
+    {"order", WO_ORDER}
     ,
-    {"Preemphasis", WO_PREEMPH}
+    {"preemphasis", WO_PREEMPH}
     ,
-    {"LpType", WO_TYPE}
+    {"lpType", WO_TYPE}
     ,
-    {"ProgressBar", WO_PBAR}
+    {"progressBar", WO_PBAR}
     ,
-    {"ToFile", WO_TOFILE}
+    {"toFile", WO_TOFILE}
     ,
-    {"OutputDirectory", WO_OUTPUTDIR}
+    {"outputDirectory", WO_OUTPUTDIR}
     ,
     {NULL, WO_NONE}
 };
@@ -305,29 +305,29 @@ W_OPT           rfcanaOptions[] = {
  * RMSANA OPTION LIST
  */
 W_OPT           rmsanaOptions[] = {
-    {"BeginTime", WO_BEGINTIME}
+    {"beginTime", WO_BEGINTIME}
     ,
-    {"CenterTime", WO_CENTRETIME}
+    {"centerTime", WO_CENTRETIME}
     ,
-    {"EndTime", WO_ENDTIME}
+    {"endTime", WO_ENDTIME}
     ,
-    {"WindowShift", WO_MSSHIFT}
+    {"windowShift", WO_MSSHIFT}
     ,
-    {"WindowSize", WO_MSSIZE}
+    {"windowSize", WO_MSSIZE}
     ,
-    {"EffectiveLength", WO_MSEFFLEN}
+    {"effectiveLength", WO_MSEFFLEN}
     ,
-    {"Linear", WO_RMS_OPT_LINEAR}
+    {"linear", WO_RMS_OPT_LINEAR}
     ,
-    {"ExplicitExt", WO_OUTPUTEXT}
+    {"explicitExt", WO_OUTPUTEXT}
     ,                           /* DON'T FORGET EXTENSION!!! */
-    {"Window", WO_WINFUNC}
+    {"window", WO_WINFUNC}
     ,
-    {"ProgressBar", WO_PBAR}
+    {"progressBar", WO_PBAR}
     ,
-    {"ToFile", WO_TOFILE}
+    {"toFile", WO_TOFILE}
     ,
-    {"OutputDirectory", WO_OUTPUTDIR}
+    {"outputDirectory", WO_OUTPUTDIR}
     ,
     {NULL, WO_NONE}
 };
@@ -337,59 +337,59 @@ W_OPT           rmsanaOptions[] = {
  * option list 
  */
 W_OPT           spectrumOptions[] = {
-    {"BeginTime", WO_BEGINTIME}
+    {"beginTime", WO_BEGINTIME}
     ,
-    {"CenterTime", WO_CENTRETIME}
+    {"centerTime", WO_CENTRETIME}
     ,
-    {"EndTime", WO_ENDTIME}
+    {"endTime", WO_ENDTIME}
     ,
-    {"SpectrumType", WO_TYPE}
+    {"spectrumType", WO_TYPE}
     ,
-    {"Resolution", WO_RESOLUTION}
+    {"resolution", WO_RESOLUTION}
     ,
-    {"FftLength", WO_FFTLEN}
+    {"fftLength", WO_FFTLEN}
     ,
-    {"WindowSize", WO_MSSIZE}
+    {"windowSize", WO_MSSIZE}
     ,
-    {"WindowShift", WO_MSSHIFT}
+    {"windowShift", WO_MSSHIFT}
     ,
-    {"Window", WO_WINFUNC}
+    {"window", WO_WINFUNC}
     ,
 
     /*
      * DFT spectrum 
      */
-    {"Bandwidth", WO_BANDWIDTH}
+    {"bandwidth", WO_BANDWIDTH}
     ,
 
     /*
      * LP smoothed spectrum 
      */
-    {"EffectiveLength", WO_MSEFFLEN}
+    {"effectiveLength", WO_MSEFFLEN}
     ,
-    {"Order", WO_ORDER}
+    {"order", WO_ORDER}
     ,
-    {"Preemphasis", WO_PREEMPH}
+    {"preemphasis", WO_PREEMPH}
     ,
-    {"Deemphasize", WO_LPS_OPT_DEEMPH}
+    {"deemphasize", WO_LPS_OPT_DEEMPH}
     ,
 
     /*
      * Cepstrally smoothed spectrum 
      */
-    {"NumCeps", WO_ORDER}
+    {"numCeps", WO_ORDER}
     ,
 
     /*
      * general stuff 
      */
-    {"ExplicitExt", WO_OUTPUTEXT}
+    {"explicitExt", WO_OUTPUTEXT}
     ,                           /* DON'T FORGET EXTENSION!!! */
-    {"ProgressBar", WO_PBAR}
+    {"progressBar", WO_PBAR}
     ,
-    {"ToFile", WO_TOFILE}
+    {"toFile", WO_TOFILE}
     ,
-    {"OutputDirectory", WO_OUTPUTDIR}
+    {"outputDirectory", WO_OUTPUTDIR}
     ,
     {NULL, WO_NONE}
 };
@@ -398,17 +398,17 @@ W_OPT           spectrumOptions[] = {
  * ZCRANA option list
  */
 W_OPT           zcranaOptions[] = {
-    {"BeginTime", WO_BEGINTIME}
+    {"beginTime", WO_BEGINTIME}
     ,
-    {"CenterTime", WO_CENTRETIME}
+    {"centerTime", WO_CENTRETIME}
     ,
-    {"EndTime", WO_ENDTIME}
+    {"endTime", WO_ENDTIME}
     ,
-    {"WindowShift", WO_MSSHIFT}
+    {"windowShift", WO_MSSHIFT}
     ,
-    {"WindowSize", WO_MSSIZE}
+    {"windowSize", WO_MSSIZE}
     ,
-    {"ExplicitExt", WO_OUTPUTEXT}
+    {"explicitExt", WO_OUTPUTEXT}
     ,                           /* DON'T FORGET EXTENSION!!! */
     /*
      * {"Window", WO_WINFUNC} 
@@ -416,11 +416,11 @@ W_OPT           zcranaOptions[] = {
     /*
      * , 
      */
-    {"ProgressBar", WO_PBAR}
+    {"progressBar", WO_PBAR}
     ,
-    {"ToFile", WO_TOFILE}
+    {"toFile", WO_TOFILE}
     ,
-    {"OutputDirectory", WO_OUTPUTDIR}
+    {"outputDirectory", WO_OUTPUTDIR}
     ,
     {NULL, WO_NONE}
 };
