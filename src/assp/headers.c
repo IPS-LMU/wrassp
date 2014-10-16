@@ -55,6 +55,7 @@
 #include <esps_lbl.h>   /* ESPS xlabel format */
 #include <uwm_xrmb.h>   /* Wisconsin X-ray microbeam formats */
 
+#include <R_ext/PrtUtil.h>
 /*
  * macros
  */
@@ -2712,7 +2713,7 @@ LOCAL int getSSFFhdr(DOBJ *dop)
       	 * if so than field[1] must be a valid SSFF size/type thingy as defined above 
       	 * in SSFF_TYPES
       	 */
-      	for (ssff_type = SSFF_TYPES; ssff_type->type != SSFF_UNDEF; ssff_type = ssff_type++) {
+      	for (ssff_type = SSFF_TYPES; ssff_type->type != SSFF_UNDEF; ssff_type++) {
       		if (strncmp(field[1], ssff_type->ident, strlen(ssff_type->ident)) == 0)
       			break;
       	}
