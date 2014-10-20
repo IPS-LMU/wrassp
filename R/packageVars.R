@@ -21,7 +21,7 @@ wrasspOutputInfos = list("acfana" = list("ext"= c("acf"), "tracks"=c("acf"), "ou
   "mhsF0" = list("ext"= c("pit"), "tracks"=c("pitch"), "outputType"="SSFF"),
   "forest" = list("ext"= c("fms"), "tracks"=c("fm", "bw"), "outputType"="SSFF"),
   "lpsSpectrum" = list("ext"= c("lps"), "tracks"=c("lps"), "outputType"="SSFF"),
-  "rfcana" = list("ext"= c("arf", "lar", "lpc", "rfc"), "tracks"=c("rms", "gain", "arf|lar|lpc|rfc"), "outputType"="SSFF"),
+  "rfcana" = list("ext"= c("rfc", "arf", "lar", "lpc"), "tracks"=c("rms", "gain", "arf|lar|lpc|rfc"), "outputType"="SSFF"),
   "rmsana" = list("ext"= c("rms"), "tracks"=c("rms"), "outputType"="SSFF"),
   "zcrana" = list("ext"= c("zcr"), "tracks"=c("zcr"), "outputType"="SSFF")
   )

@@ -25,7 +25,8 @@ Maintainer: Lasse Bombien <lasse@phonetik.uni-muenchen.de>, Raphael
 VignetteBuilder: knitr
 Suggests:
     testthat(>= 0.7.1.99),
-    knitr
+    knitr,
+    compare(>= 0.2.4)
 Depends:
     tools
 URL: https://github.com/IPS-LMU/wrassp
