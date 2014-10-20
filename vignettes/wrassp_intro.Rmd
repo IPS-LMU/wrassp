@@ -10,6 +10,8 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
+## Introduction
+
 This document is meant to be an introduction to the `wrassp`
 package. `wrassp` is a wrapper to Michel Scheffer's libassp
 (Advanced Speech Signal Processor). The libassp library aims at
@@ -23,6 +25,8 @@ functions to R in a (hopefully) user friendly manner.
 
 Let's get started by locating some example material distributed with
 the package.
+
+## File I/0 and the AsspDataObj
 
 ```{r}
 # load the package
@@ -78,8 +82,10 @@ head(au$audio)
 plot(au$audio[c(TRUE, rep(FALSE,9))], type='l', ylab='Audio')
 ```
 
-`wrassp` is of course capable of a lot more than just the mere reading 
-of audio files. Next we will use `wrassp` to calculate the formant values,
+# Signal processing
+
+`wrassp` is of course capable of a lot more than just the mere reading or writing 
+of signal files. Next we will use `wrassp` to calculate the formant values,
 their corresponding bandwidths, the zero-crossing-rate values and 
 the rms-energy values of the audio stored in `wavfiles[1]`.
 
