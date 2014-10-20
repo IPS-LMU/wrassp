@@ -20,14 +20,10 @@ License: GPL (>= 2)
 Author: Lasse Bombien [aut, cre],
     Raphael Winkelmann [aut, cre],
     Michel Scheffers [ctb]
-Maintainer: Lasse Bombien <lasse@phonetik.uni-muenchen.de>, Raphael
-    Winkelmann <raphael@phonetik.uni-muenchen.de>
 VignetteBuilder: knitr
 Suggests:
     testthat(>= 0.7.1.99),
     knitr,
     compare(>= 0.2.4)
-Depends:
-    tools
 URL: https://github.com/IPS-LMU/wrassp
 BugReports: https://github.com/IPS-LMU/wrassp/issues
