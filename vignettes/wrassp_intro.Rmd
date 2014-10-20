@@ -1,13 +1,12 @@
 ---
 title: "An introduction to the wrassp package"
-author:
-  name: Lasse Bombien & Raphael Winkelmann
-  affiliation: Institute Of Phonetic And Speech Processing (LMU Munich) 
-date: 20th of October 2014
+author: "Lasse Bombien & Raphael Winkelmann"
+affiliation: "Institute Of Phonetic And Speech Processing (LMU Munich)"
+date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  \VignetteEngine{knitr::rmarkdown}
-  \VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 ---
 

@@ -9,7 +9,6 @@
 *.tar.gz
 *.zip
 *.tgz
-
 # OS generated files #
 ######################
 .DS_Store
@@ -20,18 +19,16 @@
 Icon?
 ehthumbs.db
 Thumbs.db
-
 # Emacs Backups #
 ################
 *~
-
 # Sublime Stuff #
 #################
 *.sublime*
-
 # R Project #
 #############
 .Rproj.user
 *.Rproj
 .Rhistory
 .Rapp.history
+inst/doc
