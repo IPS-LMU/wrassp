@@ -5,7 +5,7 @@ affiliation: "Institute Of Phonetic And Speech Processing (LMU Munich)"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{An introduction to the wrassp package}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 ---
