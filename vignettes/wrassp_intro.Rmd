@@ -10,11 +10,11 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
-## Introduction
+# Introduction
 
-This document is meant to be an introduction to the `wrassp`
-package. `wrassp` is a wrapper to Michel Scheffer's libassp
-(Advanced Speech Signal Processor). The libassp library aims at
+This document is meant as an introduction to the `wrassp`
+package. `wrassp` is a **w**rapper for **R** to Michel Scheffer's libassp
+(**A**dvanced **S**peech **S**ignal **P**rocessor). The libassp library aims at
 providing functionality for handling speech signal files in most
 common audio formats and for performing analyses common in phonetic
 science/speech science. This includes the calculation of formants,
@@ -23,18 +23,19 @@ of spectral analyses, zero crossing rate, filtering etc. This wrapper
 library for R exposes a large subset of the signal processing
 functions to R in a (hopefully) user friendly manner.  
 
+
+# File I/0 and the AsspDataObj
+
 Let's get started by locating some example material distributed with
 the package.
-
-## File I/0 and the AsspDataObj
 
 ```{r}
 # load the package
 library(wrassp)
-# some audio files come along with the package
-wavpath <- system.file('extdata', package='wrassp')
-wavfiles <- list.files(wavpath, pattern=glob2rx('*.wav'), full.names=TRUE)
-# now we have some files to play with
+# get the path to the data that comes with the package
+wavPath = system.file('extdata', package='wrassp')
+# now list the .wav files so we have some audio files to play with
+wavFiles = list.files(wavPath, pattern=glob2rx('*.wav'), full.names=TRUE)
 ```
 
 One of the aims of `wrassp` is to provide mechanisms to handle
@@ -45,21 +46,30 @@ files. `wrassp` therefore comes with a class called
 
 ```{r}
 # load an audio file, e.g. the first one in the list above
-au <- read.AsspDataObj(wavfiles[1])
+au = read.AsspDataObj(wavFiles[1])
+# show class
 class(au)
+# print object description
 print(au)
 ```
 
-`au` is an object of the named class and, using `print`, we can get some information on the object, such as it's sampling rate, its duration and what kind of data are stored in what form. Since the file we loaded is audio only, the object contains exactly one track. And since it's a mono file, the track only has one field. We will later encounter different types of data with more than one track and more fields.
+`au` is an object of the class `AsspDataObj` and, using `print`,
+we can get some information about the object, such as it's sampling
+rate, its duration and what kind of data are stored in what form. Since
+the file we loaded is audio only, the object contains exactly one track.
+And since it's a mono file, this track only has one field. We will later
+encounter different types of data with more than one track and more 
+fields per track.
 
-There are more ways to extract attributes from the object, such as duration, sampling rate and the number of records:
+Here are some more ways of extracting attributes from the object, such as 
+duration, sampling rate and the number of records:
 
 ```{r}
-# duration
+# extract duration
 dur.AsspDataObj(au)
-# sampling rate
+# extract sampling rate
 rate.AsspDataObj(au)
-# number of records/samples
+# extract number of records/samples
 numRecs.AsspDataObj(au)
 ```
 
@@ -74,39 +84,98 @@ have a different number of columns (number of fields). Each track has
 a name and we can access the track using that name.
 
 ```{r}
+# extract track names
 tracks.AsspDataObj(au)
-#or
+# or an alternative way to extract track names
 names(au)
+# show head of samples
 head(au$audio)
-# and we can of course also plot this data (only every tenth element)
-plot(au$audio[c(TRUE, rep(FALSE,9))], type='l', ylab='Audio')
+# and we can of course also plot these samples (only plot every 10th element to accelarate plotting)
+plot(au$audio[c(TRUE, rep(FALSE,9))], type='l', ylab='Audio samples')
+```
+
+Now, purely to give us something unequal to the original `au` object to write
+to disc, lets manipulate the audio data by simply multiplying 
+all the sample values with a factor of `0.5`. The resulting 
+`AsspDataObj` will then be saved to a temporary directory provided by `R`.
+
+```{r}
+# manipulate the audio
+au$audio = au$audio * 0.5
+# write file to tempdir
+dir = tempdir()
+writeres = write.AsspDataObj(au, file.path(dir, 'newau.wav'))
 ```
 
 # Signal processing
 
-`wrassp` is of course capable of a lot more than just the mere reading or writing 
-of signal files. Next we will use `wrassp` to calculate the formant values,
-their corresponding bandwidths, the zero-crossing-rate values and 
-the rms-energy values of the audio stored in `wavfiles[1]`.
+`wrassp` is of course capable of a lot more than just the mere reading and writing 
+of specific signal file formats. We will now use `wrassp` to calculate the formant values,
+their corresponding bandwidths, the fundamental frequency contour and 
+the RMS-energy contour of the audio file `wavFiles[1]`.
 
+## Formants and their bandwidths
 ```{r}
 # calculate formants and corresponding bandwidth values
-fmvals = forest(wavfiles[1], toFile=F)
-# the ToFile=F returns an object of the type AsspDataObj
-class(fmvals)
+fmBwVals = forest(wavFiles[1], toFile=F)
+# due to toFile=F this returns an object of the type AsspDataObj and 
+# prevents the result beeing saved to disc as an SSFF file
+class(fmBwVals)
 # this time containing muliple tracks (formants + their bandwidths)
-tracks.AsspDataObj(fmvals)
-
-# calculate the zero-crossing-rate of the signal
-zcrvals = zcrana(wavfiles[1], toFile=F)
-# calculate the rms energy of the signal
-rmsvals = rmsana(wavfiles[1], toFile=F)
-
-# now plot all of these contours
-
+tracks.AsspDataObj(fmBwVals)
+# with more than one field (in this case F1/F2/F3/F4)
+dim(fmBwVals$fm)
 # plot the formant values
-matplot(fmvals$fm, type='l', ylab='formants')
-# plot the RMS energy
-plot(rmsvals$rms, type='l', ylab='RMS')
-
+matplot(fmBwVals$fm, type='l', ylab='formants')
 ```
+
+## Fundamental frequency contour
+
+```{r}
+# calculate the fundamental frequency contour
+f0vals = ksvF0(wavFiles[1], toFile=F)
+# plot the fundamental frequency contour
+plot(f0vals$F0, type='l', ylab='F0')
+```
+
+## RMS-energy contour
+
+Seeing as one might want to reuse some of the computed signals at a later stage, 
+`wrassp` allows the user to write the result out to file by leaving the
+`toFile` parameter set to `TRUE`. This also allows users to process more than one file at 
+once.
+
+```{r}
+# calculate the RMS-energy contour for all wavFiles
+rmsana(wavFiles, outputDirectory = tempdir())
+# list new files using wrasspOutputInfos$rmsana$ext (see below)
+rmsFilePaths = list.files(tempdir(), 
+                          pattern = paste0('*.',wrasspOutputInfos$rmsana$ext), 
+                          full.names = T)
+# read in first rms file 
+rmsvals = read.AsspDataObj(rmsFilePaths[1])
+# plot the RMS-energy contour
+plot(rmsvals$rms, type='l', ylab='RMS')
+```
+
+
+# The wrasspOutputInfos object
+
+`wrasspOutputInfos` stores meta information associated with the different signal 
+processing functions `wrassp` provides.
+
+```{r}
+# show all function names
+names(wrasspOutputInfos)
+```
+
+This object can be useful to get additional information about a specific 
+`wrassp` function. It holds information about the default file extension (`ext`), the tracks produced 
+(`tracks`) and the output file type (`outputType`) of any given `wrassp` function.
+
+```{r}
+# show outputinfos of function forest
+wrasspOutputInfos$forest
+```
+
+
