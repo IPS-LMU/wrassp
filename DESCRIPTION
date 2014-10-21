@@ -1,5 +1,5 @@
 Package: wrassp
-Version: 0.0.5
+Version: 0.0.6
 Date: 2013-06-06
 Title: R interface to ASSP Library
 Authors@R: c(person("Lasse", "Bombien", role = c("aut", "cre"), email =
