@@ -8,14 +8,14 @@ Authors@R: c(person("Lasse", "Bombien", role = c("aut", "cre"), email =
     "raphael@phonetik.uni-muenchen.de"), person("Michel",
     "Scheffers", role = "ctb"))
 Maintainer: Raphael Winkelmann <raphael@phonetik.uni-muenchen.de>
-Description: wrassp is a wrapper to Michel Scheffer's libassp (Advanced Speech
+Description: wrassp is a wrapper around Michel Scheffer's libassp (Advanced Speech
     Signal Processor). The libassp library aims at providing functionality for
     handling speech signal files in most common audio formats and for
     performing analyses common in phonetic science/speech science. This
     includes the calculation of formants, fundamental frequency, root mean
     square, auto correlation, a variety of spectral analyses, zero crossing
-    rate, filtering etc. This wrapper library for R exposes a large subset of
-    the signal processing functions to R in a (hopefully) user friendly manner.
+    rate, filtering etc. This wrapper provides R with a large subset 
+    of libassp's signal processing functions in a (hopefully) user-friendly manner.
 License: GPL (>= 2)
 Author: Lasse Bombien [aut, cre],
     Raphael Winkelmann [aut, cre],
