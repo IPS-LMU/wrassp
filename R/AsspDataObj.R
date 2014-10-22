@@ -40,7 +40,7 @@
     cat(sprintf("Format: %s (%s)\n", AsspFileFormat(x), AsspDataFormat(x)))
     cat(paste(as.integer(numRecs.AsspDataObj(x)),
               "records at", attr(x, 'sampleRate'), "Hz\n"))
-    cat(sprintf("Duration: %f ms\n", dur.AsspDataObj(x)))
+    cat(sprintf("Duration: %f s\n", dur.AsspDataObj(x)))
     cat(paste("Number of tracks:", length(names(x)), "\n"))
     for (track in names(x)) {
         cat('\t', track)
