@@ -2,7 +2,7 @@
 ##' 
 ##' @param listOfFiles The list of file names to process
 ##' @return A normalised list of filenames
-##' @author Matt Hillman
+##' @author Raphael Winkelmann
 ##' @examples
 ##' 
 ##' 
