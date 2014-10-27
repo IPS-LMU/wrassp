@@ -45,6 +45,13 @@
 #include <dataobj.h>    /* data object definitions and handler */
 #include <headers.h>    /* header definitions and handler */
 
+/* OS check for printing %llu and %lli*/
+#ifdef __unix__
+
+#elif defined(_WIN32) || defined(WIN32) || defined(_WIN64) || defined(WIN64) 
+  #define OS_Windows
+#endif
+
 /*DOC
 
 Function 'asspFOpen'
@@ -621,10 +628,19 @@ long asspFPrint(void *buffer, long startRecord, long numRecords,\
 	else {
 	  for(n = 0; n < dd->numFields; n++) {
 	    if(n == 0)
+      #ifdef OS_Windows
+        err = fprintf(dop->fp, "%I64u", (unsigned long long)(*u64Ptr));
+      #else
 	      err = fprintf(dop->fp, "%llu", (unsigned long long)(*u64Ptr));
+      #endif
 	    else
+      #ifdef OS_Windows
 	      err = fprintf(dop->fp, "%s%llu", dd->sepChars,\
 			    (unsigned long long)u64Ptr[n]);
+      #else
+        err = fprintf(dop->fp, "%s%I64u", dd->sepChars,\
+			    (unsigned long long)u64Ptr[n]);
+      #endif
 	    if(err < 0) break;
 	  }
 	}
