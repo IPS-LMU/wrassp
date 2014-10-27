@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/IPS-LMU/wrassp.svg?branch=master)](https://travis-ci.org/IPS-LMU/wrassp)
 
-`wrassp` is a wrapper for R around Michel Scheffer's [libassp](http://libassp.sourceforge.net/)
+`wrassp` is a wrapper for R around Michel Scheffers's [libassp](http://libassp.sourceforge.net/)
 (Advanced Speech Signal Processor). The libassp library aims at providing functionality for handling speech signal files in most common audio formats and for performing analyses common in phonetic science/speech science. This includes the calculation of formants, fundamental frequency, root mean square, auto correlation, a variety of spectral analyses, zero crossing rate, filtering etc. This wrapper provides R with a large subset of libassp's signal processing functions and provides them to the user in a (hopefully) user-friendly manner.
 
 

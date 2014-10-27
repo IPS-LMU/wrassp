@@ -5,7 +5,7 @@ Authors@R: as.person(c(
     "Raphael Winkelmann <raphael@phonetik.uni-muenchen.de> [aut, cre]",
     "Lasse Bombien <lasse@phonetik.uni-muenchen.de> [aut]",
     "Michel Scheffers [aut]"))
-Description: wrassp is a wrapper around Michel Scheffer's libassp (Advanced
+Description: wrassp is a wrapper around Michel Scheffers's libassp (Advanced
     Speech Signal Processor). The libassp library aims at providing
     functionality for handling speech signal files in most common audio formats
     and for performing analyses common in phonetic science/speech science. This
