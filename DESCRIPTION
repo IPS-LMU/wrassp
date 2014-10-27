@@ -1,13 +1,10 @@
 Package: wrassp
-Version: 0.0.6
-Date: 2013-06-06
+Version: 0.1.0
 Title: R interface to ASSP Library
-Authors@R: c(person("Lasse", "Bombien", role = c("aut", "cre"), email =
-    "lasse@phonetik.uni-muenchen.de"), person("Raphael",
-    "Winkelmann", role = c("aut","cre"), email =
-    "raphael@phonetik.uni-muenchen.de"), person("Michel",
-    "Scheffers", role = "ctb"))
-Maintainer: Raphael Winkelmann <raphael@phonetik.uni-muenchen.de>
+Authors@R: as.person(c(
+    "Raphael Winkelmann <raphael@phonetik.uni-muenchen.de> [aut, cre]",
+    "Lasse Bombien <lasse@phonetik.uni-muenchen.de> [aut]",
+    "Michel Scheffers [aut]"))
 Description: wrassp is a wrapper around Michel Scheffer's libassp (Advanced Speech
     Signal Processor). The libassp library aims at providing functionality for
     handling speech signal files in most common audio formats and for
@@ -17,13 +14,10 @@ Description: wrassp is a wrapper around Michel Scheffer's libassp (Advanced Spee
     rate, filtering etc. This wrapper provides R with a large subset of libassp's signal processing
     functions and provides them to the user in a (hopefully) user-friendly manner.
 License: GPL (>= 2)
-Author: Lasse Bombien [aut, cre],
-    Raphael Winkelmann [aut, cre],
-    Michel Scheffers [ctb]
 VignetteBuilder: knitr
 Suggests:
-    testthat(>= 0.7.1.99),
-    knitr,
-    compare(>= 0.2.4)
+    compare(>= 0.2.4),
+    knitr(>= 1.7),
+    testthat(>= 0.7.1.99)
 URL: https://github.com/IPS-LMU/wrassp
 BugReports: https://github.com/IPS-LMU/wrassp/issues
