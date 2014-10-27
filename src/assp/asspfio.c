@@ -628,19 +628,19 @@ long asspFPrint(void *buffer, long startRecord, long numRecords,\
 	else {
 	  for(n = 0; n < dd->numFields; n++) {
 	    if(n == 0)
-      #ifdef OS_Windows
-        err = fprintf(dop->fp, "%I64u", (unsigned long long)(*u64Ptr));
-      #else
-	      err = fprintf(dop->fp, "%llu", (unsigned long long)(*u64Ptr));
-      #endif
+        #ifdef OS_Windows
+          err = fprintf(dop->fp, "%I64u", (unsigned long long)(*u64Ptr));
+        #else
+	        err = fprintf(dop->fp, "%llu", (unsigned long long)(*u64Ptr));
+        #endif
 	    else
-      #ifdef OS_Windows
-	      err = fprintf(dop->fp, "%s%llu", dd->sepChars,\
-			    (unsigned long long)u64Ptr[n]);
-      #else
-        err = fprintf(dop->fp, "%s%I64u", dd->sepChars,\
-			    (unsigned long long)u64Ptr[n]);
-      #endif
+        #ifdef OS_Windows
+	        err = fprintf(dop->fp, "%s%I64u", dd->sepChars,\
+			      (unsigned long long)u64Ptr[n]);
+        #else
+          err = fprintf(dop->fp, "%s%llu", dd->sepChars,\
+			      (unsigned long long)u64Ptr[n]);
+        #endif
 	    if(err < 0) break;
 	  }
 	}
@@ -660,10 +660,19 @@ long asspFPrint(void *buffer, long startRecord, long numRecords,\
 	else {
 	  for(n = 0; n < dd->numFields; n++) {
 	    if(n == 0)
-	      err = fprintf(dop->fp, "%lli", (long long)(*i64Ptr));
+        #ifdef OS_Windows
+	        err = fprintf(dop->fp, "%I64d", (long long)(*i64Ptr));
+        #else
+          err = fprintf(dop->fp, "%lli", (long long)(*i64Ptr));
+        #endif
 	    else
-	      err = fprintf(dop->fp, "%s%lli", dd->sepChars,\
-			    (long long)i64Ptr[n]);
+        #ifdef OS_Windows
+	        err = fprintf(dop->fp, "%s%I64d", dd->sepChars,\
+			      (long long)i64Ptr[n]);
+        #else
+          err = fprintf(dop->fp, "%s%lli", dd->sepChars,\
+			      (long long)i64Ptr[n]);        
+        #endif
 	    if(err < 0) break;
 	  }
 	}
