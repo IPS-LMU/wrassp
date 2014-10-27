@@ -14,11 +14,13 @@ Description: wrassp is a wrapper around Michel Scheffer's libassp (Advanced
     rate, filtering etc. This wrapper provides R with a large subset of
     libassp's signal processing functions and provides them to the user in a
     (hopefully) user-friendly manner.
-License: GPL (>= 2)
+Depends:
+    R (>= 3.0.0)
 VignetteBuilder: knitr
 Suggests:
     compare(>= 0.2.4),
     knitr(>= 1.7),
     testthat(>= 0.7.1.99)
+License: GPL (>= 2)
 URL: https://github.com/IPS-LMU/wrassp
 BugReports: https://github.com/IPS-LMU/wrassp/issues
