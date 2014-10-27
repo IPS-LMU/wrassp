@@ -13,7 +13,7 @@ vignette: >
 # Introduction
 
 This document is meant as an introduction to the `wrassp`
-package. `wrassp` is a **w**rapper for **R** around Michel Scheffer's [libassp](http://libassp.sourceforge.net/)
+package. `wrassp` is a **w**rapper for **R** around Michel Scheffers's [libassp](http://libassp.sourceforge.net/)
 (**A**dvanced **S**peech **S**ignal **P**rocessor). The libassp library aims at
 providing functionality for handling speech signal files in most
 common audio formats and for performing analyses common in phonetic
@@ -94,7 +94,7 @@ names(au)
 head(au$audio)
 
 # and we can of course also plot these samples 
-# (only plot every 10th element to accelarate plotting)
+# (only plot every 10th element to accelerate plotting)
 plot(seq(0,numRecs.AsspDataObj(au) - 1, 10) / rate.AsspDataObj(au), 
      au$audio[c(TRUE, rep(FALSE,9))], 
      type='l', 
@@ -132,7 +132,7 @@ class(fmBwVals)
 # extract track names
 # this time the object contains muliple tracks (formants + their bandwidths)
 tracks.AsspDataObj(fmBwVals)
-# with more than one field (in this case F1/F2/F3/F4)
+# with more than one field (in this case 250 F1/F2/F3/F4 values)
 dim(fmBwVals$fm)
 # plot the formant values
 matplot(seq(0,numRecs.AsspDataObj(fmBwVals) - 1) / rate.AsspDataObj(fmBwVals) + 
@@ -171,7 +171,7 @@ rmsana(wavFiles, outputDirectory = tempdir())
 rmsFilePaths = list.files(tempdir(), 
                           pattern = paste0('*.',wrasspOutputInfos$rmsana$ext), 
                           full.names = T)
-# read in first rms file 
+# read first rms file 
 rmsvals = read.AsspDataObj(rmsFilePaths[1])
 # plot the RMS energy contour
 plot(seq(0,numRecs.AsspDataObj(rmsvals) - 1) / rate.AsspDataObj(rmsvals) +
@@ -209,5 +209,5 @@ We hope this document gives you a rough idea of how to use the `wrassp` package 
 it is capable of. For more information about the individual functions please consult the
 respective R documentations (e.g. `?dftSpectrum`). 
 
-For questions that might have already been answered or if you have an 
+To find questions that might have already been answered or if you have an 
 issue or a bug to report please use our [GitHub issue tracker](https://github.com/IPS-LMU/wrassp/issues).
