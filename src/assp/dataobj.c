@@ -865,7 +865,7 @@ void clearDataBuf(DOBJ *dop)
 {
   register size_t numBytes;
   register long   n, N;
-  register void  *ptr;
+  register char  *ptr;
 
   if(dop != NULL) {
     if(dop->dataBuffer != NULL && dop->recordSize > 0) {
@@ -1179,7 +1179,7 @@ long mapRecord(DOBJ *dst, DOBJ *src, long recordNr)
 {
   size_t    numBytes, numFields, n;
   long      numMapped;
-  void     *srcRec, *dstRec, *srcDat, *dstDat;
+  char     *srcRec, *dstRec, *srcDat, *dstDat;
   uint8_t  *u8Val;
   int8_t   *i8Val;
   uint16_t *u16Val;
@@ -1215,18 +1215,18 @@ long mapRecord(DOBJ *dst, DOBJ *src, long recordNr)
     setAsspMsg(AEB_BUF_RANGE, "(mapRecord)");
     return(-1);
   }
-  srcRec = src->dataBuffer + (recordNr - src->bufStartRec)*(src->recordSize);
+  srcRec = (char *)src->dataBuffer + (recordNr - src->bufStartRec)*(src->recordSize);
   if(recordNr >= (dst->bufStartRec + dst->bufNumRecs)) {
     /* zero missing records in destination buffer */
     numBytes = dst->recordSize;
-    dstRec = dst->dataBuffer + (dst->bufNumRecs)*numBytes;
+    dstRec = (char *)dst->dataBuffer + (dst->bufNumRecs)*numBytes;
     while(recordNr >= (dst->bufStartRec + dst->bufNumRecs)) {
       memset(dstRec, 0, numBytes);
       (dst->bufNumRecs)++;
       dstRec += numBytes;
     }
   }
-  dstRec = dst->dataBuffer + (recordNr - dst->bufStartRec)*(dst->recordSize);
+  dstRec = (char *)dst->dataBuffer + (recordNr - dst->bufStartRec)*(dst->recordSize);
   numMapped = 0;
   for(srcDD = &(src->ddl); srcDD != NULL; srcDD = srcDD->next) {
     dstDD = findDDesc(dst, srcDD->type, srcDD->ident);
@@ -1955,7 +1955,7 @@ int getSmpFrame(DOBJ *smpDOp, long nr, long size, long shift, long head,\
       memset(frame, 0, numZeros * dstSize);     /* 0 fits all formats */
       begSn += (long)numZeros;           /* adjust range to be copied */
       numCopy -= (long)numZeros;
-      frame += (numZeros * dstSize);
+      frame = (void *)((char *)frame + (numZeros * dstSize));
     }
     if(endSn > absEndSn) {              /* need to add trailing zeros */
       numZeros = (size_t)(endSn - absEndSn);
@@ -2113,7 +2113,7 @@ int getSmpFrame(DOBJ *smpDOp, long nr, long size, long shift, long head,\
     return(-1);
   }
   if(numZeros > 0) {                            /* set trailing zeros */
-    frame += (numCopy * dstSize);            /* adjust target pointer */
+    frame = (void *)((char *)frame + (numCopy * dstSize));            /* adjust target pointer */
     memset(frame, 0, numZeros * dstSize);
   }
   return(0);

@@ -649,7 +649,7 @@ LOCAL int storeLP(LP_OUT *LPtr, long frameNr, DOBJ *dop)
   }
   ndx = frameNr - dop->bufStartRec;
   numBytes = ndx * dop->recordSize;           /* offset to frame data */
-  fPtr = (float *)(dop->dataBuffer + numBytes);
+  fPtr = (float *)((void *)((char *)dop->dataBuffer + numBytes));
   dd = &(dop->ddl);
   *(fPtr++) = (float)(LPtr->RMS);
   dd = dd->next;

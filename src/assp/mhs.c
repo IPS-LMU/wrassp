@@ -1478,19 +1478,19 @@ LOCAL int storeMHS(float val, long frameNr, DOBJ *dop)
 LOCAL int insElement(void *array, size_t numElements, size_t elementSize,\
 		     size_t index, void *element)
 {
-  void   *srcPtr, *dstPtr;
+  char *srcPtr, *dstPtr;
   size_t  numBytes;
 
   if(index >= numElements || array == NULL ||\
      element == NULL || elementSize == 0)
     return(-1);
   if(index < (numElements-1)) {     /* shift elements to create space */
-    srcPtr = array + index*elementSize;
+    srcPtr = (char *)array + index*elementSize;
     dstPtr = srcPtr + elementSize;
     numBytes = (numElements-1 - index)*elementSize;
     memmove(dstPtr, srcPtr, numBytes);
   }
-  dstPtr = array + index*elementSize;           /* insert new element */
+  dstPtr = (char *)array + index*elementSize;           /* insert new element */
   memcpy(dstPtr, element, elementSize);
   return(0);
 }
@@ -1500,19 +1500,19 @@ LOCAL int insElement(void *array, size_t numElements, size_t elementSize,\
 LOCAL int rmvElement(void *array, size_t numElements, size_t elementSize,\
 		     size_t index, void *fill)
 {
-  void   *srcPtr, *dstPtr;
+  char   *srcPtr, *dstPtr;
   size_t  numBytes;
 
   if(index >= numElements || array == NULL || elementSize == 0)
     return(-1);
   if(index < (numElements-1)) {          /* move elements to fill gap */
-    dstPtr = array + index*elementSize;
+    dstPtr = (char *)array + index*elementSize;
     srcPtr = dstPtr + elementSize;
     numBytes = (numElements-1 - index)*elementSize;
     memmove(dstPtr, srcPtr, numBytes);
   }
   if(fill != NULL) {                    /* set filler at end of array */
-    dstPtr = array + (numElements-1)*elementSize;
+    dstPtr = (char *)array + (numElements-1)*elementSize;
     memcpy(dstPtr, fill, elementSize);
   }
   return(0);

@@ -443,7 +443,7 @@ getDObjTrackData(DOBJ * data, DDESC * desc)
     }
 
     for (m = 0; m < data->bufNumRecs; m++) {
-        bufPtr = data->dataBuffer + m * data->recordSize;
+        bufPtr = (void *)((char *)data->dataBuffer + m * data->recordSize);
         memcpy(tempBuffer, bufPtr, (size_t) data->recordSize);
         switch (desc->format) {
         case DF_UINT8:
@@ -899,7 +899,7 @@ addTrackData(DOBJ * dop, DDESC * ddl, SEXP rdobj)
     i = 0;                      /* initial index in buffer */
 
     for (m = 0; m < dop->numRecords; m++) {
-        bufPtr = dop->dataBuffer + m * dop->recordSize;
+        bufPtr = (void *)((char *)dop->dataBuffer + m * dop->recordSize);
         bPtr = (uint8_t *) bufPtr;
         switch (ddl->format) {
         case DF_UINT8:

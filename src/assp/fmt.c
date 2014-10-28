@@ -1744,7 +1744,7 @@ LOCAL int storeFMT(FMTDATA *fPtr, long frameNr, DOBJ *dop)
   int      FILE_OUT;
   size_t   numBytes, n;
   long     ndx;
-  void    *vPtr;
+  char    *vPtr;
   int16_t *i16Ptr;
   double  *dPtr;
   DDESC   *dd;
@@ -1768,7 +1768,7 @@ LOCAL int storeFMT(FMTDATA *fPtr, long frameNr, DOBJ *dop)
   }
   ndx = frameNr - dop->bufStartRec;
   numBytes = ndx * dop->recordSize;           /* offset to frame data */
-  vPtr = dop->dataBuffer + numBytes;
+  vPtr = (char *)dop->dataBuffer + numBytes;
   dd = &(dop->ddl);
   if(dd->type == DT_LP1) {
     dPtr = (double *)vPtr;

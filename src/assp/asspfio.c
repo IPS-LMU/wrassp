@@ -897,7 +897,7 @@ DOC*/
 
 long recordIndex(DOBJ *dop, long nr, long head, long tail)
 {
-  void  *rPtr;
+  char  *rPtr;
   size_t recSize;
   long   recordNr, eofRecNr, numRead;
   ENDIAN sysEndian={MSB};
@@ -998,7 +998,7 @@ DOC*/
 long frameIndex(DOBJ *smpDOp, long nr, long size, long shift,\
 		long head, long tail)
 {
-  void  *rPtr;
+  char  *rPtr;
   size_t recSize;
   long   frameSn, begRecNr, recordNr, endRecNr, eofRecNr, numRead;
   ENDIAN sysEndian={MSB};

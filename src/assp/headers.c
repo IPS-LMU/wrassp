@@ -547,7 +547,7 @@ DOC*/
 
 char *genWAVhdr(DOBJ *dop)
 {
-  void    *ptr;
+  char    *ptr;
   char    *header=NULL;
   int      SWAP, NEED_FACT;
   uint16_t dataFormat, bitsPerSample;
@@ -873,7 +873,7 @@ LOCAL int checkXRMB(DOBJ *dop)
 ***********************************************************************/
 LOCAL int getAIFhdr(DOBJ *dop)
 {
-  void    *ptr;
+  char    *ptr;
   char     buf[ONEkBYTE];
   int      err, SWAP;
   size_t   numBytes;
@@ -1094,7 +1094,7 @@ LOCAL int getAIFhdr(DOBJ *dop)
 ***********************************************************************/
 LOCAL int putAIFhdr(DOBJ *dop)
 {
-  void   *ptr;
+  char   *ptr;
   char    header[AIFC_MIN_HDR];
   int     SWAP;
   size_t  numBytes;
@@ -1221,7 +1221,7 @@ LOCAL int putAIFhdr(DOBJ *dop)
 ***********************************************************************/
 LOCAL int getCSLhdr(DOBJ *dop)
 {
-  void    *ptr;
+  char    *ptr;
   char     buf[ONEkBYTE];
   int      err, SWAP;
   size_t   numBytes;
@@ -1365,7 +1365,7 @@ LOCAL int getCSLhdr(DOBJ *dop)
 ***********************************************************************/
 LOCAL int putCSLhdr(DOBJ *dop)
 {
-  void    *ptr;
+  char    *ptr;
   char    *date, header[CSL_MIN_HDR];
   int      SWAP;
   size_t   numBytes;
@@ -3643,7 +3643,7 @@ LOCAL int adjustTiming(DOBJ *dop)
 LOCAL void *putU8(uint8_t val, void **ptr)
 {
   memcpy(*ptr, &val, 1);
-  (*ptr) += 1;
+  (*ptr) = (void *)((char *)(*ptr) + 1);
   return(*ptr);
 }
 /* LOCAL int8_t getI8(void **ptr) */
@@ -3657,7 +3657,7 @@ LOCAL void *putU8(uint8_t val, void **ptr)
 LOCAL void *putI8(int8_t val, void **ptr)
 {
   memcpy(*ptr, &val, 1);
-  (*ptr) += 1;
+  (*ptr) = (void *)((char *)(*ptr) + 1);
   return(*ptr);
 }
 LOCAL uint16_t getU16(void **ptr, int SWAP)
@@ -3666,14 +3666,14 @@ LOCAL uint16_t getU16(void **ptr, int SWAP)
 
   if(SWAP) memswab(&val, *ptr, 2, 1);
   else memcpy(&val, *ptr, 2);
-  (*ptr) += 2;
+  (*ptr) = (void *)((char *)(*ptr) + 2);
   return(val);
 }
 LOCAL void *putU16(uint16_t val, void **ptr, int SWAP)
 {
   if(SWAP) memswab(*ptr, &val, 2, 1);
   else memcpy(*ptr, &val, 2);
-  (*ptr) += 2;
+  (*ptr) = (void *)((char *)(*ptr) + 2);
   return(*ptr);
 }
 LOCAL int16_t getI16(void **ptr, int SWAP)
@@ -3682,14 +3682,14 @@ LOCAL int16_t getI16(void **ptr, int SWAP)
 
   if(SWAP) memswab(&val, *ptr, 2, 1);
   else memcpy(&val, *ptr, 2);
-  (*ptr) += 2;
+  (*ptr) = (void *)((char *)(*ptr) + 2);
   return(val);
 }
 LOCAL void *putI16(int16_t val, void **ptr, int SWAP)
 {
   if(SWAP) memswab(*ptr, &val, 2, 1);
   else memcpy(*ptr, &val, 2);
-  (*ptr) += 2;
+  (*ptr) = (void *)((char *)(*ptr) + 2);
   return(*ptr);
 }
 LOCAL uint32_t getU32(void **ptr, int SWAP)
@@ -3698,14 +3698,14 @@ LOCAL uint32_t getU32(void **ptr, int SWAP)
 
   if(SWAP) memswab(&val, *ptr, 4, 1);
   else memcpy(&val, *ptr, 4);
-  (*ptr) += 4;
+  (*ptr) = (void *)((char *)(*ptr) + 4);
   return(val);
 }
 LOCAL void *putU32(uint32_t val, void **ptr, int SWAP)
 {
   if(SWAP) memswab(*ptr, &val, 4, 1);
   else memcpy(*ptr, &val, 4);
-  (*ptr) += 4;
+  (*ptr) = (void *)((char *)(*ptr) + 4);
   return(*ptr);
 }
 LOCAL int32_t getI32(void **ptr, int SWAP)
@@ -3714,14 +3714,14 @@ LOCAL int32_t getI32(void **ptr, int SWAP)
 
   if(SWAP) memswab(&val, *ptr, 4, 1);
   else memcpy(&val, *ptr, 4);
-  (*ptr) += 4;
+  (*ptr) = (void *)((char *)(*ptr) + 4);
   return(val);
 }
 LOCAL void *putI32(int32_t val, void **ptr, int SWAP)
 {
   if(SWAP) memswab(*ptr, &val, 4, 1);
   else memcpy(*ptr, &val, 4);
-  (*ptr) += 4;
+  (*ptr) = (void *)((char *)(*ptr) + 4);
   return(*ptr);
 }
 LOCAL float getF32(void **ptr, int SWAP)
@@ -3730,13 +3730,13 @@ LOCAL float getF32(void **ptr, int SWAP)
 
   if(SWAP) memswab(&val, *ptr, 4, 1);
   else memcpy(&val, *ptr, 4);
-  (*ptr) += 4;
+  (*ptr) = (void *)((char *)(*ptr) + 4);
   return(val);
 }
 LOCAL void *putF32(float val, void **ptr, int SWAP)
 {
   if(SWAP) memswab(*ptr, &val, 4, 1);
   else memcpy(*ptr, &val, 4);
-  (*ptr) += 4;
+  (*ptr) = (void *)((char *)(*ptr) + 4);
   return(*ptr);
 }

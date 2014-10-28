@@ -948,7 +948,7 @@ LOCAL void removeTempFiles(void)
 LOCAL int storeBlock(long begSn, register long num, DOBJ *dop)
 {
   register long n;
-  void    *srcPtr, *dstPtr;
+  char    *srcPtr, *dstPtr;
   int      FILE_OUT;
   size_t   dstSize;
   long     offset, space;
@@ -983,7 +983,7 @@ LOCAL int storeBlock(long begSn, register long num, DOBJ *dop)
     dstPtr = (void *)blockBuffer;
   else {                            /* convert and transfer in one go */
     offset = (begSn - dop->bufStartRec) * (long)dstSize;
-    dstPtr = dop->dataBuffer + offset;
+    dstPtr = (char *)dop->dataBuffer + offset;
   }
   switch(dd->format) {
   case DF_INT16:
@@ -1022,7 +1022,7 @@ LOCAL int storeBlock(long begSn, register long num, DOBJ *dop)
       if(space > 0) {
 	if(space > num)
 	  space = num;
-	dstPtr = dop->dataBuffer + offset * dstSize;
+	dstPtr = (char *)dop->dataBuffer + offset * dstSize;
 	memcpy(dstPtr, srcPtr, (size_t)space * dstSize);
 	srcPtr += ((size_t)space * dstSize);
 	begSn += space;
