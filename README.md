@@ -40,7 +40,7 @@ res=forest(path2wav, ToFile=FALSE)
 
 * plot the first 100 F1 values over time: 
 ```r
-plot(res$fm[0:99,1],type='l')
+plot(res$fm[1:100,1],type='l')
 ```
 
 * for more information see the `An introduction to the wraspp package` vignette: 
