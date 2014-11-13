@@ -1,5 +1,5 @@
 Package: wrassp
-Version: 0.1.0
+Version: 0.1.1
 Title: R interface to ASSP Library
 Authors@R: as.person(c(
     "Raphael Winkelmann <raphael@phonetik.uni-muenchen.de> [aut, cre]",
