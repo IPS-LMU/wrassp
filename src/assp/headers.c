@@ -411,9 +411,10 @@ int getHeader(DOBJ *dop)
     return(getSAMhdr(dop));
   case FF_XLABEL:
     return(getXLBLhdr(dop));
-  case FF_AIFF:
-  case FF_AIFC:
-    return(getAIFhdr(dop));
+// commented out by Raphael Winkelmann 13. Nov. 2014 to throw error for AIFF/AIFC file due to copyright issues of ieee.c for CRAN
+//  case FF_AIFF:
+//  case FF_AIFC:
+//    return(getAIFhdr(dop));
   case FF_CSL:
     return(getCSLhdr(dop));
   case FF_CSRE:
@@ -970,7 +971,8 @@ LOCAL int getAIFhdr(DOBJ *dop)
       dd->numFields = (size_t)getI16(&ptr, SWAP);
       dop->numRecords = (long)getU32(&ptr, SWAP);
       dd->numBits = (uint16_t)getI16(&ptr, SWAP);
-      dop->sampFreq = ConvertFromIeeeExtended((uint8_t *)ptr);
+      // commented out by Raphael Winkelmann 13. Nov. 2014 due to copyright issues of ieee.c for CRAN (ieee.c is missing)
+      //dop->sampFreq = ConvertFromIeeeExtended((uint8_t *)ptr);
       /* needs no swapping: conversion assumes MSB-first */
       ptr += XFPSIZE;
       dop->fileData = FDF_BIN;                  /* always binary data */
@@ -1159,7 +1161,8 @@ LOCAL int putAIFhdr(DOBJ *dop)
   putI16((int16_t)dd->numFields, &ptr, SWAP);            /* numTracks */
   putU32((uint32_t)dop->numRecords, &ptr, SWAP);        /* numSamples */
   putI16((int16_t)dd->numBits, &ptr, SWAP);                /* numBits */
-  ConvertToIeeeExtended(dop->sampFreq, (uint8_t *)ptr);
+  // commented out by Raphael Winkelmann 13. Nov. 2014 due to copyright issues of ieee.c for CRAN (ieee.c is missing)
+  // ConvertToIeeeExtended(dop->sampFreq, (uint8_t *)ptr);
   /* needs no swapping: conversion produces MSB-first */
   ptr += XFPSIZE;
   if(dop->fileFormat == FF_AIFC) {
