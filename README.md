@@ -35,7 +35,7 @@ path2wav <- list.files(system.file("extdata", package = "wrassp"), pattern = glo
 
 * calculate formants from audio file: 
 ```r
-res=forest(path2wav, ToFile=FALSE)
+res=forest(path2wav, toFile=FALSE)
 ```
 
 * plot the first 100 F1 values over time: 
