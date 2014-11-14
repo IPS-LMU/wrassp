@@ -17,7 +17,8 @@ acfana(listOfFiles = NULL, optLogFilePath = NULL, beginTime = 0,
 
 \item{beginTime}{= <time>: set begin of analysis interval to <time> seconds (default: 0 = beginning of file)}
 
-\item{centerTime}{= <time>: set single-frame analysis with the analysis window centred at <time> seconds; overrules BeginTime, EndTime and WindowShift options}
+\item{centerTime}{= <time>: set single-frame analysis with the analysis window centred at <time> seconds;
+overrules BeginTime, EndTime and WindowShift options}
 
 \item{endTime}{= <time>: set end of analysis interval to <time> seconds (default: 0 = end of file)}
 
@@ -57,6 +58,23 @@ the signals in <listOFFiles>.
 Analysis results will be written to a file with the
 base name of the input file and extension '.acf'.
 Default output is in SSFF binary format (track 'acf').
+}
+\examples{
+# get path to audio file
+path2wav <- list.files(system.file("extdata", package = "wrassp"),
+                       pattern = glob2rx("*.wav"),
+                       full.names = TRUE)[1]
+
+# calculate short-term autocorrelation
+res <- acfana(path2wav, toFile=FALSE)
+
+# plot short-term autocorrelation values
+matplot(seq(0,numRecs.AsspDataObj(res) - 1) / rate.AsspDataObj(res) +
+        attr(res, 'startTime'),
+        res$acf,
+        type='l',
+        xlab='time (s)',
+        ylab='short-term autocorrelation values')
 }
 \author{
 Raphael Winkelmann

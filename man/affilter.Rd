@@ -23,7 +23,8 @@ affilter(listOfFiles = NULL, optLogFilePath = NULL, highPass = 4000,
 
 \item{useIIR}{switch from the default FIR to IIR filter}
 
-\item{numIIRsections}{= <num>: set the number of 2nd order sections to <num> (default: 4) where each section adds 12dB/oct to the slope of the filter}
+\item{numIIRsections}{= <num>: set the number of 2nd order sections to <num> (default: 4) where each section
+adds 12dB/oct to the slope of the filter}
 
 \item{toFile}{write results to file (for default extension see details section))}
 
@@ -60,6 +61,23 @@ The filtered signal will be written to a file with the
 base name of the input file and an extension corresponding
 to the filter characteristic (see table). The format of
 the output file will be the same as that of the input file.
+}
+\examples{
+# get path to audio file
+path2wav <- list.files(system.file("extdata", package = "wrassp"),
+                       pattern = glob2rx("*.wav"),
+                       full.names = TRUE)[1]
+
+# band-pass filter signal between 4000 and 5000 Hz
+res <- affilter(path2wav, highPass=4000, lowPass=5000, toFile=FALSE)
+
+# plot samples
+# (only plot every 10th element to accelerate plotting)
+plot(seq(0,numRecs.AsspDataObj(res) - 1, 10) / rate.AsspDataObj(res),
+     res$audio[c(TRUE, rep(FALSE,9))],
+     type='l',
+     xlab='time (s)',
+     ylab='Audio samples')
 }
 \author{
 Raphael Winkelmann

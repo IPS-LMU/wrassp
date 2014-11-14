@@ -71,12 +71,28 @@ lower case as extension (e.g. '.dft').
 Default output is in SSFF format with the
 spectrum type in lower case as track name.
 }
+\examples{
+# get path to audio file
+path2wav <- list.files(system.file("extdata", package = "wrassp"),
+                       pattern = glob2rx("*.wav"),
+                       full.names = TRUE)[1]
+
+# calculate dft spectrum
+res <- dftSpectrum(path2wav, toFile=FALSE)
+
+# plot spectral values at midpoint of signal
+plot(res$dft[dim(res$dft)[1]/2,],
+     type='l',
+     xlab='spectral value index',
+     ylab='spectral value')
+}
 \author{
 Raphael Winkelmann
 
 Lasse Bombien
 }
 \seealso{
-\code{\link{cssSpectrum}}, \code{\link{lpsSpectrum}}, \code{\link{cepstrum}}; all derived from libassp's spectrum function.
+\code{\link{cssSpectrum}}, \code{\link{lpsSpectrum}}, \code{\link{cepstrum}};
+all derived from libassp's spectrum function.
 }
 

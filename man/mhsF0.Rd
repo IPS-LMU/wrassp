@@ -70,6 +70,23 @@ Analysis results will be written to a file with the
 base name of the input file and extension '.pit'.
 Default output is in SSFF binary format (track 'pitch').
 }
+\examples{
+# get path to audio file
+path2wav <- list.files(system.file("extdata", package = "wrassp"),
+                       pattern = glob2rx("*.wav"),
+                       full.names = TRUE)[1]
+
+# calculate fundamental frequency contour
+res <- mhsF0(path2wav, toFile=FALSE)
+
+# plot fundamental frequency contour
+plot(seq(0,numRecs.AsspDataObj(res) - 1) / rate.AsspDataObj(res) +
+       attr(res, 'startTime'),
+     res$pitch,
+     type='l',
+     xlab='time (s)',
+     ylab='F0 frequency (Hz)')
+}
 \author{
 Raphael Winkelmann
 

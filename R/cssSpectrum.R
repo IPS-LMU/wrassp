@@ -36,8 +36,24 @@
 ##' AsspDataObj of that file
 ##' @author Raphael Winkelmann
 ##' @author Lasse Bombien
-##' @seealso \code{\link{dftSpectrum}}, \code{\link{lpsSpectrum}}, \code{\link{cepstrum}}; all derived from libassp's spectrum function.
+##' @seealso \code{\link{dftSpectrum}}, \code{\link{lpsSpectrum}}, \code{\link{cepstrum}}; 
+##' all derived from libassp's spectrum function.
 ##' @useDynLib wrassp
+##' @examples
+##' # get path to audio file
+##' path2wav <- list.files(system.file("extdata", package = "wrassp"), 
+##'                        pattern = glob2rx("*.wav"), 
+##'                        full.names = TRUE)[1]
+##' 
+##' # calculate cepstrally smoothed spectrum
+##' res <- cssSpectrum(path2wav, toFile=FALSE)
+##' 
+##' # plot spectral values at midpoint of signal
+##' plot(res$css[dim(res$css)[1]/2,], 
+##'      type='l', 
+##'      xlab='spectral value index', 
+##'      ylab='spectral value')
+##'      
 ##' @export
 'cssSpectrum' <- function(listOfFiles = NULL, optLogFilePath = NULL,
                           beginTime = 0.0, centerTime = FALSE,

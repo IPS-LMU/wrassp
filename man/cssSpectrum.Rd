@@ -64,12 +64,28 @@ base name of the input file and '.css.' as extension.
 Default output is in SSFF format with
 'css' in lower case as track name.
 }
+\examples{
+# get path to audio file
+path2wav <- list.files(system.file("extdata", package = "wrassp"),
+                       pattern = glob2rx("*.wav"),
+                       full.names = TRUE)[1]
+
+# calculate cepstrally smoothed spectrum
+res <- cssSpectrum(path2wav, toFile=FALSE)
+
+# plot spectral values at midpoint of signal
+plot(res$css[dim(res$css)[1]/2,],
+     type='l',
+     xlab='spectral value index',
+     ylab='spectral value')
+}
 \author{
 Raphael Winkelmann
 
 Lasse Bombien
 }
 \seealso{
-\code{\link{dftSpectrum}}, \code{\link{lpsSpectrum}}, \code{\link{cepstrum}}; all derived from libassp's spectrum function.
+\code{\link{dftSpectrum}}, \code{\link{lpsSpectrum}}, \code{\link{cepstrum}};
+all derived from libassp's spectrum function.
 }
 

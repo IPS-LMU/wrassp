@@ -63,12 +63,28 @@ base name of the input file and as extension '.cep'.
 Default output is in SSFF format with
 'cep' as track name.
 }
+\examples{
+# get path to audio file
+path2wav <- list.files(system.file("extdata", package = "wrassp"),
+                       pattern = glob2rx("*.wav"),
+                       full.names = TRUE)[1]
+
+# calulate cepstrum
+res <- cepstrum(path2wav, toFile=FALSE)
+
+# plot cepstral values at midpoint of signal
+plot(res$cep[dim(res$cep)[1]/2,],
+     type='l',
+     xlab='cepstral value index',
+     ylab='cepstral value')
+}
 \author{
 Raphael Winkelmann
 
 Lasse Bombien
 }
 \seealso{
-\code{\link{dftSpectrum}}, \code{\link{cssSpectrum}}, \code{\link{lpsSpectrum}}; all derived from libassp's spectrum function
+\code{\link{dftSpectrum}}, \code{\link{cssSpectrum}}, \code{\link{lpsSpectrum}};
+all derived from libassp's spectrum function
 }
 

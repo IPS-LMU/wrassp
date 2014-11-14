@@ -26,7 +26,8 @@
 ##' @param stopBand = <num>: set the stop-band attenuation to <num> dB (default: 93.0 dB, minimum: 21.0 dB)
 ##' @param transition = <num>: set the width of the transition band to <num> Hz (default: 250.0 Hz)
 ##' @param useIIR switch from the default FIR to IIR filter 
-##' @param numIIRsections = <num>: set the number of 2nd order sections to <num> (default: 4) where each section adds 12dB/oct to the slope of the filter 
+##' @param numIIRsections = <num>: set the number of 2nd order sections to <num> (default: 4) where each section 
+##' adds 12dB/oct to the slope of the filter 
 ##' @param toFile write results to file (for default extension see details section))
 ##' @param explicitExt set if you wish to overwride the default extension
 ##' @param outputDirectory directory in which output files are stored. Defaults to NULL, i.e. 
@@ -37,6 +38,23 @@
 ##' @author Raphael Winkelmann
 ##' @author Lasse Bombien
 ##' @useDynLib wrassp
+##' @examples
+##' # get path to audio file
+##' path2wav <- list.files(system.file("extdata", package = "wrassp"), 
+##'                        pattern = glob2rx("*.wav"), 
+##'                        full.names = TRUE)[1]
+##' 
+##' # band-pass filter signal between 4000 and 5000 Hz
+##' res <- affilter(path2wav, highPass=4000, lowPass=5000, toFile=FALSE)
+##' 
+##' # plot samples
+##' # (only plot every 10th element to accelerate plotting)
+##' plot(seq(0,numRecs.AsspDataObj(res) - 1, 10) / rate.AsspDataObj(res), 
+##'      res$audio[c(TRUE, rep(FALSE,9))], 
+##'      type='l', 
+##'      xlab='time (s)', 
+##'      ylab='Audio samples')
+##'      
 ##' @export
 'affilter' <- function(listOfFiles = NULL, optLogFilePath = NULL, 
                        highPass = 4000, lowPass = 0, 
