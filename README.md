@@ -8,14 +8,12 @@
 
 ## Installation
 
-* as large parts of `wrassp` are written in `C` make sure your system fulfills the requirements for package development (see [here](http://www.rstudio.com/ide/docs/packages/prerequisites))
-
-* Download & extract the package from GitHub. Then install it with the following command:
+* install the current [CRAN release](http://cran.r-project.org/web/packages/wrassp/):
 ```r
-install.packages("path/to/wrassp", repos = NULL, type="source")
+install.packages("wrassp")
 ```
 
-* or install the latest development version from GitHub (**preferred method**):
+* or install the latest development version from GitHub (as large parts of `wrassp` are written in `C` make sure your system fulfills the requirements for package development (see [here](http://www.rstudio.com/ide/docs/packages/prerequisites))):
 ```r
 library(devtools)
 install_github("IPS-LMU/wrassp")
