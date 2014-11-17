@@ -46,13 +46,16 @@ affilter function adapted from libassp
 Filters the audio signal in <listOfFiles>.
 By specifying the high-pass and/or low-pass cut-off
 frequency one of four filter characteristics may be
-selected as shown in the table below.\cr
-hp     lp     filter characteristic         extension\cr
--------------------------------------------------------\cr
-> 0     [0]    high-pass from hp             '.hpf'\cr
- [0]   > 0     low-pass up to lp             '.lpf'\cr
-> 0    > hp    band-pass from hp to lp       '.bpf'\cr
-> lp   > 0     band-stop between lp and hp   '.bsf'\cr
+selected as shown in the table below.
+
+\tabular{ccll}{
+\strong{hp} \tab \strong{lp} \tab \strong{filter characteristic} \tab \strong{extension}\cr
+> 0 \tab [0] \tab high-pass from hp \tab '.hpf'\cr
+ [0] \tab > 0 \tab low-pass up to lp \tab '.lpf'\cr
+> 0 \tab > hp \tab band-pass from hp to lp \tab '.bpf'\cr
+> lp \tab > 0 \tab band-stop between lp and hp \tab '.bsf'\cr
+}
+
 The Kaiser-window design method is used to compute the
 coefficients of a linear-phase FIR filter with unity gain
 in the pass-band. The cut-off frequencies (-6 dB points)
