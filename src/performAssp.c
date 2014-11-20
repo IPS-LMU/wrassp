@@ -1014,8 +1014,14 @@ performAssp(SEXP args)
                 break;
             }
             outDir = strdup(CHAR(STRING_ELT(el, 0)));
-            if (outDir[strlen(outDir) - 1] != DIR_SEP_CHR)
-                outDir = strcat(outDir, DIR_SEP_STR);
+            if (outDir[strlen(outDir) - 1] != DIR_SEP_CHR) {
+                /* add trailing slash, but we need a bit more space first */
+                char *tmp = malloc(strlen(outDir) + 1);
+                strcpy(tmp, outDir);
+                tmp = strcat(tmp, DIR_SEP_STR);
+                free(outDir);
+                outDir = tmp;
+            }
             break;
         case WO_PBAR:
             pBar = el;
