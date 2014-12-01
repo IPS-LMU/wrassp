@@ -1016,7 +1016,7 @@ performAssp(SEXP args)
             outDir = strdup(CHAR(STRING_ELT(el, 0)));
             if (outDir[strlen(outDir) - 1] != DIR_SEP_CHR) {
                 /* add trailing slash, but we need a bit more space first */
-                char *tmp = malloc(strlen(outDir) + 1);
+                char *tmp = malloc(strlen(outDir) + 2);
                 strcpy(tmp, outDir);
                 tmp = strcat(tmp, DIR_SEP_STR);
                 free(outDir);
