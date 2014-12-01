@@ -7,6 +7,8 @@
 context("compute libassp vs. wrassp comparison")
 
 test_that("wrassp does the same thing as libassp", {
+  # don't run on CRAN
+  skip_on_cran() 
   
   # only run tests if libassp is installed - check for a sample executable
   if(Sys.which("acfana") == "") {
