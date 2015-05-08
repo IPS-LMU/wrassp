@@ -1,6 +1,6 @@
 ##' ksvF0 function adapted from libassp
 ##'
-##' F0 analysis of the signal in <listOfFile> using the 
+##' F0 analysis of the signal in <listOfFiles> using the 
 ##' K. Schaefer-Vincent periodicity detection algortithm.
 ##' Analysis results will be written to a file with the
 ##' base name of the input file and extension '.f0'.
@@ -32,6 +32,7 @@
 ##' @return nrOfProcessedFiles or if only one file to process return AsspDataObj of that file
 ##' @author Raphael Winkelmann
 ##' @author Lasse Bombien
+##' @references Schaefer-Vincent K (1983) Pitch period detection and chaining: method and evaluation. Phonetica 1983, Vol 40, pp. 177-202
 ##' @aliases f0ana f0_ksv
 ##' @seealso \code{\link{mhsF0}} for an alternative pitch tracker
 ##' @useDynLib wrassp
