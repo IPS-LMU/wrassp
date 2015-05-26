@@ -17,7 +17,7 @@ install.packages("wrassp")
 * or install the latest development version from GitHub (as large parts of `wrassp` are written in `C` make sure your system fulfills the requirements for package development (see [here](http://www.rstudio.com/ide/docs/packages/prerequisites))):
 ```r
 library(devtools)
-install_github("IPS-LMU/wrassp")
+install_github("IPS-LMU/wrassp", build_vignettes = TRUE)
 ```
 
 ## Quick start
