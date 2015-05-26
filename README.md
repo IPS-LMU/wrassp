@@ -1,6 +1,7 @@
 # wrassp
 
 [![Build Status](https://travis-ci.org/IPS-LMU/wrassp.svg?branch=master)](https://travis-ci.org/IPS-LMU/wrassp)
+[![Coverage Status](https://coveralls.io/repos/IPS-LMU/wrassp/badge.svg)](https://coveralls.io/r/IPS-LMU/wrassp)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/wrassp)](http://cran.r-project.org/web/packages/wrassp)
 
 `wrassp` is a wrapper for R around Michel Scheffers's [libassp](http://libassp.sourceforge.net/)
