@@ -24,7 +24,7 @@
 *----------------------------------------------------------------------*
 *                                                                      *
 * File:     ksv.c                                                      *
-* Contents: Functions implementing the K. Schäfer-Vincent Periodicity  *
+* Contents: Functions implementing the K. Sch?fer-Vincent Periodicity  *
 *           Detection Algorithm. See printKSVrefs() for references.    *
 * Author:   Michel T.M. Scheffers                                      *
 *                                                                      *
@@ -169,10 +169,10 @@ void printKSVrefs(void)
 {
 #ifndef WRASSP
   printf("\nReferences:\n");
-  printf("Schäfer-Vincent, K. (1982), \"Significant points: Pitch period\n");
+  printf("Sch?fer-Vincent, K. (1982), \"Significant points: Pitch period\n");
   printf("   detection as a problem of segmentation,\" Phonetica 39,\n");
   printf("   pp. 241-253\n");
-  printf("Schäfer-Vincent, K. (1983), \"Pitch period detection and chaining:\n");
+  printf("Sch?fer-Vincent, K. (1983), \"Pitch period detection and chaining:\n");
   printf("   Method and evaluation,\" Phonetica 40, pp. 177-202\n");
 #endif
   return;
@@ -1329,7 +1329,7 @@ LOCAL int ksvAMV(long bsn, int dur, double amv[])
   register float  *sPtr;
   register double *amvPtr;
   double sum, mean;
-  
+  Rprintf("dude\n");
   n = KSV_NUM_AMV;
   slot = dur / n;                             /* slot size in samples */
   i = (int)(bsn - workDOp->bufStartRec);
