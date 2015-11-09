@@ -127,7 +127,7 @@
   #############################
   # return dataObj if length only one file
         
-	if(!(length(listOfFiles) == 1) & verbose){
+	if(!is.null(pb)){
     close(pb)
   }else{
     return(externalRes)
