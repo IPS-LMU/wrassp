@@ -1329,7 +1329,6 @@ LOCAL int ksvAMV(long bsn, int dur, double amv[])
   register float  *sPtr;
   register double *amvPtr;
   double sum, mean;
-  Rprintf("dude\n");
   n = KSV_NUM_AMV;
   slot = dur / n;                             /* slot size in samples */
   i = (int)(bsn - workDOp->bufStartRec);
