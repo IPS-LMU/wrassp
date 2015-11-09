@@ -23,6 +23,7 @@
 ##' the directory of the input files
 ##' @param forceToLog is set by the global package variable useWrasspLogger. This is set
 ##' to FALSE by default and should be set to TRUE is logging is desired.
+##' @param verbose display infos & show progress bar
 ##' @return nrOfProcessedFiles or if only one file to process return AsspDataObj of that file
 ##' @author Raphael Winkelmann
 ##' @author Lasse Bombien
@@ -49,7 +50,7 @@
                      computeBackwardDifference = FALSE, computeCentralDifference = FALSE, 
                      channel = 1, toFile = TRUE, 
                      explicitExt=NULL, outputDirectory = NULL,
-                     forceToLog = useWrasspLogger){
+                     forceToLog = useWrasspLogger, verbose = TRUE){
   
   ###########################
   # a few parameter checks and expand paths
@@ -85,7 +86,7 @@
   ###########################
   # perform analysis
   
-  if(length(listOfFiles)==1){
+  if(length(listOfFiles)==1 | !verbose){
     pb <- NULL
   }else{
     if(toFile==FALSE){
@@ -114,7 +115,7 @@
   #############################
   # return dataObj if length only one file
   
-  if(!(length(listOfFiles)==1)){
+  if(!(length(listOfFiles) == 1) & verbose){
     close(pb)
   }else{
     return(externalRes)
