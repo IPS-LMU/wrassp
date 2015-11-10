@@ -11,6 +11,7 @@ test_that("length(listOfFiles) > 1 and ToFile=F causes Error", {
     funcFormals = formals(func)
     funcFormals$listOfFiles = wavFiles
     funcFormals$ToFile = FALSE
+    funcFormals$verbose = FALSE
     expect_that(do.call(func,as.list(funcFormals)), throws_error())
   }
   

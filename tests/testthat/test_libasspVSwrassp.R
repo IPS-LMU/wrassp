@@ -36,6 +36,7 @@ test_that("wrassp does the same thing as libassp", {
     funcFormals = formals(func)
     funcFormals$listOfFiles = wavFiles[1]
     funcFormals$outputDirectory = fromWrasspDir
+    funcFormals$verbose = FALSE
     
     res = do.call(func,as.list(funcFormals))
     

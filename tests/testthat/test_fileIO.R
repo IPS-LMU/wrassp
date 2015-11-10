@@ -22,6 +22,7 @@ test_that("read things that are written to disc are the same as origs", {
       sp[length(sp)] = funcFormals$explicitExt
       fromFile = read.AsspDataObj(paste(sp, collapse="."))
       funcFormals$toFile = FALSE
+      funcFormals$verbose = FALSE
       inMem = do.call(func,as.list(funcFormals))
       # test attributes if they are the same 
       for (at in names(attributes(fromFile))){

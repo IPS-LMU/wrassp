@@ -13,8 +13,9 @@ test_that("all signal processing functions run without errors on audio files", {
     funcFormals = formals(func)
     funcFormals$listOfFiles = wavFiles
     funcFormals$outputDirectory = altDir
+    funcFormals$verbose = FALSE
     res = do.call(func,as.list(funcFormals))
-    expect_that(res, equals(NULL))
+    expect_that(res, equals(9))
   }
   
 })

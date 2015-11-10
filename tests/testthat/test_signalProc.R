@@ -32,7 +32,7 @@ test_that("acfana doesn't break due to varying parameters", {
                   window=sample(posValsWindow, 1)[[1]], analysisOrder=sample(posValsAnalysisOrder, 1)[[1]], 
                   energyNormalization=sample(posValsEnergyNormalization, 1)[[1]], lengthNormalization=sample(posValsLengthNormalization, 1)[[1]], 
                   explicitExt=NULL, outputDirectory=NULL,
-                  toFile=FALSE, forceToLog=useWrasspLogger)
+                  toFile=FALSE, forceToLog=useWrasspLogger, verbose=FALSE)
     # print(params)
     res = do.call(acfana,as.list(params))
 
@@ -58,7 +58,7 @@ test_that("afdiff doesn't break due to varying parameters", {
                   computeBackwardDifferenc=sample(posValsComputeBackwardDifference,1)[[1]], computeCentralDifference=sample(posValsComputeCentralDifference,1)[[1]],
                   channel=sample(posValsChannel,1)[[1]], toFile=FALSE,
                   explicitExt=NULL, outputDirectory=NULL,
-                  forceToLog=useWrasspLogger)
+                  forceToLog=useWrasspLogger, verbose=FALSE)
     # print(params)
     res = do.call(afdiff,as.list(params))
     expect_that(class(res), equals("AsspDataObj"))
@@ -87,7 +87,7 @@ test_that("affilter doesn't break due to varying parameters", {
                   stopBand=sample(posValsStopBand,1)[[1]], transition=sample(posValsTransition,1)[[1]], 
                   useIIR=sample(posValsUseIIR,1)[[1]], numIIRsections=sample(posValsNumIIRsections,1)[[1]],
                   toFile=FALSE, explicitExt=NULL,
-                  outputDirectory=NULL, forceToLog=useWrasspLogger)
+                  outputDirectory=NULL, forceToLog=useWrasspLogger, verbose=FALSE)
   
     # print(params)
     res = do.call(affilter, as.list(params))
@@ -118,7 +118,7 @@ test_that("cepstrum doesn't break due to varying parameters", {
                   fftLength=sample(posValsFftLength,1)[[1]], windowShift=sample(posValsWindowShift,1)[[1]],
                   window=sample(posValsWindow,1)[[1]], toFile=FALSE,
                   explicitExt=NULL, outputDirectory=NULL,
-                  forceToLog=useWrasspLogger)
+                  forceToLog=useWrasspLogger, verbose=FALSE)
     
     # print(params)
     res = do.call(cepstrum, as.list(params))
@@ -152,7 +152,7 @@ test_that("cssSpectrum doesn't break due to varying parameters", {
                   fftLength=sample(posValsFftLength,1)[[1]], windowShift=sample(posValsWindowShift,1)[[1]], 
                   window=sample(posValsWindow,1)[[1]], numCeps=sample(posValsNumCeps,1)[[1]], 
                   toFile=FALSE, explicitExt=NULL, 
-                  outputDirectory=NULL, forceToLog=useWrasspLogger)
+                  outputDirectory=NULL, forceToLog=useWrasspLogger, verbose=FALSE)
         # print(params)
     res = do.call(cssSpectrum, as.list(params))
     expect_that(class(res), equals("AsspDataObj"))
@@ -183,7 +183,7 @@ test_that("dftSpectrum doesn't break due to varying parameters", {
                   fftLength=posValsFftLength[[1]], windowShift=posValsWindowShift[[1]], 
                   window=posValsWindow[[1]], bandwidth=posValsBandwidth[[1]], 
                   toFile=FALSE, explicitExt=NULL, 
-                  outputDirectory=NULL, forceToLog=useWrasspLogger)
+                  outputDirectory=NULL, forceToLog=useWrasspLogger, verbose=FALSE)
   
     # print(params)
     res = do.call(dftSpectrum, as.list(params))
@@ -224,7 +224,7 @@ test_that("forest doesn't break due to varying parameters", {
                   numFormants=sample(posValsNumFormants,1)[[1]], window=sample(posValsWindow,1)[[1]], 
                   preemphasis=sample(posValsPreemphasis,1)[[1]], toFile=FALSE, 
                   explicitExt=NULL, outputDirectory=NULL, 
-                  forceToLog=useWrasspLogger)
+                  forceToLog=useWrasspLogger, verbose=FALSE)
 
     # print(params)
     res = do.call(forest, as.list(params))
@@ -256,7 +256,7 @@ test_that("ksvF0 doesn't break due to varying parameters", {
                   maxF=sample(posValsMaxF,1)[[1]], minF=sample(posValsMinF,1)[[1]], 
                   minAmp=sample(posValsMinAmp,1)[[1]], maxZCR=sample(posValsMaxZCR,1)[[1]], 
                   toFile=FALSE, explicitExt=NULL, 
-                  outputDirectory=NULL, forceToLog=useWrasspLogger)
+                  outputDirectory=NULL, forceToLog=useWrasspLogger, verbose=FALSE)
 
         # print(params)
     res = do.call(ksvF0, as.list(params))
@@ -293,7 +293,7 @@ test_that("lpsSpectrum doesn't break due to varying parameters", {
                   order=sample(posValsOrder,1)[[1]], preemphasis=sample(posValsPreemphasis,1)[[1]], 
                   deemphasize=sample(posValsDeemphasize,1)[[1]], toFile=FALSE, 
                   explicitExt=NULL, outputDirectory=NULL, 
-                  forceToLog=useWrasspLogger)
+                  forceToLog=useWrasspLogger, verbose=FALSE)
     
     # print(params)
     res = do.call(lpsSpectrum, as.list(params))
@@ -333,7 +333,7 @@ test_that("mhsF0 doesn't break due to varying parameters", {
                   maxZCR=sample(posValsMaxZCR,1)[[1]], minProb=sample(posValsMinProb,1)[[1]], 
                   plainSpectrum=sample(posValsPlainSpectrum,1)[[1]], toFile=FALSE, 
                   explicitExt=NULL, outputDirectory=NULL, 
-                  forceToLog=useWrasspLogger)
+                  forceToLog=useWrasspLogger, verbose=FALSE)
 
     # print(params)
     res = do.call(mhsF0, as.list(params))
@@ -369,7 +369,7 @@ test_that("rfcana doesn't break due to varying parameters", {
                   window=sample(posValsWindow,1)[[1]], order=sample(posValsOrder,1)[[1]], 
                   preemphasis=sample(posValsPreemphasis,1)[[1]], lpType=sample(posValsLpType,1)[[1]], 
                   toFile=FALSE, explicitExt=NULL, 
-                  outputDirectory=NULL, forceToLog=useWrasspLogger)
+                  outputDirectory=NULL, forceToLog=useWrasspLogger, verbose=FALSE)
         # print(params)
     res = do.call(rfcana, as.list(params))
     expect_that(class(res), equals("AsspDataObj"))
@@ -401,7 +401,7 @@ test_that("rmsana doesn't break due to varying parameters", {
                   windowSize=sample(posValsWindowSize,1)[[1]], effectiveLength=sample(posValsEffectiveLength,1)[[1]], 
                   linear=sample(posValsLinear,1)[[1]], window=sample(posValsWindow,1)[[1]], 
                   toFile=FALSE, explicitExt=NULL, 
-                  outputDirectory=NULL, forceToLog=useWrasspLogger)
+                  outputDirectory=NULL, forceToLog=useWrasspLogger, verbose=FALSE)
             # print(params)
     res = do.call(rmsana, as.list(params))
     expect_that(class(res), equals("AsspDataObj"))
@@ -429,7 +429,7 @@ test_that("zcrana doesn't break due to varying parameters", {
                   endTime=sample(posValsEndTime,1)[[1]], windowShift=sample(posValsWindowShift,1)[[1]], 
                   windowSize=sample(posValsWindowSize,1)[[1]], toFile=FALSE, 
                   explicitExt=NULL, outputDirectory=NULL, 
-                  forceToLog=useWrasspLogger)
+                  forceToLog=useWrasspLogger, verbose=FALSE)
                 # print(params)
     res = do.call(zcrana, as.list(params))
     expect_that(class(res), equals("AsspDataObj"))
