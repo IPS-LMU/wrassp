@@ -52,26 +52,26 @@ vignette('wrassp_intro')
 
 ## Available signal processing functions
 
-+ `acfana()` = Analysis of short-term autocorrelation function
-+ `afdiff()` = Computes the first difference of the signal
-+ `affilter()` = Filters the audio signal (see docs for types)
-+ `cepstrum()` = Short-term cepstral analysis
-+ `cssSpectrum()` = Cepstral smoothed version of `dftSpectrum()`
-+ `dftSpectrum()` = Short-term DFT spectral analysis
-+ `forest()` = Formant estimation
-+ `ksvF0()` = F0 analysis of the signal
-+ `lpsSpectrum()` = Linear Predictive smoothed version of `dftSpectrum()`
-+ `mhsF0()` = Pitch analysis of the speech signal using Michel's/Modified Harmonic Sieve algorithm
-+ `rfcana()` = Linear Prediction analysis
-+ `rmsana()` = Analysis of short-term Root Mean Square amplitude
-+ `zcrana()` = Analysis of the averages of the short-term positive and negative zero-crossing rates
++ `acfana()`: Analysis of short-term autocorrelation function
++ `afdiff()`: Computes the first difference of the signal
++ `affilter()`: Filters the audio signal (see docs for types)
++ `cepstrum()`: Short-term cepstral analysis
++ `cssSpectrum()`: Cepstral smoothed version of `dftSpectrum()`
++ `dftSpectrum()`: Short-term DFT spectral analysis
++ `forest()`: Formant estimation
++ `ksvF0()`: F0 analysis of the signal
++ `lpsSpectrum()`: Linear Predictive smoothed version of `dftSpectrum()`
++ `mhsF0()`: Pitch analysis of the speech signal using Michel's/Modified Harmonic Sieve algorithm
++ `rfcana()`: Linear Prediction analysis
++ `rmsana()`: Analysis of short-term Root Mean Square amplitude
++ `zcrana()`: Analysis of the averages of the short-term positive and negative zero-crossing rates
 
 (see the respective R documentation for more details on all of these functions)
 
 ## Available file handling functions
 
-+ `read.AsspDataObj()` which reads an existing SSFF file into a `AsspDataObj` which is its in-memory equivalent.
-+ `write.AsspDataObj()` which writes a `AsspDataObj` out to a SSFF file.
++ `read.AsspDataObj()`: reads an existing SSFF file into a `AsspDataObj` which is its in-memory equivalent.
++ `write.AsspDataObj()`: writes a `AsspDataObj` out to a SSFF file.
 
 ## Authors
 
