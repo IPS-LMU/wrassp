@@ -24,4 +24,4 @@ Suggests:
 License: GPL (>= 3)
 URL: https://github.com/IPS-LMU/wrassp
 BugReports: https://github.com/IPS-LMU/wrassp/issues
-RoxygenNote: 5.0.0
+RoxygenNote: 5.0.1
