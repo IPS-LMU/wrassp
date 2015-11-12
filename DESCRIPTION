@@ -1,11 +1,11 @@
 Package: wrassp
 Version: 0.1.4
 Title: Interface to the ASSP Library
-Authors@R: as.person(c(
-    "Raphael Winkelmann <raphael@phonetik.uni-muenchen.de> [aut, cre]",
-    "Lasse Bombien <lasse@phonetik.uni-muenchen.de> [aut]",
-    "Michel Scheffers [aut]"))
-Description: wrassp is a wrapper around Michel Scheffers's libassp (Advanced
+Authors@R: c(
+    person("Raphael", "Winkelmann", ,"raphael@phonetik.uni-muenchen.de", role = c("aut", "cre")),
+    person("Lasse", "Bombien", , "lasse@phonetik.uni-muenchen.de", role = c("aut")),
+    person("Michel", "Scheffers", role = c("aut")))
+Description: A wrapper around Michel Scheffers's libassp (Advanced
     Speech Signal Processor). The libassp library aims at providing
     functionality for handling speech signal files in most common audio formats
     and for performing analyses common in phonetic science/speech science. This

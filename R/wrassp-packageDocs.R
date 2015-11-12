@@ -1,4 +1,4 @@
-##' wrassp - a wrapper around Michel Scheffers's libassp (AdvancedSpeech Signal Processor)
+##' wrassp - Interface to the ASSP Library
 ##' 
 ##' wrassp is a wrapper for R around Michel Scheffers's libassp (Advanced Speech Signal Processor). 
 ##' The libassp library aims at providing functionality for handling speech signal files in most 
