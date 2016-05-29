@@ -109,7 +109,7 @@
       stop("length(listOfFiles) is > 1 and ToFile=FALSE! ToFile=FALSE only permitted for single files.")
     }
     cat('\n  INFO: applying cssSpectrum to', length(listOfFiles), 'files\n')
-    pb <- txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
+    pb <- utils::txtProgressBar(min = 0, max = length(listOfFiles), style = 3)
   }	
   
   externalRes = invisible(.External("performAssp", listOfFiles, 
