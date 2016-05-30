@@ -8,3 +8,4 @@
 # travis ci #
 #############
 .travis.yml
+^cran-comments\.md$
