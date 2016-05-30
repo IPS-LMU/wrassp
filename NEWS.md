@@ -4,3 +4,4 @@
 
 * added verbose parameter to sig. proc. functions
 * added new package docs (?wrassp)
+* updated wrassp_intro vignette to include ?wrassp reference
