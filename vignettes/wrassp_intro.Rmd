@@ -7,7 +7,7 @@ output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{An introduction to the wrassp package}
   %\VignetteEngine{knitr::rmarkdown}
-  \usepackage[utf8]{inputenc}
+  %\usepackage[utf8]{inputenc}
 ---
 
 # Introduction
