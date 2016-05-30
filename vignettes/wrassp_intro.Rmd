@@ -203,6 +203,15 @@ any given `wrassp` function.
 wrasspOutputInfos$forest
 ```
 
+For a list of the available signal processing function provided by `wrassp` simply 
+open the package documentation:
+
+```{r eval=FALSE}
+# open wrassp package documentation
+?wrassp
+```
+
+
 # Conclusion
 
 We hope this document gives you a rough idea of how to use the `wrassp` package and what 
