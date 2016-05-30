@@ -4,7 +4,7 @@
 \name{wrassp-package}
 \alias{wrassp}
 \alias{wrassp-package}
-\title{wrassp - a wrapper around Michel Scheffers's libassp (AdvancedSpeech Signal Processor)}
+\title{wrassp - Interface to the ASSP Library}
 \description{
 wrassp is a wrapper for R around Michel Scheffers's libassp (Advanced Speech Signal Processor). 
 The libassp library aims at providing functionality for handling speech signal files in most 
@@ -32,7 +32,7 @@ Available signal processing functions:
 \item \code{\link{forest}}: Formant estimation
 \item \code{\link{ksvF0}}: F0 analysis of the signal
 \item \code{\link{lpsSpectrum}}: Linear Predictive smoothed version of \code{\link{dftSpectrum}}
-\item \code{\link{mhsF0}}: Pitch analysis of the speech signal using Michel's/Modified Harmonic Sieve algorithm
+\item \code{\link{mhsF0}}: Pitch analysis of the speech signal using Michel's (M)odified (H)armonic (S)ieve algorithm
 \item \code{\link{rfcana}}: Linear Prediction analysis
 \item \code{\link{rmsana}}: Analysis of short-term Root Mean Square amplitude
 \item \code{\link{zcrana}}: Analysis of the averages of the short-term positive and negative zero-crossing rates
