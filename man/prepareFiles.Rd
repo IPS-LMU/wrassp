@@ -25,4 +25,3 @@ Normalise a list of filenames so that they can be passed to a signal processing 
 \author{
 Raphael Winkelmann
 }
-

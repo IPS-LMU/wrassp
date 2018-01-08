@@ -18,4 +18,3 @@ wrapper function for AsspWindowTypes of wrassp
 \author{
 Raphael Winkelmann
 }
-

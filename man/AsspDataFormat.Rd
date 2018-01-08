@@ -30,10 +30,9 @@ Valid values are
 \code{'ascii'} (or \code{1}) for ASCII format or \code{'binary'} (or \code{2}) for binary IO.
 Use is discouraged unless the user knows what they are doing.
 }
-\author{
-Lasse Bombien
-}
 \seealso{
 \code{\link{AsspFileFormat}}
 }
-
+\author{
+Lasse Bombien
+}

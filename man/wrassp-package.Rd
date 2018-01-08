@@ -2,8 +2,8 @@
 % Please edit documentation in R/wrassp-packageDocs.R
 \docType{package}
 \name{wrassp-package}
-\alias{wrassp}
 \alias{wrassp-package}
+\alias{wrassp}
 \title{wrassp - Interface to the ASSP Library}
 \description{
 wrassp is a wrapper for R around Michel Scheffers's libassp (Advanced Speech Signal Processor). 
@@ -46,4 +46,3 @@ Available file handling functions:
 }
 }
 \keyword{package}
-

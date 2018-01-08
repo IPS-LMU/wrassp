@@ -73,6 +73,16 @@ vignette('wrassp_intro')
 + `read.AsspDataObj()`: read an existing SSFF file into a `AsspDataObj` which is its in-memory equivalent.
 + `write.AsspDataObj()`: write a `AsspDataObj` out to a SSFF file.
 
+## For Developers
+
+### Checking on rocker/r-devel docker image (prerequisite docker is installed)
+
+- pull current r-devel image: `docker pull rocker/r-devel`
+- check if pull worked: `docker images`
+- check R version in image: `docker run rocker/r-devel:latest R --version`
+- run interactive version of R `docker run --rm -ti rocker/r-devel:latest`
+
+
 ## Authors
 
 **Raphael Winkelmann**

@@ -18,4 +18,3 @@ wrapper function for AsspSpectTypes of wrassp
 \author{
 Raphael Winkelmann
 }
-

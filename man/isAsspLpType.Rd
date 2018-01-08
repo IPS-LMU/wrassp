@@ -18,4 +18,3 @@ checks if given string is a valid AsspLpType according to the assp library
 \author{
 Raphael Winkelmann
 }
-

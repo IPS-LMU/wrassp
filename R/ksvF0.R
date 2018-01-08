@@ -36,7 +36,7 @@
 ##' @references Schaefer-Vincent K (1983) Pitch period detection and chaining: method and evaluation. Phonetica 1983, Vol 40, pp. 177-202
 ##' @aliases f0ana f0_ksv
 ##' @seealso \code{\link{mhsF0}} for an alternative pitch tracker
-##' @useDynLib wrassp
+##' @useDynLib wrassp, .registration = TRUE
 ##' @examples
 ##' # get path to audio file
 ##' path2wav <- list.files(system.file("extdata", package = "wrassp"), 

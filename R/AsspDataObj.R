@@ -9,7 +9,7 @@
 ##' @return list object containing file data
 ##' @author Lasse Bombien
 ##' @aliases getAsspDataObj
-##' @useDynLib wrassp
+##' @useDynLib wrassp, .registration = TRUE
 ##' @export
 'read.AsspDataObj' <- 'getAsspDataObj' <- function(fname, begin=0, end=0, samples=FALSE) {
   fname <- path.expand(fname)
@@ -25,7 +25,7 @@
 ##' @author Lasse Bombien
 ##' @method print AsspDataObj
 ##' @seealso \code{\link{read.AsspDataObj}}
-##' @useDynLib wrassp
+##' @useDynLib wrassp, .registration = TRUE
 ##' @aliases summary.AsspDataObj
 ##' @export
 "print.AsspDataObj" <- summary.AsspDataObj<- function(x, ...)
@@ -71,7 +71,7 @@
 ##' \code{filePath} attribute of the AsspDataObj
 ##' @return NULL
 ##' @author Lasse Bombien
-##' @useDynLib wrassp
+##' @useDynLib wrassp, .registration = TRUE
 ##' @export
 "write.AsspDataObj" <- function (dobj, file=attr(dobj, 'filePath'))
   {
@@ -88,7 +88,7 @@
 ##' @param ... optional other arguments passed to further functions
 ##' @return TRUE or FALSE
 ##' @author Lasse Bombien
-##' @useDynLib wrassp
+##' @useDynLib wrassp, .registration = TRUE
 ##' @export
 is.AsspDataObj <- function (x, ...)
   {
@@ -106,7 +106,7 @@ is.AsspDataObj <- function (x, ...)
 ##' @param trackname the name of a track in this object
 ##' @return The object without the track named trackname
 ##' @author Lasse Bombien
-##' @useDynLib wrassp
+##' @useDynLib wrassp, .registration = TRUE
 ##' @export
 delTrack <- function (dobj, trackname)
   {
@@ -145,7 +145,7 @@ delTrack <- function (dobj, trackname)
 ##' @return the object including the new track
 ##' @author Lasse Bombien
 ##' @seealso \code{\link{delTrack}}
-##' @useDynLib wrassp
+##' @useDynLib wrassp, .registration = TRUE
 ##' @export
 addTrack <- function (dobj, trackname, data, format = 'INT16',
                       deleteExisting=FALSE) {
@@ -192,7 +192,7 @@ addTrack <- function (dobj, trackname, data, format = 'INT16',
 ##' @return a character vector containing the names of the tracks
 ##' @author Lasse Bombien
 ##' @export
-##' @useDynLib wrassp
+##' @useDynLib wrassp, .registration = TRUE
 tracks.AsspDataObj <- function(x) {
   names(x)
 }
@@ -220,7 +220,7 @@ tracks.AsspDataObj <- function(x) {
 ##' AsspFileFormat(obj) <- 'SSFF' ## or
 ##' AsspFileFormat(obj) <- 20
 ##' }
-##' @useDynLib wrassp
+##' @useDynLib wrassp, .registration = TRUE
 ##' @export
 AsspFileFormat <- function(x) {
   ## file format is in the first element (of two) in the fileInfo attribute
@@ -269,7 +269,7 @@ AsspFileFormat <- function(x) {
 ##' @title Get/set data format of an AsspDataObj
 ##' @param x an object of class AsspDataObj
 ##' @return a string representing the current data format
-##' @useDynLib wrassp
+##' @useDynLib wrassp, .registration = TRUE
 ##' @seealso \code{\link{AsspFileFormat}}
 ##' @export
 ##' @author Lasse Bombien
@@ -317,7 +317,7 @@ AsspDataFormat <- function(x) {
 ##' @return dur: the duration of the AsspDataObj in ms
 ##' @author Lasse Bombien
 ##' @export
-##' @useDynLib wrassp
+##' @useDynLib wrassp, .registration = TRUE
 dur.AsspDataObj <- function(x) {
   if (!is.AsspDataObj(x))
     stop('Argument must be of class AsspDataObj.')

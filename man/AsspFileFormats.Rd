@@ -44,11 +44,10 @@ AsspFileFormats
 list of possibly useful file formats for AsspDataObj corresponding to the
 first element of the fileInfo attribute
 }
-\author{
-Lasse Bombien
-}
 \seealso{
 \code{\link{AsspFileFormat}}
 }
+\author{
+Lasse Bombien
+}
 \keyword{datasets}
-

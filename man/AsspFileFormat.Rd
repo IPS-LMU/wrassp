@@ -41,10 +41,9 @@ AsspFileFormat(obj) <- 'SSFF' ## or
 AsspFileFormat(obj) <- 20
 }
 }
-\author{
-Lasse Bombien
-}
 \seealso{
 \code{\link{AsspFileFormats}}, \code{\link{AsspDataFormat}}
 }
-
+\author{
+Lasse Bombien
+}

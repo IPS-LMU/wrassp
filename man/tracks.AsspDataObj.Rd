@@ -22,4 +22,3 @@ of these tracks. This function is equvalent to calling \code{names(x)}.
 \author{
 Lasse Bombien
 }
-

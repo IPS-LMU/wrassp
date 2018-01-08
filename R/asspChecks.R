@@ -4,7 +4,7 @@
 ##' @param windowName name of window
 ##' @return (BOOL) true if windowName is valid; false otherwise
 ##' @author Raphael Winkelmann
-##' @useDynLib wrassp
+##' @useDynLib wrassp, .registration = TRUE
 ##' @export
 "isAsspWindowType" <- function(windowName = NULL) {
 	if (is.null(windowName)) {
@@ -30,7 +30,7 @@
 ##' @param lpName name of lp type
 ##' @return (BOOL) true if lpName is valid; false otherwise
 ##' @author Raphael Winkelmann
-##' @useDynLib wrassp
+##' @useDynLib wrassp, .registration = TRUE
 ##' @export
 "isAsspLpType" <- function(lpName = NULL) {
 	if (is.null(lpName)) {
@@ -56,7 +56,7 @@
 ##' @param spectName name of lp type
 ##' @return (BOOL) true if spectName is valid; false otherwise
 ##' @author Raphael Winkelmann
-##' @useDynLib wrassp
+##' @useDynLib wrassp, .registration = TRUE
 ##' @export
 "isAsspSpectType" <- function(spectName = NULL) {
   if (is.null(spectName)) {

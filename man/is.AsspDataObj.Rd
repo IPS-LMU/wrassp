@@ -20,4 +20,3 @@ Checks whether x is a valid AsspDataObj
 \author{
 Lasse Bombien
 }
-

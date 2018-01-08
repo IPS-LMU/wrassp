@@ -23,10 +23,9 @@ Function logs the call to a signal processing function (spf) of wrassp.
 It is called by default if the forceToLog option of the spf is not set to 
 false. I tries to format the output in an easily readable fashion.
 }
-\author{
-Raphael Winkelmann
-}
 \seealso{
 \code{\link{match.call}}
 }
-
+\author{
+Raphael Winkelmann
+}

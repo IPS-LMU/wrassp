@@ -19,4 +19,3 @@ for each signal processing function in wrassp
 Raphael Winkelmann
 }
 \keyword{datasets}
-

@@ -18,4 +18,3 @@ checks if given string is a valid AsspWindowType according to the assp library
 \author{
 Raphael Winkelmann
 }
-

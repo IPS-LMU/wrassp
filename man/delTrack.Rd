@@ -21,4 +21,3 @@ AsspDataObj object
 \author{
 Lasse Bombien
 }
-

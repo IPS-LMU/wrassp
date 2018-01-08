@@ -31,4 +31,3 @@ Some utility function to retrieve duration, number of records, sample rate and s
 \author{
 Lasse Bombien
 }
-

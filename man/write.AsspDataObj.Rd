@@ -19,4 +19,3 @@ contained in the object.
 \author{
 Lasse Bombien
 }
-

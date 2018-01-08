@@ -34,10 +34,9 @@ It must have
 the same number of rows as the tracks that already exist in the object
 (if any). TODO add \code{format} information.
 }
-\author{
-Lasse Bombien
-}
 \seealso{
 \code{\link{delTrack}}
 }
-
+\author{
+Lasse Bombien
+}

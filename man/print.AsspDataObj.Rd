@@ -15,10 +15,9 @@
 \description{
 Prints an overview of ASSP Data Objects
 }
-\author{
-Lasse Bombien
-}
 \seealso{
 \code{\link{read.AsspDataObj}}
 }
-
+\author{
+Lasse Bombien
+}

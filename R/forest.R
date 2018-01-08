@@ -42,7 +42,7 @@
 ##' @return nrOfProcessedFiles or if only one file to process return AsspDataObj of that file
 ##' @author Raphael Winkelmann
 ##' @author Lasse Bombien
-##' @useDynLib wrassp
+##' @useDynLib wrassp, .registration = TRUE
 ##' @examples
 ##' # get path to audio file
 ##' path2wav <- list.files(system.file("extdata", package = "wrassp"), 

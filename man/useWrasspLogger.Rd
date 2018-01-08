@@ -17,4 +17,3 @@ set to FALSE by default
 Raphael Winkelmann
 }
 \keyword{datasets}
-

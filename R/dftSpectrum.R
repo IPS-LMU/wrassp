@@ -46,7 +46,7 @@
 ##' @author Lasse Bombien
 ##' @seealso \code{\link{cssSpectrum}}, \code{\link{lpsSpectrum}}, \code{\link{cepstrum}}; 
 ##' all derived from libassp's spectrum function.
-##' @useDynLib wrassp
+##' @useDynLib wrassp, .registration = TRUE
 ##' @examples
 ##' # get path to audio file
 ##' path2wav <- list.files(system.file("extdata", package = "wrassp"), 

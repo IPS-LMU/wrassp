@@ -4,7 +4,7 @@
 ##' @title AsspWindowTypes
 ##' @return vector containing window types
 ##' @author Raphael Winkelmann
-##' @useDynLib wrassp
+##' @useDynLib wrassp, .registration = TRUE
 ##' @export
 'AsspWindowTypes' <- function(){
 	
@@ -18,7 +18,7 @@
 ##' @title AsspLpTypes
 ##' @return vector containing lp types
 ##' @author Raphael Winkelmann
-##' @useDynLib wrassp
+##' @useDynLib wrassp, .registration = TRUE
 ##' @export
 'AsspLpTypes' <- function(){
 	
@@ -32,7 +32,7 @@
 ##' @title AsspSpectTypes
 ##' @return vector containing spectrogram types
 ##' @author Raphael Winkelmann
-##' @useDynLib wrassp
+##' @useDynLib wrassp, .registration = TRUE
 ##' @export
 'AsspSpectTypes' <- function(){
 	

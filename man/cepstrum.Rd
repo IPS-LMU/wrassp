@@ -82,13 +82,12 @@ plot(res$cep[dim(res$cep)[1]/2,],
      ylab='cepstral value')
      
 }
+\seealso{
+\code{\link{dftSpectrum}}, \code{\link{cssSpectrum}}, \code{\link{lpsSpectrum}}; 
+all derived from libassp's spectrum function
+}
 \author{
 Raphael Winkelmann
 
 Lasse Bombien
 }
-\seealso{
-\code{\link{dftSpectrum}}, \code{\link{cssSpectrum}}, \code{\link{lpsSpectrum}}; 
-all derived from libassp's spectrum function
-}
-

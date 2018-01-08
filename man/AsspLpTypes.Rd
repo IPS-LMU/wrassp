@@ -18,4 +18,3 @@ wrapper function for AsspLpTypes of wrassp
 \author{
 Raphael Winkelmann
 }
-

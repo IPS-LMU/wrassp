@@ -37,7 +37,7 @@
 ##' @author Lasse Bombien
 ##' @aliases mhspitch f0_mhs
 ##' @seealso \code{\link{ksvF0}} for an tracking the fundamental frequency
-##' @useDynLib wrassp
+##' @useDynLib wrassp, .registration = TRUE
 ##' @examples
 ##' # get path to audio file
 ##' path2wav <- list.files(system.file("extdata", package = "wrassp"), 
