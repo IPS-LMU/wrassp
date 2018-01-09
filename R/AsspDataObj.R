@@ -78,7 +78,7 @@
     if (is.null(file))
       stop('File path not set internally. Please specify!')
     file <- path.expand(file)
-    .Call("writeDObj", dobj, file, PACKAGE="wrassp")
+    .Call("writeDObj_", dobj, file, PACKAGE="wrassp")
   }
 
 ##' Checks whether x is a valid AsspDataObj

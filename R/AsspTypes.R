@@ -8,7 +8,7 @@
 ##' @export
 'AsspWindowTypes' <- function(){
 	
-	return(.Call("AsspWindowTypes", PACKAGE = "wrassp"))
+	return(.Call("AsspWindowTypes_", PACKAGE = "wrassp"))
   
 }
 
@@ -22,7 +22,7 @@
 ##' @export
 'AsspLpTypes' <- function(){
 	
-	return(.Call("AsspLpTypes", PACKAGE = "wrassp"))
+	return(.Call("AsspLpTypes_", PACKAGE = "wrassp"))
 
 }
 
@@ -36,6 +36,6 @@
 ##' @export
 'AsspSpectTypes' <- function(){
 	
-	return(.Call("AsspSpectTypes", PACKAGE = "wrassp"))
+	return(.Call("AsspSpectTypes_", PACKAGE = "wrassp"))
 
 }

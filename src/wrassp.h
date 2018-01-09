@@ -196,7 +196,7 @@ SEXP            showArgs(SEXP args);
 
 SEXP            AsspWindowList();
 char           *asspDF2ssffString(int df);
-SEXP            writeDObj(SEXP, SEXP);
+SEXP            writeDObj_(SEXP, SEXP);
 int             addTrackData(DOBJ * dop, DDESC * ddl, SEXP rdobj);
 DOBJ           *computeFilter(DOBJ * inpDOp, AOPTS * anaopts,
                               DOBJ * outDOp);

@@ -842,8 +842,7 @@ sexp2dobj(SEXP rdobj)
  * This function takes a SEXP of class AsspDataFormat, turns it into a
  * DOBJ and writes it to file. The DOBJ is deleted after wards. 
  */
-SEXP
-writeDObj(SEXP data, SEXP fname)
+SEXP writeDObj_(SEXP data, SEXP fname)
 {
     DOBJ           *dop = sexp2dobj(data);
     dop = asspFOpen(strdup(CHAR(STRING_ELT(fname, 0))), AFO_WRITE, dop);
