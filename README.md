@@ -80,8 +80,10 @@ vignette('wrassp_intro')
 - pull current r-devel image: `docker pull rocker/r-devel`
 - check if pull worked: `docker images`
 - check R version in image: `docker run rocker/r-devel:latest R --version`
-- run interactive version of R `docker run --rm -ti rocker/r-devel:latest`
-
+- run interactive version of bash and mount wrassp project folder (==current directory): `docker run --rm -ti -v $(pwd):/wrassp rocker/r-devel:latest bash`
+- build: `RD CMD build --resave-data --no-manual --no-build-vignettes wrassp`
+- manually install deps (this might need a bit of tweaking): `RD -e 'install.packages(c("stringi","evaluate","compare", "rmarkdown", "knitr", "testthat"))'`
+- check: `RD CMD check --as-cran wrassp_*.tar.gz`
 
 ## Authors
 
