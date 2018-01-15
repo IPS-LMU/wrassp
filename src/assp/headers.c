@@ -636,7 +636,7 @@ char *genWAVhdr(DOBJ *dop)
   strncpy(header, RIFF_MAGIC, 4);
   ptr = (void *)(&header[4]);
   chunkSize = (uint32_t)(dop->headerSize) - SIZEOF_CHUNK + dataBytes;
-  putU32(chunkSize, &ptr, SWAP);
+  putU32(chunkSize, (void **) &ptr, SWAP);
   strncpy((char *)ptr, WAVE_MAGIC, 4);
   ptr += 4;
   /* format chunk */
@@ -644,26 +644,26 @@ char *genWAVhdr(DOBJ *dop)
   ptr += 4;
   if(dop->fileFormat == FF_WAVE) {
     chunkSize = (uint32_t)(SIZEOF_WAVFMT - SIZEOF_CHUNK);
-    putU32(chunkSize, &ptr, SWAP);
-    putU16(dataFormat, &ptr, SWAP);
+    putU32(chunkSize, (void **) &ptr, SWAP);
+    putU16(dataFormat, (void **) &ptr, SWAP);
   }
   else {
     chunkSize = (uint32_t)(SIZEOF_WAVFMTX - SIZEOF_CHUNK);
-    putU32(chunkSize, &ptr, SWAP);
-    putU16(WAVE_EXTS, &ptr, SWAP);
+    putU32(chunkSize, (void **) &ptr, SWAP);
+    putU16(WAVE_EXTS, (void **) &ptr, SWAP);
   }
-  putU16((uint16_t)(dd->numFields), &ptr, SWAP);
-  putU32(sampRate, &ptr, SWAP);
-  putU32(byteRate, &ptr, SWAP);
-  putU16((uint16_t)(dop->recordSize), &ptr, SWAP);
+  putU16((uint16_t)(dd->numFields), (void **) &ptr, SWAP);
+  putU32(sampRate, (void **) &ptr, SWAP);
+  putU32(byteRate, (void **) &ptr, SWAP);
+  putU16((uint16_t)(dop->recordSize), (void **) &ptr, SWAP);
   if(dop->fileFormat == FF_WAVE)
-    putU16((uint16_t)(dd->numBits), &ptr, SWAP);
+    putU16((uint16_t)(dd->numBits), (void **) &ptr, SWAP);
   else {
-    putU16(bitsPerSample, &ptr, SWAP);
-    putU16(WAVE_FMTX_MAX, &ptr, SWAP);
-    putU16((uint16_t)(dd->numBits), &ptr, SWAP);        /* valid bits */
-    putU32(0, &ptr, SWAP);      /* speaker mapping: put where you can */
-    putU16(dataFormat, &ptr, SWAP);
+    putU16(bitsPerSample, (void **) &ptr, SWAP);
+    putU16(WAVE_FMTX_MAX, (void **) &ptr, SWAP);
+    putU16((uint16_t)(dd->numBits), (void **) &ptr, SWAP);        /* valid bits */
+    putU32(0, (void **) &ptr, SWAP);      /* speaker mapping: put where you can */
+    putU16(dataFormat, (void **) &ptr, SWAP);
     memcpy((void *)ptr, (void *)WAVE_GUID_ID, WAVE_GUID_LEN);
     ptr += WAVE_GUID_LEN;
   }
@@ -672,13 +672,13 @@ char *genWAVhdr(DOBJ *dop)
     strncpy((char *)ptr, WAVE_FACT_ID, 4);
     ptr += 4;
     chunkSize = (uint32_t)(SIZEOF_WAVFACT - SIZEOF_CHUNK);
-    putU32(chunkSize, &ptr, SWAP);
-    putU32((uint32_t)(dop->numRecords), &ptr, SWAP);
+    putU32(chunkSize, (void **) &ptr, SWAP);
+    putU32((uint32_t)(dop->numRecords), (void **) &ptr, SWAP);
   }
   /* data chunk */
   strncpy((char *)ptr, WAVE_DATA_ID, 4);
   ptr += 4;
-  putU32(dataBytes, &ptr, SWAP);
+  putU32(dataBytes, (void **) &ptr, SWAP);
   return(header);
 }
 
@@ -921,7 +921,7 @@ LOCAL int getAIFhdr(DOBJ *dop)
   SETMSBFIRST(dop->fileEndian);                   /* always MSB first */
   SWAP = DIFFENDIAN(dop->fileEndian, sysEndian);
   ptr = (void *)&buf[4];
-  chunkSize = getI32(&ptr, SWAP);               /* for debugging only */
+  chunkSize = getI32((void **) &ptr, SWAP);               /* for debugging only */
   headSize = (long)numBytes;              /* keep track of bytes read */
   dop->headerSize = 0;                        /* use as flag for SSND */
   dop->numRecords = -1;                       /* use as flag for COMM */
@@ -939,7 +939,7 @@ LOCAL int getAIFhdr(DOBJ *dop)
     }
     headSize += (long)numBytes;
     ptr = (void *)&buf[4];
-    chunkSize = getI32(&ptr, SWAP);
+    chunkSize = getI32((void **) &ptr, SWAP);
     if(ODD(chunkSize))
       chunkSize++;                       /* zero-padding NOT included */
 /*
@@ -954,7 +954,7 @@ LOCAL int getAIFhdr(DOBJ *dop)
       }
       headSize += (long)numBytes;
       ptr = (void *)buf;
-      dop->version = getI32(&ptr, SWAP);
+      dop->version = getI32((void **) &ptr, SWAP);
     }
 /*
  * decode COMM chunk
@@ -968,9 +968,9 @@ LOCAL int getAIFhdr(DOBJ *dop)
       }
       headSize += (long)numBytes;
       ptr = (void *)buf;
-      dd->numFields = (size_t)getI16(&ptr, SWAP);
-      dop->numRecords = (long)getU32(&ptr, SWAP);
-      dd->numBits = (uint16_t)getI16(&ptr, SWAP);
+      dd->numFields = (size_t)getI16((void **) &ptr, SWAP);
+      dop->numRecords = (long)getU32((void **) &ptr, SWAP);
+      dd->numBits = (uint16_t)getI16((void **) &ptr, SWAP);
       // commented out by Raphael Winkelmann 13. Nov. 2014 due to copyright issues of ieee.c for CRAN (ieee.c is missing)
       //dop->sampFreq = ConvertFromIeeeExtended((uint8_t *)ptr);
       /* needs no swapping: conversion assumes MSB-first */
@@ -1066,8 +1066,8 @@ LOCAL int getAIFhdr(DOBJ *dop)
       }
       headSize += (long)numBytes;
       ptr = (void *)buf;
-      offset = (long)getU32(&ptr, SWAP);
-      blockSize = getU32(&ptr, SWAP);           /* for debugging only */
+      offset = (long)getU32((void **) &ptr, SWAP);
+      blockSize = getU32((void **) &ptr, SWAP);           /* for debugging only */
       dop->headerSize = headSize + offset; /* data follow immediately */
       if(dop->numRecords >= 0)
 	break;                   /* can't handle multiple data chunks */
@@ -1137,7 +1137,7 @@ LOCAL int putAIFhdr(DOBJ *dop)
  */
   strncpy(header, AIF_FORM_ID, 4);
   ptr = (void *)&header[4];
-  putI32((int32_t)(dop->headerSize - SIZEOF_CHUNK + dataBytes), &ptr, SWAP);
+  putI32((int32_t)(dop->headerSize - SIZEOF_CHUNK + dataBytes), (void **) &ptr, SWAP);
   if(dop->fileFormat == FF_AIFF)
     strncpy((char *)ptr, AIFF_MAGIC, 4);
   else
@@ -1149,18 +1149,18 @@ LOCAL int putAIFhdr(DOBJ *dop)
   if(dop->fileFormat == FF_AIFC) {
     strncpy((char *)ptr, AIFC_VERSION_ID, 4);
     ptr += 4;
-    putI32(SIZEOF_FVER - SIZEOF_CHUNK, &ptr, SWAP);         /* ckSize */
-    putI32(AIFC_VERSION, &ptr, SWAP);
+    putI32(SIZEOF_FVER - SIZEOF_CHUNK, (void **) &ptr, SWAP);         /* ckSize */
+    putI32(AIFC_VERSION, (void **) &ptr, SWAP);
   }
 /*
  * COMM chunk
  */
   strncpy((void *)ptr, AIF_COMM_ID, 4);
   ptr += 4;
-  putI32(commSize - SIZEOF_CHUNK, &ptr, SWAP);              /* ckSize */
-  putI16((int16_t)dd->numFields, &ptr, SWAP);            /* numTracks */
-  putU32((uint32_t)dop->numRecords, &ptr, SWAP);        /* numSamples */
-  putI16((int16_t)dd->numBits, &ptr, SWAP);                /* numBits */
+  putI32(commSize - SIZEOF_CHUNK, (void **) &ptr, SWAP);              /* ckSize */
+  putI16((int16_t)dd->numFields, (void **) &ptr, SWAP);            /* numTracks */
+  putU32((uint32_t)dop->numRecords, (void **) &ptr, SWAP);        /* numSamples */
+  putI16((int16_t)dd->numBits, (void **) &ptr, SWAP);                /* numBits */
   // commented out by Raphael Winkelmann 13. Nov. 2014 due to copyright issues of ieee.c for CRAN (ieee.c is missing)
   // ConvertToIeeeExtended(dop->sampFreq, (uint8_t *)ptr);
   /* needs no swapping: conversion produces MSB-first */
@@ -1192,17 +1192,17 @@ LOCAL int putAIFhdr(DOBJ *dop)
       return(-1);
     }
     ptr += 4;
-    putU8(0, &ptr);               /* length of compression descriptor */
-    putI8(0, &ptr);            /* descriptor text (we leave it empty) */
+    putU8(0, (void **) &ptr);               /* length of compression descriptor */
+    putI8(0, (void **) &ptr);            /* descriptor text (we leave it empty) */
   }
 /*
  * SSND chunk
  */
   strncpy((char *)ptr, AIF_DATA_ID,4);
   ptr += 4;
-  putI32((int32_t)(SIZEOF_SSND - SIZEOF_CHUNK + dataBytes), &ptr, SWAP);
-  putU32(0, &ptr, FALSE);                                   /* offset */
-  putU32(0, &ptr, FALSE);                                /* blockSize */
+  putI32((int32_t)(SIZEOF_SSND - SIZEOF_CHUNK + dataBytes), (void **) &ptr, SWAP);
+  putU32(0, (void **) &ptr, FALSE);                                   /* offset */
+  putU32(0, (void **) &ptr, FALSE);                                /* blockSize */
 /*
  * write header
  */
@@ -1253,7 +1253,7 @@ LOCAL int getCSLhdr(DOBJ *dop)
   SETMSBLAST(dop->fileEndian);                     /* always MSB last */
   SWAP = DIFFENDIAN(dop->fileEndian, sysEndian);
   ptr = (void *)&buf[strlen(CSL_MAGIC)];
-  chunkSize = getU32(&ptr, SWAP);               /* for debugging only */
+  chunkSize = getU32((void **) &ptr, SWAP);               /* for debugging only */
   dop->headerSize = 0;                      /* use as flag for 'DATA' */
   dop->numRecords = -1;                     /* use as flag for 'HEDR' */
   numRecords = -1;                         /* for header verification */
@@ -1274,7 +1274,7 @@ LOCAL int getCSLhdr(DOBJ *dop)
     }
     headSize += (long)numBytes;
     ptr = (void *)&buf[4];
-    chunkSize = getU32(&ptr, SWAP);
+    chunkSize = getU32((void **) &ptr, SWAP);
     if(ODD(chunkSize))
       chunkSize++;                       /* zero-padding NOT included */
 /*
@@ -1295,10 +1295,10 @@ LOCAL int getCSLhdr(DOBJ *dop)
       headSize += (long)numBytes;
       ptr = (void *)buf;
       ptr += CSL_DATESIZE;         /* skip date until we can store it */
-      dop->sampFreq = (double)getU32(&ptr, SWAP);
-      dop->numRecords = (long)getU32(&ptr, SWAP);
-      peakMag = getI16(&ptr, SWAP);                   /* skip peakA */
-      peakMag = getI16(&ptr, SWAP);                   /* skip peakB */
+      dop->sampFreq = (double)getU32((void **) &ptr, SWAP);
+      dop->numRecords = (long)getU32((void **) &ptr, SWAP);
+      peakMag = getI16((void **) &ptr, SWAP);                   /* skip peakA */
+      peakMag = getI16((void **) &ptr, SWAP);                   /* skip peakB */
     }
 /*
  * decode DATA chunk
@@ -1399,32 +1399,32 @@ LOCAL int putCSLhdr(DOBJ *dop)
   dataBytes = (uint32_t)(dop->numRecords * (long)(dop->recordSize));
   strncpy(header, CSL_MAGIC, strlen(CSL_MAGIC));
   ptr = (void *)&header[strlen(CSL_MAGIC)];
-  putU32(SIZEOF_CSLFMT + SIZEOF_CSLDAT + dataBytes, &ptr, SWAP);
+  putU32(SIZEOF_CSLFMT + SIZEOF_CSLDAT + dataBytes, (void **) &ptr, SWAP);
 /*
  * HEDR and DATA chunk
  */
   strncpy((char *)ptr, CSL_HEAD_ID, 4);
   ptr += 4;
-  putU32(SIZEOF_CSLFMT - SIZEOF_CHUNK, &ptr, SWAP);
+  putU32(SIZEOF_CSLFMT - SIZEOF_CHUNK, (void **) &ptr, SWAP);
   currTime = time(NULL);                          /* get current time */
   date = ctime(&currTime);                       /* convert to string */
   strncpy((char *)ptr, &date[4], CSL_DATESIZE);
   ptr += CSL_DATESIZE;
-  putU32((uint32_t)myrint(dop->sampFreq), &ptr, SWAP);
-  putU32((uint32_t)(dop->numRecords), &ptr, SWAP);
+  putU32((uint32_t)myrint(dop->sampFreq), (void **) &ptr, SWAP);
+  putU32((uint32_t)(dop->numRecords), (void **) &ptr, SWAP);
   peakMag = (1 << (dd->numBits -1)) -1;
   if(dd->numFields == 1) {
-    putI16(peakMag, &ptr, SWAP);
-    putI16(-1, &ptr, SWAP);
+    putI16(peakMag, (void **) &ptr, SWAP);
+    putI16(-1, (void **) &ptr, SWAP);
     strncpy((char *)ptr, CSL_DATA_ID_L, 4);
   }
   else {
-    putI16(peakMag, &ptr, SWAP);
-    putI16(peakMag, &ptr, SWAP);
+    putI16(peakMag, (void **) &ptr, SWAP);
+    putI16(peakMag, (void **) &ptr, SWAP);
     strncpy((char *)ptr, CSL_DATA_ID_S, 4);
   }
   ptr += 4;
-  putU32(dataBytes, &ptr, SWAP);
+  putU32(dataBytes, (void **) &ptr, SWAP);
 /*
  * write header
  */
@@ -1473,8 +1473,8 @@ LOCAL int getADFhdr(DOBJ *dop)
   freeDDList(dop);                   /* clear/remove data descriptors */
   dd = &(dop->ddl);
   ptr = (void *)&buf[8];                                /* past ident */
-  dop->numRecords = (long)getI32(&ptr, SWAP);
-  dd->zeroValue = (uint32_t)getI32(&ptr, SWAP);         /* centreLine */
+  dop->numRecords = (long)getI32((void **) &ptr, SWAP);
+  dd->zeroValue = (uint32_t)getI32((void **) &ptr, SWAP);         /* centreLine */
   uInt16 = getU16(&ptr, SWAP); /* startTrack: debugging and ptr advance */
   dd->numBits = getU16(&ptr, SWAP);
   if(dd->numBits < 12 || dd->numBits > 16) {
@@ -1503,7 +1503,7 @@ LOCAL int getADFhdr(DOBJ *dop)
   }
   dop->sampFreq = (double)getF32(&ptr, SWAP);  /* sampRate in kHz !!! */
   dop->sampFreq = myrint((dop->sampFreq) * 1000.0);    /* round to Hz */
-  getI32(&ptr, SWAP);     /* peakSample: debugging and to advance ptr */
+  getI32((void **) &ptr, SWAP);     /* peakSample: debugging and to advance ptr */
 /*
  * complete DOBJ and DDESC
  */
@@ -1567,8 +1567,8 @@ LOCAL int putADFhdr(DOBJ *dop)
   memset((void *)header, 0, ADF_HDR_SIZE);            /* clear header */
   strcpy(header, ADF_MAGIC);
   ptr = (void *)(&header[8]);
-  putI32((int32_t)dop->numRecords, &ptr, SWAP);
-  putI32((int32_t)dd->zeroValue, &ptr, SWAP);       /* centreLine ??? */
+  putI32((int32_t)dop->numRecords, (void **) &ptr, SWAP);
+  putI32((int32_t)dd->zeroValue, (void **) &ptr, SWAP);       /* centreLine ??? */
   putU16(1, &ptr, SWAP);                            /* startTrack ??? */
   putU16(dd->numBits, &ptr, SWAP);
   if(dd->coding == DC_BINOFF)
@@ -1576,7 +1576,7 @@ LOCAL int putADFhdr(DOBJ *dop)
   else
     putU16(ADF_SLIN, &ptr, SWAP);
   putF32((float)(dop->sampFreq / 1000.0), &ptr, SWAP);  /* in kHz !!! */
-  putI32(maxMag-1, &ptr, SWAP);                         /* peakSample */
+  putI32(maxMag-1, (void **) &ptr, SWAP);                         /* peakSample */
 /*
  * write header
  */
@@ -1626,11 +1626,11 @@ LOCAL int getSNDhdr(DOBJ *dop)
   freeDDList(dop);                   /* clear/remove data descriptors */
   dd = &(dop->ddl);
   ptr = (void *)(&buf[strlen(SND_MAGIC)]);
-  dop->headerSize = (long)getI32(&ptr, SWAP);
-  dop->numRecords = (long)getI32(&ptr, SWAP);
-  format = (long)getI32(&ptr, SWAP);
-  dop->sampFreq = (double)getI32(&ptr, SWAP);
-  dd->numFields = (size_t)getI32(&ptr, SWAP);
+  dop->headerSize = (long)getI32((void **) &ptr, SWAP);
+  dop->numRecords = (long)getI32((void **) &ptr, SWAP);
+  format = (long)getI32((void **) &ptr, SWAP);
+  dop->sampFreq = (double)getI32((void **) &ptr, SWAP);
+  dd->numFields = (size_t)getI32((void **) &ptr, SWAP);
   if(format < 1 || dop->sampFreq <= 0.0 || dd->numFields < 1) {
     asspMsgNum = AEF_BAD_HEAD;
     sprintf(applMessage, "(AU/SND format) in file %s", dop->filePath);
@@ -1757,28 +1757,28 @@ LOCAL int putSNDhdr(DOBJ *dop)
  */
   strcpy(header, SND_MAGIC);
   ptr = (void *)(&header[strlen(SND_MAGIC)]);
-  putI32((int32_t)(dop->headerSize), &ptr, SWAP);
-  putI32((int32_t)(dop->numRecords * (long)(dop->recordSize)), &ptr, SWAP);
+  putI32((int32_t)(dop->headerSize), (void **) &ptr, SWAP);
+  putI32((int32_t)(dop->numRecords * (long)(dop->recordSize)), (void **) &ptr, SWAP);
   switch(dd->coding) {
   case DC_PCM:
     switch(dd->format) {
     case DF_INT8:
-      putI32(SND_LINEAR_8, &ptr, SWAP);
+      putI32(SND_LINEAR_8, (void **) &ptr, SWAP);
       break;
     case DF_INT16:
-      putI32(SND_LINEAR_16, &ptr, SWAP);
+      putI32(SND_LINEAR_16, (void **) &ptr, SWAP);
       break;
     case DF_INT24:
-      putI32(SND_LINEAR_24, &ptr, SWAP);
+      putI32(SND_LINEAR_24, (void **) &ptr, SWAP);
       break;
     case DF_INT32:
-      putI32(SND_LINEAR_32, &ptr, SWAP);
+      putI32(SND_LINEAR_32, (void **) &ptr, SWAP);
       break;
     case DF_REAL32:
-      putI32(SND_FLOAT, &ptr, SWAP);
+      putI32(SND_FLOAT, (void **) &ptr, SWAP);
       break;
     case DF_REAL64:
-      putI32(SND_DOUBLE, &ptr, SWAP);
+      putI32(SND_DOUBLE, (void **) &ptr, SWAP);
       break;
     default:
       asspMsgNum = AEG_ERR_BUG;
@@ -1787,19 +1787,19 @@ LOCAL int putSNDhdr(DOBJ *dop)
     }
     break;
   case DC_ALAW:
-    putI32(SND_ALAW_8, &ptr, SWAP);
+    putI32(SND_ALAW_8, (void **) &ptr, SWAP);
     break;
   case DC_uLAW:
-    putI32(SND_MULAW_8, &ptr, SWAP);
+    putI32(SND_MULAW_8, (void **) &ptr, SWAP);
     break;
   default:
     asspMsgNum = AEG_ERR_BUG;
     sprintf(applMessage, "putSNDhdr: %s", getAsspMsg(AED_BAD_FORM));
     return(-1);
   }
-  putI32((int32_t)myrint(dop->sampFreq), &ptr, SWAP);
-  putI32((int32_t)(dd->numFields), &ptr, SWAP);
-  putI32(0, &ptr, FALSE);                   /* 4 NULL bytes in 'info' */
+  putI32((int32_t)myrint(dop->sampFreq), (void **) &ptr, SWAP);
+  putI32((int32_t)(dd->numFields), (void **) &ptr, SWAP);
+  putI32(0, (void **) &ptr, FALSE);                   /* 4 NULL bytes in 'info' */
 /*
  * write header
  */
@@ -1852,7 +1852,7 @@ LOCAL int getWAVhdr(DOBJ *dop)
   freeDDList(dop);                   /* clear/remove data descriptors */
   dd = &(dop->ddl);
   ptr = (void *)(&buf[4]);
-  chunkSize = getU32(&ptr, SWAP);               /* for debugging only */
+  chunkSize = getU32((void **) &ptr, SWAP);               /* for debugging only */
   format = 0;                                /* use as flag for 'fmt' */
   dop->headerSize = 0;                      /* use as flag for 'data' */
   dop->numRecords = -1;                     /* use as flag for 'fact' */
@@ -1870,7 +1870,7 @@ LOCAL int getWAVhdr(DOBJ *dop)
     }
     headSize += numBytes;
     ptr = (void *)(&buf[4]);              /* first 4 chars contain ID */
-    chunkSize = getU32(&ptr, SWAP);
+    chunkSize = getU32((void **) &ptr, SWAP);
     /* can't check on ODD here because we need the value for the data */
 /*
  * decode FORMAT chunk
@@ -1900,17 +1900,17 @@ LOCAL int getWAVhdr(DOBJ *dop)
 	dop->fileFormat = FF_WAVE;
 	dop->version = 1; /* old style */
       }
-      dd->numFields = (size_t)getU16(&ptr, SWAP);
-      dop->sampFreq = (double)getU32(&ptr, SWAP);
-      byteRate = getU32(&ptr, SWAP);    /* only of interest for ADPCM */
-      blockSize = getU16(&ptr, SWAP);         /* problemetic if ADPCM */
-      dd->numBits = getU16(&ptr, SWAP);
+      dd->numFields = (size_t)getU16((void **) &ptr, SWAP);
+      dop->sampFreq = (double)getU32((void **) &ptr, SWAP);
+      byteRate = getU32((void **) &ptr, SWAP);    /* only of interest for ADPCM */
+      blockSize = getU16((void **) &ptr, SWAP);         /* problemetic if ADPCM */
+      dd->numBits = getU16((void **) &ptr, SWAP);
       if(chunkSize >= SIZEOF_WAVFMTX_M - SIZEOF_CHUNK) {
 	extSize = getU16(&ptr, SWAP);     /* extensible part of chunk */
 	if(extSize == WAVE_FMTX_MAX) {
-	  dd->numBits = getU16(&ptr, SWAP);  /* valid bits per sample */
-	  lspPosMask = getU32(&ptr, SWAP);   /* loudspeaker positions */
-	  format = getU16(&ptr, SWAP);        /* first 2 Byte of GUID */
+	  dd->numBits = getU16((void **) &ptr, SWAP);  /* valid bits per sample */
+	  lspPosMask = getU32((void **) &ptr, SWAP);   /* loudspeaker positions */
+	  format = getU16((void **) &ptr, SWAP);        /* first 2 Byte of GUID */
 	}
 	else if(dop->fileFormat == FF_WAVE_X) {
 	  asspMsgNum = AEF_BAD_HEAD;
