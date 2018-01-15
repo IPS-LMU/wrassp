@@ -457,7 +457,7 @@ long asspFPrint(void *buffer, long startRecord, long numRecords,\
 		DOBJ *dop, int extra)
 {
   uint8_t  *bPtr;
-  char      tFormat[16], dFormat[16];
+  char      tFormat[32], dFormat[16];
   int       n, nd, rn, err;
   double    time, frameRate=0.0;
   DDESC    *dd;

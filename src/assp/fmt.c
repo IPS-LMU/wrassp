@@ -63,7 +63,7 @@ unsigned long totFMTfiles, totFMTframes, totFMTsilent, totFMTfail;
 /*
  * local global variables and arrays
  */
-LOCAL char trgepFormat[32], fpbFormat[32];
+LOCAL char trgepFormat[64], fpbFormat[32];
 
 LOCAL double *rmsBuf=NULL; /* buffer for RMS calculation (allocated) */
 LOCAL double *frame=NULL;  /* frame buffer incl. leading sample (allocated) */
