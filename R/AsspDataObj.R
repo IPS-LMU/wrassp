@@ -186,7 +186,7 @@ addTrack <- function (dobj, trackname, data, format = 'INT16',
 ##' List the tracks of an AsspDataObj
 ##'
 ##' AsspDataObj contain tracks (at least one). This function lists the names
-##' of these tracks. This function is equvalent to calling \code{names(x)}.
+##' of these tracks. This function is equivalent to calling \code{names(x)}.
 ##' @title tracks.AsspDataObj
 ##' @param x an object of class AsspDataObj
 ##' @return a character vector containing the names of the tracks

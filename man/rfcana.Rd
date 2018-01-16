@@ -43,7 +43,7 @@ overrules beginTime, endTime and windowShift options}
 
 \item{toFile}{write results to file (default extension dependent on LpType .arf/.lar/.lpc/.rfc)}
 
-\item{explicitExt}{set if you wish to overwride the default extension}
+\item{explicitExt}{set if you wish to override the default extension}
 
 \item{outputDirectory}{directory in which output files are stored. Defaults to NULL, i.e.
 the directory of the input files}

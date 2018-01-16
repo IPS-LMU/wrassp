@@ -43,7 +43,7 @@ the FFT)}
 
 \item{toFile}{write results to file (default extension depends on )}
 
-\item{explicitExt}{set if you wish to overwride the default extension}
+\item{explicitExt}{set if you wish to override the default extension}
 
 \item{outputDirectory}{directory in which output files are stored. Defaults to NULL, i.e.
 the directory of the input files}

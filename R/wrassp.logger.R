@@ -6,7 +6,7 @@
 ##' 
 ##' @title wrassp.logger
 ##' @param fName the name of the function calling the logger
-##' @param fOpts are the function options given by the user aquired by match.call 
+##' @param fOpts are the function options given by the user acquired by match.call 
 ##' @param optLogFilePath path to option log file 
 ##' @param listOfFiles vector of file paths that the spf calling the logger processed
 ##' @author Raphael Winkelmann

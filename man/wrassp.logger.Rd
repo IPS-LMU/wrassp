@@ -9,7 +9,7 @@ wrassp.logger(fName, fOpts, optLogFilePath, listOfFiles)
 \arguments{
 \item{fName}{the name of the function calling the logger}
 
-\item{fOpts}{are the function options given by the user aquired by match.call}
+\item{fOpts}{are the function options given by the user acquired by match.call}
 
 \item{optLogFilePath}{path to option log file}
 

@@ -15,7 +15,7 @@
 ##' @param windowShift = <dur>: set analysis window shift to <dur> ms (default: 5.0)
 ##' @param windowSize = <dur>:  set analysis window size to <dur> ms (default: 25.0)
 ##' @param toFile write results to file (default extension is .zcr)
-##' @param explicitExt set if you wish to overwride the default extension
+##' @param explicitExt set if you wish to override the default extension
 ##' @param outputDirectory directory in which output files are stored. Defaults to NULL, i.e.
 ##' the directory of the input files
 ##' @param forceToLog is set by the global package variable useWrasspLogger. This is set

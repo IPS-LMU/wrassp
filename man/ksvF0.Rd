@@ -37,7 +37,7 @@ ksvF0(listOfFiles = NULL, optLogFilePath = NULL, beginTime = 0,
 
 \item{toFile}{write results to file (default extension is .f0)}
 
-\item{explicitExt}{set if you wish to overwride the default extension}
+\item{explicitExt}{set if you wish to override the default extension}
 
 \item{outputDirectory}{directory in which output files are stored. Defaults to NULL, i.e.
 the directory of the input files}
@@ -55,7 +55,7 @@ ksvF0 function adapted from libassp
 }
 \details{
 F0 analysis of the signal in <listOfFiles> using the 
-K. Schaefer-Vincent periodicity detection algortithm.
+K. Schaefer-Vincent periodicity detection algorithm.
 Analysis results will be written to a file with the
 base name of the input file and extension '.f0'.
 Default output is in SSFF binary format (track 'F0').

@@ -7,7 +7,7 @@
 ##' Split-Levinson-Algorithm (SLA). Resonances are then
 ##' classified as formants using the so-called Pisarenko
 ##' frequencies (by-product of the SLA) and a formant
-##' frequeny range table derived from the nominal F1
+##' frequency range table derived from the nominal F1
 ##' frequency. The latter may have to be increased by
 ##' about 12\% for female voices (see NominalF1 and Gender options).
 ##' Formant estimates will be written to a file with the
@@ -33,7 +33,7 @@
 ##' @param preemphasis = <val>: set pre-emphasis factor to <val> (-1 <= val <= 0) 
 ##' (default: dependent on sample rate and nominal F1)
 ##' @param toFile write results to file (default extension is .fms)
-##' @param explicitExt set if you wish to overwride the default extension
+##' @param explicitExt set if you wish to override the default extension
 ##' @param outputDirectory directory in which output files are stored. Defaults to NULL, i.e. 
 ##' the directory of the input files
 ##' @param forceToLog is set by the global package variable useWrasspLogger. This is set

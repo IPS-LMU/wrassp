@@ -46,7 +46,7 @@ forest(listOfFiles = NULL, optLogFilePath = NULL, beginTime = 0,
 
 \item{toFile}{write results to file (default extension is .fms)}
 
-\item{explicitExt}{set if you wish to overwride the default extension}
+\item{explicitExt}{set if you wish to override the default extension}
 
 \item{outputDirectory}{directory in which output files are stored. Defaults to NULL, i.e. 
 the directory of the input files}
@@ -70,7 +70,7 @@ polynomial from the autocorrelation method and the
 Split-Levinson-Algorithm (SLA). Resonances are then
 classified as formants using the so-called Pisarenko
 frequencies (by-product of the SLA) and a formant
-frequeny range table derived from the nominal F1
+frequency range table derived from the nominal F1
 frequency. The latter may have to be increased by
 about 12\% for female voices (see NominalF1 and Gender options).
 Formant estimates will be written to a file with the

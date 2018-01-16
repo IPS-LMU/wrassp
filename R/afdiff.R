@@ -18,7 +18,7 @@
 ##' @param computeCentralDifference compute central/interpolated/3-point difference
 ##' @param channel = <num>: for multi-channel input files: extract and differentiate channel <num> (1 <= <num> <= 8  default: channel 1)
 ##' @param toFile write results to file (default extension is .d+(extensionsOfAudioFile))
-##' @param explicitExt set if you wish to overwride the default extension 
+##' @param explicitExt set if you wish to override the default extension 
 ##' @param outputDirectory directory in which output files are stored. Defaults to NULL, i.e. 
 ##' the directory of the input files
 ##' @param forceToLog is set by the global package variable useWrasspLogger. This is set

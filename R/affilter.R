@@ -32,7 +32,7 @@
 ##' @param numIIRsections = <num>: set the number of 2nd order sections to <num> (default: 4) where each section 
 ##' adds 12dB/oct to the slope of the filter 
 ##' @param toFile write results to file (for default extension see details section))
-##' @param explicitExt set if you wish to overwride the default extension
+##' @param explicitExt set if you wish to override the default extension
 ##' @param outputDirectory directory in which output files are stored. Defaults to NULL, i.e. 
 ##' the directory of the input files
 ##' @param forceToLog is set by the global package variable useWrasspLogger. This is set
