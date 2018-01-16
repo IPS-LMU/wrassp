@@ -24,7 +24,7 @@
 ##' (default: 5.0)
 ##' @param window = <type>: set analysis window function to <type> (default:
 ##' BLACKMAN)
-##' @param numCeps = <num>: set number of cepstral coeffcients used to <num>
+##' @param numCeps = <num>: set number of cepstral coefficients used to <num>
 ##' (default: sampling rate in kHz + 1; minimum: 2)
 ##' @param toFile write results to file (default extension depends on )
 ##' @param explicitExt set if you wish to override the default extension

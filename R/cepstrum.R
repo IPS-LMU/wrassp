@@ -1,4 +1,4 @@
-##' calculate cepstral coeffisients using libassp
+##' calculate cepstral coefficients using libassp
 ##'
 ##' Short-term cepstral analysis of the signal in <listOfFiles>
 ##' using the Fast Fourier Transform. The number of
