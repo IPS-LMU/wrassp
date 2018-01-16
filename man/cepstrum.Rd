@@ -54,7 +54,7 @@ nrOfProcessedFiles or if only one file to process return
 AsspDataObj of that file
 }
 \description{
-calculate cepstral coeffisients using libassp
+calculate cepstral coefficients using libassp
 }
 \details{
 Short-term cepstral analysis of the signal in <listOfFiles>

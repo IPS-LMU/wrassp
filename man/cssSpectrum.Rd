@@ -37,7 +37,7 @@ and 'resolution' option)}
 \item{window}{= <type>: set analysis window function to <type> (default:
 BLACKMAN)}
 
-\item{numCeps}{= <num>: set number of cepstral coeffcients used to <num>
+\item{numCeps}{= <num>: set number of cepstral coefficients used to <num>
 (default: sampling rate in kHz + 1; minimum: 2)}
 
 \item{toFile}{write results to file (default extension depends on )}
