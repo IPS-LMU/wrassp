@@ -1,3 +1,10 @@
+# wrassp 0.1.6
+
+## bug fixes
+
+* fixed rchk issues
+* adressed comments by cran maintainer about description files
+
 # wrassp 0.1.5
 
 ## bug fixes
