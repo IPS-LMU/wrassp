@@ -1,18 +1,18 @@
 Package: wrassp
-Version: 0.1.5
-Title: Interface to the ASSP Library
+Version: 0.1.6
+Title: Interface to the 'ASSP' Library
 Authors@R: c(
     person("Raphael", "Winkelmann", ,"raphael@phonetik.uni-muenchen.de", role = c("aut", "cre")),
     person("Lasse", "Bombien", , "lasse@phonetik.uni-muenchen.de", role = c("aut")),
     person("Michel", "Scheffers", role = c("aut")))
-Description: A wrapper around Michel Scheffers's libassp (Advanced
-    Speech Signal Processor). The libassp library aims at providing
+Description: A wrapper around Michel Scheffers's 'libassp' (<http://libassp.sourceforge.net/>). 
+    The 'libassp' (Advanced Speech Signal Processor) library aims at providing
     functionality for handling speech signal files in most common audio formats
     and for performing analyses common in phonetic science/speech science. This
     includes the calculation of formants, fundamental frequency, root mean
     square, auto correlation, a variety of spectral analyses, zero crossing
     rate, filtering etc. This wrapper provides R with a large subset of
-    libassp's signal processing functions and provides them to the user in a
+    'libassp's signal processing functions and provides them to the user in a
     (hopefully) user-friendly manner.
 Depends:
     R (>= 3.1.1)
