@@ -85,6 +85,18 @@ vignette('wrassp_intro')
 - manually install deps (this might need a bit of tweaking): `RD -e 'install.packages(c("stringi","evaluate","compare", "rmarkdown", "knitr", "testthat"))'`
 - check: `RD CMD check --as-cran wrassp_*.tar.gz`
 
+
+### Using rchk for additional checks
+
+- clone repo `git clone https://github.com/joshuaulrich/rchk-docker.git`
+- `cd rchk-docker`
+- build docker image `docker build .`
+- code below is adapted from final example of this `README.md`: https://github.com/kalibera/rchk
+- build r package `./bin/R CMD build --resave-data --no-manual --no-build-vignettes /wrassp`
+- install package `echo 'install.packages("wrassp_0.1.5.tar.gz",repos=NULL)' |  ./bin/R --slave`
+- run rchk `/opt/rchk/scripts/check_package.sh wrassp`
+- view rchk results `less packages/lib/wrassp/libs/wrassp.so.bcheck` and `less packages/lib/wrassp/libs/wrassp.so.maacheck`
+
 ## Authors
 
 **Raphael Winkelmann**
