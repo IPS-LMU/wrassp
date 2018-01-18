@@ -488,7 +488,9 @@ performAssp(SEXP args)
                     res,
                     pBar = R_NilValue,
         utilsPackage,           /* to update the prograssbar */
-        newVal;
+        newVal,
+        R_fcall1, R_fcall2, R_fcall3; // for protected versions 
+  
     const char     *name;
     AOPTS           OPTS;
     AOPTS          *opt = &OPTS;
@@ -1072,13 +1074,15 @@ performAssp(SEXP args)
      * hook into the progressbar if present 
      */
     if (pBar != R_NilValue) {
+        SEXP s;
+        PROTECT(s = ScalarString(mkChar("utils"))); // not in lang2 function call because of Multiple-Allocating-Arguments Bug problem (caught by rchk)
+        PROTECT(R_fcall1 = lang2(install("getNamespace"), s));
+      
         PROTECT(newVal = allocVector(INTSXP, 1));
-        PROTECT(utilsPackage = eval(lang2(install("getNamespace"),
-                                          ScalarString(mkChar("utils"))),
-                                    R_GlobalEnv));
+        PROTECT(utilsPackage = eval(R_fcall1, R_GlobalEnv));
         INTEGER(newVal)[0] = 0;
-        eval(lang4(install("setTxtProgressBar"), pBar, newVal, R_NilValue),
-             utilsPackage);
+        PROTECT(R_fcall2 = lang4(install("setTxtProgressBar"), pBar, newVal, R_NilValue));
+        eval(R_fcall2, utilsPackage);
     }
 
     /*
@@ -1169,7 +1173,7 @@ performAssp(SEXP args)
             }
             asspFClose(outPtr, AFC_FREE);
         } else {
-            res = dobj2AsspDataObj(outPtr);
+            PROTECT(res = dobj2AsspDataObj(outPtr));
             asspFClose(outPtr, AFC_FREE);
         }
 
@@ -1179,12 +1183,17 @@ performAssp(SEXP args)
          * if a progress bar was passed over, increment its value
          */
         if (pBar != R_NilValue) {
+            PROTECT(R_fcall3 = lang4(install("setTxtProgressBar"), pBar, newVal, R_NilValue));
             INTEGER(newVal)[0] = i + 1;
-            eval(lang4
-                 (install("setTxtProgressBar"), pBar, newVal, R_NilValue),
-                 utilsPackage);
+            eval(R_fcall3, utilsPackage);
+            UNPROTECT(1);
         }
-    }
+        
+        // unprotect res
+        if (!toFile) UNPROTECT(1);
+        
+    }// end of for loop
+    
     free((void *) outDir);
     if (toFile) {
         /*
@@ -1194,16 +1203,17 @@ performAssp(SEXP args)
         INTEGER(res)[0] = i;
     }
     /*
-     * for the progress bar, to SEXPs were protected
+     * for the progress bar, five SEXPs were protected
      */
     if (pBar != R_NilValue)
-        UNPROTECT(2);
+        UNPROTECT(5);
 
     /*
      * in toFile mode, the return value was protected
      */
     if (toFile)
         UNPROTECT(1);
+    
     return res;
 }
 

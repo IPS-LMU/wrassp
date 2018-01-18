@@ -33,8 +33,9 @@ getDObj(SEXP fname)
     if ((numRecs = asspFFill(data)) < 0)
         error(getAsspMsg(asspMsgNum));
     asspFClose(data, AFC_KEEP);
-    res = dobj2AsspDataObj(data);
+    res = PROTECT(dobj2AsspDataObj(data));
     asspFClose(data, AFC_FREE);
+    UNPROTECT(1);
     return res;
 }
 
@@ -125,8 +126,9 @@ getDObj2(SEXP args)
         error(getAsspMsg(asspMsgNum));
     }
     asspFClose(data, AFC_KEEP);
-    ans = dobj2AsspDataObj(data);
+    ans = PROTECT(dobj2AsspDataObj(data));
     asspFClose(data, AFC_FREE);
+    UNPROTECT(1);
     return ans;
 }
 
@@ -301,7 +303,7 @@ getGenericVars(DOBJ * dop)
             UNPROTECT(3);
             return (R_NilValue);
         }
-        var = allocVector(VECSXP, 2);
+        PROTECT(var = allocVector(VECSXP, 2));
         for (ssff_types = SSFF_TYPES; ssff_types->type != SSFF_UNDEF;
              ssff_types++) {
             if (ssff_types->type == genVar->type)
@@ -309,29 +311,32 @@ getGenericVars(DOBJ * dop)
         }
         if (ssff_types->type == SSFF_UNDEF)
             error("Invalid type for SSFF generic variable.");
-        value = allocVector(STRSXP, 1);
+        PROTECT(value = allocVector(STRSXP, 1));
         SET_STRING_ELT(value, 0, mkChar(ssff_types->ident));
         SET_VECTOR_ELT(var, 1, value);
         switch (genVar->type) {
         case SSFF_CHAR:
         case SSFF_BYTE:
-            value = allocVector(STRSXP, 1);
+            PROTECT(value = allocVector(STRSXP, 1));
             SET_STRING_ELT(value, 0, mkChar(genVar->data));
             SET_VECTOR_ELT(var, 0, value);
+            UNPROTECT(1);
             break;
         case SSFF_SHORT:
         case SSFF_LONG:
         case SSFF_FLOAT:
         case SSFF_DOUBLE:
-            value = allocVector(REALSXP, 1);
+            PROTECT(value = allocVector(REALSXP, 1));
             REAL(value)[0] = strtod(genVar->data, NULL);
             SET_VECTOR_ELT(var, 0, value);
+            UNPROTECT(1);
         case SSFF_UNDEF:
             break;
         }
         setAttrib(var, R_NamesSymbol, names);
         SET_VECTOR_ELT(ans, i, var);
         SET_STRING_ELT(varNames, i, mkChar(genVar->ident));
+        UNPROTECT(2);
     }
     setAttrib(ans, R_NamesSymbol, varNames);
     UNPROTECT(3);
