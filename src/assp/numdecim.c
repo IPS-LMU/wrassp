@@ -48,7 +48,7 @@ DOC*/
 
 int numDecim(double x, int maxDecim)
 {
-  char format[8], string[256];
+  char format[10], string[256]; /* change char format from size 8 to 10 for max %d range */
   int  nd, i;
   
   if(maxDecim <= 0)

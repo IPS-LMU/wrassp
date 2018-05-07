@@ -1,3 +1,9 @@
+# wrassp 0.1.7
+
+## bug fixes
+
+* fixed GCC >= 8.0 [-Wformat-overflow=] significant warning in numdecim.c
+
 # wrassp 0.1.6
 
 ## bug fixes
