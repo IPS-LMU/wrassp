@@ -1,8 +1,7 @@
 ## Test environments
 
 * local OS X install, R 3.5.0
-* ubuntu 14.04.5 LTS (on travis-ci), R 3.4.2
-* Debian GNU/Linux (rocker/r-devel docker image), R Under development (unstable) (2017-12-12 r73891) -- "Unsuffered Consequences"
+* ubuntu 14.04.5 LTS (on travis-ci), R 3.5.0
 * win-builder (devel and release)
 
 ## R CMD check results
