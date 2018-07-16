@@ -907,7 +907,7 @@ performAssp(SEXP args)
             }
             break;
         case WO_WINFUNC:
-            wPtr = wfShortList;
+            wPtr = wfLongList;
             while (wPtr->code != NULL) {
                 if (strcmp(wPtr->code, CHAR(STRING_ELT(el, 0))) == 0)
                     break;

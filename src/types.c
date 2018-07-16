@@ -9,7 +9,7 @@
  */
 SEXP AsspWindowTypes_()
 {
-    WFLIST         *wPtr = wfShortList; // defined in assp
+    WFLIST         *wPtr = wfLongList; // defined in assp
     int             n = 0,
         i = 0;
     SEXP            wlist;
@@ -18,7 +18,7 @@ SEXP AsspWindowTypes_()
         n++;
         wPtr++;
     }
-    wPtr = wfShortList;
+    wPtr = wfLongList;
 
     PROTECT(wlist = allocVector(STRSXP, n));
     while (wPtr->code != NULL) {

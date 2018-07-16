@@ -1,3 +1,12 @@
+# wrassp 0.1.7.9000
+
+## new features / performance tweaks / improvements
+
+* exposing/using long instead of short windows function list
+* added deprecation warning to the `wrassp_intro` vignette
+
+## bug fixes
+
 # wrassp 0.1.7
 
 ## bug fixes

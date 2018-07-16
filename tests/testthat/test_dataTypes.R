@@ -7,10 +7,14 @@ context("type variable testing")
 test_that("wrassp returns correct windows types", {
   # window types
   wrasspWins = AsspWindowTypes()
-  WTs = c("RECTANGLE", "PARABOLA", "COS", "HANN", 
-    "COS_4", "HAMMING", "BLACKMAN", "BLACK_X",
-    "BLACK_M3", "BLACK_M4", "NUTTAL_3", "NUTTAL_4",
-    "KAISER2_0", "KAISER3_0", "KAISER4_0")
+  WTs = c("RECTANGLE", "TRIANGLE", "PARABOLA", 
+          "COS", "HANN", "COS_3", "COS_4", 
+          "HAMMING", "BLACKMAN", "BLACK_X", 
+          "BLACK_3", "BLACK_M3", "BLACK_4", 
+          "BLACK_M4", "NUTTAL_3", "NUTTAL_4", 
+          "GAUSS2_5", "GAUSS3_0", "GAUSS3_5", 
+          "KAISER2_0", "KAISER2_5", "KAISER3_0", 
+          "KAISER3_5", "KAISER4_0")
   
   expect_that(wrasspWins, equals(WTs))
 
