@@ -1,4 +1,4 @@
-# wrassp 0.1.7.9000
+# wrassp 0.1.8
 
 ## new features / performance tweaks / improvements
 
