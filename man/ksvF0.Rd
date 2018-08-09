@@ -7,9 +7,10 @@
 \title{ksvF0}
 \usage{
 ksvF0(listOfFiles = NULL, optLogFilePath = NULL, beginTime = 0,
-  endTime = 0, windowShift = 5, gender = "u", maxF = 600, minF = 50,
-  minAmp = 50, maxZCR = 3000, toFile = TRUE, explicitExt = NULL,
-  outputDirectory = NULL, forceToLog = useWrasspLogger, verbose = TRUE)
+  endTime = 0, windowShift = 5, gender = "u", maxF = 600,
+  minF = 50, minAmp = 50, maxZCR = 3000, toFile = TRUE,
+  explicitExt = NULL, outputDirectory = NULL,
+  forceToLog = useWrasspLogger, verbose = TRUE)
 }
 \arguments{
 \item{listOfFiles}{vector of file paths to be processed by function}

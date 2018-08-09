@@ -5,11 +5,12 @@
 \title{forest}
 \usage{
 forest(listOfFiles = NULL, optLogFilePath = NULL, beginTime = 0,
-  endTime = 0, windowShift = 5, windowSize = 20, effectiveLength = TRUE,
-  nominalF1 = 500, gender = "m", estimate = FALSE, order = 0,
-  incrOrder = 0, numFormants = 4, window = "BLACKMAN",
-  preemphasis = -0.8, toFile = TRUE, explicitExt = NULL,
-  outputDirectory = NULL, forceToLog = useWrasspLogger, verbose = TRUE)
+  endTime = 0, windowShift = 5, windowSize = 20,
+  effectiveLength = TRUE, nominalF1 = 500, gender = "m",
+  estimate = FALSE, order = 0, incrOrder = 0, numFormants = 4,
+  window = "BLACKMAN", preemphasis = -0.8, toFile = TRUE,
+  explicitExt = NULL, outputDirectory = NULL,
+  forceToLog = useWrasspLogger, verbose = TRUE)
 }
 \arguments{
 \item{listOfFiles}{vector of file paths to be processed by function}
