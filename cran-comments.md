@@ -11,3 +11,7 @@ There were no ERRORs, WARNINGs or NOTEs.
 ## Downstream dependencies
 
 There are currently no downstream dependencies for this package.
+
+## Additional comments
+
+* Usage of `#ifdef __unix__` was replaced by `#if defined (__unix__) || (defined (__APPLE__) && defined (__MACH__))` as requested by CRAN maintainer

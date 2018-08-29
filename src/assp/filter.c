@@ -54,7 +54,8 @@
 //#include <R.h>
 
 /* OS check for creating temporary file*/
-#ifdef __unix__         
+// #ifdef __unix__         
+#if defined (__unix__) || (defined (__APPLE__) && defined (__MACH__))
 
 #elif defined(_WIN32) || defined(WIN32) || defined(_WIN64) || defined(WIN64) 
   #define OS_Windows
