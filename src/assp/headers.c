@@ -633,14 +633,14 @@ char *genWAVhdr(DOBJ *dop)
 /*
  * construct header
  */
-  strncpy(header, RIFF_MAGIC, 4);
+  strncpy(header, RIFF_MAGIC, 5);
   ptr = (void *)(&header[4]);
   chunkSize = (uint32_t)(dop->headerSize) - SIZEOF_CHUNK + dataBytes;
   putU32(chunkSize, (void **) &ptr, SWAP);
-  strncpy((char *)ptr, WAVE_MAGIC, 4);
+  strncpy((char *)ptr, WAVE_MAGIC, 5);
   ptr += 4;
   /* format chunk */
-  strncpy((char *)ptr, WAVE_FORM_ID, 4);
+  strncpy((char *)ptr, WAVE_FORM_ID, 5);
   ptr += 4;
   if(dop->fileFormat == FF_WAVE) {
     chunkSize = (uint32_t)(SIZEOF_WAVFMT - SIZEOF_CHUNK);
@@ -669,14 +669,14 @@ char *genWAVhdr(DOBJ *dop)
   }
   /* fact chunk */
   if(NEED_FACT) {
-    strncpy((char *)ptr, WAVE_FACT_ID, 4);
+    strncpy((char *)ptr, WAVE_FACT_ID, 5);
     ptr += 4;
     chunkSize = (uint32_t)(SIZEOF_WAVFACT - SIZEOF_CHUNK);
     putU32(chunkSize, (void **) &ptr, SWAP);
     putU32((uint32_t)(dop->numRecords), (void **) &ptr, SWAP);
   }
   /* data chunk */
-  strncpy((char *)ptr, WAVE_DATA_ID, 4);
+  strncpy((char *)ptr, WAVE_DATA_ID, 5);
   ptr += 4;
   putU32(dataBytes, (void **) &ptr, SWAP);
   return(header);
@@ -1135,19 +1135,19 @@ LOCAL int putAIFhdr(DOBJ *dop)
 /*
  * construct header in memory: FORM chunk
  */
-  strncpy(header, AIF_FORM_ID, 4);
+  strncpy(header, AIF_FORM_ID, 5);
   ptr = (void *)&header[4];
   putI32((int32_t)(dop->headerSize - SIZEOF_CHUNK + dataBytes), (void **) &ptr, SWAP);
   if(dop->fileFormat == FF_AIFF)
-    strncpy((char *)ptr, AIFF_MAGIC, 4);
+    strncpy((char *)ptr, AIFF_MAGIC, 5);
   else
-    strncpy((char *)ptr, AIFC_MAGIC, 4);
+    strncpy((char *)ptr, AIFC_MAGIC, 5);
   ptr += 4;
 /*
  * FVER chunk (AIFC only)
  */
   if(dop->fileFormat == FF_AIFC) {
-    strncpy((char *)ptr, AIFC_VERSION_ID, 4);
+    strncpy((char *)ptr, AIFC_VERSION_ID, 5);
     ptr += 4;
     putI32(SIZEOF_FVER - SIZEOF_CHUNK, (void **) &ptr, SWAP);         /* ckSize */
     putI32(AIFC_VERSION, (void **) &ptr, SWAP);
@@ -1155,7 +1155,7 @@ LOCAL int putAIFhdr(DOBJ *dop)
 /*
  * COMM chunk
  */
-  strncpy((void *)ptr, AIF_COMM_ID, 4);
+  strncpy((void *)ptr, AIF_COMM_ID, 5);
   ptr += 4;
   putI32(commSize - SIZEOF_CHUNK, (void **) &ptr, SWAP);              /* ckSize */
   putI16((int16_t)dd->numFields, (void **) &ptr, SWAP);            /* numTracks */
@@ -1170,21 +1170,21 @@ LOCAL int putAIFhdr(DOBJ *dop)
     case DC_PCM:
       switch(dd->format) {
       case DF_REAL32:
-	strncpy((char *)ptr, AIFC_FL32, 4);
+	strncpy((char *)ptr, AIFC_FL32, 5);
 	break;
       case DF_REAL64:
-	strncpy((char *)ptr, AIFC_FL64, 4);
+	strncpy((char *)ptr, AIFC_FL64, 5);
 	break;
       default:
-	strncpy((char *)ptr, AIFC_NONE, 4);
+	strncpy((char *)ptr, AIFC_NONE, 5);
 	break;
       }
       break;
     case DC_ALAW:
-      strncpy((char *)ptr, AIFC_ALAW, 4);
+      strncpy((char *)ptr, AIFC_ALAW, 5);
       break;
     case DC_uLAW:
-      strncpy((char *)ptr, AIFC_uLAW, 4);
+      strncpy((char *)ptr, AIFC_uLAW, 5);
       break;
     default:
       asspMsgNum = AEG_ERR_BUG;
@@ -1198,7 +1198,7 @@ LOCAL int putAIFhdr(DOBJ *dop)
 /*
  * SSND chunk
  */
-  strncpy((char *)ptr, AIF_DATA_ID,4);
+  strncpy((char *)ptr, AIF_DATA_ID, 5);
   ptr += 4;
   putI32((int32_t)(SIZEOF_SSND - SIZEOF_CHUNK + dataBytes), (void **) &ptr, SWAP);
   putU32(0, (void **) &ptr, FALSE);                                   /* offset */
@@ -1397,13 +1397,13 @@ LOCAL int putCSLhdr(DOBJ *dop)
  * construct header in memory: FORM chunk
  */
   dataBytes = (uint32_t)(dop->numRecords * (long)(dop->recordSize));
-  strncpy(header, CSL_MAGIC, strlen(CSL_MAGIC));
+  strncpy(header, CSL_MAGIC, strlen(CSL_MAGIC) + 1);
   ptr = (void *)&header[strlen(CSL_MAGIC)];
   putU32(SIZEOF_CSLFMT + SIZEOF_CSLDAT + dataBytes, (void **) &ptr, SWAP);
 /*
  * HEDR and DATA chunk
  */
-  strncpy((char *)ptr, CSL_HEAD_ID, 4);
+  strncpy((char *)ptr, CSL_HEAD_ID, 5);
   ptr += 4;
   putU32(SIZEOF_CSLFMT - SIZEOF_CHUNK, (void **) &ptr, SWAP);
   currTime = time(NULL);                          /* get current time */
@@ -1416,12 +1416,12 @@ LOCAL int putCSLhdr(DOBJ *dop)
   if(dd->numFields == 1) {
     putI16(peakMag, (void **) &ptr, SWAP);
     putI16(-1, (void **) &ptr, SWAP);
-    strncpy((char *)ptr, CSL_DATA_ID_L, 4);
+    strncpy((char *)ptr, CSL_DATA_ID_L, 5);
   }
   else {
     putI16(peakMag, (void **) &ptr, SWAP);
     putI16(peakMag, (void **) &ptr, SWAP);
-    strncpy((char *)ptr, CSL_DATA_ID_S, 4);
+    strncpy((char *)ptr, CSL_DATA_ID_S, 5);
   }
   ptr += 4;
   putU32(dataBytes, (void **) &ptr, SWAP);
@@ -2584,7 +2584,7 @@ LOCAL int getSSFFhdr(DOBJ *dop)
  * verify format
  */
   n = fgetl(buf, sizeof(buf), dop->fp, NULL);
-  strncpy(bak, buf, strlen(buf));
+  strncpy(bak, buf, strlen(buf) + 1);
   if(n <= 0 || strcmp(buf, SSFF_MAGIC) != 0) {
     asspMsgNum = AEF_ERR_FORM;
     sprintf(applMessage, "(not SSFF) in file %s", dop->filePath);
@@ -2607,7 +2607,7 @@ LOCAL int getSSFFhdr(DOBJ *dop)
   FIRST = TRUE;       /* first data descriptor needs not be allocated */
   FIRSTMETA = TRUE; /* first meta variable needs not be allocated */
   while(fgetl(buf, sizeof(buf), dop->fp, NULL) > 0) {
-    strncpy(bak, buf, strlen(buf)); /* retain a copy of the line because strparse will alter it */
+    strncpy(bak, buf, strlen(buf) + 1); /* retain a copy of the line because strparse will alter it */
   	if(strcmp(buf, SSFF_EOH_STR) == 0) {     /* end of header reached */
       dop->headerSize = ftell(dop->fp);    /* data follow immediately */
       break;
