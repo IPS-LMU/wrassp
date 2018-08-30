@@ -860,9 +860,9 @@ performAssp(SEXP args)
                 }
                 if (lPtr->ident == NULL)
                     error("Invalid LP Type: %s.", CHAR(STRING_ELT(el, 0)));
-                strncpy(opt->type, lPtr->ident, strlen(lPtr->ident) + 1);
+                strncpy(opt->type, lPtr->ident, (sizeof opt->type) - 1);
                 if (expExt == 0)
-                    strncpy(ext, lPtr->ext, strlen(lPtr->ext) + 1);
+                    strncpy(ext, lPtr->ext, (sizeof ext) - 1);
                 break;
             case AF_SPECTRUM:
                 sPtr = spectType;
@@ -873,11 +873,11 @@ performAssp(SEXP args)
                 }
                 if (sPtr->ident == NULL)
                     error("Invalid SP Type: %s.", CHAR(STRING_ELT(el, 0)));
-                strncpy(opt->type, sPtr->ident, strlen(sPtr->ident) + 1);
+                strncpy(opt->type, sPtr->ident, (sizeof opt->type) - 1);
                 if (setSPECTdefaults(opt) < 0) {
                     error("%s", getAsspMsg(asspMsgNum));
                 }
-                strncpy(opt->type, sPtr->ident, strlen(sPtr->ident) + 1);
+                strncpy(opt->type, sPtr->ident, (sizeof opt->type) - 1);
                 switch (sPtr->type) {
                 case DT_FTPOW:
                 case DT_FTAMP:
@@ -900,7 +900,7 @@ performAssp(SEXP args)
                     break;
                 }
                 if (expExt == 0)
-                    strncpy(ext, sPtr->ext, strlen(sPtr->ext) + 1);
+                    strncpy(ext, sPtr->ext, (sizeof ext) - 1);
                 break;
             default:
                 break;
@@ -916,7 +916,7 @@ performAssp(SEXP args)
             if (wPtr->code == NULL)
                 error("Invalid window function code %s.",
                       CHAR(STRING_ELT(el, 0)));
-            strncpy(opt->winFunc, wPtr->code, strlen(wPtr->code) + 1);
+            strncpy(opt->winFunc, wPtr->code, (sizeof opt->winFunc) - 1);
             break;
             /*
              * These are not in libassp but in wrassp
@@ -967,7 +967,7 @@ performAssp(SEXP args)
                 strncpy(ext, ".", strlen(".") + 1);
                 strcat(ext, cPtr);
             } else {
-                strncpy(ext, cPtr, strlen(cPtr) + 1);
+                strncpy(ext, cPtr,  (sizeof ext) - 1);
             }
             free(cPtr);
             expExt = 1;

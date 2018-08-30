@@ -2584,12 +2584,12 @@ LOCAL int getSSFFhdr(DOBJ *dop)
  * verify format
  */
   n = fgetl(buf, sizeof(buf), dop->fp, NULL);
-  strncpy(bak, buf, strlen(buf) + 1);
   if(n <= 0 || strcmp(buf, SSFF_MAGIC) != 0) {
     asspMsgNum = AEF_ERR_FORM;
     sprintf(applMessage, "(not SSFF) in file %s", dop->filePath);
     return(-1);
   }
+  strncpy(bak, buf, n + 1);
 /*
  * set default values
  */
@@ -2606,8 +2606,8 @@ LOCAL int getSSFFhdr(DOBJ *dop)
   dd->format = DF_ERROR;
   FIRST = TRUE;       /* first data descriptor needs not be allocated */
   FIRSTMETA = TRUE; /* first meta variable needs not be allocated */
-  while(fgetl(buf, sizeof(buf), dop->fp, NULL) > 0) {
-    strncpy(bak, buf, strlen(buf) + 1); /* retain a copy of the line because strparse will alter it */
+  while((n=fgetl(buf, sizeof(buf), dop->fp, NULL)) > 0) {
+    strncpy(bak, buf, n + 1); /* retain a copy of the line because strparse will alter it */
   	if(strcmp(buf, SSFF_EOH_STR) == 0) {     /* end of header reached */
       dop->headerSize = ftell(dop->fp);    /* data follow immediately */
       break;
