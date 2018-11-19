@@ -10,11 +10,11 @@ read.AsspDataObj(fname, begin = 0, end = 0, samples = FALSE)
 \arguments{
 \item{fname}{filename of the signal or parameter file}
 
-\item{begin}{begin time (default is in ms) of segment to retrieve}
+\item{begin}{begin time (default is in seconds) of segment to retrieve}
 
-\item{end}{end time (default is in ms) of segment to retrieve}
+\item{end}{end time (default is in seconds) of segment to retrieve}
 
-\item{samples}{(BOOL) if set to false ms values of begin/end are sample numbers}
+\item{samples}{(BOOL) if set to false seconds values of begin/end are sample numbers}
 }
 \value{
 list object containing file data

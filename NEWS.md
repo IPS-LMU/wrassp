@@ -1,3 +1,12 @@
+# wrassp 0.1.8.9000
+
+## new features / performance tweaks / improvements
+
+* replaced ms with (the correct) seconds in `read.AsspDataObj` function doc.
+
+## bug fixes
+
+
 # wrassp 0.1.8
 
 ## new features / performance tweaks / improvements
