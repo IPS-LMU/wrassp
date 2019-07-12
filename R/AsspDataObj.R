@@ -12,7 +12,7 @@
 ##' @useDynLib wrassp, .registration = TRUE
 ##' @export
 'read.AsspDataObj' <- 'getAsspDataObj' <- function(fname, begin=0, end=0, samples=FALSE) {
-  fname <- path.expand(fname)
+  fname <- prepareFiles(fname)
   .External("getDObj2", fname, begin=begin, end=end, samples=samples, PACKAGE="wrassp")
 }
 

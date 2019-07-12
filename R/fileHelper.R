@@ -9,7 +9,7 @@
 ##' #   listOfFiles <- prepareFiles(listOfFiles)
 ##' 
 ##' 
-'prepareFiles' <- function(listOfFiles) {
+prepareFiles <- function(listOfFiles) {
     
 	listOfFiles = gsub("^file://","", listOfFiles)
 	listOfFiles = normalizePath(path.expand(listOfFiles))
