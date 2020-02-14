@@ -12,7 +12,7 @@ vignette: >
 
 # DEPRECATION WARNING
 
-This vignette is considered depricated! It's content has been moved to
+This vignette is considered deprecated! It's content has been moved to
 the [the EMU-SDMS manual](https://ips-lmu.github.io/The-EMU-SDMS-Manual/) (+ expanded and updated). Specifially see
 the [the R package wrassp](https://ips-lmu.github.io/The-EMU-SDMS-Manual/chap-wrassp.html) as well as
 the [wrassp implementation](https://ips-lmu.github.io/The-EMU-SDMS-Manual/chap-wrassp-impl.html) chapters.
