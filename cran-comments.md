@@ -15,4 +15,5 @@ There are currently no downstream dependencies for this package.
 
 ## Additional comments
 
-* now using return value of `fread` in labelobj.c
+* now using return value of `fread` in labelobj.c and fixed [-Wunused-value] warning
+* https://cran.r-project.org/web/checks/check_results_wrassp.html ERROR on r-patched-solaris-x86 caused by testthat not being available
