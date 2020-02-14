@@ -411,7 +411,7 @@ int getAMDF(double *s, register double *c, register long N,\
    if(s == NULL || c == NULL || N < 1 || minLag < 0 || maxLag < minLag)
      return(-1);                                          /* bad call */
    if(minLag == 0) {                       /* no need to compute zero */
-     *(c++) == 0.0;
+     // *(c++) == 0.0; // value computed but is not used? -> removed due to [-Wunused-value] warning
      minLag++;
    }
    for(m = minLag; m <= maxLag; m++, c++) {

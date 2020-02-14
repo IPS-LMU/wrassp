@@ -4,11 +4,18 @@
 \alias{afdiff}
 \title{afdiff}
 \usage{
-afdiff(listOfFiles = NULL, optLogFilePath = NULL,
-  computeBackwardDifference = FALSE, computeCentralDifference = FALSE,
-  channel = 1, toFile = TRUE, explicitExt = NULL,
-  outputDirectory = NULL, forceToLog = useWrasspLogger,
-  verbose = TRUE)
+afdiff(
+  listOfFiles = NULL,
+  optLogFilePath = NULL,
+  computeBackwardDifference = FALSE,
+  computeCentralDifference = FALSE,
+  channel = 1,
+  toFile = TRUE,
+  explicitExt = NULL,
+  outputDirectory = NULL,
+  forceToLog = useWrasspLogger,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{listOfFiles}{vector of file paths to be processed by function}

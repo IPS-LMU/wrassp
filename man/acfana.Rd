@@ -4,13 +4,25 @@
 \alias{acfana}
 \title{acfana}
 \usage{
-acfana(listOfFiles = NULL, optLogFilePath = NULL, beginTime = 0,
-  centerTime = FALSE, endTime = 0, windowShift = 5,
-  windowSize = 20, effectiveLength = TRUE, window = "BLACKMAN",
-  analysisOrder = 0, energyNormalization = FALSE,
-  lengthNormalization = FALSE, toFile = TRUE, explicitExt = NULL,
-  outputDirectory = NULL, forceToLog = useWrasspLogger,
-  verbose = TRUE)
+acfana(
+  listOfFiles = NULL,
+  optLogFilePath = NULL,
+  beginTime = 0,
+  centerTime = FALSE,
+  endTime = 0,
+  windowShift = 5,
+  windowSize = 20,
+  effectiveLength = TRUE,
+  window = "BLACKMAN",
+  analysisOrder = 0,
+  energyNormalization = FALSE,
+  lengthNormalization = FALSE,
+  toFile = TRUE,
+  explicitExt = NULL,
+  outputDirectory = NULL,
+  forceToLog = useWrasspLogger,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{listOfFiles}{vector of file paths to be processed by function}

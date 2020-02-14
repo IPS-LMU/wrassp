@@ -4,11 +4,20 @@
 \alias{zcrana}
 \title{zcrana}
 \usage{
-zcrana(listOfFiles = NULL, optLogFilePath = NULL, beginTime = 0,
-  centerTime = FALSE, endTime = 0, windowShift = 5,
-  windowSize = 25, toFile = TRUE, explicitExt = NULL,
-  outputDirectory = NULL, forceToLog = useWrasspLogger,
-  verbose = TRUE)
+zcrana(
+  listOfFiles = NULL,
+  optLogFilePath = NULL,
+  beginTime = 0,
+  centerTime = FALSE,
+  endTime = 0,
+  windowShift = 5,
+  windowSize = 25,
+  toFile = TRUE,
+  explicitExt = NULL,
+  outputDirectory = NULL,
+  forceToLog = useWrasspLogger,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{listOfFiles}{vector of file paths to be processed by function}

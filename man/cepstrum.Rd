@@ -4,11 +4,22 @@
 \alias{cepstrum}
 \title{cepstrum}
 \usage{
-cepstrum(listOfFiles = NULL, optLogFilePath = NULL, beginTime = 0,
-  centerTime = FALSE, endTime = 0, resolution = 40, fftLength = 0,
-  windowShift = 5, window = "BLACKMAN", toFile = TRUE,
-  explicitExt = NULL, outputDirectory = NULL,
-  forceToLog = useWrasspLogger, verbose = TRUE)
+cepstrum(
+  listOfFiles = NULL,
+  optLogFilePath = NULL,
+  beginTime = 0,
+  centerTime = FALSE,
+  endTime = 0,
+  resolution = 40,
+  fftLength = 0,
+  windowShift = 5,
+  window = "BLACKMAN",
+  toFile = TRUE,
+  explicitExt = NULL,
+  outputDirectory = NULL,
+  forceToLog = useWrasspLogger,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{listOfFiles}{vector of file paths to be processed by function}

@@ -4,11 +4,23 @@
 \alias{dftSpectrum}
 \title{dftSpectrum}
 \usage{
-dftSpectrum(listOfFiles = NULL, optLogFilePath = NULL, beginTime = 0,
-  centerTime = FALSE, endTime = 0, resolution = 40, fftLength = 0,
-  windowShift = 5, window = "BLACKMAN", bandwidth = 0,
-  toFile = TRUE, explicitExt = NULL, outputDirectory = NULL,
-  forceToLog = useWrasspLogger, verbose = TRUE)
+dftSpectrum(
+  listOfFiles = NULL,
+  optLogFilePath = NULL,
+  beginTime = 0,
+  centerTime = FALSE,
+  endTime = 0,
+  resolution = 40,
+  fftLength = 0,
+  windowShift = 5,
+  window = "BLACKMAN",
+  bandwidth = 0,
+  toFile = TRUE,
+  explicitExt = NULL,
+  outputDirectory = NULL,
+  forceToLog = useWrasspLogger,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{listOfFiles}{vector of file paths to be processed by function}

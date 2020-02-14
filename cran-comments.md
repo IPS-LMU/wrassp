@@ -1,7 +1,8 @@
 ## Test environments
 
-* local OS X install, R 3.5.1
-* ubuntu 14.04.5 LTS (on travis-ci), R 3.5.0
+* local OS X install, R 3.6.2
+* local Ubuntu 18.04.4 LTS install, R 3.6.2
+* Ubuntu 16.04.6 LTS (on travis-ci), R 3.6.2
 * win-builder (devel and release)
 
 ## R CMD check results
@@ -14,5 +15,4 @@ There are currently no downstream dependencies for this package.
 
 ## Additional comments
 
-* Usage of `#ifdef __unix__` was replaced by `#if defined (__unix__) || (defined (__APPLE__) && defined (__MACH__))` 
-as requested by CRAN maintainer via e-mail
+* now using return value of `fread` in labelobj.c

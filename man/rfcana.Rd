@@ -4,12 +4,25 @@
 \alias{rfcana}
 \title{rfcana}
 \usage{
-rfcana(listOfFiles = NULL, optLogFilePath = NULL, beginTime = 0,
-  centerTime = FALSE, endTime = 0, windowShift = 5,
-  windowSize = 20, effectiveLength = TRUE, window = "BLACKMAN",
-  order = 0, preemphasis = -0.95, lpType = "RFC", toFile = TRUE,
-  explicitExt = NULL, outputDirectory = NULL,
-  forceToLog = useWrasspLogger, verbose = TRUE)
+rfcana(
+  listOfFiles = NULL,
+  optLogFilePath = NULL,
+  beginTime = 0,
+  centerTime = FALSE,
+  endTime = 0,
+  windowShift = 5,
+  windowSize = 20,
+  effectiveLength = TRUE,
+  window = "BLACKMAN",
+  order = 0,
+  preemphasis = -0.95,
+  lpType = "RFC",
+  toFile = TRUE,
+  explicitExt = NULL,
+  outputDirectory = NULL,
+  forceToLog = useWrasspLogger,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{listOfFiles}{vector of file paths to be processed by function}

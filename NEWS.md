@@ -1,12 +1,14 @@
-# wrassp 0.1.8.9000
+# wrassp 0.1.9
 
 ## new features / performance tweaks / improvements
 
 * replaced ms with (the correct) seconds in `read.AsspDataObj` function doc.
+* implemented `as_tibble` S3 method for AsspDataObjects
 
 ## bug fixes
 
 * using return value of `fread` in labelobj.c
+* removed `*(c++) == 0.0;` line that was causing [-Wunused-value] warning
 
 # wrassp 0.1.8
 

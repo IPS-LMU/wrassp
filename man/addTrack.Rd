@@ -4,8 +4,7 @@
 \alias{addTrack}
 \title{Add a track to an AsspDataObj}
 \usage{
-addTrack(dobj, trackname, data, format = "INT16",
-  deleteExisting = FALSE)
+addTrack(dobj, trackname, data, format = "INT16", deleteExisting = FALSE)
 }
 \arguments{
 \item{dobj}{The data object to which the data is to be added}

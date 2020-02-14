@@ -6,12 +6,28 @@
 \alias{f0_mhs}
 \title{mhsF0}
 \usage{
-mhsF0(listOfFiles = NULL, optLogFilePath = NULL, beginTime = 0,
-  centerTime = FALSE, endTime = 0, windowShift = 5, gender = "u",
-  maxF = 600, minF = 50, minAmp = 50, minAC1 = 0.25, minRMS = 18,
-  maxZCR = 3000, minProb = 0.52, plainSpectrum = FALSE,
-  toFile = TRUE, explicitExt = NULL, outputDirectory = NULL,
-  forceToLog = useWrasspLogger, verbose = TRUE)
+mhsF0(
+  listOfFiles = NULL,
+  optLogFilePath = NULL,
+  beginTime = 0,
+  centerTime = FALSE,
+  endTime = 0,
+  windowShift = 5,
+  gender = "u",
+  maxF = 600,
+  minF = 50,
+  minAmp = 50,
+  minAC1 = 0.25,
+  minRMS = 18,
+  maxZCR = 3000,
+  minProb = 0.52,
+  plainSpectrum = FALSE,
+  toFile = TRUE,
+  explicitExt = NULL,
+  outputDirectory = NULL,
+  forceToLog = useWrasspLogger,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{listOfFiles}{vector of file paths to be processed by function}

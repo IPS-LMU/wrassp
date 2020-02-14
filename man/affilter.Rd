@@ -4,11 +4,21 @@
 \alias{affilter}
 \title{affilter}
 \usage{
-affilter(listOfFiles = NULL, optLogFilePath = NULL, highPass = 4000,
-  lowPass = 0, stopBand = 96, transition = 250, useIIR = FALSE,
-  numIIRsections = 4, toFile = TRUE, explicitExt = NULL,
-  outputDirectory = NULL, forceToLog = useWrasspLogger,
-  verbose = TRUE)
+affilter(
+  listOfFiles = NULL,
+  optLogFilePath = NULL,
+  highPass = 4000,
+  lowPass = 0,
+  stopBand = 96,
+  transition = 250,
+  useIIR = FALSE,
+  numIIRsections = 4,
+  toFile = TRUE,
+  explicitExt = NULL,
+  outputDirectory = NULL,
+  forceToLog = useWrasspLogger,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{listOfFiles}{vector of file paths to be processed by function}
