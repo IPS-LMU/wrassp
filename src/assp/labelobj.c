@@ -162,7 +162,10 @@ int getLabelHead(DOBJ *dop)
     return(-1);
   }
   fseek(dop->fp, offset, SEEK_SET);
-  fread(ptr->headCopy, sizeof(char), (size_t)headSize, dop->fp); 
+  if(fread(ptr->headCopy, sizeof(char), (size_t)headSize, dop->fp) != (size_t)headSize){
+    setAsspMsg(AEF_ERR_READ, dop->filePath);
+    return(-1);
+  }
   ptr->copySize = headSize;
   dop->doFreeGeneric = (DOfreeFunc)freeHeadCopy;
   if(strlen(dop->eol) == 0) {
