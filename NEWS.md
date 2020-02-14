@@ -6,7 +6,7 @@
 
 ## bug fixes
 
-* using return value of fread in labelobj.c
+* using return value of `fread` in labelobj.c
 
 # wrassp 0.1.8
 
