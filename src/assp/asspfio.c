@@ -45,12 +45,17 @@
 #include <dataobj.h>    /* data object definitions and handler */
 #include <headers.h>    /* header definitions and handler */
 
+#include <R_ext/PrtUtil.h>
+
+
 /* OS check for printing %llu and %lli*/
 //#ifdef __unix__
 #if defined (__unix__) || (defined (__APPLE__) && defined (__MACH__))
 
 #elif defined(_WIN32) || defined(WIN32) || defined(_WIN64) || defined(WIN64) 
   #define OS_Windows
+  #include <windows.h>
+  #include <wchar.h>
 #endif
 
 /*DOC
@@ -104,7 +109,6 @@ DOBJ *asspFOpen(char *filePath, int mode, DOBJ *doPtr)
   int   err=0;
   int   CLEAR=FALSE;
   DOBJ *dop=NULL;
-
   if(filePath == NULL || !(mode & AFO_READ || mode & AFO_WRITE)) {
     setAsspMsg(AEB_BAD_ARGS, "asspFOpen");
     return(NULL);
@@ -119,15 +123,14 @@ DOBJ *asspFOpen(char *filePath, int mode, DOBJ *doPtr)
       return(NULL);
     }
     if(mode & AFO_WRITE && !(mode & AFO_READ)) {
-      if(doPtr->fileFormat <= FF_UNDEF ||
-	 doPtr->fileFormat >= NUM_FILE_FORMATS) {
-	setAsspMsg(AEB_BAD_ARGS, "asspFOpen");
-	return(NULL);
+      if(doPtr->fileFormat <= FF_UNDEF || 
+         doPtr->fileFormat >= NUM_FILE_FORMATS) {
+	        setAsspMsg(AEB_BAD_ARGS, "asspFOpen");
+	        return(NULL);
       }
-    }
-    else {
+    } else {
       if(doPtr->fileFormat <= FF_UNDEF)
-	CLEAR = TRUE;                      /* we may clear upon error */
+	      CLEAR = TRUE;                      /* we may clear upon error */
     }
     dop = doPtr;
   }
@@ -148,23 +151,41 @@ DOBJ *asspFOpen(char *filePath, int mode, DOBJ *doPtr)
 	return(NULL);
       }
       strcpy(Cmode, "r");
-      if(mode & AFO_WRITE)                     /* open in update mode */
-	strcat(Cmode, "+");
-      if(!(mode & AFO_TEXT))
-	strcat(Cmode, "b");
-      if(strcmp(filePath, "stdin") == 0)
-	dop->fp = stdin;
-      else
-	dop->fp = fopen(filePath, Cmode);
-      if(!(dop->fp)) {
-	if(dop != doPtr)
-	  freeDObj(dop);
-	else if(CLEAR)
-	  clearDObj(dop);
-	setAsspMsg(AEF_ERR_OPEN, filePath);
-	return(NULL);
+      if(mode & AFO_WRITE){                    /* open in update mode */
+	      strcat(Cmode, "+");
       }
-      err = getHeader(dop);
+      if(!(mode & AFO_TEXT)){
+	      strcat(Cmode, "b");
+      }
+      if(strcmp(filePath, "stdin") == 0){
+	      dop->fp = stdin;
+      }
+      else 
+      #ifdef OS_Windows
+        // Rprintf("dude %s", "hi");
+        // int wchars_num  = MultiByteToWideChar(CP_UTF8, 0, filePath, -1, NULL, 0);
+        // Rprintf("count %i", wchars_num);
+        // char filePathW[1000] = "";
+        // char *pFilePathW = filePathW;
+        // strncpy(filePath, filePathW, 1000);
+        //filePathW.resize(filePath.size());
+        // int newSize = MultiByteToWideChar(CP_UTF8, 0, filePath.c_str(), filePath.length(), const_cast<wchar_t *>(filePathW.c_str()), filePath.length());
+        //filePathW.resize(newSize);
+      	dop->fp = fopen(filePath, Cmode);
+      #else
+        dop->fp = fopen(filePath, Cmode);
+      #endif
+        if(!(dop->fp)) {
+        	if(dop != doPtr){
+        	  freeDObj(dop);
+        	} else if(CLEAR){
+        	  clearDObj(dop);
+            warning("%s", filePath);
+        	  setAsspMsg(AEF_ERR_OPEN, filePath);
+        	  return(NULL);
+        	}
+        }
+        err = getHeader(dop);
       if(err < 0) {
 	fclose(dop->fp);
 	if(dop != doPtr)
