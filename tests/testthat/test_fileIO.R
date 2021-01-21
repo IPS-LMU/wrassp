@@ -44,3 +44,16 @@ test_that("read things that are written to disc are the same as origs", {
   }
   
 })
+
+test_that("files containing utf-8 symbols in file names work (was an issue under windows)", {
+  
+  altDir = tempdir()
+  
+  wavFiles <- list.files(system.file("extdata", package = "wrassp"), pattern = glob2rx("*.wav"), full.names = TRUE)
+  
+  utf8filePath = file.path(tempdir(), "bål.wav")
+  file.copy(wavFiles[1], utf8filePath)
+  ado = read.AsspDataObj(utf8filePath)
+  expect_equal(attr(ado, "sampleRate"), 16000)
+  unlink(utf8filePath)
+})

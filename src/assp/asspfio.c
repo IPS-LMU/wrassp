@@ -55,7 +55,6 @@
 #elif defined(_WIN32) || defined(WIN32) || defined(_WIN64) || defined(WIN64) 
   #define OS_Windows
   #include <windows.h>
-  #include <wchar.h>
 #endif
 
 /*DOC
@@ -133,22 +132,22 @@ DOBJ *asspFOpen(char *filePath, int mode, DOBJ *doPtr)
 	      CLEAR = TRUE;                      /* we may clear upon error */
     }
     dop = doPtr;
-  }
-  else
+  } else {
     dop = allocDObj();
+  }
   if(dop != NULL) {
     clrAsspMsg();
     dop->filePath = filePath;
     dop->openMode = AFO_NONE;
     if(mode & AFO_READ) {                    /* open an existing file */
-      if(strcmp(filePath, "stdout") == 0 ||
-	 strcmp(filePath, "stderr") == 0) {
-	if(dop != doPtr)
-	  freeDObj(dop);
-	else if(CLEAR)
-	  clearDObj(dop);
-	setAsspMsg(AEF_ERR_OPEN, filePath);
-	return(NULL);
+      if(strcmp(filePath, "stdout") == 0 || strcmp(filePath, "stderr") == 0) {
+      	if(dop != doPtr) {
+      	  freeDObj(dop);
+      	} else if(CLEAR){
+      	  clearDObj(dop);
+      	}
+      	setAsspMsg(AEF_ERR_OPEN, filePath);
+	      return(NULL);
       }
       strcpy(Cmode, "r");
       if(mode & AFO_WRITE){                    /* open in update mode */
@@ -160,39 +159,49 @@ DOBJ *asspFOpen(char *filePath, int mode, DOBJ *doPtr)
       if(strcmp(filePath, "stdin") == 0){
 	      dop->fp = stdin;
       }
-      else 
-      #ifdef OS_Windows
-        // Rprintf("dude %s", "hi");
-        // int wchars_num  = MultiByteToWideChar(CP_UTF8, 0, filePath, -1, NULL, 0);
-        // Rprintf("count %i", wchars_num);
-        // char filePathW[1000] = "";
-        // char *pFilePathW = filePathW;
-        // strncpy(filePath, filePathW, 1000);
-        //filePathW.resize(filePath.size());
-        // int newSize = MultiByteToWideChar(CP_UTF8, 0, filePath.c_str(), filePath.length(), const_cast<wchar_t *>(filePathW.c_str()), filePath.length());
-        //filePathW.resize(newSize);
-      	dop->fp = fopen(filePath, Cmode);
-      #else
-        dop->fp = fopen(filePath, Cmode);
-      #endif
-        if(!(dop->fp)) {
-        	if(dop != doPtr){
-        	  freeDObj(dop);
-        	} else if(CLEAR){
-        	  clearDObj(dop);
-            warning("%s", filePath);
-        	  setAsspMsg(AEF_ERR_OPEN, filePath);
-        	  return(NULL);
-        	}
-        }
-        err = getHeader(dop);
+      else {
+        #ifdef OS_Windows
+          // convert file name to _wchar 
+          int numberOfWchars_fileName  = MultiByteToWideChar(CP_UTF8, 0, filePath, -1, NULL, 0);
+          wchar_t wFilePath[MAX_PATH]; // MAX_PATH const available under Windows
+          wFilePath[numberOfWchars_fileName] = L'\0';
+          int newSize = MultiByteToWideChar(CP_UTF8, 0, filePath, -1, wFilePath, numberOfWchars_fileName); // return value ignored
+          // convert Cmode to _wchar
+          int numberOfWchars_cMode  = MultiByteToWideChar(CP_UTF8, 0, Cmode, -1, NULL, 0);
+          wchar_t wCmode[MAX_PATH]; // MAX_PATH const available under Windows
+          wCmode[numberOfWchars_cMode] = L'\0';
+          newSize = MultiByteToWideChar(CP_UTF8, 0, Cmode, -1, wCmode, numberOfWchars_cMode); // return value ignored
+          
+          // Rprintf("numberOfWchars_fileName %i\n", numberOfWchars_fileName);
+          // Rprintf("wFilePath %s\n", wFilePath);
+          // Rprintf("newSize_fileName %i\n", newSize_fileName);
+          // Rprintf("Cmode %s\n", Cmode);
+        	dop->fp = _wfopen(wFilePath, wCmode);
+        	// if(!dop->fp){
+        	// error("couldn't open file");
+        	// }
+        #else
+          dop->fp = fopen(filePath, Cmode);
+        #endif
+      }
+      if(!(dop->fp)) {
+      	if(dop != doPtr){
+      	  freeDObj(dop);
+      	} else if(CLEAR){
+      	  clearDObj(dop);
+      	  setAsspMsg(AEF_ERR_OPEN, filePath);
+      	  return(NULL);
+      	}
+      }
+      err = getHeader(dop);
       if(err < 0) {
-	fclose(dop->fp);
-	if(dop != doPtr)
-	  freeDObj(dop);
-	else if(CLEAR)
-	  clearDObj(dop);
-	return(NULL);
+      	fclose(dop->fp);
+      	if(dop != doPtr){
+      	  freeDObj(dop);
+      	} else if(CLEAR) {
+      	  clearDObj(dop);
+      	}
+      	return(NULL);
       } /* else retain warning if set */
     }
     else if(mode & AFO_WRITE) {                    /* create/truncate */
