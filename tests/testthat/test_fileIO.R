@@ -53,7 +53,15 @@ test_that("files containing utf-8 symbols in file names work (was an issue under
   
   utf8filePath = file.path(tempdir(), "bål.wav")
   file.copy(wavFiles[1], utf8filePath)
+  # check that reading works
   ado = read.AsspDataObj(utf8filePath)
   expect_equal(attr(ado, "sampleRate"), 16000)
+  # check that writing works
+  write.AsspDataObj(ado, paste0(utf8filePath, "_new"))
+  expect_true(file.exists(paste0(utf8filePath, "_new")))
+  # function work 
+  zcrana(listOfFiles = utf8filePath)
+  expect_true(file.exists(paste0(tools::file_path_sans_ext(utf8filePath), ".zcr")))
   unlink(utf8filePath)
+  unlink(paste0(utf8filePath, "_new"))
 })
