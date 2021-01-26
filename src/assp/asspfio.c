@@ -249,8 +249,15 @@ DOBJ *asspFOpen(char *filePath, int mode, DOBJ *doPtr)
       	} /* else retain warning if set */
       }
     }
+    
     dop->openMode = mode;                      /* successfully opened */
   }
+  #ifdef WRASSP
+  // test this under windows
+  // set char encoding of path to UTF8
+  // mkCharCE(dop->filePath, CE_UTF8);
+  #endif
+  
   return(dop);
 }
 

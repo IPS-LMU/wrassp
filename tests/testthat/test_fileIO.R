@@ -56,6 +56,10 @@ test_that("files containing utf-8 symbols in file names work (was an issue under
   # check that reading works
   ado = read.AsspDataObj(utf8filePath)
   expect_equal(attr(ado, "sampleRate"), 16000)
+  if(Encoding(utf8filePath) == "UTF-8"){ # this is always true right?
+    # is encoding of filePath preserved?
+    expect_equal(Encoding(attr(ado, "filePath")), "UTF-8")
+  }
   # check that writing works
   write.AsspDataObj(ado, paste0(utf8filePath, "_new"))
   expect_true(file.exists(paste0(utf8filePath, "_new")))
