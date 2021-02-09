@@ -1,3 +1,11 @@
+# wrassp 1.0.0
+
+## new features / performance tweaks / improvements
+
+## bug fixes
+
+* fixed broken UTF-8 support on in windows paths
+
 # wrassp 0.1.9.9000
 
 ## new features / performance tweaks / improvements
