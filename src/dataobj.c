@@ -219,11 +219,11 @@ dobj2AsspDataObj(DOBJ * data)
     REAL(rate)[0] = data->dataRate;
     setAttrib(ans, install("sampleRate"), rate);
     if (data->filePath == NULL || strlen(data->filePath) == 0){
-        //Rprintf("at non caps protect call\n");
+        // Rprintf("at non caps protect call\n");
         PROTECT(filePath = R_NilValue);
     } else {
         PROTECT(filePath = allocVector(STRSXP, 1));
-        SET_STRING_ELT(filePath, 0, mkChar(data->filePath));
+        SET_STRING_ELT(filePath, 0, mkCharCE(data->filePath, CE_UTF8));
     }
     setAttrib(ans, install("filePath"), filePath);
     PROTECT(origRate = allocVector(REALSXP, 1));
