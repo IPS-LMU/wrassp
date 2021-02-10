@@ -1,13 +1,13 @@
 # wrassp
 
 [![Build Status](https://travis-ci.org/IPS-LMU/wrassp.svg?branch=master)](https://travis-ci.org/IPS-LMU/wrassp)
-[![Coverage Status](https://coveralls.io/repos/IPS-LMU/wrassp/badge.svg)](https://coveralls.io/r/IPS-LMU/wrassp)
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/wrassp)](https://CRAN.R-project.org/package=wrassp)
+[![Coverage Status](https://coveralls.io/repos/IPS-LMU/wrassp/badge.svg)](https://coveralls.io/github/IPS-LMU/wrassp)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/wrassp)](https://CRAN.R-project.org/package=wrassp)
 
 `wrassp` is a wrapper for R around Michel Scheffers's [libassp](http://libassp.sourceforge.net/)
 (Advanced Speech Signal Processor). The libassp library aims at providing functionality for handling speech signal files in most common audio formats and for performing analyses common in phonetic science/speech science. This includes the calculation of formants, fundamental frequency, root mean square, auto correlation, a variety of spectral analyses, zero crossing rate, filtering etc. This wrapper provides R with a large subset of libassp's signal processing functions and provides them to the user in a (hopefully) user-friendly manner.
 
-This package is part of the next iteration of the EMU Speech Database Management System which aims to be as close to an all-in-one solution for generating, manipulating, querying, analyzing and managing speech databases as possible. For an overview of the system please visit this URL: [http://ips-lmu.github.io/EMU.html](http://ips-lmu.github.io/EMU.html).
+This package is part of the next iteration of the EMU Speech Database Management System which aims to be as close to an all-in-one solution for generating, manipulating, querying, analyzing and managing speech databases as possible. For an overview of the system please visit this URL: [https://ips-lmu.github.io/EMU.html](https://ips-lmu.github.io/EMU.html).
 
 ## Installation
 
@@ -16,7 +16,7 @@ This package is part of the next iteration of the EMU Speech Database Management
 install.packages("wrassp")
 ```
 
-* or install the latest development version from GitHub (as large parts of `wrassp` are written in `C` make sure your system fulfills the requirements for package development (see [here](http://www.rstudio.com/ide/docs/packages/prerequisites))):
+* or install the latest development version from GitHub (as large parts of `wrassp` are written in `C` make sure your system fulfills the requirements for package development (see [here](https://support.rstudio.com/hc/en-us/articles/200486498-Package-Development-Prerequisites))):
 ```r
 library(devtools)
 install_github("IPS-LMU/wrassp", build_vignettes = TRUE)
@@ -101,13 +101,13 @@ vignette('wrassp_intro')
 
 **Raphael Winkelmann**
 
-+ [github](http://github.com/raphywink)
++ [github](https://github.com/raphywink)
 
 **Lasse Bombien**
 
-+ [github](http://github.com/quabolasse)
++ [github](https://github.com/quabolasse)
 
 
 **Affiliations**
 
-[INSTITUTE OF PHONETICS AND SPEECH PROCESSING](http://www.en.phonetik.uni-muenchen.de/)
+[INSTITUTE OF PHONETICS AND SPEECH PROCESSING](https://www.en.phonetik.uni-muenchen.de)
