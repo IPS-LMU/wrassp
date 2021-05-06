@@ -13,6 +13,13 @@
 ##' @export
 'read.AsspDataObj' <- 'getAsspDataObj' <- function(fname, begin=0, end=0, samples=FALSE) {
   fname <- prepareFiles(fname)
+  # type cast begin/end if integer
+  if(class(begin) == "integer"){
+    begin = as.numeric(begin)
+  } 
+  if(class(end) == "integer"){
+    end = as.numeric(end)
+  }
   .External("getDObj2", fname, begin=begin, end=end, samples=samples, PACKAGE="wrassp")
 }
 

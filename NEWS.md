@@ -1,3 +1,12 @@
+# wrassp 1.0.0.9000
+
+## new features / performance tweaks / improvements
+
+## bug fixes
+
+* typcasting begin/end to numeric if they are integer values in `read.AsspDataObj()` (fixes IPS-LMU/emuR#231)
+
+
 # wrassp 1.0.0
 
 ## new features / performance tweaks / improvements
