@@ -2796,6 +2796,7 @@ LOCAL int putSSFFhdr(DOBJ *dop)
   dop->version = 0;
   dop->sepChars[0] = EOS;
   strcpy(dop->eol, SSFF_EOL_STR);
+  
 /*
  * construct header in memory
  */
@@ -2819,7 +2820,8 @@ LOCAL int putSSFFhdr(DOBJ *dop)
   cPtr = &header[strlen(header)];
   sprintf(cPtr, "%s %.*f", SSFF_TIME_ID, nd, dop->Start_Time);
   strcat(header, dop->eol);
-
+  
+  int prev_header_length = strlen(header);
   while(dd != NULL) {
     ident = dd->ident;
     if(ident == NULL) {
@@ -2858,9 +2860,21 @@ LOCAL int putSSFFhdr(DOBJ *dop)
     if(dd->numFields < 1)
       dd->numFields = 1;
     cPtr = &header[strlen(header)];
+    // test if new header line still fits into header
+    char headerLineTmp[1000];
+    sprintf(headerLineTmp, "%s %s %s %ld", SSFF_DATA_ID,\
+            ident, format, (long)(dd->numFields));
+    strcat(headerLineTmp, dop->eol);
+    if(strlen(headerLineTmp) + strlen(header) >= ONEkBYTE){
+      setAsspMsg(AEG_ERR_APPL, "putSSFFhdr: SSFF header size exceeded (max. 1KB)");
+      return(-1);
+    }
+    
     sprintf(cPtr, "%s %s %s %ld", SSFF_DATA_ID,\
-	    ident, format, (long)(dd->numFields));
+            ident, format, (long)(dd->numFields));
+    
     strcat(header, dop->eol);
+    
     dd = dd->next;
   }
   /* NEW !!! */
