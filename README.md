@@ -4,6 +4,16 @@
 [![Coverage Status](https://coveralls.io/repos/IPS-LMU/wrassp/badge.svg)](https://coveralls.io/github/IPS-LMU/wrassp)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/wrassp)](https://CRAN.R-project.org/package=wrassp)
 
+## Out of funding
+
+Unfortunately, the EMU-SDMS is currently out of funding.
+
+We at the IPS will do what we can to fix bugs, security issues or necessary adjustments to new versions of R; but we cannot currently work on new features or performance improvements.
+
+We would be very glad if funding in academia allowed for more technical staff to maintain software used by the research community.
+
+## Introduction
+
 `wrassp` is a wrapper for R around Michel Scheffers's [libassp](http://libassp.sourceforge.net/)
 (Advanced Speech Signal Processor). The libassp library aims at providing functionality for handling speech signal files in most common audio formats and for performing analyses common in phonetic science/speech science. This includes the calculation of formants, fundamental frequency, root mean square, auto correlation, a variety of spectral analyses, zero crossing rate, filtering etc. This wrapper provides R with a large subset of libassp's signal processing functions and provides them to the user in a (hopefully) user-friendly manner.
 
