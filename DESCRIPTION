@@ -6,7 +6,7 @@ Authors@R: c(
     person("Raphael", "Winkelmann", ,"raphael@phonetik.uni-muenchen.de", role = c("aut")),
     person("Lasse", "Bombien", , "lasse@phonetik.uni-muenchen.de", role = c("aut")),
     person("Michel", "Scheffers", role = c("aut")))
-Description: A wrapper around Michel Scheffers's 'libassp' (<http://libassp.sourceforge.net/>). 
+Description: A wrapper around Michel Scheffers's 'libassp' (<https://libassp.sourceforge.net/>).
     The 'libassp' (Advanced Speech Signal Processor) library aims at providing
     functionality for handling speech signal files in most common audio formats
     and for performing analyses common in phonetic science/speech science. This
