@@ -14,10 +14,10 @@
 'read.AsspDataObj' <- 'getAsspDataObj' <- function(fname, begin=0, end=0, samples=FALSE) {
   fname <- prepareFiles(fname)
   # type cast begin/end if integer
-  if(class(begin) == "integer"){
+  if(inherits(begin, "integer")){
     begin = as.numeric(begin)
   } 
-  if(class(end) == "integer"){
+  if(inherits(end, "integer")){
     end = as.numeric(end)
   }
   .External("getDObj2", fname, begin=begin, end=end, samples=samples, PACKAGE="wrassp")
@@ -99,7 +99,7 @@
 ##' @export
 is.AsspDataObj <- function (x, ...)
   {
-    if (class (x) != "AsspDataObj")
+    if (!inherits(x, "AsspDataObj"))
       return (FALSE)
     return (TRUE)
   }
