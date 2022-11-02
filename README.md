@@ -117,6 +117,9 @@ vignette('wrassp_intro')
 
 + [github](https://github.com/quabolasse)
 
+**Markus Jochim** (current maintainer)
+
++ [github](https://github.com/MJochim)
 
 **Affiliations**
 
