@@ -35,6 +35,7 @@
 #include <stddef.h>     /* size_t */
 #include <stdlib.h>     /* malloc() calloc() */
 #include <string.h>     /* str...() memset() */
+#include <inttypes.h>   /* Portable format conversion (printf) for integer types */
 
 #include <miscdefs.h>   /* TRUE FALSE NATIVE_EOL */
 #include <trace.h>      /* TRACE[] */
@@ -674,19 +675,10 @@ long asspFPrint(void *buffer, long startRecord, long numRecords,\
 	else {
 	  for(n = 0; n < dd->numFields; n++) {
 	    if(n == 0)
-        #ifdef OS_Windows
-          err = fprintf(dop->fp, "%I64u", (unsigned long long)(*u64Ptr));
-        #else
-	        err = fprintf(dop->fp, "%llu", (unsigned long long)(*u64Ptr));
-        #endif
+        err = fprintf(dop->fp, "%"PRIu64, *u64Ptr);
 	    else
-        #ifdef OS_Windows
-	        err = fprintf(dop->fp, "%s%I64u", dd->sepChars,\
-			      (unsigned long long)u64Ptr[n]);
-        #else
-          err = fprintf(dop->fp, "%s%llu", dd->sepChars,\
-			      (unsigned long long)u64Ptr[n]);
-        #endif
+        err = fprintf(dop->fp, "%s%"PRIu64, dd->sepChars,\
+		      u64Ptr[n]);
 	    if(err < 0) break;
 	  }
 	}
@@ -706,19 +698,10 @@ long asspFPrint(void *buffer, long startRecord, long numRecords,\
 	else {
 	  for(n = 0; n < dd->numFields; n++) {
 	    if(n == 0)
-        #ifdef OS_Windows
-	        err = fprintf(dop->fp, "%I64d", (long long)(*i64Ptr));
-        #else
-          err = fprintf(dop->fp, "%lli", (long long)(*i64Ptr));
-        #endif
+        err = fprintf(dop->fp, "%"PRId64, *i64Ptr);
 	    else
-        #ifdef OS_Windows
-	        err = fprintf(dop->fp, "%s%I64d", dd->sepChars,\
-			      (long long)i64Ptr[n]);
-        #else
-          err = fprintf(dop->fp, "%s%lli", dd->sepChars,\
-			      (long long)i64Ptr[n]);        
-        #endif
+        err = fprintf(dop->fp, "%s%"PRId64, dd->sepChars,\
+		      i64Ptr[n]);
 	    if(err < 0) break;
 	  }
 	}
