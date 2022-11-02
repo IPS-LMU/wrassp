@@ -187,7 +187,7 @@ Returns:
 Note: If the returned value exceeds the maximum number of iterations
       defined in "term", the values of p and/or q are not reliable.
 
-See: Fröberg, C.E. (1969), "Introduction to numerical analysis."
+See: FrÃ¶berg, C.E. (1969), "Introduction to numerical analysis."
        Chapter 2.3, Addison Wesley, Reading
      Presser. W.H., Teukolsky, S.A., Vettering, W.T. and Flannery, B.P.
        (1992), "Numerical Recipes in C". 2nd Edition pp. 376-379, 

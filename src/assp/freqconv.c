@@ -70,7 +70,7 @@ double st2rel(double s)
 }
 
 /*
- * From: H. Traunmüller (1997), "Auditory scales of frequency representation."
+ * From: H. TraunmÃ¼ller (1997), "Auditory scales of frequency representation."
  *       http://www.ling.su.se/staff/hartmut/bark.htm
  */
 /*

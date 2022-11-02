@@ -27,7 +27,7 @@
 *                                                                      *
 * File:     ksv.h                                                      *
 * Contents: Constants, structures and prototypes implementing the      *
-*           K. Sch‰fer-Vincent Periodicity Detection Algorithm.        *
+*           K. Sch√§fer-Vincent Periodicity Detection Algorithm.        *
 * Author:   Michel T.M. Scheffers                                      *
 *                                                                      *
 *-- revision history --------------------------------------------------*
