@@ -85,27 +85,32 @@ vignette('wrassp_intro')
 
 ## For Developers
 
-### Checking on rocker/r-devel docker image (prerequisite docker is installed)
+Prerequisite: docker is installed on your machine
+
+### Build and check package using rocker/r-devel docker image
 
 - pull current r-devel image: `docker pull rocker/r-devel`
 - check if pull worked: `docker images`
-- check R version in image: `docker run rocker/r-devel:latest R --version`
-- run interactive version of bash and mount wrassp project folder (==current directory): `docker run --rm -ti -v $(pwd):/wrassp rocker/r-devel:latest bash`
-- build: `RD CMD build --resave-data --no-manual --no-build-vignettes wrassp`
-- manually install deps (this might need a bit of tweaking): `RD -e 'install.packages(c("stringi","evaluate","compare", "rmarkdown", "knitr", "testthat"))'`
+- check R version in image: `docker run --rm rocker/r-devel:latest R --version`
+- run the container with an interactive shell, mounting wrassp project folder (==current directory) and a named docker volume for the output tarball:
+  `docker run --rm -ti -v $(pwd):/wrassp -v wrassp_packages:/output rocker/r-devel:latest bash`
+
+In the interactive shell you just started:
+
+- manually install OS deps (this might need a bit of tweaking): `apt update && apt install --yes pandoc tidy qpdf`
+- manually install R deps (this might need a bit of tweaking): `RD -e 'install.packages(c("tibble","compare", "rmarkdown", "knitr", "testthat"))'`
+- build: `RD CMD build --resave-data wrassp`
 - check: `RD CMD check --as-cran wrassp_*.tar.gz`
+- copy built package to the named docker volume so it can be retrieved from outside this container: `cp wrassp_*.tar.gz /output`
 
+### Additional checks using kalibera/rchk
 
-### Using rchk for additional checks
+- pull current rchk image: `docker pull kalibera/rchk`
+- run the checks:
+  `docker run --rm -v wrassp_packages:/rchk/packages kalibera/rchk:latest /rchk/packages/wrassp_x.y.z.tar.gz`
+- rchk results are printed to stdout and also stored in `libsonly/wrassp/libs/wrassp.so{maa|b|ffi}check` on the named docker volume
+- see also: https://github.com/kalibera/rchk/blob/master/doc/DOCKER.md (Checking a package from a tarball)
 
-- clone repo `git clone https://github.com/joshuaulrich/rchk-docker.git`
-- `cd rchk-docker`
-- build docker image `docker build .`
-- code below is adapted from final example of this `README.md`: https://github.com/kalibera/rchk
-- build r package `./bin/R CMD build --resave-data --no-manual --no-build-vignettes /wrassp`
-- install package `echo 'install.packages("wrassp_0.1.5.tar.gz",repos=NULL)' |  ./bin/R --slave`
-- run rchk `/opt/rchk/scripts/check_package.sh wrassp`
-- view rchk results `less packages/lib/wrassp/libs/wrassp.so.bcheck` and `less packages/lib/wrassp/libs/wrassp.so.maacheck`
 
 ## Authors
 
