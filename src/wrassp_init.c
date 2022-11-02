@@ -17,9 +17,9 @@ Check these declarations against the C/Fortran source code.
 */
 
 /* .Call calls */
-extern SEXP AsspLpTypes_();
-extern SEXP AsspSpectTypes_();
-extern SEXP AsspWindowTypes_();
+extern SEXP AsspLpTypes_(void);
+extern SEXP AsspSpectTypes_(void);
+extern SEXP AsspWindowTypes_(void);
 extern SEXP writeDObj_(SEXP, SEXP);
 
 /* .External calls */

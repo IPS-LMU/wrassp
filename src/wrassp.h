@@ -194,7 +194,7 @@ SEXP            getGenericVars(DOBJ * dop);
 SEXP            performAssp(SEXP args);
 SEXP            showArgs(SEXP args);
 
-SEXP            AsspWindowList();
+SEXP            AsspWindowList(void);
 char           *asspDF2ssffString(int df);
 SEXP            writeDObj_(SEXP, SEXP);
 int             addTrackData(DOBJ * dop, DDESC * ddl, SEXP rdobj);

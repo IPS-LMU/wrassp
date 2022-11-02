@@ -7,7 +7,7 @@
  * This function makes the names of window functions as defined in ASSP
  * available to R 
  */
-SEXP AsspWindowTypes_()
+SEXP AsspWindowTypes_(void)
 {
     WFLIST         *wPtr = wfLongList; // defined in assp
     int             n = 0,
@@ -35,7 +35,7 @@ SEXP AsspWindowTypes_()
  * ASSP available to R 
  */
 SEXP
-AsspLpTypes_()
+AsspLpTypes_(void)
 {
     LP_TYPE        *lPtr = lpType;
     SEXP            result;
@@ -62,7 +62,7 @@ AsspLpTypes_()
  * This function makes the names of the types of spectral analysis used in 
  * ASSP available to R 
  */
-SEXP AsspSpectTypes_()
+SEXP AsspSpectTypes_(void)
 {
     SPECT_TYPE     *sPtr = spectType;
     SEXP            result;
