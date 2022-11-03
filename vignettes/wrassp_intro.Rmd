@@ -20,7 +20,7 @@ the [wrassp implementation](https://ips-lmu.github.io/The-EMU-SDMS-Manual/chap-w
 # Introduction
 
 This document is meant as an introduction to the `wrassp`
-package. `wrassp` is a **w**rapper for **R** around Michel Scheffers's [libassp](http://libassp.sourceforge.net/)
+package. `wrassp` is a **w**rapper for **R** around Michel Scheffers's [libassp](https://libassp.sourceforge.net/)
 (**A**dvanced **S**peech **S**ignal **P**rocessor). The libassp library aims at
 providing functionality for handling speech signal files in most
 common audio formats and for performing analyses common in phonetic
