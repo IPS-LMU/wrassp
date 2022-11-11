@@ -1,3 +1,10 @@
+# wrassp 1.0.2
+
+## bug fixes
+
+* adapted to CRAN's compiler warnings
+* changed http links to https and support.rstudio.com to support.posit.co
+
 # wrassp 1.0.1
 
 ## new features / performance tweaks / improvements

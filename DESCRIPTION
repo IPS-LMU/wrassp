@@ -1,5 +1,5 @@
 Package: wrassp
-Version: 1.0.1
+Version: 1.0.2
 Title: Interface to the 'ASSP' Library
 Authors@R: c(
     person("Markus", "Jochim", ,"markusjochim@phonetik.uni-muenchen.de", role = c("cre")),
