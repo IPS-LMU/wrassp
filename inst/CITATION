@@ -1,14 +1,2 @@
-citHeader("To cite package 'wrassp' in publications use:")
-year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", meta$Date, perl = TRUE)
-vers <- paste("R package version", meta$Version)
-citEntry(entry="Manual",
-         title = "wrassp: an R wrapper to the ASSP Library",
-         author = personList(as.person("Lasse Bombien"),
-         as.person("Raphael Winkelmann"),
-         as.person("Michel Scheffers")),
-         year = year,
-         note = vers,
-         textVersion =
-         paste("Lasse Bombien, Raphael Winkelmann and Michel Scheffers (",
-               year,"). wrassp: an R wrapper to the ASSP Library ",
-               vers, ".", sep=""))
+## R package reference generated from DESCRIPTION metadata
+citation(auto = meta)
