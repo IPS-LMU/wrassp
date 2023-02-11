@@ -212,7 +212,7 @@ int setKSVgenderDefaults(AOPTS *aoPtr, char gender)
     break;
   default:
     setAsspMsg(AEG_ERR_BUG, NULL);
-    sprintf(applMessage, "setKSVgenderDefaults: invalid gender code '%c'",\
+    snprintf(applMessage, sizeof(applMessage), "setKSVgenderDefaults: invalid gender code '%c'",\
 	    gender);
     return(-1);
   }
@@ -298,13 +298,13 @@ DOBJ *createKSV(DOBJ *smpDOp, AOPTS *aoPtr)
   clrAsspMsg();                               /* ignore warnings here */
   if(aoPtr->minF < KSV_ABSMIN_F0) {
     asspMsgNum = AEG_ERR_APPL;
-    sprintf(applMessage, "KSV: minimum F0 too low (minimally %d Hz)",\
+    snprintf(applMessage, sizeof(applMessage), "KSV: minimum F0 too low (minimally %d Hz)",\
 	    (int)KSV_ABSMIN_F0);
     return(NULL);
   }
   if(aoPtr->maxF <= aoPtr->minF) {
     asspMsgNum = AEG_ERR_APPL;
-    sprintf(applMessage, "KSV: maximum F0 <= minimum F0");
+    snprintf(applMessage, sizeof(applMessage), "KSV: maximum F0 <= minimum F0");
     return(NULL);
   }
   if((gd=(KSV_GD *)malloc(sizeof(KSV_GD))) == NULL) {
@@ -1194,7 +1194,7 @@ LOCAL int ksvTwin(long sn3, float a3, int type)
   }
   if(i3 >= maxExtrema) {
     asspMsgNum = AEG_ERR_BUG;
-    sprintf(applMessage, "\nOverflow in extrema buffer %d at sample #%ld",\
+    snprintf(applMessage, sizeof(applMessage), "\nOverflow in extrema buffer %d at sample #%ld",\
 	    type, sn3);
     return(-1);
   }
@@ -1599,7 +1599,7 @@ LOCAL int putChain(int i, int OVERWRITE)
     esn = tPtr->sn3;                /* end sample number of next twin */
     if((int)(esn - ringBsn) > ringLength) {    /* should never happen */
       asspMsgNum = AEG_ERR_BUG;
-      sprintf(applMessage, "\nOverflow in ring buffer at sample #%ld", esn);
+      snprintf(applMessage, sizeof(applMessage), "\nOverflow in ring buffer at sample #%ld", esn);
       return(-1);
     }
     dur23 = tPtr->dur23;             /* duration of right-hand period */
@@ -1633,7 +1633,7 @@ LOCAL int putChain(int i, int OVERWRITE)
     j = (int)(bsn - ringBsn);                /* offset in ring buffer */
     if(j < 0) {
       asspMsgNum = AWG_WARN_BUG;
-      sprintf(applMessage, "\nunderflow of ring buffer: bsn = %ld"\
+      snprintf(applMessage, sizeof(applMessage), "\nunderflow of ring buffer: bsn = %ld"\
 	      " ringBsn = %ld", bsn, ringBsn);
       return(1);
     }

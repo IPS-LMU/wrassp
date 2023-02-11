@@ -752,11 +752,11 @@ DOBJ *filterSignal(DOBJ *inpDOp, DOBJ *filtDOp, DOBJ *outDOp)
   if(RESCALE && !(gd->options & FILT_OPT_AUTOGAIN)) {
     asspMsgNum = AWG_WARN_APPL;
     if(FILE_OUT)
-      sprintf(applMessage, "amplitude reduced by %.4f dB to avoid "\
+      snprintf(applMessage, sizeof(applMessage), "amplitude reduced by %.4f dB to avoid "\
 	      "numerical overflow\n         in file %s",\
 	      -LINtodB(scaleFac), myfilename(outDOp->filePath));
     else
-      sprintf(applMessage, "amplitude reduced by %.4f dB to avoid "\
+      snprintf(applMessage, sizeof(applMessage), "amplitude reduced by %.4f dB to avoid "\
 	      "numerical overflow", -LINtodB(scaleFac));
   }
   /*

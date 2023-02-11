@@ -149,7 +149,7 @@ char *getAsspMsg(short num)
       return(asspMessage[i].str);
   }
 /* not found in list */
-  sprintf(applMessage,"\n%s: %04x", getAsspMsg(AEE_BAD_ERR), num);
+  snprintf(applMessage, sizeof(applMessage), "\n%s: %04x", getAsspMsg(AEE_BAD_ERR), num);
   return(getAsspMsg(AWG_WARN_BUG));
 }
 

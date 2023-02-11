@@ -149,7 +149,7 @@ typedef struct assp_message_record {
 #define MAX_MSG_LEN (4095)
 ASSP_EXTERN AMREC asspMessage[];
 ASSP_EXTERN short asspMsgNum;
-ASSP_EXTERN char  applMessage[/* MAX_MSG_LEN + 1 */];
+ASSP_EXTERN char  applMessage[MAX_MSG_LEN + 1];
 
 /*
  * prototypes of functions in asspmess.c

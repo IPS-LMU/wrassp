@@ -32,7 +32,7 @@
 ***********************************************************************/
 /* $Id: aucheck.c,v 1.6 2010/01/14 14:44:44 mtms Exp $ */
 
-#include <stdio.h>      /* sprintf() */
+#include <stdio.h>      /* snprintf() */
 #include <string.h>     /* strlen() */
 
 #include <miscdefs.h>   /* TRUE FALSE */
@@ -75,20 +75,20 @@ long checkSound(DOBJ *dop, long auCaps, int channel)
   auProps = auPropsDO(dop);
   if(auProps < 0) {
     if(strlen(applMessage) == 0 && isFile && !(auCaps & AUC_HEAD))
-      sprintf(applMessage, "in file %s", dop->filePath);
+      snprintf(applMessage, sizeof(applMessage), "in file %s", dop->filePath);
     return(AUC_ERROR);
   }
   if(auProps == AUC_NONE) {
     setAsspMsg(AED_NO_AUDIO, NULL);
     if(isFile && !(auCaps & AUC_HEAD))
-      sprintf(applMessage, "in file %s", dop->filePath);
+      snprintf(applMessage, sizeof(applMessage), "in file %s", dop->filePath);
     return(AUC_NONE);
   }
   format = auProps & AUC_FORM_MASK;
   if(!(auCaps & format)) {
     setAsspMsg(AED_NOHANDLE, NULL);
     if(auProps & AUC_FILE && !(auCaps & AUC_HEAD))
-      sprintf(applMessage, "in file %s", dop->filePath);
+      snprintf(applMessage, sizeof(applMessage), "in file %s", dop->filePath);
     return(AUC_ERROR);
   }
   if(format & AUC_SWAP_MASK) {/* no endian check for single-byte data */
@@ -96,7 +96,7 @@ long checkSound(DOBJ *dop, long auCaps, int channel)
     if(!(auCaps & endian)) {
       setAsspMsg(AED_NOHANDLE, NULL);
       if(auProps & AUC_FILE && !(auCaps & AUC_HEAD))
-	sprintf(applMessage, "in file %s", dop->filePath);
+	snprintf(applMessage, sizeof(applMessage), "in file %s", dop->filePath);
       return(AUC_ERROR);
     }
   }
@@ -104,13 +104,13 @@ long checkSound(DOBJ *dop, long auCaps, int channel)
   if(numTracks == 0 || dop->frameDur != 1) {
     setAsspMsg(AED_ERR_FORM, NULL);
     if(auProps & AUC_FILE && !(auCaps & AUC_HEAD))
-      sprintf(applMessage, "in file %s", dop->filePath);
+      snprintf(applMessage, sizeof(applMessage), "in file %s", dop->filePath);
     return(AUC_ERROR);
   }
   maxTracks = auCaps & AUC_CHAN_MASK;
   if(maxTracks > 0 && numTracks > maxTracks) {
     setAsspMsg(AEG_ERR_APPL, NULL);
-    sprintf(applMessage, "Can't handle %ld-channel data", numTracks);
+    snprintf(applMessage, sizeof(applMessage), "Can't handle %ld-channel data", numTracks);
     if(auProps & AUC_FILE && !(auCaps & AUC_HEAD)) {
       strcat(applMessage, "\nin file ");
       strcat(applMessage, dop->filePath);
@@ -119,7 +119,7 @@ long checkSound(DOBJ *dop, long auCaps, int channel)
   }
   if(channel > 0 && (long)channel > numTracks) {
     setAsspMsg(AEG_ERR_APPL, NULL);
-    sprintf(applMessage, "Channel %i not available", channel);
+    snprintf(applMessage, sizeof(applMessage), "Channel %i not available", channel);
     if(auProps & AUC_FILE && !(auCaps & AUC_HEAD)) {
       strcat(applMessage, "\nin file ");
       strcat(applMessage, dop->filePath);

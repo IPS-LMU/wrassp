@@ -334,7 +334,7 @@ fform_e guessFormat(FILE *fp, char *filePath, fdata_e *dataFormat)
   }
   if(fileFormat == FF_UNDEF) {            /* still not recognized */
     asspMsgNum = AEF_BAD_FORM;
-    sprintf(applMessage, "in file %s", filePath);
+    snprintf(applMessage, sizeof(applMessage), "in file %s", filePath);
   }
   return(fileFormat);
 }
@@ -397,7 +397,7 @@ int getHeader(DOBJ *dop)
 	                / (long)(dop->recordSize);
       else {
 	asspMsgNum = AEG_ERR_APPL;
-	sprintf(applMessage, "File size less than header size"\
+	snprintf(applMessage, sizeof(applMessage), "File size less than header size"\
 		"\n(RAW format) for file %s", dop->filePath);
 	return(-1);
       }
@@ -434,7 +434,7 @@ int getHeader(DOBJ *dop)
     return(checkXRMB(dop)); /* no real header but identifyable */
   default:
     asspMsgNum = AEF_BAD_FORM;
-    sprintf(applMessage, "in file %s", dop->filePath);
+    snprintf(applMessage, sizeof(applMessage), "in file %s", dop->filePath);
     return(-1);
   }
   return(0);
@@ -494,7 +494,7 @@ int putHeader(DOBJ *dop)
     return(putWAVhdr(dop));
   default:
     asspMsgNum = AEG_ERR_BUG;
-    sprintf(applMessage, "putHeader: unsupported file format code %i",\
+    snprintf(applMessage, sizeof(applMessage), "putHeader: unsupported file format code %i",\
 	    (int)(dop->fileFormat));
     return(-1);
   }
@@ -619,7 +619,7 @@ char *genWAVhdr(DOBJ *dop)
     break;
   default:
     asspMsgNum = AEG_ERR_BUG;
-    sprintf(applMessage, "genWAVhdr: %s", getAsspMsg(AED_BAD_FORM));
+    snprintf(applMessage, sizeof(applMessage), "genWAVhdr: %s", getAsspMsg(AED_BAD_FORM));
     return(NULL);
   }
 /*
@@ -796,7 +796,7 @@ LOCAL int checkXRMB(DOBJ *dop)
 
   rewind(dop->fp);
   asspMsgNum = AEF_ERR_FORM;                          /* preset error */
-  sprintf(applMessage, "(not XRMB) in file %s", dop->filePath);
+  snprintf(applMessage, sizeof(applMessage), "(not XRMB) in file %s", dop->filePath);
   OK = TRUE;
   n = fgetl(buf, sizeof(buf), dop->fp, &rest);
   if(n <= 0)
@@ -911,9 +911,9 @@ LOCAL int getAIFhdr(DOBJ *dop)
   if(err) {
     asspMsgNum = AEF_ERR_FORM;
     if(dop->fileFormat == FF_AIFF)
-      sprintf(applMessage, "(not AIFF)");
+      snprintf(applMessage, sizeof(applMessage), "(not AIFF)");
     else
-      sprintf(applMessage, "(not AIFC)");
+      snprintf(applMessage, sizeof(applMessage), "(not AIFC)");
     strcat(applMessage, "\nin file ");
     strcat(applMessage, dop->filePath);
     return(-1);
@@ -949,7 +949,7 @@ LOCAL int getAIFhdr(DOBJ *dop)
       numBytes = (size_t)chunkSize;     /* doesn't include CHUNK part */
       if(fread(buf, 1, numBytes, dop->fp) != numBytes) {
 	asspMsgNum = AEF_BAD_HEAD;
-	sprintf(applMessage, "(AIFC format) in file %s", dop->filePath);
+	snprintf(applMessage, sizeof(applMessage), "(AIFC format) in file %s", dop->filePath);
 	return(-1);
       }
       headSize += (long)numBytes;
@@ -963,7 +963,7 @@ LOCAL int getAIFhdr(DOBJ *dop)
       numBytes = (size_t)chunkSize;     /* doesn't include CHUNK part */
       if(fread(buf, 1, numBytes, dop->fp) != numBytes) {
 	asspMsgNum = AEF_BAD_HEAD;
-	sprintf(applMessage, "(AIF format) in file %s", dop->filePath);
+	snprintf(applMessage, sizeof(applMessage), "(AIF format) in file %s", dop->filePath);
 	return(-1);
       }
       headSize += (long)numBytes;
@@ -1028,7 +1028,7 @@ LOCAL int getAIFhdr(DOBJ *dop)
 	else {
 	  dd->coding = DC_ERROR;
 	  asspMsgNum = AED_BAD_FORM;
-	  sprintf(applMessage, "(AIFC format) in file %s", dop->filePath);
+	  snprintf(applMessage, sizeof(applMessage), "(AIFC format) in file %s", dop->filePath);
 	  return(-1);
 	}
 	ptr += 4;/* in case we want to check for bugs like PRAAT does */
@@ -1047,7 +1047,7 @@ LOCAL int getAIFhdr(DOBJ *dop)
 	else {
 	  dd->format = DF_ERROR;
 	  asspMsgNum = AED_BAD_FORM;
-	  sprintf(applMessage, "(AIF format) in file %s", dop->filePath);
+	  snprintf(applMessage, sizeof(applMessage), "(AIF format) in file %s", dop->filePath);
 	  return(-1);
 	}
       }
@@ -1061,7 +1061,7 @@ LOCAL int getAIFhdr(DOBJ *dop)
       numBytes = SIZEOF_SSND - SIZEOF_CHUNK;        /* ignore data !! */
       if(fread(buf, 1, numBytes, dop->fp) != numBytes) {
 	asspMsgNum = AEF_BAD_HEAD;
-	sprintf(applMessage, "(AIF format) in file %s", dop->filePath);
+	snprintf(applMessage, sizeof(applMessage), "(AIF format) in file %s", dop->filePath);
 	return(-1);
       }
       headSize += (long)numBytes;
@@ -1085,7 +1085,7 @@ LOCAL int getAIFhdr(DOBJ *dop)
 
   if(dop->headerSize <= 0 || dop->numRecords < 0) {
     asspMsgNum = AEF_BAD_HEAD;
-    sprintf(applMessage, "(AIF format) in file %s", dop->filePath);
+    snprintf(applMessage, sizeof(applMessage), "(AIF format) in file %s", dop->filePath);
     return(-1);
   }
   setStart_Time(dop);
@@ -1188,7 +1188,7 @@ LOCAL int putAIFhdr(DOBJ *dop)
       break;
     default:
       asspMsgNum = AEG_ERR_BUG;
-      sprintf(applMessage, "putAIFhdr: %s", getAsspMsg(AED_BAD_FORM));
+      snprintf(applMessage, sizeof(applMessage), "putAIFhdr: %s", getAsspMsg(AED_BAD_FORM));
       return(-1);
     }
     ptr += 4;
@@ -1247,7 +1247,7 @@ LOCAL int getCSLhdr(DOBJ *dop)
  */
   if(strncmp(buf, CSL_MAGIC, strlen(CSL_MAGIC)) != 0) {
     asspMsgNum = AEF_ERR_FORM;
-    sprintf(applMessage, "(not CSL) in file %s", dop->filePath);
+    snprintf(applMessage, sizeof(applMessage), "(not CSL) in file %s", dop->filePath);
     return(-1);
   }
   SETMSBLAST(dop->fileEndian);                     /* always MSB last */
@@ -1269,7 +1269,7 @@ LOCAL int getCSLhdr(DOBJ *dop)
     numBytes = SIZEOF_CHUNK;
     if(fread(buf, 1, numBytes, dop->fp) != numBytes) {
       asspMsgNum = AEF_BAD_HEAD;
-      sprintf(applMessage, "(CSL format) in file %s", dop->filePath);
+      snprintf(applMessage, sizeof(applMessage), "(CSL format) in file %s", dop->filePath);
       return(-1);
     }
     headSize += (long)numBytes;
@@ -1283,13 +1283,13 @@ LOCAL int getCSLhdr(DOBJ *dop)
     if(strncmp(buf, CSL_HEAD_ID, 4) == 0) {
       if(chunkSize != (SIZEOF_CSLFMT - SIZEOF_CHUNK)) {
 	asspMsgNum = AEF_BAD_HEAD;
-	sprintf(applMessage, "(CSL format) in file %s", dop->filePath);
+	snprintf(applMessage, sizeof(applMessage), "(CSL format) in file %s", dop->filePath);
 	return(-1);
       }
       numBytes = (size_t)chunkSize;
       if(fread(buf, 1, numBytes, dop->fp) != numBytes) {
 	asspMsgNum = AEF_BAD_HEAD;
-	sprintf(applMessage, "(CSL format) in file %s", dop->filePath);
+	snprintf(applMessage, sizeof(applMessage), "(CSL format) in file %s", dop->filePath);
 	return(-1);
       }
       headSize += (long)numBytes;
@@ -1308,7 +1308,7 @@ LOCAL int getCSLhdr(DOBJ *dop)
 	    strncmp(buf, CSL_DATA_ID_S, 4) == 0) {
       if(dop->headerSize > 0) {   /* may contain multiple data blocks */
 	asspMsgNum = AWG_WARN_APPL;
-	sprintf(applMessage, "Multiple data blocks in file %s (CSL format)",\
+	snprintf(applMessage, sizeof(applMessage), "Multiple data blocks in file %s (CSL format)",\
 		dop->filePath);
 	err = 1;
 	break;
@@ -1343,20 +1343,20 @@ LOCAL int getCSLhdr(DOBJ *dop)
 
   if(dop->headerSize <= 0 || dop->numRecords < 0) {
     asspMsgNum = AEF_BAD_HEAD;
-    sprintf(applMessage, "(CSL format) in file %s", dop->filePath);
+    snprintf(applMessage, sizeof(applMessage), "(CSL format) in file %s", dop->filePath);
     return(-1);
   }
   if(dop->numRecords > 0 && numRecords > 0) {
     if(dop->numRecords > numRecords) {
       asspMsgNum = AWG_WARN_APPL;
-      sprintf(applMessage, "Multiple data blocks\n"\
+      snprintf(applMessage, sizeof(applMessage), "Multiple data blocks\n"\
 	      "         (CSL format) in file %s", dop->filePath);
       dop->numRecords = numRecords;
       err = 1;
     }
     else if(dop->numRecords != numRecords) {
       asspMsgNum = AEF_BAD_HEAD;
-      sprintf(applMessage, "(CSL format) in file %s", dop->filePath);
+      snprintf(applMessage, sizeof(applMessage), "(CSL format) in file %s", dop->filePath);
       return(-1);
     }
   }
@@ -1465,7 +1465,7 @@ LOCAL int getADFhdr(DOBJ *dop)
   }
   if(strcmp(buf, ADF_MAGIC) != 0) {                  /* verify format */
     asspMsgNum = AEF_ERR_FORM;
-    sprintf(applMessage, "(not CSRE-ADF) in file %s", dop->filePath);
+    snprintf(applMessage, sizeof(applMessage), "(not CSRE-ADF) in file %s", dop->filePath);
     return(-1);
   }
   SETMSBLAST(dop->fileEndian);                     /* always MSB last */
@@ -1479,7 +1479,7 @@ LOCAL int getADFhdr(DOBJ *dop)
   dd->numBits = getU16(&ptr, SWAP);
   if(dd->numBits < 12 || dd->numBits > 16) {
     asspMsgNum = AEF_BAD_HEAD;
-    sprintf(applMessage, "(CSRE-ADF format) in file %s", dop->filePath);
+    snprintf(applMessage, sizeof(applMessage), "(CSRE-ADF format) in file %s", dop->filePath);
     return(-1);
   }
   uInt16 = getU16(&ptr, SWAP);                          /* dataFormat */
@@ -1498,7 +1498,7 @@ LOCAL int getADFhdr(DOBJ *dop)
   default:
     dd->format = DF_ERROR;
     asspMsgNum = AEF_BAD_HEAD;
-    sprintf(applMessage, "(CSRE-ADF format) in file %s", dop->filePath);
+    snprintf(applMessage, sizeof(applMessage), "(CSRE-ADF format) in file %s", dop->filePath);
     return(-1);
   }
   dop->sampFreq = (double)getF32(&ptr, SWAP);  /* sampRate in kHz !!! */
@@ -1617,7 +1617,7 @@ LOCAL int getSNDhdr(DOBJ *dop)
  */
   if(strncmp(buf, SND_MAGIC, strlen(SND_MAGIC)) != 0) {
     asspMsgNum = AEF_ERR_FORM;
-    sprintf(applMessage, "(not AU/SND) in file %s", dop->filePath);
+    snprintf(applMessage, sizeof(applMessage), "(not AU/SND) in file %s", dop->filePath);
     return(-1);
   }
   err = 0;
@@ -1633,13 +1633,13 @@ LOCAL int getSNDhdr(DOBJ *dop)
   dd->numFields = (size_t)getI32((void **) &ptr, SWAP);
   if(format < 1 || dop->sampFreq <= 0.0 || dd->numFields < 1) {
     asspMsgNum = AEF_BAD_HEAD;
-    sprintf(applMessage, "(AU/SND format) in file %s", dop->filePath);
+    snprintf(applMessage, sizeof(applMessage), "(AU/SND format) in file %s", dop->filePath);
     return(-1);
   }
   if(dop->headerSize < SND_MIN_HDR) {
     err = 1;
     asspMsgNum = AWF_BAD_ITEM;
-    sprintf(applMessage, "(AU/SND format) in file %s\n"\
+    snprintf(applMessage, sizeof(applMessage), "(AU/SND format) in file %s\n"\
 	    "         Incorrect data offset (%ld, using %d)",\
 	    dop->filePath, dop->headerSize, SND_MIN_HDR);
     dop->headerSize = SND_MIN_HDR;
@@ -1711,7 +1711,7 @@ LOCAL int getSNDhdr(DOBJ *dop)
   default:
     dd->format = DF_ERROR;
     asspMsgNum = AED_BAD_FORM;
-    sprintf(applMessage, "(AU/SND format) in file %s", dop->filePath);
+    snprintf(applMessage, sizeof(applMessage), "(AU/SND format) in file %s", dop->filePath);
     return(-1);
   }
   setRecordSize(dop);
@@ -1782,7 +1782,7 @@ LOCAL int putSNDhdr(DOBJ *dop)
       break;
     default:
       asspMsgNum = AEG_ERR_BUG;
-      sprintf(applMessage, "putSNDhdr: %s", getAsspMsg(AED_BAD_FORM));
+      snprintf(applMessage, sizeof(applMessage), "putSNDhdr: %s", getAsspMsg(AED_BAD_FORM));
       return(-1);
     }
     break;
@@ -1794,7 +1794,7 @@ LOCAL int putSNDhdr(DOBJ *dop)
     break;
   default:
     asspMsgNum = AEG_ERR_BUG;
-    sprintf(applMessage, "putSNDhdr: %s", getAsspMsg(AED_BAD_FORM));
+    snprintf(applMessage, sizeof(applMessage), "putSNDhdr: %s", getAsspMsg(AED_BAD_FORM));
     return(-1);
   }
   putI32((int32_t)myrint(dop->sampFreq), (void **) &ptr, SWAP);
@@ -1844,7 +1844,7 @@ LOCAL int getWAVhdr(DOBJ *dop)
   if(!(strncmp(buf, RIFF_MAGIC, 4) == 0 &&
        strncmp(&buf[8], WAVE_MAGIC, 4) == 0)) {
     asspMsgNum = AEF_ERR_FORM;
-    sprintf(applMessage, "(not WAV) in file %s", dop->filePath);
+    snprintf(applMessage, sizeof(applMessage), "(not WAV) in file %s", dop->filePath);
     return(-1);
   }
   SETMSBLAST(dop->fileEndian);                     /* always MSB last */
@@ -1865,7 +1865,7 @@ LOCAL int getWAVhdr(DOBJ *dop)
     numBytes = SIZEOF_CHUNK;
     if(fread(buf, 1, numBytes, dop->fp) != numBytes) {
       asspMsgNum = AEF_BAD_HEAD;
-      sprintf(applMessage, "(WAV format) in file %s", dop->filePath);
+      snprintf(applMessage, sizeof(applMessage), "(WAV format) in file %s", dop->filePath);
       return(-1);
     }
     headSize += numBytes;
@@ -1878,7 +1878,7 @@ LOCAL int getWAVhdr(DOBJ *dop)
     if(strncmp(buf, WAVE_FORM_ID, 4) == 0) {
       if(chunkSize < (SIZEOF_WAVFMT - SIZEOF_CHUNK)) {
 	asspMsgNum = AEF_BAD_HEAD;
-	sprintf(applMessage, "(WAV format) in file %s", dop->filePath);
+	snprintf(applMessage, sizeof(applMessage), "(WAV format) in file %s", dop->filePath);
 	return(-1);
       }
       if(ODD(chunkSize))
@@ -1886,7 +1886,7 @@ LOCAL int getWAVhdr(DOBJ *dop)
       numBytes = (size_t)chunkSize;
       if(fread(buf, 1, numBytes, dop->fp) != numBytes) {
 	asspMsgNum = AEF_BAD_HEAD;
-	sprintf(applMessage, "(WAV format) in file %s", dop->filePath);
+	snprintf(applMessage, sizeof(applMessage), "(WAV format) in file %s", dop->filePath);
 	return(-1);
       }
       headSize += numBytes;
@@ -1914,20 +1914,20 @@ LOCAL int getWAVhdr(DOBJ *dop)
 	}
 	else if(dop->fileFormat == FF_WAVE_X) {
 	  asspMsgNum = AEF_BAD_HEAD;
-	  sprintf(applMessage, "(extensible WAV format) in file %s",\
+	  snprintf(applMessage, sizeof(applMessage), "(extensible WAV format) in file %s",\
 		  dop->filePath);
 	  return(-1);
 	}
       }
       else if(dop->fileFormat == FF_WAVE_X) {
 	asspMsgNum = AEF_BAD_HEAD;
-	sprintf(applMessage, "(extended WAV format) in file %s",
+	snprintf(applMessage, sizeof(applMessage), "(extended WAV format) in file %s",
 		dop->filePath);
 	return(-1);
       }
       if(dd->numFields < 1 || dop->sampFreq == 0.0) {
 	asspMsgNum = AEF_BAD_HEAD;
-	sprintf(applMessage, "(WAV format) in file %s", dop->filePath);
+	snprintf(applMessage, sizeof(applMessage), "(WAV format) in file %s", dop->filePath);
 	return(-1);
       }
       dop->fileData = FDF_BIN;                  /* always binary data */
@@ -1940,7 +1940,7 @@ LOCAL int getWAVhdr(DOBJ *dop)
 	sampleSize = blockSize / dd->numFields;   /* bytes per sample */
 	if(sampleSize * dd->numFields != blockSize) {
 	  asspMsgNum = AEF_BAD_HEAD;
-	  sprintf(applMessage, "(WAV format) in file %s", dop->filePath);
+	  snprintf(applMessage, sizeof(applMessage), "(WAV format) in file %s", dop->filePath);
 	  return(-1);
 	}
 	switch(sampleSize) {
@@ -1963,7 +1963,7 @@ LOCAL int getWAVhdr(DOBJ *dop)
 	  break;
 	default:
 	  asspMsgNum = AEF_BAD_HEAD;
-	  sprintf(applMessage, "(WAV format) in file %s", dop->filePath);
+	  snprintf(applMessage, sizeof(applMessage), "(WAV format) in file %s", dop->filePath);
 	  return(-1);
 	}
 	break;
@@ -1973,7 +1973,7 @@ LOCAL int getWAVhdr(DOBJ *dop)
 	sampleSize = blockSize / dd->numFields;   /* bytes per sample */
 	if(sampleSize * dd->numFields != blockSize) {
 	  asspMsgNum = AEF_BAD_HEAD;
-	  sprintf(applMessage, "(WAV format) in file %s", dop->filePath);
+	  snprintf(applMessage, sizeof(applMessage), "(WAV format) in file %s", dop->filePath);
 	  return(-1);
 	}
 	switch(sampleSize) {
@@ -1987,7 +1987,7 @@ LOCAL int getWAVhdr(DOBJ *dop)
 	  break;
 	default:
 	  asspMsgNum = AEF_BAD_HEAD;
-	  sprintf(applMessage, "(WAV format) in file %s", dop->filePath);
+	  snprintf(applMessage, sizeof(applMessage), "(WAV format) in file %s", dop->filePath);
 	  return(-1);
 	}
 	break;
@@ -2030,7 +2030,7 @@ LOCAL int getWAVhdr(DOBJ *dop)
       default:
 	dd->coding = DC_ERROR;
 	asspMsgNum = AED_BAD_FORM;
-	sprintf(applMessage, "(WAV format) in file %s",	dop->filePath);
+	snprintf(applMessage, sizeof(applMessage), "(WAV format) in file %s",	dop->filePath);
 	return(-1);
       }
       dd->ident = strdup("audio");
@@ -2045,7 +2045,7 @@ LOCAL int getWAVhdr(DOBJ *dop)
       headSize += (long)chunkSize;
       if(fread(buf, 1, 4, dop->fp) != 4) {/* only read the first item */
 	asspMsgNum = AEF_BAD_HEAD;
-	sprintf(applMessage, "(WAV format) in file %s", dop->filePath);
+	snprintf(applMessage, sizeof(applMessage), "(WAV format) in file %s", dop->filePath);
 	return(-1);
       }
       ptr = (void *)buf;
@@ -2054,7 +2054,7 @@ LOCAL int getWAVhdr(DOBJ *dop)
 	fseek(dop->fp, headSize, SEEK_SET); /* skip rest (may be big) */
       else {
 	asspMsgNum = AEF_BAD_HEAD;
-	sprintf(applMessage, "(WAV format) in file %s",	dop->filePath);
+	snprintf(applMessage, sizeof(applMessage), "(WAV format) in file %s",	dop->filePath);
 	return(-1);
       }
     }
@@ -2069,7 +2069,7 @@ LOCAL int getWAVhdr(DOBJ *dop)
 	  if(dop->numRecords != numRecords) {
 	    err = 1;
 	    asspMsgNum = AWF_BAD_ITEM;
-	    sprintf(applMessage, "(WAV format) in file %s\n"\
+	    snprintf(applMessage, sizeof(applMessage), "(WAV format) in file %s\n"\
 		    "         Incorrect number of records (%ld, using %ld)",\
 		    dop->filePath, dop->numRecords, numRecords);
 	    dop->numRecords = numRecords;
@@ -2094,7 +2094,7 @@ LOCAL int getWAVhdr(DOBJ *dop)
 
   if(format < 1 || dop->headerSize <= 0 || dop->numRecords < 0) {
     asspMsgNum = AEF_BAD_HEAD;
-    sprintf(applMessage, "(WAV format) in file %s", dop->filePath);
+    snprintf(applMessage, sizeof(applMessage), "(WAV format) in file %s", dop->filePath);
     return(-1);
   }
   if(dop->recordSize > 0) {
@@ -2103,7 +2103,7 @@ LOCAL int getWAVhdr(DOBJ *dop)
       lenE = (dop->numRecords) * (long)(dop->recordSize);
       lenC = numRecords * (long)(dop->recordSize);
       asspMsgNum = AWF_BAD_ITEM;
-      sprintf(applMessage, "(WAV format) in file %s\n"\
+      snprintf(applMessage, sizeof(applMessage), "(WAV format) in file %s\n"\
 	      "         Incorrect data length (%ld, using %ld)",\
 	      dop->filePath, lenE, lenC);
       dop->numRecords = numRecords;
@@ -2195,11 +2195,11 @@ LOCAL int getKTHhdr(DOBJ *dop)
     if(n != 2) {
       if(isKTH) {
 	asspMsgNum = AEF_BAD_HEAD;
-	sprintf(applMessage, "(KTH format) in file %s", dop->filePath);
+	snprintf(applMessage, sizeof(applMessage), "(KTH format) in file %s", dop->filePath);
       }
       else {
 	asspMsgNum = AEF_ERR_FORM;
-	sprintf(applMessage, "(not KTH) in %s", dop->filePath);
+	snprintf(applMessage, sizeof(applMessage), "(not KTH) in %s", dop->filePath);
       }
       return(-1);
     }
@@ -2207,7 +2207,7 @@ LOCAL int getKTHhdr(DOBJ *dop)
       dop->headerSize = strtol(field[1], &rest, 10);
       if(strlen(rest) > 0) {
 	asspMsgNum = AEF_BAD_HEAD;
-	sprintf(applMessage, "(KTH format) in file %s", dop->filePath);
+	snprintf(applMessage, sizeof(applMessage), "(KTH format) in file %s", dop->filePath);
 	return(-1);
       }
     }
@@ -2232,7 +2232,7 @@ LOCAL int getKTHhdr(DOBJ *dop)
       }
       else {
 	asspMsgNum = AEF_BAD_HEAD;
-	sprintf(applMessage, "(KTH format) in file %s", dop->filePath);
+	snprintf(applMessage, sizeof(applMessage), "(KTH format) in file %s", dop->filePath);
 	return(-1);
       }
     }
@@ -2248,12 +2248,12 @@ LOCAL int getKTHhdr(DOBJ *dop)
   }
   if(n <= 0 || !isKTH) {
     asspMsgNum = AEF_ERR_FORM;
-    sprintf(applMessage, "(not KTH) in %s", dop->filePath);
+    snprintf(applMessage, sizeof(applMessage), "(not KTH) in %s", dop->filePath);
     return(-1);
   }
   if(dd->type != DT_SMP || dd->coding != DC_PCM) {
     asspMsgNum = AED_NOHANDLE;
-    sprintf(applMessage, "(KTH format) in file %s", dop->filePath);
+    snprintf(applMessage, sizeof(applMessage), "(KTH format) in file %s", dop->filePath);
     return(-1);
   }
   dd->ident = strdup("audio");
@@ -2270,7 +2270,7 @@ LOCAL int getKTHhdr(DOBJ *dop)
   }
   else if(dop->numRecords > numRecords) {        /* fewer is possible */
     asspMsgNum = AWF_BAD_ITEM;
-    sprintf(applMessage, "(KTH format) in file %s\n"\
+    snprintf(applMessage, sizeof(applMessage), "(KTH format) in file %s\n"\
 	    "         Incorrect number of records (%ld, using %ld)",\
 	    dop->filePath, dop->numRecords, numRecords);
     dop->numRecords = numRecords;
@@ -2366,19 +2366,19 @@ LOCAL int getNISThdr(DOBJ *dop)
   n = fgetl(buf, sizeof(buf), dop->fp, NULL);
   if(n <= 0 || strcmp(buf, "NIST_1A") != 0) {
     asspMsgNum = AEF_ERR_FORM;
-    sprintf(applMessage, "(not NIST) in file %s", dop->filePath);
+    snprintf(applMessage, sizeof(applMessage), "(not NIST) in file %s", dop->filePath);
     return(-1);
   }
   n = fgetl(buf, sizeof(buf), dop->fp, NULL);/* line with header size */
   if(n <= 0 || n >= 8) {
     asspMsgNum = AEF_ERR_FORM;
-    sprintf(applMessage, "(not NIST) in file %s", dop->filePath);
+    snprintf(applMessage, sizeof(applMessage), "(not NIST) in file %s", dop->filePath);
     return(-1);
   }
   dop->headerSize = strtol(buf, &rest, 10);   /* skips initial blanks */
   if(strlen(rest) > 0 || (dop->headerSize) % 1024 != 0) {
     asspMsgNum = AEF_BAD_HEAD;
-    sprintf(applMessage, "(NIST format) in file %s", dop->filePath);
+    snprintf(applMessage, sizeof(applMessage), "(NIST format) in file %s", dop->filePath);
     return(-1);
   }
 /*
@@ -2402,13 +2402,13 @@ LOCAL int getNISThdr(DOBJ *dop)
 	break;
       if(ftell(dop->fp) >= dop->headerSize) {
 	asspMsgNum = AEF_BAD_HEAD;
-	sprintf(applMessage, "(NIST format) in file %s", dop->filePath);
+	snprintf(applMessage, sizeof(applMessage), "(NIST format) in file %s", dop->filePath);
 	return(-1);
       }
       n = strparse(buf, NULL, field, MAX_HDR_FIELDS);
       if(n < 3) {
 	asspMsgNum = AEF_BAD_HEAD;
-	sprintf(applMessage, "(NIST format) in file %s", dop->filePath);
+	snprintf(applMessage, sizeof(applMessage), "(NIST format) in file %s", dop->filePath);
 	return(-1);
       }
       if(n == 3) {                  /* keyword, format, value triplet */
@@ -2449,7 +2449,7 @@ LOCAL int getNISThdr(DOBJ *dop)
       asspMsgNum = AEG_ERR_SYS;
     else {
       asspMsgNum = AEF_BAD_HEAD;
-      sprintf(applMessage, "(NIST format) in file %s", dop->filePath);
+      snprintf(applMessage, sizeof(applMessage), "(NIST format) in file %s", dop->filePath);
     }
     return(-1);
   }
@@ -2474,7 +2474,7 @@ LOCAL int getNISThdr(DOBJ *dop)
     default:
       dd->format = DF_ERROR;
       asspMsgNum = AED_NOHANDLE;
-      sprintf(applMessage, "(NIST format) in file %s", dop->filePath);
+      snprintf(applMessage, sizeof(applMessage), "(NIST format) in file %s", dop->filePath);
       return(-1);
     }
   }
@@ -2586,7 +2586,7 @@ LOCAL int getSSFFhdr(DOBJ *dop)
   n = fgetl(buf, sizeof(buf), dop->fp, NULL);
   if(n <= 0 || strcmp(buf, SSFF_MAGIC) != 0) {
     asspMsgNum = AEF_ERR_FORM;
-    sprintf(applMessage, "(not SSFF) in file %s", dop->filePath);
+    snprintf(applMessage, sizeof(applMessage), "(not SSFF) in file %s", dop->filePath);
     return(-1);
   }
   strncpy(bak, buf, n + 1);
@@ -2617,7 +2617,7 @@ LOCAL int getSSFFhdr(DOBJ *dop)
       if(strcmp(field[0], SSFF_SYS_ID) == 0) {
 	if(n < 2) {
 	  asspMsgNum = AEF_BAD_HEAD;
-	  sprintf(applMessage, "(SSFF format) in file %s", dop->filePath);
+	  snprintf(applMessage, sizeof(applMessage), "(SSFF format) in file %s", dop->filePath);
 	  return(-1);
 	}
 	if(strcmp(field[1], SSFF_MSB_LAST) == 0 ||
@@ -2629,7 +2629,7 @@ LOCAL int getSSFFhdr(DOBJ *dop)
       else if(strcmp(field[0], SSFF_RATE_ID) == 0) {
 	if(n < 2) {
 	  asspMsgNum = AEF_BAD_HEAD;
-	  sprintf(applMessage, "(SSFF format) in file %s", dop->filePath);
+	  snprintf(applMessage, sizeof(applMessage), "(SSFF format) in file %s", dop->filePath);
 	  return(-1);
 	}
 	dop->dataRate = strtod(field[1], &rest);
@@ -2637,13 +2637,13 @@ LOCAL int getSSFFhdr(DOBJ *dop)
       else if(strcmp(field[0], SSFF_TIME_ID) == 0) {
 	if(n < 2) {
 	  asspMsgNum = AEF_BAD_HEAD;
-	  sprintf(applMessage, "(SSFF format) in file %s", dop->filePath);
+	  snprintf(applMessage, sizeof(applMessage), "(SSFF format) in file %s", dop->filePath);
 	  return(-1);
 	}
 	dop->Start_Time = strtod(field[1], &rest); 
 	if(dop->Start_Time < 0.0) {
 	  asspMsgNum = AEF_BAD_HEAD;
-	  sprintf(applMessage, "(negative start time) in file %s",\
+	  snprintf(applMessage, sizeof(applMessage), "(negative start time) in file %s",\
 		  dop->filePath);
 	  return(-1);
 	}
@@ -2651,7 +2651,7 @@ LOCAL int getSSFFhdr(DOBJ *dop)
       else if(strcmp(field[0], SSFF_DATA_ID) == 0) {
 	if(n < 4) {
 	  asspMsgNum = AEF_BAD_HEAD;
-	  sprintf(applMessage, "(SSFF format) in file %s", dop->filePath);
+	  snprintf(applMessage, sizeof(applMessage), "(SSFF format) in file %s", dop->filePath);
 	  return(-1);
 	}
 	if(!FIRST) {                          /* multi-parameter data */
@@ -2699,7 +2699,7 @@ LOCAL int getSSFFhdr(DOBJ *dop)
 	else {
 	  dd->format = DF_ERROR;
 	  asspMsgNum = AEF_BAD_HEAD;
-	  sprintf(applMessage, "(SSFF format) in file %s", dop->filePath);
+	  snprintf(applMessage, sizeof(applMessage), "(SSFF format) in file %s", dop->filePath);
 	  return(-1);
 	}
 	dd->numFields = (size_t)strtol(field[3], &rest, 10);
@@ -2707,7 +2707,7 @@ LOCAL int getSSFFhdr(DOBJ *dop)
       else if(strcmp(field[0], SSFF_REF_RATE) == 0) {      /* NEW !!! */
 	if(n < 3) {
 	  asspMsgNum = AEF_BAD_HEAD;
-	  sprintf(applMessage, "(SSFF format) in file %s", dop->filePath);
+	  snprintf(applMessage, sizeof(applMessage), "(SSFF format) in file %s", dop->filePath);
 	  return(-1);
 	}
 	dop->sampFreq = strtod(field[2], &rest);
@@ -2749,7 +2749,7 @@ LOCAL int getSSFFhdr(DOBJ *dop)
   if(feof(dop->fp) || MSBUNDEF(dop->fileEndian) || dd->format <= DF_UNDEF ||
      dop->headerSize == 0 || dop->dataRate == 0.0) {
     asspMsgNum = AEF_BAD_HEAD;
-    sprintf(applMessage, "(SSFF format) in file %s", dop->filePath);
+    snprintf(applMessage, sizeof(applMessage), "(SSFF format) in file %s", dop->filePath);
     return(-1);
   }
   if(dop->ddl.type == DT_SMP) {
@@ -2757,7 +2757,7 @@ LOCAL int getSSFFhdr(DOBJ *dop)
     dop->frameDur = 1;
   }
   if(checkRates(dop) < 0) {   /* sync sampFreq, dataRate and frameDur */
-    sprintf(applMessage, "(SSFF format) in file %s", dop->filePath);
+    snprintf(applMessage, sizeof(applMessage), "(SSFF format) in file %s", dop->filePath);
     return(-1);
   }
   adjustTiming(dop);                 /* set startRecord and Time_Zero */
@@ -2787,7 +2787,7 @@ LOCAL int putSSFFhdr(DOBJ *dop)
  */
   if(checkRates(dop) < 0) {   /* sync sampFreq, dataRate and frameDur */
     asspMsgNum = AEG_ERR_BUG;
-    sprintf(applMessage, "putSSFFhdr: %s", getAsspMsg(AED_ERR_RATE));
+    snprintf(applMessage, sizeof(applMessage), "putSSFFhdr: %s", getAsspMsg(AED_ERR_RATE));
     return(-1);
   }
   dop->fileData = FDF_BIN;
@@ -2854,7 +2854,7 @@ LOCAL int putSSFFhdr(DOBJ *dop)
       break;
     default:
       asspMsgNum = AEG_ERR_BUG;
-      sprintf(applMessage, "putSSFFhdr: %s", getAsspMsg(AED_ERR_FORM));
+      snprintf(applMessage, sizeof(applMessage), "putSSFFhdr: %s", getAsspMsg(AED_ERR_FORM));
       return(-1);
     }
     if(dd->numFields < 1)
@@ -2944,18 +2944,18 @@ LOCAL int getXASSPhdr(DOBJ *dop)
   strcpy(eolCode, rest);
   if(len <= 0) {
     asspMsgNum = AEF_ERR_FORM;
-    sprintf(applMessage, "(not XASSP) in file %s", dop->filePath);
+    snprintf(applMessage, sizeof(applMessage), "(not XASSP) in file %s", dop->filePath);
     return(-1);
   }
   if(strncmp(buf, XASSP_MAGIC, strlen(XASSP_MAGIC)) != 0) {
     asspMsgNum = AEF_ERR_FORM;
-    sprintf(applMessage, "(not XASSP) in file %s", dop->filePath);
+    snprintf(applMessage, sizeof(applMessage), "(not XASSP) in file %s", dop->filePath);
     return(-1);
   }
   n = strparse(buf, NULL, field, MAX_HDR_FIELDS);
   if(n < 2) {
     asspMsgNum = AEF_BAD_HEAD;
-    sprintf(applMessage, "(XASSP format) in file %s", dop->filePath);
+    snprintf(applMessage, sizeof(applMessage), "(XASSP format) in file %s", dop->filePath);
     return(-1);
   }
 
@@ -3014,7 +3014,7 @@ LOCAL int getXASSPhdr(DOBJ *dop)
   case DT_ERROR:
     dd->type = DT_ERROR;
     asspMsgNum = AED_BAD_TYPE;
-    sprintf(applMessage, "\"%s\"\n       (XASSP format) in file %s",\
+    snprintf(applMessage, sizeof(applMessage), "\"%s\"\n       (XASSP format) in file %s",\
 	    field[1], dop->filePath);
     return(-1);
   default:                      /* all others are OK or not supported */
@@ -3096,7 +3096,7 @@ LOCAL int putXASSPhdr(DOBJ *dop)
     break;
   default:
     asspMsgNum = AEG_ERR_BUG;
-    sprintf(applMessage, "putXASSPhdr: %s", getAsspMsg(AED_BAD_FORM));
+    snprintf(applMessage, sizeof(applMessage), "putXASSPhdr: %s", getAsspMsg(AED_BAD_FORM));
     return(-1);
   }
   strcat(header, dop->eol);
@@ -3143,7 +3143,7 @@ LOCAL int getMIXhdr(DOBJ *dop)
   }
   if(n < 0 || !isMIX) {
     asspMsgNum = AEF_ERR_FORM;
-    sprintf(applMessage, "(not IPdS-MIX) in file %s", dop->filePath);
+    snprintf(applMessage, sizeof(applMessage), "(not IPdS-MIX) in file %s", dop->filePath);
     return(-1);
   }
 
@@ -3256,13 +3256,13 @@ LOCAL int getSAMhdr(DOBJ *dop)
   n = fgetl(buf, sizeof(buf), dop->fp, NULL);      /* read first line */
   if(n <= 0) {
     asspMsgNum = AEF_ERR_FORM;
-    sprintf(applMessage, "(not IPdS-SAM\nin file %s", dop->filePath);
+    snprintf(applMessage, sizeof(applMessage), "(not IPdS-SAM\nin file %s", dop->filePath);
     return(-1);
   }
   strcpy(buf, mybarename(buf));             /* should contain file name */
   if(strcmp(buf, mybarename(dop->filePath)) != 0) {
     asspMsgNum = AEF_ERR_FORM;
-    sprintf(applMessage, "(not IPdS-SAM\nin file %s", dop->filePath);
+    snprintf(applMessage, sizeof(applMessage), "(not IPdS-SAM\nin file %s", dop->filePath);
     return(-1);
   }
   do {
@@ -3271,7 +3271,7 @@ LOCAL int getSAMhdr(DOBJ *dop)
   } while(n >= 0 && strcmp(buf, SAM_EOC_ID) != 0);
   if(n <= 0) {
     asspMsgNum = AEF_BAD_HEAD;
-    sprintf(applMessage, "(IPdS-SAM format) in file %s", dop->filePath);
+    snprintf(applMessage, sizeof(applMessage), "(IPdS-SAM format) in file %s", dop->filePath);
     return(-1);
   }
 
@@ -3306,7 +3306,7 @@ LOCAL int getSAMhdr(DOBJ *dop)
   }
   if(ferror(dop->fp) || strcmp(buf, SAM_EOH_ID) != 0) {
     asspMsgNum = AEF_BAD_HEAD;
-    sprintf(applMessage, "(IPdS-SAM format) in file %s", dop->filePath);
+    snprintf(applMessage, sizeof(applMessage), "(IPdS-SAM format) in file %s", dop->filePath);
     return(-1);
   }
   dop->headerSize = headSize;
@@ -3440,7 +3440,7 @@ LOCAL int getXLBLhdr(DOBJ *dop)
     if(font != NULL)
       free((void *)font);
     asspMsgNum = AEF_ERR_FORM;
-    sprintf(applMessage, "(not ESPS-xlabel) in file %s", dop->filePath);
+    snprintf(applMessage, sizeof(applMessage), "(not ESPS-xlabel) in file %s", dop->filePath);
     return(-1);
   }
   dop->fileData = FDF_ASC;

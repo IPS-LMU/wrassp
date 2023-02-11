@@ -189,7 +189,7 @@ int setFMTgenderDefaults(AOPTS *aoPtr, char gender)
     break;
   default:
     setAsspMsg(AEG_ERR_BUG, NULL);
-    sprintf(applMessage, "setFMTgenderDefaults: invalid gender code '%c'",\
+    snprintf(applMessage, sizeof(applMessage), "setFMTgenderDefaults: invalid gender code '%c'",\
 	    gender);
     return(-1);
   }

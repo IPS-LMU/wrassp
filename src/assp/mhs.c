@@ -207,7 +207,7 @@ int setMHSgenderDefaults(AOPTS *aoPtr, char gender)
     break;
   default:
     setAsspMsg(AEG_ERR_BUG, NULL);
-    sprintf(applMessage, "setMHSgenderDefaults: invalid gender code '%c'",\
+    snprintf(applMessage, sizeof(applMessage), "setMHSgenderDefaults: invalid gender code '%c'",\
 	    gender);
     return(-1);
   }
@@ -302,21 +302,21 @@ DOBJ *createMHS(DOBJ *smpDOp, AOPTS *aoPtr)
   if((aoPtr->maxF * MHS_MINPEAKS * 2.0) >= smpDOp->sampFreq) {
     asspMsgNum = AEG_ERR_APPL;
     if(smpDOp->filePath != NULL)
-      sprintf(applMessage, "Maximum pitch too high for sample rate in %s",\
+      snprintf(applMessage, sizeof(applMessage), "Maximum pitch too high for sample rate in %s",\
 	      smpDOp->filePath);
     else
-      sprintf(applMessage, "Maximum pitch too high for sample rate");
+      snprintf(applMessage, sizeof(applMessage), "Maximum pitch too high for sample rate");
     return(NULL);
   }
   if(aoPtr->minF < MHS_ABSMIN_F0) {
     asspMsgNum = AEG_ERR_APPL;
-    sprintf(applMessage, "Minimum pitch too low (minimally %d)",\
+    snprintf(applMessage, sizeof(applMessage), "Minimum pitch too low (minimally %d)",\
 	    (int)MHS_ABSMIN_F0);
     return(NULL);
   }
   if(aoPtr->maxF <= aoPtr->minF) {
     asspMsgNum = AEG_ERR_APPL;
-    sprintf(applMessage, "Maximum pitch <= minimum pitch");
+    snprintf(applMessage, sizeof(applMessage), "Maximum pitch <= minimum pitch");
     return(NULL);
   }
   if((gd=(MHS_GD *)malloc(sizeof(MHS_GD))) == NULL) {
