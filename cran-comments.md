@@ -1,42 +1,50 @@
-## Change of maintainership
-
-Maintainership of this package is being handed over from Raphael Winkelmann to
-Markus Jochim. Raphael is still reachable at the below email address and he will
-confirm the mutual intention.
-
-* Raphael Winkelmann <raphael@phonetik.uni-muenchen.de>
-* Markus Jochim <markusjochim@phonetik.uni-muenchen.de>
-
 ## Test environments
 
 * local Arch Linux install, gcc, R 4.2.2
-* local Docker container rocker/r-devel, clang, R Under development (unstable) (2022-11-06 r83294) -- "Unsuffered Consequences"
+* local Docker container rocker/r-devel, gcc, R Under development (unstable) (2023-02-05 r83767) -- "Unsuffered Consequences"
 * R-hub builder:
   * Windows Server 2022, R-devel, 64 bit
   * Ubuntu Linux 20.04.1 LTS, R-release, GCC
   * Fedora Linux, R-devel, clang, gfortran
   * Debian Linux, R-devel, GCC ASAN/UBSAN
-* win-builder (devel), R Under development (unstable) (2022-10-11 r83083 ucrt) -- "Unsuffered Consequences"
+* win-builder devel
 
-## R CMD check results (Arch Linux, rocker/r-devel, R-Hub Windows, R-Hub Debian)
+## R CMD check results (Arch Linux, R-hub Ubuntu, R-hub Debian)
 
 There were no ERRORs, WARNINGs or NOTEs.
 
-## R CMD check results (R-hub Ubuntu)
+## R CMD check results (rocker/r-devel)
 
-There was 1 NOTE that highlighted the change of maintainership.
+There was 1 NOTE mentioning the container’s use of non-portable compiler flags:
+
+```
+* checking compilation flags used ... NOTE
+Compilation used the following non-portable flag(s):
+  ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
+```
+
+## R CMD check results (R-hub Windows)
+
+There was 1 NOTE mentioning left-over files in the temp directory:
+
+```
+* checking for detritus in the temp directory ... NOTE
+Found the following files/directories:
+  'lastMiKTeXException'
+```
 
 ## R CMD check results (R-hub Fedora)
 
-There were 2 NOTEs. One that highlighted the change of maintainership and this one:
+There was 1 NOTE:
 
+```
 * checking HTML version of manual ... NOTE
 Skipping checking HTML validation: no command 'tidy' found
+```
 
-### win-builder
+## R CMD check results (win-builder)
 
-There was 1 NOTE that highlighted both the change of maintainership and one
-possibly invalid URL:
+There was 1 NOTE that highlighted a possibly invalid URL:
 
 https://support.posit.co/hc/en-us/articles/200486498-Package-Development-Prerequisites
 
