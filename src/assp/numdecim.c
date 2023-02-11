@@ -33,7 +33,7 @@
 ***********************************************************************/
 /* $Id: numdecim.c,v 1.2 2007/10/01 15:00:01 mtms Exp $ */
 
-#include <stdio.h>   /* sprintf() */
+#include <stdio.h>   /* snprintf() */
 #include <string.h>  /* strlen() */
 
 #include <misc.h>    /* prototype */
@@ -53,8 +53,8 @@ int numDecim(double x, int maxDecim)
   
   if(maxDecim <= 0)
     return(0);                                      /* integral value */
-  sprintf(format,"%%.%df", maxDecim);         /* create format string */
-  sprintf(string, format, x);             /* convert number to string */
+  snprintf(format, sizeof(format), "%%.%df", maxDecim);         /* create format string */
+  snprintf(string, sizeof(string), format, x);             /* convert number to string */
   i = strlen(string);
   nd = maxDecim;
   while(nd > 0) {	       /* scan string back to front for zeros */

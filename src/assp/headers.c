@@ -2306,7 +2306,7 @@ LOCAL int putKTHhdr(DOBJ *dop)
  * construct header in memory
  */
   memset((void *)header, 0, KTH_DEF_HDR);             /* clear header */
-  sprintf(header, "head=%ld", dop->headerSize);         /* used as ID */
+  snprintf(header, sizeof(header), "head=%ld", dop->headerSize);         /* used as ID */
   strcat(header, dop->eol);
   strcat(header, "file=samp");
   strcat(header, dop->eol);
@@ -2862,7 +2862,7 @@ LOCAL int putSSFFhdr(DOBJ *dop)
     cPtr = &header[strlen(header)];
     // test if new header line still fits into header
     char headerLineTmp[1000];
-    sprintf(headerLineTmp, "%s %s %s %ld", SSFF_DATA_ID,\
+    snprintf(headerLineTmp, sizeof(headerLineTmp), "%s %s %s %ld", SSFF_DATA_ID,\
             ident, format, (long)(dd->numFields));
     strcat(headerLineTmp, dop->eol);
     if(strlen(headerLineTmp) + strlen(header) >= ONEkBYTE){
@@ -3073,26 +3073,26 @@ LOCAL int putXASSPhdr(DOBJ *dop)
   case DT_LBL:
   case DT_TAG:
     dop->frameDur = 0;
-    sprintf(header, "XASSP\tLABELS\t%.*f\t%ld",\
+    snprintf(header, sizeof(header), "XASSP\tLABELS\t%.*f\t%ld",\
 	    nd, dop->sampFreq, dop->frameDur);
     break;
   case DT_PIT:
-    sprintf(header, "XASSP\tFZERO\t%.*f\t%ld",\
+    snprintf(header, sizeof(header), "XASSP\tFZERO\t%.*f\t%ld",\
 	    nd, frameRate, frameDur);
     break;
   case DT_RMS:
-    sprintf(header, "XASSP\tENERGY\t%.*f\t%ld",\
+    snprintf(header, sizeof(header), "XASSP\tENERGY\t%.*f\t%ld",\
 	    nd, frameRate, frameDur);
     break;
   case DT_EPG:
     if(dop->frameDur <= 0)
       dop->frameDur = 1;
-    sprintf(header, "XASSP\tPALATOGRAM\t%.*f\t%ld",\
+    snprintf(header, sizeof(header), "XASSP\tPALATOGRAM\t%.*f\t%ld",\
 	    nd, dop->sampFreq, dop->frameDur);
     break;
   case DT_DATA_LOG:
     dop->frameDur = 0;
-    sprintf(header, "XASSP\tDATALOG");
+    snprintf(header, sizeof(header), "XASSP\tDATALOG");
     break;
   default:
     asspMsgNum = AEG_ERR_BUG;
@@ -3548,10 +3548,10 @@ LOCAL int putXLBLhdr(DOBJ *dop)
   else
     strcat(header, mybarename(dop->filePath));
   strcat(header, dop->eol);
-  sprintf(temp, "%s %ld", XLBL_VERS_ID, dop->version);
+  snprintf(temp, sizeof(temp), "%s %ld", XLBL_VERS_ID, dop->version);
   strcat(header, temp);
   strcat(header, dop->eol);
-  sprintf(temp, "%s %ld", XLBL_TIERS_ID, (long)(dd->numFields));
+  snprintf(temp, sizeof(temp), "%s %ld", XLBL_TIERS_ID, (long)(dd->numFields));
   strcat(header, temp);
   strcat(header, dop->eol);
   if(dd->numFields > 1) {
@@ -3561,7 +3561,7 @@ LOCAL int putXLBLhdr(DOBJ *dop)
   }
   if(gd != NULL && strcmp(gd->ident, XLBL_GD_IDENT) == 0) {
     if(gd->color >= 0) {
-      sprintf(temp, "%s %i", XLBL_COLOR_ID, gd->color);
+      snprintf(temp, sizeof(temp), "%s %i", XLBL_COLOR_ID, gd->color);
       strcat(header, temp);
       strcat(header, dop->eol);
     }

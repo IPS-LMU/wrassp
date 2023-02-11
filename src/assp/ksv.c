@@ -1817,11 +1817,11 @@ LOCAL int storeTag(char *name, long smpNr, DOBJ *tagDOp)
   if(tagDOp->fp != NULL) {
     nd = numDecim(1.0 / (tagDOp->sampFreq), 9);
     if(tagDOp->fileFormat == FF_IPDS_M)
-      sprintf(lineBuf, MIX_LBL_STR_AP, smpNr + 1, name,\
+      snprintf(lineBuf, sizeof(lineBuf), MIX_LBL_STR_AP, smpNr + 1, name,\
 	      (long)floor(time*100.0) + 1, nd, time);
     else { /* FF_XLABEL */
       gd = (XLBL_GD *)(tagDOp->generic);
-      sprintf(lineBuf, XLBL_STR_AP, nd, time, gd->color, name);
+      snprintf(lineBuf, sizeof(lineBuf), XLBL_STR_AP, nd, time, gd->color, name);
     }
     strcat(lineBuf, tagDOp->eol);
     if(fwrite((void *)lineBuf, sizeof(char),\

@@ -723,7 +723,7 @@ LOCAL int setGlobals(DOBJ *dop)
   }
   winShift = SMPNRtoTIME(frameShift, sampFreq);         /* in seconds */
   nd = numDecim(winShift, 12);
-  sprintf(secFormat, "TIME %%%d.%df  ", nd+2+1, nd);     /* for TRACE */
+  snprintf(secFormat, sizeof(secFormat), "TIME %%%d.%df  ", nd+2+1, nd);     /* for TRACE */
 /*
  * FFT and window parameters
  */

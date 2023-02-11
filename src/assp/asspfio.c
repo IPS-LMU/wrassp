@@ -572,7 +572,7 @@ long asspFPrint(void *buffer, long startRecord, long numRecords,\
     time = foreignTime(time, dop, FALSE);  /* ASSP ==> foreign time */
     n = numDecim(time, 12);
     if(n > nd) nd = n;
-    sprintf(tFormat, "%%%i.%if%s", nd+4, nd, dop->sepChars);
+    snprintf(tFormat, sizeof(tFormat), "%%%i.%if%s", nd+4, nd, dop->sepChars);
   }
 
   err = 0;
@@ -707,7 +707,7 @@ long asspFPrint(void *buffer, long startRecord, long numRecords,\
 	}
 	break;
       case DF_REAL32:
-	sprintf(dFormat, "%s%s", dd->sepChars, dd->ascFormat);
+	snprintf(dFormat, sizeof(dFormat), "%s%s", dd->sepChars, dd->ascFormat);
 	f32Ptr = (float *)&bPtr[dd->offset];
 	for(n = 0; n < dd->numFields; n++) {
 	  if(n == 0)
@@ -718,7 +718,7 @@ long asspFPrint(void *buffer, long startRecord, long numRecords,\
 	}
 	break;
       case DF_REAL64:
-	sprintf(dFormat, "%s%s", dd->sepChars, dd->ascFormat);
+	snprintf(dFormat, sizeof(dFormat), "%s%s", dd->sepChars, dd->ascFormat);
 	f64Ptr = (double *)&bPtr[dd->offset];
 	for(n = 0; n < dd->numFields; n++) {
 	  if(n == 0)

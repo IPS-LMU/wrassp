@@ -986,7 +986,7 @@ LOCAL int setGlobals(DOBJ *dop)
   nd = numDecim(shift, 12);
   if(nd <= 0)
     nd = 1;
-  sprintf(trgepFormat, "%%%d.%df %%5.1f %%5.1f %%+.2e %%.1e", nd+3+1, nd);
+  snprintf(trgepFormat, sizeof(trgepFormat), "%%%d.%df %%5.1f %%5.1f %%+.2e %%.1e", nd+3+1, nd);
   strcpy(fpbFormat, "  %c%d %4.0f/%-4.0f %4.0f");
   return(0);
 }

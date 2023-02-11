@@ -497,7 +497,7 @@ int statPrintHist(STAT *s, FILE *fp)
       nd = nd1;
     if(nd < 1)
       nd = 1;
-    sprintf(format,"%%.%df  %%lu\n", nd);
+    snprintf(format, sizeof(format), "%%.%df  %%lu\n", nd);
     fprintf(fp, "# below range   %lu\n", (unsigned long)(s->numBelow));
     fprintf(fp, "# within range  %lu\n", (unsigned long)(s->histNum));
     fprintf(fp, "# above range   %lu\n", (unsigned long)(s->numAbove));

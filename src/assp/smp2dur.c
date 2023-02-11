@@ -62,11 +62,11 @@ char *smp2dur(long smpNr, double smpRate)
     sec -= ((double)min * 60.0);
 
   if(hrs > 0)
-    sprintf(durStr, "%i hrs %i min %.0f sec", hrs, min, sec);
+    snprintf(durStr, sizeof(durStr), "%i hrs %i min %.0f sec", hrs, min, sec);
   else if(min > 0)
-    sprintf(durStr, "%i min %.3f sec", min, sec);
+    snprintf(durStr, sizeof(durStr), "%i min %.3f sec", min, sec);
   else
-    sprintf(durStr, "%.3f sec", sec);
+    snprintf(durStr, sizeof(durStr), "%.3f sec", sec);
 
   return(durStr);
 }
