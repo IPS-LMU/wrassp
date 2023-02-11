@@ -1,5 +1,5 @@
 Package: wrassp
-Version: 1.0.2
+Version: 1.0.3
 Date: 2023-02-11
 Title: Interface to the 'ASSP' Library
 Authors@R: c(
