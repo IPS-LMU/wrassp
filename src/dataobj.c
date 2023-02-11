@@ -707,7 +707,19 @@ sexp2dobj(SEXP rdobj)
             case SSFF_LONG:
             case SSFF_FLOAT:
             case SSFF_DOUBLE:
-                sprintf(format, "%f", REAL(VECTOR_ELT(var, 0))[0]);
+                // While replacing sprintf with snprintf, I am wondering how much
+                // reserved memory `format` is actually pointing at; because that
+                // is what I want to pass to snprintf as the second variable. The
+                // memory was reserved by strdup() above. I will assume that the
+                // strdup() function only reserved as many bytes as it needs. This
+                // would mean I can safely cut off snprintf after strlen(format)+1
+                // bytes, which is what I am now doing.
+                //
+                // The only way this change might introduce a regression is if:
+                // A. strdup() reserved more memory than is necessary AND
+                // B. The value that gets written into *format needs that excess memory.
+                //
+                snprintf(format, strlen(format) + 1, "%f", REAL(VECTOR_ELT(var, 0))[0]);
                 genVar->data = strdup(format);
                 break;
             case SSFF_UNDEF:
