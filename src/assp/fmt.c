@@ -371,7 +371,7 @@ DOBJ *createFMT(DOBJ *smpDOp, AOPTS *aoPtr)
     else {
       dd->ident = strdup("LP1");
       strcpy(dd->sepChars, " ");                      /* within field */
-      sprintf(dd->ascFormat, "%%+.%de", gd->accuracy);
+      snprintf(dd->ascFormat, member_size(DDESC, ascFormat), "%%+.%de", gd->accuracy);
     }
     dd = dd->next;              /* set pointer to 2nd data descriptor */
   }

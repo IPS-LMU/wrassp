@@ -167,6 +167,9 @@ ASSP_EXTERN int   setAsspMsg(short num, char *txt);
 #define asspBug ((asspMsgNum & (short)0xfff0) == ASSP_BUG)
 #define asspFeof (asspMsgNum == ASSP_ERR_EOF)
 
+// helper macro to make usage of snprintf easier; macro copied from https://stackoverflow.com/a/3553321
+#define member_size(type, member) sizeof(((type *)0)->member)
+
 #ifdef __cplusplus
 } /* closing brace for extern "C" */
 #endif

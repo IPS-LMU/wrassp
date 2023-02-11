@@ -511,10 +511,10 @@ DOBJ *createSPECT(DOBJ *smpDOp, AOPTS *aoPtr)
       if(dd->format == DF_REAL64)
 	strcpy(dd->ascFormat, "%+.14e");
       else
-	sprintf(dd->ascFormat, "%%+.%de", gd->accuracy);
+	snprintf(dd->ascFormat, member_size(DDESC, ascFormat), "%%+.%de", gd->accuracy);
     }
     else
-      sprintf(dd->ascFormat, "%%.%df", gd->precision);
+      snprintf(dd->ascFormat, member_size(DDESC, ascFormat), "%%.%df", gd->precision);
   }
   setRecordSize(dop);
   setStart_Time(dop);

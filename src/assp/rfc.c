@@ -266,7 +266,7 @@ DOBJ *createLP(DOBJ *smpDOp, AOPTS *aoPtr)
     dd->ident = strdup("RMS");
     strcpy(dd->unit, "dB");
     strcpy(dd->sepChars, " ");                        /* within field */
-    sprintf(dd->ascFormat, "%%.%df", gd->precision);
+    snprintf(dd->ascFormat, member_size(DDESC, ascFormat), "%%.%df", gd->precision);
   }
 
   dd = dd->next;                /* set pointer to 2nd data descriptor */
@@ -289,7 +289,7 @@ DOBJ *createLP(DOBJ *smpDOp, AOPTS *aoPtr)
     dd->ident = strdup("GAIN");
     strcpy(dd->unit, "dB");
     strcpy(dd->sepChars, " ");                        /* within field */
-    sprintf(dd->ascFormat, "%%.%df", gd->precision);
+    snprintf(dd->ascFormat, member_size(DDESC, ascFormat), "%%.%df", gd->precision);
   }
 
   dd = dd->next;                /* set pointer to 3rd data descriptor */
@@ -314,7 +314,7 @@ DOBJ *createLP(DOBJ *smpDOp, AOPTS *aoPtr)
   else {
     dd->ident = strdup(LPident);
     strcpy(dd->sepChars, " ");                        /* within field */
-    sprintf(dd->ascFormat, "%%+.%de", gd->accuracy);
+    snprintf(dd->ascFormat, member_size(DDESC, ascFormat), "%%+.%de", gd->accuracy);
   }
   setRecordSize(dop);
   setStart_Time(dop);

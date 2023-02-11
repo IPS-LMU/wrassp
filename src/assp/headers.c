@@ -3047,7 +3047,7 @@ LOCAL int putXASSPhdr(DOBJ *dop)
   dop->version = 0;
   strcpy(dop->sepChars, XASSP_SEP_STR);
   if(strlen(dop->eol) == 0)
-    sprintf(dop->eol, "\n");
+    snprintf(dop->eol, member_size(DOBJ, eol), "\n");
 /*   dop->recordSize = 0; BEWARE! data in memory problably binary */
   checkRates(dop);            /* sync sampFreq, dataRate and frameDur */
   if(dop->sampFreq > 0.0 && dop->frameDur >= 1) { /* KLUDGE IN XASSP !!! */

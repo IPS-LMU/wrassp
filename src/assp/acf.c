@@ -198,7 +198,7 @@ DOBJ *createACF(DOBJ *smpDOp, AOPTS *aoPtr)
   else { /* fall through to raw ASCII */
     strcpy(dop->sepChars, "\t");                    /* between fields */
     strcpy(dd->sepChars, " ");                        /* within field */
-    sprintf(dd->ascFormat, "%%+.%de", gd->accuracy);
+    snprintf(dd->ascFormat, member_size(DDESC, ascFormat), "%%+.%de", gd->accuracy);
   }
   setRecordSize(dop);
   setStart_Time(dop);

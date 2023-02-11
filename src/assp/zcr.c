@@ -188,7 +188,7 @@ DOBJ *createZCR(DOBJ *smpDOp, AOPTS *aoPtr)
   else { /* fall through to raw ASCII */
     strcpy(dop->sepChars, "\t");                    /* between fields */
     strcpy(dd->sepChars, " ");                        /* within field */
-    sprintf(dd->ascFormat, "%%.%df", gd->precision);
+    snprintf(dd->ascFormat, member_size(DDESC, ascFormat), "%%.%df", gd->precision);
   }
   setRecordSize(dop);
   setStart_Time(dop);

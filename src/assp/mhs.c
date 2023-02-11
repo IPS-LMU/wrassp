@@ -398,14 +398,14 @@ DOBJ *createMHS(DOBJ *smpDOp, AOPTS *aoPtr)
     }
     strcpy(dop->sepChars, "\t");                    /* between fields */
     strcpy(dd->sepChars, " ");                        /* within field */
-    sprintf(dd->ascFormat, "%%.%df", gd->precision);
+    snprintf(dd->ascFormat, member_size(DDESC, ascFormat), "%%.%df", gd->precision);
   }
   else { /* fall through to raw ASCII */
     dd->ident = strdup("PITCH");
     strcpy(dd->unit, "Hz");
     strcpy(dop->sepChars, "\t");                    /* between fields */
     strcpy(dd->sepChars, " ");                        /* within field */
-    sprintf(dd->ascFormat, "%%.%df", gd->precision);
+    snprintf(dd->ascFormat, member_size(DDESC, ascFormat), "%%.%df", gd->precision);
   }
   setRecordSize(dop);
   setStart_Time(dop);
