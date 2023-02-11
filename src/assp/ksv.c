@@ -707,7 +707,7 @@ DOBJ *computeKSV(DOBJ *smpDOp, AOPTS *aoPtr, DOBJ *f0DOp, DOBJ *prdDOp)
   if(err < 0) {
     if(smpDOp->filePath != NULL) {
       cPtr = &applMessage[strlen(applMessage)];
-      sprintf(cPtr, "\n       for file %s",\
+      snprintf(cPtr, sizeof(applMessage) - strlen(applMessage), "\n       for file %s",\
 	      myfilename(smpDOp->filePath));
     }
     if(CREATED)

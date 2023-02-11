@@ -2319,7 +2319,7 @@ LOCAL int putKTHhdr(DOBJ *dop)
     strcat(header, "last");
   strcat(header, dop->eol);
   cPtr = &header[strlen(header)];                      /* set pointer */
-  sprintf(cPtr, "nchans=%ld", (long)(dd->numFields));
+  snprintf(cPtr, sizeof(header) - strlen(header), "nchans=%ld", (long)(dd->numFields));
   strcat(header, dop->eol);
 /*   if(dop->numRecords > 0) { */
 /*     cPtr = &header[strlen(header)]; */
@@ -2327,7 +2327,7 @@ LOCAL int putKTHhdr(DOBJ *dop)
 /*     strcat(header, dop->eol); */
 /*   } */
   cPtr = &header[strlen(header)];                      /* set pointer */
-  sprintf(cPtr, "sftot=%ld", (long)((dop->sampFreq * dd->numFields) + 0.5));
+  snprintf(cPtr, sizeof(header) - strlen(header), "sftot=%ld", (long)((dop->sampFreq * dd->numFields) + 0.5));
   strcat(cPtr, dop->eol);
   strcat(header, "=");                           /* set end of header */
   strcat(header, dop->eol);
@@ -2516,33 +2516,33 @@ LOCAL int putNISThdr(DOBJ *dop)
   memset((void *)header, 0, ONEkBYTE);                /* clear header */
   strcpy(header, NIST_MAGIC);
   cPtr = &header[strlen(header)];                      /* set pointer */
-  sprintf(cPtr, "channel_count -i %ld", (long)(dd->numFields));
+  snprintf(cPtr, sizeof(header) - strlen(header), "channel_count -i %ld", (long)(dd->numFields));
   strcat(header, dop->eol);
   cPtr = &header[strlen(header)];
-  sprintf(cPtr, "sample_count -i %ld", dop->numRecords);
+  snprintf(cPtr, sizeof(header) - strlen(header), "sample_count -i %ld", dop->numRecords);
   strcat(header, dop->eol);
   cPtr = &header[strlen(header)];
-  sprintf(cPtr, "sample_rate -i %ld", (long)myrint(dop->sampFreq));
+  snprintf(cPtr, sizeof(header) - strlen(header), "sample_rate -i %ld", (long)myrint(dop->sampFreq));
   strcat(header, dop->eol);
   cPtr = &header[strlen(header)];
-  sprintf(cPtr, "sample_n_bytes -i %d", (int)PCM_BYTES(dd));
+  snprintf(cPtr, sizeof(header) - strlen(header), "sample_n_bytes -i %d", (int)PCM_BYTES(dd));
   strcat(header, dop->eol);
   cPtr = &header[strlen(header)];
   if(dd->numBits > 8) {
-    sprintf(cPtr, "sample_byte_format -s2 ");
+    snprintf(cPtr, sizeof(header) - strlen(header), "sample_byte_format -s2 ");
     if(MSBFIRST(dop->fileEndian))
       strcat(header, "10");
     else
       strcat(header, "01");
   }
   else
-    sprintf(cPtr, "sample_byte_format -s1 1");
+    snprintf(cPtr, sizeof(header) - strlen(header), "sample_byte_format -s1 1");
   strcat(header, dop->eol);
   cPtr = &header[strlen(header)];
-  sprintf(cPtr, "sample_sig_bits -i %d", (int)(dd->numBits));
+  snprintf(cPtr, sizeof(header) - strlen(header), "sample_sig_bits -i %d", (int)(dd->numBits));
   strcat(header, dop->eol);
   cPtr = &header[strlen(header)];
-  sprintf(cPtr, "sample_coding ");
+  snprintf(cPtr, sizeof(header) - strlen(header), "sample_coding ");
   if(dd->coding == DC_uLAW)
     strcat(header, "-s4 ulaw");
   else
@@ -2803,7 +2803,7 @@ LOCAL int putSSFFhdr(DOBJ *dop)
   strcpy(header, SSFF_MAGIC);
   strcat(header, dop->eol);
   cPtr = &header[strlen(header)];                      /* set pointer */
-  sprintf(cPtr, "%s %s", SSFF_SYS_ID,\
+  snprintf(cPtr, sizeof(header) - strlen(header), "%s %s", SSFF_SYS_ID,\
 	  MSBFIRST(dop->fileEndian) ? SSFF_MSB_FIRST : SSFF_MSB_LAST);
   strcat(header, dop->eol);
   if(dop->dataRate > 0.0)
@@ -2813,12 +2813,12 @@ LOCAL int putSSFFhdr(DOBJ *dop)
   nd = numDecim(frameRate, 12);
   if(nd <= 0) nd = 1;
   cPtr = &header[strlen(header)];
-  sprintf(cPtr, "%s %.*f", SSFF_RATE_ID, nd, frameRate);
+  snprintf(cPtr, sizeof(header) - strlen(header), "%s %.*f", SSFF_RATE_ID, nd, frameRate);
   strcat(header, dop->eol);
   nd = numDecim(dop->Start_Time, 12);
   if(nd <= 0) nd = 1;
   cPtr = &header[strlen(header)];
-  sprintf(cPtr, "%s %.*f", SSFF_TIME_ID, nd, dop->Start_Time);
+  snprintf(cPtr, sizeof(header) - strlen(header), "%s %.*f", SSFF_TIME_ID, nd, dop->Start_Time);
   strcat(header, dop->eol);
   
   int prev_header_length = strlen(header);
@@ -2870,7 +2870,7 @@ LOCAL int putSSFFhdr(DOBJ *dop)
       return(-1);
     }
     
-    sprintf(cPtr, "%s %s %s %ld", SSFF_DATA_ID,\
+    snprintf(cPtr, sizeof(header) - strlen(header), "%s %s %s %ld", SSFF_DATA_ID,\
             ident, format, (long)(dd->numFields));
     
     strcat(header, dop->eol);
@@ -2882,7 +2882,7 @@ LOCAL int putSSFFhdr(DOBJ *dop)
     nd = numDecim(dop->sampFreq, 12);
     if(nd <= 0) nd = 1;
     cPtr = &header[strlen(header)];
-    sprintf(cPtr, "%s DOUBLE %.*f", SSFF_REF_RATE, nd, dop->sampFreq);
+    snprintf(cPtr, sizeof(header) - strlen(header), "%s DOUBLE %.*f", SSFF_REF_RATE, nd, dop->sampFreq);
     strcat(header, dop->eol);
   }
   /* 
@@ -2903,7 +2903,7 @@ LOCAL int putSSFFhdr(DOBJ *dop)
   		return(-1);
   	} else {
   		cPtr = &header[strlen(header)];
-  		sprintf(cPtr, "%s %s %s", genVar->ident, ssff_types->ident, genVar->data);
+		snprintf(cPtr, sizeof(header) - strlen(header), "%s %s %s", genVar->ident, ssff_types->ident, genVar->data);
   		strcat(header, dop->eol);
   	}
 
