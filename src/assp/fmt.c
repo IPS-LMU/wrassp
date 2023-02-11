@@ -616,11 +616,11 @@ DOBJ *computeFMT(DOBJ *smpDOp, AOPTS *aoPtr, DOBJ *fmtDOp)
 	  bPtr = &applMessage[strlen(applMessage)];
 	  if(asspWarning) {                        /* instable filter */
 	    if(FILE_IN)
-	      sprintf(bPtr, "\nat T = %.4f in %s",\
+	      snprintf(bPtr, sizeof(applMessage) - strlen(applMessage), "\nat T = %.4f in %s",\
 		      FRMNRtoTIME(fn, sampFreq, frameShift),\
 		      myfilename(smpDOp->filePath));
 	    else
-	      sprintf(bPtr, "\nat T = %.4f",\
+	      snprintf(bPtr, sizeof(applMessage) - strlen(applMessage), "\nat T = %.4f",\
 		      FRMNRtoTIME(fn, sampFreq, frameShift));
 #ifndef WRASSP
 	    if(TRACE['F'] || TRACE['f'])
@@ -630,11 +630,11 @@ DOBJ *computeFMT(DOBJ *smpDOp, AOPTS *aoPtr, DOBJ *fmtDOp)
 	  }
 	  else {                         /* FATAL error in PF search */
 	    if(FILE_IN)
-	      sprintf(bPtr, "\nat T = %.4f in %s",\
+	      snprintf(bPtr, sizeof(applMessage) - strlen(applMessage), "\nat T = %.4f in %s",\
 		      FRMNRtoTIME(fn, sampFreq, frameShift),\
 		      myfilename(smpDOp->filePath));
 	    else
-	      sprintf(bPtr, "\nat T = %.4f",\
+	      snprintf(bPtr, sizeof(applMessage) - strlen(applMessage), "\nat T = %.4f",\
 		      FRMNRtoTIME(fn, sampFreq, frameShift));
 	    err = -1;
 	    /* break; */
@@ -666,11 +666,11 @@ DOBJ *computeFMT(DOBJ *smpDOp, AOPTS *aoPtr, DOBJ *fmtDOp)
 	if(asspDurbin(atc, lpc, NULL, &(sortBuf.gain), gd->lpOrder) < 0) {
 	  bPtr = &applMessage[strlen(applMessage)];
 	  if(FILE_IN)
-	    sprintf(bPtr, "\nat T = %.4f in %s",\
+	    snprintf(bPtr, sizeof(applMessage) - strlen(applMessage), "\nat T = %.4f in %s",\
 		    FRMNRtoTIME(fn, sampFreq, frameShift),\
 		    myfilename(smpDOp->filePath));
 	  else
-	    sprintf(bPtr, "\nat T = %.4f",\
+	    snprintf(bPtr, sizeof(applMessage) - strlen(applMessage), "\nat T = %.4f",\
 		    FRMNRtoTIME(fn, sampFreq, frameShift));
 #ifndef WRASSP
 	  if(TRACE['F'] || TRACE['f'])

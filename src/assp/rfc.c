@@ -472,11 +472,11 @@ DOBJ *computeLP(DOBJ *smpDOp, AOPTS *aoPtr, DOBJ *lpDOp)
     if(asspDurbin(acf, lpc, rfc, &(data.gain), order) < 0) {
       bPtr = &applMessage[strlen(applMessage)];
       if(FILE_IN)
-	sprintf(bPtr, "\nat T = %.4f in %s",\
+	snprintf(bPtr, sizeof(applMessage) - strlen(applMessage), "\nat T = %.4f in %s",\
 		FRMNRtoTIME(fn, smpDOp->sampFreq, frameShift),\
 		myfilename(smpDOp->filePath));
       else
-	sprintf(bPtr, "\nat T = %.4f",\
+	snprintf(bPtr, sizeof(applMessage) - strlen(applMessage), "\nat T = %.4f",\
 		FRMNRtoTIME(fn, smpDOp->sampFreq, frameShift));
       if(TRACE['F'] || TRACE['f'])
 	prtAsspMsg(traceFP);

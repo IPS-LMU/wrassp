@@ -687,11 +687,11 @@ DOBJ *computeSPECT(DOBJ *smpDOp, AOPTS *aoPtr, DOBJ *spectDOp)
       if(err < 0) {
 	bPtr = &applMessage[strlen(applMessage)];
 	if(FILE_IN)
-	  sprintf(bPtr, " at T = %.4f in %s",\
+	  snprintf(bPtr, sizeof(applMessage) - strlen(applMessage), " at T = %.4f in %s",\
 		  FRMNRtoTIME(fn, spectDOp->sampFreq, frameShift),\
 		  myfilename(smpDOp->filePath));
 	else
-	  sprintf(bPtr, " at T = %.4f",\
+	  snprintf(bPtr, sizeof(applMessage) - strlen(applMessage), " at T = %.4f",\
 		  FRMNRtoTIME(fn, spectDOp->sampFreq, frameShift));
 	if(TRACE['d'])
 	  prtAsspMsg(traceFP);
