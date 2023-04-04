@@ -1,6 +1,5 @@
 # wrassp
 
-[![Build Status](https://travis-ci.org/IPS-LMU/wrassp.svg?branch=master)](https://travis-ci.org/IPS-LMU/wrassp)
 [![Coverage Status](https://coveralls.io/repos/IPS-LMU/wrassp/badge.svg)](https://coveralls.io/github/IPS-LMU/wrassp)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/wrassp)](https://CRAN.R-project.org/package=wrassp)
 
