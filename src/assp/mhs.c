@@ -1020,7 +1020,6 @@ LOCAL int sievePeaks(MHS_PEAK *peak, int numPeaks, MHS_CAND *cand,\
       if(subHarm >= gd->maxF0 * rdf)
 	continue;               /* above range; ignore and try next */
       sieveF0[numSieves++] = subHarm;
-     ns++;
       if(numSieves < MHS_MAXSIEVES && subHarm > gd->minF0)
 	sieveF0[numSieves++] = subHarm / df;
       if(numSieves < MHS_MAXSIEVES && subHarm < gd->maxF0)
