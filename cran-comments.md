@@ -1,27 +1,18 @@
 ## Test environments
 
-* local Arch Linux install, gcc, R 4.2.2
-* local Docker container rocker/r-devel, gcc, R Under development (unstable) (2023-02-05 r83767) -- "Unsuffered Consequences"
+* local Arch Linux install, gcc, R 4.2.3
+* local Docker container rocker/r-devel, gcc, R Under development (unstable) (2023-04-02 r84146) -- "Unsuffered Consequences"
+  * compiling wrassp with gcc
+  * compiling wrassp with clang
 * R-hub builder:
   * Windows Server 2022, R-devel, 64 bit
   * Ubuntu Linux 20.04.1 LTS, R-release, GCC
   * Fedora Linux, R-devel, clang, gfortran
   * Debian Linux, R-devel, GCC ASAN/UBSAN
-* win-builder devel
 
-## R CMD check results (Arch Linux, R-hub Ubuntu, R-hub Debian)
+## R CMD check results (Arch Linux, rocker/r-devel, R-hub Ubuntu, R-hub Debian)
 
 There were no ERRORs, WARNINGs or NOTEs.
-
-## R CMD check results (rocker/r-devel)
-
-There was 1 NOTE mentioning the container’s use of non-portable compiler flags:
-
-```
-* checking compilation flags used ... NOTE
-Compilation used the following non-portable flag(s):
-  ‘-Wdate-time’ ‘-Werror=format-security’ ‘-Wformat’
-```
 
 ## R CMD check results (R-hub Windows)
 
@@ -42,15 +33,9 @@ There was 1 NOTE:
 Skipping checking HTML validation: no command 'tidy' found
 ```
 
-## R CMD check results (win-builder)
+## Downstream dependencies (revdepcheck results)
 
-There was 1 NOTE that highlighted a possibly invalid URL:
+We checked 3 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
-https://support.posit.co/hc/en-us/articles/200486498-Package-Development-Prerequisites
-
-This URL is valid and active, but win-builder gets a status 403 because the CDN
-Cloudflare correctly thinks that win-builder is not a human.
-
-## Downstream dependencies
-
-The revdepcheck::revdep_check() function revealed no problems.
+ * We saw 0 new problems
+ * We failed to check 0 packages
