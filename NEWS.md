@@ -1,3 +1,9 @@
+# wrassp 1.0.5
+
+## bug fixes
+
+* adapted to CRAN's compiler warnings
+
 # wrassp 1.0.4
 
 ## bug fixes

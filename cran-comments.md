@@ -1,41 +1,47 @@
 ## Test environments
 
-* local Arch Linux install, gcc, R 4.2.3
-* local Docker container rocker/r-devel, gcc, R Under development (unstable) (2023-04-02 r84146) -- "Unsuffered Consequences"
-  * compiling wrassp with gcc
-  * compiling wrassp with clang
+* win-builder:
+  * R Under development (unstable) (2024-01-07 r85787 ucrt)
+  * R version 4.3.2 (2023-10-31 ucrt)
 * R-hub builder:
   * Windows Server 2022, R-devel, 64 bit
   * Ubuntu Linux 20.04.1 LTS, R-release, GCC
   * Fedora Linux, R-devel, clang, gfortran
-  * Debian Linux, R-devel, GCC ASAN/UBSAN
+  * FIXME Debian Linux, R-devel, GCC ASAN/UBSAN
 
-## R CMD check results (Arch Linux, rocker/r-devel, R-hub Ubuntu, R-hub Debian)
 
-There were no ERRORs, WARNINGs or NOTEs.
+## R CMD check results
 
-## R CMD check results (R-hub Windows)
+Across all environments, there were no ERRORs or WARNINGs, but some NOTEs.
 
-There was 1 NOTE mentioning left-over files in the temp directory:
+The NOTEs were the following:
+
+Two NOTEs mentioning left-over files:
 
 ```
 * checking for detritus in the temp directory ... NOTE
 Found the following files/directories:
   'lastMiKTeXException'
+
+* checking for non-standard things in the check directory ... NOTE
+Found the following files/directories:
+  ''NULL''
 ```
 
-## R CMD check results (R-hub Fedora)
+One NOTE about a possibly invalid URL. This NOTE is a false positive, the URL is
+valid and online when opened in a browser:
 
-There was 1 NOTE:
+```
+Found the following (possibly) invalid URLs:
+  URL: https://support.posit.co/hc/en-us/articles/200486498-Package-Development-Prerequisites
+    From: README.md
+    Status: 403
+    Message: Forbidden
+```
+
+One NOTE about a missing tidy command:
 
 ```
 * checking HTML version of manual ... NOTE
 Skipping checking HTML validation: no command 'tidy' found
 ```
-
-## Downstream dependencies (revdepcheck results)
-
-We checked 3 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
-
- * We saw 0 new problems
- * We failed to check 0 packages
