@@ -24,14 +24,14 @@ getDObj(SEXP fname)
         asspFOpen(strdup(CHAR(STRING_ELT(fname, 0))), AFO_READ,
                   (DOBJ *) NULL);
     if (data == NULL)
-        error(getAsspMsg(asspMsgNum));
+        error("%s", getAsspMsg(asspMsgNum));
     /*
      * error(CHAR(STRING_ELT(fname,0)));
      */
     allocDataBuf(data, data->numRecords);
     data->bufStartRec = data->startRecord;
     if ((numRecs = asspFFill(data)) < 0)
-        error(getAsspMsg(asspMsgNum));
+        error("%s", getAsspMsg(asspMsgNum));
     asspFClose(data, AFC_KEEP);
     res = PROTECT(dobj2AsspDataObj(data));
     asspFClose(data, AFC_FREE);
@@ -123,7 +123,7 @@ getDObj2(SEXP args)
     data->bufStartRec = (long) begin;
     if ((numRecs = asspFFill(data)) < 0) {
         asspFClose(data, AFC_FREE);
-        error(getAsspMsg(asspMsgNum));
+        error("%s", getAsspMsg(asspMsgNum));
     }
     asspFClose(data, AFC_KEEP);
     ans = PROTECT(dobj2AsspDataObj(data));
@@ -630,7 +630,7 @@ sexp2dobj(SEXP rdobj)
     dop = allocDObj();
     desc = &(dop->ddl);
     if (dop == NULL) {
-        error(getAsspMsg(asspMsgNum));
+        error("%s", getAsspMsg(asspMsgNum));
     }
     /*
      * assign attributes
@@ -765,12 +765,12 @@ sexp2dobj(SEXP rdobj)
             desc = addDDesc(dop);
             if (desc == NULL) {
                 freeDObj(dop);
-                error(getAsspMsg(asspMsgNum));
+                error("%s", getAsspMsg(asspMsgNum));
             }
             if (dop->numRecords != INTEGER(attr)[0]) {
                 freeDObj(dop);
                 error("Dimensions of tracks do not match."
-                      "(%d rows in first track, but %d rows in track %d).",
+                      "(%ld rows in first track, but %d rows in track %d).",
                       dop->numRecords, INTEGER(attr)[0], i);
             }
         }
@@ -839,7 +839,7 @@ sexp2dobj(SEXP rdobj)
     allocDataBuf(dop, dop->numRecords);
     if (dop->dataBuffer == NULL) {
         freeDObj(dop);
-        error(getAsspMsg(asspMsgNum));
+        error("%s", getAsspMsg(asspMsgNum));
     }
 
     for (i = 0, desc = &(dop->ddl); i < LENGTH(tracks);
@@ -865,7 +865,7 @@ SEXP writeDObj_(SEXP data, SEXP fname)
     dop = asspFOpen(strdup(CHAR(STRING_ELT(fname, 0))), AFO_WRITE, dop);
     if (dop == NULL) {
         freeDObj(dop);
-        error(getAsspMsg(asspMsgNum));
+        error("%s", getAsspMsg(asspMsgNum));
     }
     asspFWrite(dop->dataBuffer, dop->bufNumRecs, dop);
     asspFClose(dop, AFC_FREE);
