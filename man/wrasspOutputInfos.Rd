@@ -6,7 +6,9 @@
 \title{list of default output extensions,
 track names and output type 
 for each signal processing function in wrassp}
-\format{An object of class \code{list} of length 13.}
+\format{
+An object of class \code{list} of length 13.
+}
 \usage{
 wrasspOutputInfos
 }

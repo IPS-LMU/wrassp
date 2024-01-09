@@ -5,7 +5,8 @@
 \alias{AsspFileFormats}
 \title{list of possibly useful file formats for AsspDataObj corresponding to the
 first element of the fileInfo attribute}
-\format{\tabular{rll}{
+\format{
+\tabular{rll}{
 Code Name \tab code number \tab description\cr
 RAW     \tab  1\tab headerless or unsupported format \cr
 ASP_A   \tab  2\tab ASP with ASCII data \cr
@@ -36,7 +37,8 @@ WAVE_X  \tab 22\tab RIFF-WAVE extended format (Revision 3) \cr
 XLABEL  \tab 24\tab ESPS xlabel \cr
 YORK    \tab 25\tab University of York (Klatt'80 parameters) \cr
 UWM     \tab 26\tab University of Wisconsin at Madison (microbeam data) )\cr
-}}
+}
+}
 \usage{
 AsspFileFormats
 }

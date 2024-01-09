@@ -5,7 +5,9 @@
 \alias{useWrasspLogger}
 \title{package variable to force the usage of the logger
 set to FALSE by default}
-\format{An object of class \code{logical} of length 1.}
+\format{
+An object of class \code{logical} of length 1.
+}
 \usage{
 useWrasspLogger
 }
