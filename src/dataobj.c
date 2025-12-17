@@ -5,8 +5,6 @@
 #include <asspmess.h>
 #include <headers.h>            /* KDTAB */
 
-#include <R_ext/PrtUtil.h>
-
 /*
  * This was the original reading function that did not allow for
  * preselecting time. Should be save to remove now. 

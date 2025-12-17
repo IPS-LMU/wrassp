@@ -46,8 +46,6 @@
 #include <dataobj.h>    /* data object definitions and handler */
 #include <headers.h>    /* header definitions and handler */
 
-#include <R_ext/PrtUtil.h>
-
 
 /* OS check for printing %llu and %lli*/
 //#ifdef __unix__

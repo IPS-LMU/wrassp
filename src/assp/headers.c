@@ -55,7 +55,6 @@
 #include <esps_lbl.h>   /* ESPS xlabel format */
 #include <uwm_xrmb.h>   /* Wisconsin X-ray microbeam formats */
 
-#include <R_ext/PrtUtil.h>
 /*
  * macros
  */

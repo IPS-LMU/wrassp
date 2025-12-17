@@ -12,7 +12,6 @@
 #include <filter.h>
 #include <ksv.h>
 #include <ctype.h>              /* tolower() */
-#include <R_ext/PrtUtil.h>
 
 /*
  * This list is used to map gender option values from R to the appropriate 
