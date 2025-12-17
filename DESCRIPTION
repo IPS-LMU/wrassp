@@ -16,6 +16,7 @@ Description: A wrapper around Michel Scheffers's 'libassp' (<https://libassp.sou
     rate, filtering etc. This wrapper provides R with a large subset of
     'libassp's signal processing functions and provides them to the user in a
     (hopefully) user-friendly manner.
+Encoding: UTF-8
 Depends:
     R (>= 3.1.1),
     tibble(>= 2.1.0)
@@ -28,4 +29,4 @@ Suggests:
 License: GPL (>= 3)
 URL: https://github.com/IPS-LMU/wrassp
 BugReports: https://github.com/IPS-LMU/wrassp/issues
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.3

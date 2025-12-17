@@ -38,13 +38,8 @@
 ##' \item \code{\link{write.AsspDataObj}}: write a \code{AsspDataObj} out to a SSFF file.
 ##' }
 ##' 
-##' @name wrassp-package
-##' @aliases wrassp wrassp-package
-##' 
-##' 
-##' @keywords package
-##' @docType package
+"_PACKAGE"
+
+## usethis namespace: start
+## usethis namespace: end
 NULL
-
-
-
