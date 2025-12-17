@@ -185,7 +185,7 @@ addTrack <- function (dobj, trackname, data, format = 'INT16',
   if (any(w))
     attr(dobj, 'trackFormats')[w] <- format
   else
-    append(attr(dobj, 'trackFormats'), format)
+    attr(dobj, 'trackFormats') = append(attr(dobj, 'trackFormats'), format)
 
   return(dobj)
 }
