@@ -194,9 +194,9 @@ DOBJ *asspFOpen(char *filePath, int mode, DOBJ *doPtr)
       	  freeDObj(dop);
       	} else if(CLEAR){
       	  clearDObj(dop);
-      	  setAsspMsg(AEF_ERR_OPEN, filePath);
-      	  return(NULL);
       	}
+      	setAsspMsg(AEF_ERR_OPEN, filePath);
+      	return(NULL);
       }
       err = getHeader(dop);
       if(err < 0) {
