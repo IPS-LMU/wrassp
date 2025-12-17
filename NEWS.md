@@ -1,3 +1,10 @@
+# wrassp 1.0.6
+
+## bug fixes
+
+* no longer crashes on opening non-existent/non-readable files
+* fixed bug in addTrack, where the trackFormats attribute was not always set correctly
+
 # wrassp 1.0.5
 
 ## bug fixes
