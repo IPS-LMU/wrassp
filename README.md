@@ -106,18 +106,16 @@ In the interactive shell you just started:
 
 ## Authors
 
-**Raphael Winkelmann**
+Development of the R package and ongoing maintenance of the ASSP library in this repository:
 
-+ [github](https://github.com/raphywink)
+[Institute for Phonetics and Speech Processing, Ludwig-Maximilians-Universität München](https://www.en.phonetik.uni-muenchen.de)
 
-**Lasse Bombien**
+- **Markus Jochim** (current maintainer) [[GitHub](https://github.com/MJochim)]
+- **Raphael Winkelmann** [[GitHub](https://github.com/raphywink)]
+- **Lasse Bombien** [[GitHub](https://github.com/quabolasse)]
 
-+ [github](https://github.com/quabolasse)
+Development of the original ASSP library:
 
-**Markus Jochim** (current maintainer)
+[Christian-Albrechts-Universität zu Kiel](https://www.isfas.uni-kiel.de/en/general-linguistics-and-phonetics?set_language=en)
 
-+ [github](https://github.com/MJochim)
-
-**Affiliations**
-
-[INSTITUTE OF PHONETICS AND SPEECH PROCESSING](https://www.en.phonetik.uni-muenchen.de)
+- **Michel Scheffers**
